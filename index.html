@@ -1,0 +1,2117 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Memory worlds · long-horizon is not memory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+    />
+    <style>
+      :root,
+      html[data-theme="dark"] {
+        --bg: #08090b;
+        --panel: #111318;
+        --ink: #f2eee6;
+        --muted: #9aa3b2;
+        --faint: #6b7382;
+        --line: #242a33;
+        --cue: #f5c518;
+        --gone: #ff5a4a;
+        --ok: #3ee0a0;
+        --accent: #7aa2ff;
+        --hud: #0b0d11;
+        --hover: #1a2230;
+        --stage: #000;
+        --code-bg: #1c222c;
+        --still: #f4f1ea;
+        --btn: #1c222c;
+        --serif: "Newsreader", Georgia, serif;
+        --sans: "Source Sans 3", system-ui, sans-serif;
+        --mono: "IBM Plex Mono", ui-monospace, monospace;
+        color-scheme: dark;
+      }
+      html[data-theme="light"] {
+        --bg: #f6f4ef;
+        --panel: #fffdf8;
+        --ink: #1c1f26;
+        --muted: #5a6270;
+        --faint: #8a919c;
+        --line: #e4e0d6;
+        --cue: #b45309;
+        --gone: #c2410c;
+        --ok: #0f766e;
+        --accent: #1d4ed8;
+        --hud: #f3f1eb;
+        --hover: #ece8de;
+        --stage: #111;
+        --code-bg: #ece8de;
+        --still: #f4f1ea;
+        --btn: #ece8de;
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      h2,
+      .ep,
+      #split {
+        scroll-margin-top: 5.5rem;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font: 17px/1.5 var(--sans);
+      }
+      a {
+        color: var(--accent);
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      code {
+        font-family: var(--mono);
+        font-size: 0.86em;
+        background: var(--code-bg);
+        padding: 0.12em 0.38em;
+        border-radius: 4px;
+      }
+      .wrap {
+        width: min(1180px, calc(100% - 2rem));
+        margin: 0 auto;
+      }
+      header.top {
+        position: sticky;
+        top: 0;
+        z-index: 8;
+        background: color-mix(in srgb, var(--bg) 88%, transparent);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--line);
+      }
+      .top-in {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+        align-items: center;
+        padding: 0.8rem 0;
+        flex-wrap: wrap;
+      }
+      .brand {
+        font-family: var(--serif);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
+      .brand em {
+        color: var(--faint);
+        font-weight: 400;
+        font-style: italic;
+      }
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.15rem 0.85rem;
+      }
+      nav a {
+        color: var(--muted);
+        text-decoration: none;
+        font-size: 0.92rem;
+      }
+      nav a:hover {
+        color: var(--ink);
+      }
+      .icon-btn {
+        font: 600 0.78rem var(--mono);
+        letter-spacing: 0.04em;
+        background: var(--btn);
+        color: var(--ink);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.28rem 0.7rem;
+        cursor: pointer;
+      }
+      .icon-btn:hover {
+        border-color: var(--accent);
+      }
+      .hero {
+        padding: 2.8rem 0 1.2rem;
+      }
+      .kicker {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--cue);
+        font-weight: 600;
+      }
+      h1 {
+        font-family: var(--serif);
+        font-size: clamp(2.3rem, 6vw, 4.1rem);
+        line-height: 1.02;
+        letter-spacing: -0.03em;
+        margin: 0.4rem 0 0.8rem;
+        font-weight: 700;
+      }
+      .lede {
+        max-width: 40rem;
+        color: var(--muted);
+        font-size: 1.15rem;
+      }
+      .lede strong {
+        color: var(--ink);
+      }
+      .filters {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin: 0 0 1.4rem;
+      }
+      .filters button {
+        font: 600 0.78rem var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: transparent;
+        color: var(--muted);
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        padding: 0.38rem 0.8rem;
+        cursor: pointer;
+      }
+      .filters button:hover {
+        color: var(--ink);
+        border-color: var(--muted);
+      }
+      .filters button[aria-pressed="true"] {
+        color: var(--bg);
+        background: var(--ink);
+        border-color: var(--ink);
+      }
+      html[data-theme="light"] .filters button[aria-pressed="true"] {
+        color: #fffdf8;
+      }
+      .filter-count {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--faint);
+        align-self: center;
+      }
+      .split {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.7rem;
+        margin: 0 0 2.2rem;
+      }
+      @media (max-width: 800px) {
+        .split {
+          grid-template-columns: 1fr;
+        }
+      }
+      .film,
+      .reg,
+      .ep {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .film {
+        display: flex;
+        flex-direction: column;
+      }
+      .film .stage,
+      .reg .stage,
+      .ep .stage {
+        background: var(--stage);
+        overflow: hidden;
+        position: relative;
+      }
+      .film .stage,
+      .reg .stage {
+        aspect-ratio: 16/10;
+        max-height: 340px;
+      }
+      .ep .stage {
+        min-height: 260px;
+      }
+      .film img,
+      .film video,
+      .reg img,
+      .reg video,
+      .ep img,
+      .ep video {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+        background: var(--stage);
+      }
+      .film.still img {
+        background: var(--still);
+      }
+      .film .cap {
+        padding: 0.85rem 1rem 1rem;
+      }
+      .pill {
+        display: inline-block;
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        font-weight: 600;
+        padding: 0.18rem 0.5rem;
+        border-radius: 999px;
+        margin-bottom: 0.4rem;
+      }
+      .pill.no {
+        background: color-mix(in srgb, var(--ok) 16%, transparent);
+        color: var(--ok);
+      }
+      .pill.yes {
+        background: color-mix(in srgb, var(--gone) 16%, transparent);
+        color: var(--gone);
+      }
+      .film h3 {
+        margin: 0 0 0.3rem;
+        font-family: var(--serif);
+        font-size: 1.35rem;
+      }
+      .film p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      h2 {
+        font-family: var(--serif);
+        font-size: 1.7rem;
+        margin: 2.4rem 0 0.7rem;
+        letter-spacing: -0.02em;
+      }
+      .note {
+        color: var(--muted);
+        max-width: 46rem;
+        margin: 0 0 1.1rem;
+      }
+      .regimes {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.7rem;
+      }
+      @media (max-width: 900px) {
+        .regimes {
+          grid-template-columns: 1fr;
+        }
+      }
+      .reg {
+        cursor: pointer;
+      }
+      .reg:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+      }
+      .reg.is-off {
+        opacity: 0.42;
+      }
+      .reg .body {
+        padding: 0.9rem 1rem 1.1rem;
+      }
+      .reg h3 {
+        margin: 0 0 0.25rem;
+        font-size: 1.15rem;
+        font-family: var(--serif);
+      }
+      .n {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--faint);
+      }
+      .ep {
+        display: grid;
+        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+        gap: 0;
+        border-radius: 16px;
+        margin: 0 0 1.1rem;
+      }
+      @media (max-width: 860px) {
+        .ep {
+          grid-template-columns: 1fr;
+        }
+      }
+      .film[hidden],
+      .reg[hidden],
+      .ep[hidden] {
+        display: none !important;
+      }
+      .split:has(.film[hidden]) {
+        grid-template-columns: 1fr;
+        max-width: 720px;
+      }
+      .regimes:has(.reg[hidden]) {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      }
+      .ep img,
+      .ep video {
+        max-height: 420px;
+      }
+      .ep .stage video {
+        height: 100%;
+        min-height: 320px;
+        max-height: none;
+        object-fit: cover;
+      }
+      .ep .copy {
+        padding: 1.1rem 1.15rem 1.2rem;
+      }
+      .ep h3 {
+        font-family: var(--serif);
+        margin: 0 0 0.35rem;
+        font-size: 1.45rem;
+      }
+      .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin: 0 0 0.6rem;
+      }
+      .tag {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        background: var(--code-bg);
+        color: var(--muted);
+        border-radius: 999px;
+        padding: 0.15rem 0.5rem;
+      }
+      .must {
+        border-left: 3px solid var(--cue);
+        padding: 0.15rem 0 0.15rem 0.7rem;
+        margin: 0.6rem 0 0.8rem;
+      }
+      .must b {
+        color: var(--cue);
+        font-weight: 650;
+      }
+      .jump {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.45rem 0.7rem;
+        margin: 0.2rem 0 0.7rem;
+        font-size: 0.82rem;
+      }
+      .jump a,
+      .jump button {
+        font-family: var(--mono);
+        font-size: 0.72rem;
+        color: var(--accent);
+        background: none;
+        border: 0;
+        padding: 0;
+        cursor: pointer;
+        text-decoration: underline;
+      }
+      .jump button {
+        color: var(--muted);
+        text-decoration: none;
+      }
+      .jump button:hover {
+        color: var(--ink);
+      }
+      .hud {
+        background: var(--hud);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0.7rem 0.75rem;
+      }
+      .hud .who {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--accent);
+        margin-bottom: 0.45rem;
+      }
+      .dims {
+        display: grid;
+        gap: 0.22rem;
+      }
+      .dim {
+        display: grid;
+        grid-template-columns: 1.4rem 3.4rem 1fr auto;
+        gap: 0.45rem;
+        align-items: baseline;
+        font-size: 0.84rem;
+        padding: 0.12rem 0.2rem;
+        border-radius: 6px;
+      }
+      .dim:hover,
+      .dim.on,
+      .vec-chip.hot {
+        background: var(--hover);
+      }
+      .dim i {
+        font-family: var(--mono);
+        font-style: normal;
+        color: var(--cue);
+        font-weight: 600;
+      }
+      .dim b {
+        font-family: var(--mono);
+        font-weight: 500;
+      }
+      .dim span {
+        color: var(--muted);
+      }
+      .dim em {
+        font-family: var(--mono);
+        font-style: normal;
+        color: var(--ok);
+        font-size: 0.78rem;
+      }
+      .vec {
+        font-family: var(--mono);
+        font-size: 0.75rem;
+        color: var(--muted);
+        margin-top: 0.55rem;
+        overflow-x: auto;
+      }
+      @media (max-width: 860px) {
+        .dim {
+          grid-template-columns: 1.5rem 3.2rem 1fr;
+          font-size: 0.8rem;
+        }
+        .dim em {
+          grid-column: 2 / -1;
+          justify-self: start;
+        }
+        header.top {
+          position: static;
+        }
+        .top-in {
+          align-items: flex-start;
+          padding: 0.55rem 0 0.65rem;
+        }
+        nav {
+          width: 100%;
+          gap: 0.15rem 0.7rem;
+        }
+      }
+      .frames {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin: 1rem 0 1.4rem;
+      }
+      .frames th,
+      .frames td {
+        text-align: left;
+        padding: 0.55rem 0.65rem;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .frames th {
+        font-family: var(--mono);
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--faint);
+        font-weight: 600;
+      }
+      .frames td:first-child {
+        font-weight: 600;
+      }
+      .frames code {
+        font-size: 0.78em;
+      }
+      .play-modes {
+        position: absolute;
+        top: 0.5rem;
+        left: 0.5rem;
+        z-index: 2;
+        display: flex;
+        margin: 0;
+        padding: 3px;
+        gap: 0;
+        background: rgba(8, 9, 11, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        border-radius: 999px;
+      }
+      .play-modes button {
+        font: 600 0.68rem var(--mono);
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        background: transparent;
+        color: #9aa3b2;
+        border: 0;
+        border-radius: 999px;
+        padding: 0.32rem 0.7rem;
+        cursor: pointer;
+      }
+      .play-modes button[aria-pressed="true"] {
+        color: #fff;
+        background: #2a4a8a;
+      }
+      .stage-cap {
+        position: absolute;
+        bottom: 0.55rem;
+        left: 0.55rem;
+        z-index: 2;
+        margin: 0;
+        font: 600 0.68rem var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: #c9d4ea;
+        pointer-events: none;
+        text-shadow: 0 1px 8px #000;
+      }
+      .ep.egogym .stage {
+        min-height: 340px;
+      }
+      #arm {
+        width: 100%;
+        height: 100%;
+        min-height: 340px;
+        aspect-ratio: 16/10;
+        display: block;
+        background: var(--stage);
+        cursor: grab;
+        touch-action: none;
+      }
+      #arm:active {
+        cursor: grabbing;
+      }
+      .sliders label {
+        display: grid;
+        grid-template-columns: 3.2rem 1fr 3.2rem;
+        gap: 0.45rem;
+        align-items: center;
+        font-size: 0.82rem;
+        margin: 0 0 0.45rem;
+      }
+      .sliders label span {
+        font-family: var(--mono);
+        color: var(--cue);
+        font-size: 0.72rem;
+      }
+      .sliders label em {
+        font-family: var(--mono);
+        font-style: normal;
+        color: var(--ok);
+        font-size: 0.72rem;
+        text-align: right;
+      }
+      .sliders input[type="range"] {
+        width: 100%;
+        accent-color: var(--accent);
+      }
+      .live-vec {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.3rem;
+        margin: 0.55rem 0 0.35rem;
+        font-family: var(--mono);
+        font-size: 0.78rem;
+      }
+      .vec-chip {
+        background: var(--hud);
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        padding: 0.18rem 0.4rem;
+        color: var(--muted);
+      }
+      .vec-chip b {
+        color: var(--ink);
+        font-weight: 500;
+      }
+      .mat-live {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 3px;
+        max-width: 280px;
+        margin: 0.5rem 0;
+        font-family: var(--mono);
+        font-size: 0.72rem;
+      }
+      .mat-live span {
+        background: var(--hover);
+        padding: 0.28rem;
+        text-align: center;
+        border-radius: 4px;
+        color: var(--ok);
+      }
+      .mat-live span.hot {
+        outline: 1px solid var(--cue);
+        color: var(--cue);
+      }
+      .mat-live[hidden] {
+        display: none !important;
+      }
+      .aside {
+        margin: 2rem 0;
+        padding: 1rem 1.1rem;
+        border: 1px dashed var(--line);
+        border-radius: 12px;
+        color: var(--muted);
+      }
+      .aside strong {
+        color: var(--ink);
+      }
+      footer.end {
+        padding: 1.6rem 0 3rem;
+        color: var(--faint);
+        font-size: 0.82rem;
+      }
+      footer.end p {
+        max-width: 46rem;
+      }
+      .toast {
+        position: fixed;
+        bottom: 1.2rem;
+        right: 1.2rem;
+        z-index: 20;
+        background: var(--ink);
+        color: var(--bg);
+        font: 600 0.8rem var(--mono);
+        padding: 0.5rem 0.8rem;
+        border-radius: 8px;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.2s;
+      }
+      .toast.on {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="top">
+      <div class="wrap top-in">
+        <div class="brand">Memory worlds</div>
+        <nav>
+          <a href="#split">the difference</a>
+          <a href="#regimes">3 regimes</a>
+          <a href="#episodes">tasks</a>
+          <a href="#actions">action data</a>
+          <a href="https://roaring-kringle-be46b2.netlify.app/"
+            >code_flow menu</a
+          >
+          <button
+            type="button"
+            class="icon-btn"
+            id="theme-btn"
+            aria-label="Toggle color theme"
+          >
+            theme
+          </button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <div class="kicker">long-horizon · memory · simulation</div>
+        <h1>Long-horizon is not memory.</h1>
+        <p class="lede">
+          LIBERO and RoboCasa can run for hundreds of steps and still be
+          solvable from the <strong>current camera frame</strong>. A memory
+          benchmark hides the answer. Watch the yellow square: it is the whole
+          point.
+        </p>
+      </section>
+
+      <div class="filters" role="group" aria-label="Filter by memory regime">
+        <button type="button" data-filter="all" aria-pressed="true">All</button>
+        <button type="button" data-filter="markovian" aria-pressed="false">
+          Markovian
+        </button>
+        <button type="button" data-filter="in-trial" aria-pressed="false">
+          In-trial
+        </button>
+        <button type="button" data-filter="cross-trial" aria-pressed="false">
+          Cross-trial
+        </button>
+        <span class="filter-count" id="filter-count"></span>
+      </div>
+
+      <section class="split" id="split">
+        <article class="film" data-regime="markovian">
+          <div class="stage">
+            <video
+              src="assets/robocasa_pnp.mp4"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+          </div>
+          <div class="cap">
+            <span class="pill no">no memory required</span>
+            <h3>RoboCasa</h3>
+            <p>
+              Pick, open a cabinet, press the microwave. The appliance stays on
+              camera for the whole episode. Long-horizon, not a memory test —
+              unlike the yellow cube on the right.
+            </p>
+          </div>
+        </article>
+        <article class="film" data-regime="in-trial">
+          <div class="stage">
+            <img
+              src="assets/remember_color.gif?v=slow2"
+              alt="MIKASA RememberColor: a yellow target appears, then the table is empty"
+            />
+          </div>
+          <div class="cap">
+            <span class="pill yes">memory required</span>
+            <h3>MIKASA RememberColor</h3>
+            <p>
+              t = 0–4: a yellow cube is the target. Then it vanishes. Later,
+              several colors appear. If you forgot the yellow, you fail — even
+              though the robot, the table, and the 7-D action look like LIBERO.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <h2 id="regimes">Three memory regimes</h2>
+      <p class="note">
+        From Gated Memory Policy’s MemMimic. This is the map. Click a tile to
+        keep only that kind of world.
+      </p>
+      <div class="regimes">
+        <article class="reg" data-regime="markovian" tabindex="0">
+          <div class="stage">
+            <video
+              src="assets/robocasa_door.mp4"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+          </div>
+          <div class="body">
+            <div class="n">1 · Markovian</div>
+            <h3>Current frame is enough</h3>
+            <p>
+              Tool Hang, LIBERO pick, RoboCasa microwave. History can even
+              <em>hurt</em> a precise policy. Long ≠ memory.
+            </p>
+          </div>
+        </article>
+        <article class="reg" data-regime="in-trial" tabindex="0">
+          <div class="stage">
+            <video
+              src="assets/match_color.mp4"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+          </div>
+          <div class="body">
+            <div class="n">2 · In-trial</div>
+            <h3>The cue appears once</h3>
+            <p>
+              Match Color, RememberColor, Place Back, Shell Game. See a color or
+              a start pose, then it leaves the camera. Hold it until the
+              decision.
+            </p>
+          </div>
+        </article>
+        <article class="reg" data-regime="cross-trial" tabindex="0">
+          <div class="stage">
+            <video
+              src="assets/iterative_pushing.mp4"
+              muted
+              loop
+              playsinline
+              preload="metadata"
+            ></video>
+          </div>
+          <div class="body">
+            <div class="n">3 · Cross-trial</div>
+            <h3>Learn across attempts</h3>
+            <p>
+              Iterative Pushing (MemMimic): friction is secret. Push, miss,
+              remember the miss, push again. Memory is the last trial’s outcome,
+              not the current RGB.
+            </p>
+          </div>
+        </article>
+      </div>
+
+      <h2 id="episodes">What the other worlds look like</h2>
+      <p class="note">
+        Each row is a <strong>task</strong>, not a paper. The action HUD is the
+        vector <code>env.step</code> consumes. GitHub is the jump to practice —
+        these folders are not cloned on this machine.
+      </p>
+
+      <article class="ep" id="robocasa" data-regime="markovian">
+        <div class="stage">
+          <video
+            src="assets/robocasa_button.mp4"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="RoboCasa: pressing a kitchen appliance button"
+          ></video>
+        </div>
+        <div class="copy">
+          <h3>RoboCasa</h3>
+          <div class="tags">
+            <span class="tag">not memory</span
+            ><span class="tag">PandaOmron</span
+            ><span class="tag">12-D action</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/robocasa/robocasa"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <a href="https://robocasa.ai/" target="_blank" rel="noreferrer"
+              >site</a
+            >
+            <a
+              href="https://robocasa.ai/docs/build/html/v0.2/tasks_scenes_assets/atomic_tasks.html"
+              target="_blank"
+              rel="noreferrer"
+              >atomic tasks</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/robocasa/robocasa.git"
+            >
+              copy clone
+            </button>
+            <button
+              type="button"
+              data-copy='env = gym.make("robocasa/PickPlaceCounterToCabinet", split="pretrain", seed=0)'
+            >
+              copy gym.make
+            </button>
+          </p>
+          <p>
+            A mobile Franka (PandaOmron) in a full kitchen. Original release: 25
+            atomic skills — pick-and-place, doors, drawers, knobs, levers,
+            buttons, insertion, navigation — then LLM-authored composite
+            recipes. RoboCasa365 scales that to hundreds of tasks and thousands
+            of scenes. The microwave, the cabinet, the mug stay in RGB.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the language instruction. Not a hidden object
+            property. Pressing <code>TurnOffMicrowave</code> is long-horizon,
+            not a memory test.
+          </p>
+          <div class="hud" data-kind="robocasa"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="libero" data-regime="markovian">
+        <div class="stage">
+          <video
+            src="assets/libero_spatial.mp4"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+            aria-label="LIBERO Spatial: pick and place on a table, objects stay in view"
+          ></video>
+        </div>
+        <div class="copy">
+          <h3>LIBERO</h3>
+          <div class="tags">
+            <span class="tag">not memory</span><span class="tag">OSC_POSE</span
+            ><span class="tag">4 suites</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/Lifelong-Robot-Learning/LIBERO"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <a
+              href="https://libero-project.github.io/"
+              target="_blank"
+              rel="noreferrer"
+              >site</a
+            >
+            <a
+              href="https://lifelong-robot-learning.github.io/LIBERO/"
+              target="_blank"
+              rel="noreferrer"
+              >docs</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git"
+            >
+              copy clone
+            </button>
+            <button
+              type="button"
+              data-copy='from libero.libero import benchmark; task_suite = benchmark.get_benchmark_dict()["libero_spatial"]()'
+            >
+              copy get suite
+            </button>
+          </p>
+          <p>
+            130 tabletop tasks in four suites: Spatial, Object, Goal, and
+            LIBERO-100 (90 short + 10 long). The research question is
+            <em>lifelong transfer</em> across those suites — not a cue that
+            leaves the camera. Bowls, plates, and cabinets stay in RGB. Same 7-D
+            OSC family as MIKASA; the world is the opposite of RememberColor.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the language instruction for this task. Not a
+            hidden object property. <code>env.step([0.]*7)</code> is the
+            published dummy.
+          </p>
+          <div class="hud" data-kind="libero"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="remember" data-regime="in-trial">
+        <div class="stage">
+          <img
+            src="assets/remember_color.gif?v=slow2"
+            alt="RememberColor looping episode"
+          />
+        </div>
+        <div class="copy">
+          <h3>RememberColor</h3>
+          <div class="tags">
+            <span class="tag">MIKASA-Robo</span
+            ><span class="tag">object memory</span
+            ><span class="tag">ManiSkill3</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <a
+              href="https://mikasarobo.github.io/quickstart.html"
+              target="_blank"
+              rel="noreferrer"
+              >docs</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            Watch a cube’s color for ~5 steps. Wait on an empty table. Then
+            touch the matching color among 3 / 5 / 9 cubes.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the target color. It is gone from RGB after
+            the delay.
+          </p>
+          <div class="hud"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="shell" data-regime="in-trial">
+        <div class="stage">
+          <img
+            src="assets/shell_game_touch.gif?v=slow2"
+            alt="ShellGameTouch looping episode"
+          />
+        </div>
+        <div class="copy">
+          <h3>ShellGameTouch</h3>
+          <div class="tags">
+            <span class="tag">MIKASA-Robo</span
+            ><span class="tag">spatial memory</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <a
+              href="https://mikasarobo.github.io/quickstart.html"
+              target="_blank"
+              rel="noreferrer"
+              >docs</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            A ball sits in one of three spots. Mugs cover the spots. Touch the
+            mug that hides the ball.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> which seat had the ball before the cover. The
+            current frame is three identical mugs.
+          </p>
+          <div class="hud"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="takeback" data-regime="in-trial">
+        <div class="stage">
+          <img
+            src="assets/take_it_back.gif?v=slow2"
+            alt="TakeItBack looping episode"
+          />
+        </div>
+        <div class="copy">
+          <h3>TakeItBack</h3>
+          <div class="tags">
+            <span class="tag">MIKASA-Robo</span
+            ><span class="tag">spatial memory</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            Pick an object from a random start, then return it to that start.
+            Same idea as MemMimic Place Back.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the start pose. Once lifted, the table no
+            longer shows where it came from.
+          </p>
+          <div class="hud"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="match" data-regime="in-trial">
+        <div class="stage">
+          <video
+            src="assets/match_color.mp4"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+        <div class="copy">
+          <h3>Match Color</h3>
+          <div class="tags">
+            <span class="tag">MemMimic</span><span class="tag">in-trial</span
+            ><span class="tag">GMP’s benchmark</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/real-stanford/gated-memory-policy"
+              target="_blank"
+              rel="noreferrer"
+              >GMP GitHub</a
+            >
+            <a
+              href="https://gated-memory-policy.github.io/"
+              target="_blank"
+              rel="noreferrer"
+              >paper site</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            Pick a cube from one of four colored bins. Bins shuffle. Put it back
+            in the original color. Gated Memory Policy is the <em>method</em>;
+            this is the <em>world</em>.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the bin color at pickup. After the shuffle,
+            RGB lies.
+          </p>
+          <div class="hud" data-kind="mem_abs"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="push" data-regime="cross-trial">
+        <div class="stage">
+          <video
+            src="assets/iterative_pushing.mp4"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+        <div class="copy">
+          <h3>Iterative Pushing</h3>
+          <div class="tags">
+            <span class="tag">MemMimic</span
+            ><span class="tag">cross-trial</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/real-stanford/gated-memory-policy"
+              target="_blank"
+              rel="noreferrer"
+              >GMP GitHub</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            Cube friction is sampled and hidden. Six pushes. Success = last
+            three land in the red box. The policy has to remember overshoots and
+            undershoots.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> outcomes of prior trials, not a color on the
+            table.
+          </p>
+          <div class="hud" data-kind="mem_push"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="place" data-regime="in-trial">
+        <div class="stage">
+          <video
+            src="assets/place_back.mp4"
+            muted
+            loop
+            playsinline
+            preload="metadata"
+          ></video>
+        </div>
+        <div class="copy">
+          <h3>Continuous Place Back</h3>
+          <div class="tags">
+            <span class="tag">MemMimic · real</span
+            ><span class="tag">in-trial</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/real-stanford/gated-memory-policy"
+              target="_blank"
+              rel="noreferrer"
+              >GMP GitHub</a
+            >
+            <a
+              href="https://gated-memory-policy.github.io/"
+              target="_blank"
+              rel="noreferrer"
+              >paper site</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            Cup on saucer, then back within 5 cm of the start. The start pose
+            leaves the camera the moment the cup lifts. Same memory demand as
+            TakeItBack, on hardware.
+          </p>
+          <p class="must"><b>Must remember:</b> the cup’s original XY.</p>
+          <div class="hud" data-kind="mem_umi"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="intercept" data-regime="in-trial">
+        <div class="stage">
+          <img
+            src="assets/intercept.gif?v=slow2"
+            alt="MIKASA Intercept episode"
+          />
+        </div>
+        <div class="copy">
+          <h3>Intercept</h3>
+          <div class="tags">
+            <span class="tag">MIKASA-Robo</span
+            ><span class="tag">sequential / timing</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            A moving object. The arm has to meet it. Timing is the memory: where
+            it was, where it will be.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> recent motion, not a static property written
+            on the table.
+          </p>
+          <div class="hud"></div>
+        </div>
+      </article>
+
+      <article class="ep" id="calvin" data-regime="markovian">
+        <div class="stage">
+          <img
+            src="assets/calvin_sensors.png"
+            alt="CALVIN RGB, wrist, depth and gripper cameras"
+          />
+        </div>
+        <div class="copy">
+          <h3>CALVIN</h3>
+          <div class="tags">
+            <span class="tag">long-horizon</span
+            ><span class="tag">language</span
+            ><span class="tag">mostly Markovian</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/mees/calvin"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/mees/calvin.git"
+            >
+              copy clone
+            </button>
+          </p>
+          <p>
+            String language skills: open drawer, push button, place block.
+            Horizon is long. The blocks and drawers stay visible — useful
+            contrast, not a memory test.
+          </p>
+          <p class="must">
+            <b>Must remember:</b> the instruction chain. Not a hidden object
+            property.
+          </p>
+          <div class="hud" data-kind="calvin"></div>
+        </div>
+      </article>
+
+      <article class="ep egogym" id="egogym" data-regime="markovian">
+        <div class="stage">
+          <div class="play-modes">
+            <button type="button" data-mode="ego" aria-pressed="false">
+              17-D camera
+            </button>
+            <button type="button" data-mode="osc" aria-pressed="true">
+              7-D OSC
+            </button>
+          </div>
+          <canvas
+            id="arm"
+            width="640"
+            height="400"
+            aria-label="Drag the hypothetical gripper"
+          ></canvas>
+          <p class="stage-cap" id="ego-cap">
+            7-D OSC · table / EEF Δ · drag the gripper
+          </p>
+        </div>
+        <div class="copy">
+          <h3>EgoGym</h3>
+          <div class="tags">
+            <span class="tag">on the shelf</span
+            ><span class="tag">egocentric</span
+            ><span class="tag" id="ego-tag">contrast · 7-D OSC</span>
+          </div>
+          <p class="jump">
+            <a
+              href="https://github.com/omarrayyann/EgoGym"
+              target="_blank"
+              rel="noreferrer"
+              >GitHub</a
+            >
+            <button
+              type="button"
+              data-copy="git clone https://github.com/omarrayyann/EgoGym.git"
+            >
+              copy clone
+            </button>
+            <button
+              type="button"
+              data-copy='env = gym.make("Egogym-Pick-v0", robot="rum", action_space="delta", num_objs=5)'
+            >
+              copy gym.make
+            </button>
+          </p>
+          <p>
+            Pick / Open / Close, wrist camera, robots <code>rum</code> or
+            <code>droid</code>. Drag the gripper. The switch on the frame is the
+            whole point: same motion, different vector.
+          </p>
+          <p class="must" id="ego-must">
+            <b>Would send (LIBERO family):</b> 7-D
+            <code>pd_ee_delta_pose</code> — Δxyz, Δrot, gripper. Not what EgoGym
+            consumes. Flip to <b>17-D camera</b> for the real vector.
+          </p>
+          <form class="sliders" id="sliders"></form>
+          <div class="live-vec" id="live-vec"></div>
+          <div class="mat-live" id="mat-live"></div>
+          <p class="n" id="play-hint"></p>
+        </div>
+      </article>
+
+      <h2 id="actions">
+        The action is usually 7 numbers — except when it isn’t
+      </h2>
+      <p class="note">
+        The trap when you switch simulators is not the length of the vector. It
+        is the <strong>frame</strong> and whether the numbers are a
+        <em>delta</em> or a pose in the world.
+      </p>
+      <table class="frames">
+        <thead>
+          <tr>
+            <th>World</th>
+            <th>What you send</th>
+            <th>Frame</th>
+            <th>Relative or absolute</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>MIKASA-Robo VLA</td>
+            <td>
+              <code>(7,) float32</code> · <code>[0:3]</code> Δxyz ·
+              <code>[3:6]</code> Δrot · <code>[6]</code> gripper
+            </td>
+            <td>End-effector (<code>pd_ee_delta_pose</code>)</td>
+            <td>Relative, normalized <code>[-1, 1]</code></td>
+          </tr>
+          <tr>
+            <td>LIBERO OSC_POSE</td>
+            <td>
+              <code>(7,) float32</code> · <code>[0:3]</code> Δxyz ·
+              <code>[3:6]</code> Δrot · <code>[6]</code> gripper
+            </td>
+            <td>End-effector OSC (<code>dummy_action = [0.]*7</code>)</td>
+            <td>
+              Relative, scaled deltas, <code>[-1, 1]</code>. Objects stay
+              visible.
+            </td>
+          </tr>
+          <tr>
+            <td>CALVIN</td>
+            <td><code>(7,)</code> Δxyz, Δrpy, gripper <code>−1/+1</code></td>
+            <td>Cartesian world axes</td>
+            <td>Relative; env scales to metres / radians</td>
+          </tr>
+          <tr>
+            <td>MemMimic Match Color</td>
+            <td>End-effector pose (paper: action + proprio)</td>
+            <td>World / table</td>
+            <td><strong>Absolute</strong> pose @ 10 Hz</td>
+          </tr>
+          <tr>
+            <td>Place Back (UMI, real)</td>
+            <td>End-effector pose as in UMI</td>
+            <td>UMI gripper / iPhone</td>
+            <td><strong>Relative</strong> pose @ 15–20 Hz</td>
+          </tr>
+          <tr>
+            <td>EgoGym</td>
+            <td>
+              <code>(17,)</code> flattened 4×4 <code>[0–15]</code> + gripper
+              <code>[16]</code>
+            </td>
+            <td>Camera: X right, Y up, Z backward</td>
+            <td><code>delta</code> or <code>absolute</code> (env flag)</td>
+          </tr>
+          <tr>
+            <td>RoboCasa (PandaOmron datasets)</td>
+            <td>
+              <code>(12,) float32</code> · arm 6 + gripper 1 + base 4 + arm/base
+              switch 1
+            </td>
+            <td>EEF cartesian, then holonomic base</td>
+            <td>Relative, <code>[-1, 1]</code>. Not a 7-D OSC vector.</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+
+    <script>
+      const HUDS = {
+        seven: {
+          label: "env.step · (7,) float32  ∈ [-1, 1]  ·  pd_ee_delta_pose",
+          foot: "MIKASA / ManiSkill3 spec. Relative EEF frame. Same 7-D family as LIBERO OSC_POSE. No live step on this page.",
+          dims: [
+            ["0", "dx", "relative EEF translation X", "∈ [-1, 1]"],
+            ["1", "dy", "relative EEF translation Y", "∈ [-1, 1]"],
+            ["2", "dz", "relative EEF translation Z", "∈ [-1, 1]"],
+            ["3", "dax", "relative EEF rotation X", "∈ [-1, 1]"],
+            ["4", "day", "relative EEF rotation Y", "∈ [-1, 1]"],
+            ["5", "daz", "relative EEF rotation Z", "∈ [-1, 1]"],
+            ["6", "grip", "gripper target", "open ↔ close"],
+          ],
+        },
+        calvin: {
+          label: "env.step · (7,) relative cartesian",
+          foot: "CALVIN: Δxyz, Δrpy, gripper. Cartesian axes; scaled to metres / radians inside the env.",
+          dims: [
+            ["0", "dx", "relative cartesian X", "m, scaled"],
+            ["1", "dy", "relative cartesian Y", "m, scaled"],
+            ["2", "dz", "relative cartesian Z", "m, scaled"],
+            ["3", "droll", "relative roll", "rad, scaled"],
+            ["4", "dpitch", "relative pitch", "rad, scaled"],
+            ["5", "dyaw", "relative yaw", "rad, scaled"],
+            ["6", "grip", "gripper", "−1 open / +1 close"],
+          ],
+        },
+        libero: {
+          label: "env.step · (7,) float32  ∈ [-1, 1]  ·  OSC_POSE",
+          foot: "LIBERO README: dummy_action = [0.]*7. Maintainer (issue #26): OSC_POSE delta EEF + gripper. Lifelong transfer is across task suites, not a vanished cube.",
+          dims: [
+            ["0", "dx", "relative EEF translation X", "∈ [-1, 1]"],
+            ["1", "dy", "relative EEF translation Y", "∈ [-1, 1]"],
+            ["2", "dz", "relative EEF translation Z", "∈ [-1, 1]"],
+            ["3", "dax", "relative EEF rotation X", "∈ [-1, 1]"],
+            ["4", "day", "relative EEF rotation Y", "∈ [-1, 1]"],
+            ["5", "daz", "relative EEF rotation Z", "∈ [-1, 1]"],
+            ["6", "grip", "gripper", "open ↔ close"],
+          ],
+        },
+        robocasa: {
+          label: "env.step · (12,) float32  ∈ [-1, 1]  ·  PandaOmron datasets",
+          foot: "Maintainer (issue #24) and dataset modality.json: cartesian arm 6-D, gripper 1, base 4, then a binary arm-vs-base switch. LeRobot wrappers sometimes reorder the same 12 numbers. Objects stay in view — not a memory vector.",
+          dims: [
+            ["0–2", "ee pos", "end-effector cartesian position", "3-D"],
+            ["3–5", "ee rot", "end-effector cartesian rotation", "3-D"],
+            ["6", "grip", "gripper", "1-D"],
+            ["7–10", "base", "mobile base motion", "4-D"],
+            ["11", "mode", "control arm or base (binary)", "±1"],
+          ],
+        },
+        ego: {
+          label: "env.step · (17,)  flattened 4×4 + gripper",
+          foot: "EgoGym: camera frame, X right, Y up, Z backward. action_space is delta or absolute. Not OSC 7-D.",
+          dims: [
+            ["0–15", "T", "4×4 pose in camera frame", "flattened row-major"],
+            ["16", "grip", "gripper", "0 open · 1 close"],
+          ],
+        },
+        mem_abs: {
+          label: "command · absolute EEF pose · 10 Hz",
+          foot: "GMP appendix T1 (Match Color). Paper does not publish a numbered (7,) table. Not MIKASA pd_ee_delta_pose.",
+          dims: [
+            [
+              "act",
+              "EEF",
+              "absolute end-effector pose (action + proprio)",
+              "absolute",
+            ],
+            ["img", "RGB", "third-person RGB", "1 view"],
+            [
+              "hz",
+              "10",
+              "policy rate; interpolated to 500 Hz physics",
+              "MuJoCo",
+            ],
+            ["H", "16/8", "predict 16 steps, execute 8", "1.6 s / 0.8 s"],
+          ],
+        },
+        mem_push: {
+          label: "command · EEF pose, Y-only · 10 Hz",
+          foot: "GMP appendix T4 (Iterative Pushing). Action constrained to the Y axis. Top-down camera.",
+          dims: [
+            ["act", "EEF", "end-effector pose, constrained to Y", "push axis"],
+            ["img", "RGB", "top-down RGB", "1 view"],
+            ["hz", "10", "data collection and inference", "MuJoCo"],
+            ["H", "240", "GMP history covers ~2 full trials", "timesteps"],
+          ],
+        },
+        mem_umi: {
+          label: "command · relative EEF pose · UMI · 15–20 Hz",
+          foot: "GMP appendix T3 (Continuous Place Back). Relative poses as in the UMI paper. UR5 + WSG50, iPhone ultra-wide.",
+          dims: [
+            ["act", "ΔEEF", "relative end-effector pose (UMI)", "relative"],
+            ["img", "RGB", "iPhone ultra-wide", "UMI gripper"],
+            ["hz", "15–20", "train 20 Hz, deploy 15 Hz", "real"],
+            ["H", "16/8", "predict 16, execute 8", "async ok"],
+          ],
+        },
+      };
+
+      function hud(el) {
+        const spec = HUDS[el.dataset.kind || "seven"];
+        el.innerHTML = `<div class="who">${spec.label}</div><div class="dims">${spec.dims
+          .map(
+            (d) =>
+              `<div class="dim"><i>${d[0]}</i><b>${d[1]}</b><span>${d[2]}</span><em>${d[3]}</em></div>`,
+          )
+          .join("")}</div><div class="vec">${spec.foot}</div>`;
+        el.querySelectorAll(".dim").forEach((row) => {
+          row.addEventListener("pointerenter", () => {
+            el.querySelectorAll(".dim").forEach((r) =>
+              r.classList.remove("on"),
+            );
+            row.classList.add("on");
+          });
+        });
+      }
+      document.querySelectorAll(".hud").forEach(hud);
+
+      document.querySelectorAll('nav a[href^="#"]').forEach((a) => {
+        a.addEventListener("click", (e) => {
+          const el = document.getElementById(a.getAttribute("href").slice(1));
+          if (!el) return;
+          e.preventDefault();
+          el.scrollIntoView({ behavior: "smooth", block: "start" });
+          history.replaceState(null, "", a.getAttribute("href"));
+        });
+      });
+
+      /* theme */
+      const themeBtn = document.getElementById("theme-btn");
+      function setTheme(t) {
+        document.documentElement.dataset.theme = t;
+        localStorage.setItem("mw-theme", t);
+        themeBtn.textContent = t === "dark" ? "light" : "dark";
+      }
+      setTheme(
+        localStorage.getItem("mw-theme") ||
+          (matchMedia("(prefers-color-scheme: light)").matches
+            ? "light"
+            : "dark"),
+      );
+      themeBtn.addEventListener("click", () =>
+        setTheme(
+          document.documentElement.dataset.theme === "dark" ? "light" : "dark",
+        ),
+      );
+
+      /* copy */
+      const toast = document.getElementById("toast");
+      let toastT;
+      function ping(msg) {
+        toast.textContent = msg;
+        toast.classList.add("on");
+        clearTimeout(toastT);
+        toastT = setTimeout(() => toast.classList.remove("on"), 1400);
+      }
+      document.querySelectorAll("[data-copy]").forEach((btn) => {
+        btn.addEventListener("click", async () => {
+          const text = btn.dataset.copy;
+          try {
+            await navigator.clipboard.writeText(text);
+            ping("copied");
+          } catch {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand("copy");
+            ta.remove();
+            ping(ok ? "copied" : "copy failed");
+          }
+        });
+      });
+
+      /* filters */
+      let filter = "all";
+      function applyFilter(next) {
+        filter = next;
+        document.querySelectorAll(".filters [data-filter]").forEach((b) => {
+          b.setAttribute("aria-pressed", String(b.dataset.filter === filter));
+        });
+        let shown = 0,
+          total = 0;
+        document.querySelectorAll(".ep").forEach((ep) => {
+          total += 1;
+          const ok = filter === "all" || ep.dataset.regime === filter;
+          ep.hidden = !ok;
+          if (ok) shown += 1;
+          const vid = ep.querySelector("video");
+          if (vid && !ok) vid.pause();
+        });
+        document.querySelectorAll(".film, .reg").forEach((el) => {
+          const ok = filter === "all" || el.dataset.regime === filter;
+          el.hidden = !ok;
+          el.classList.remove("is-off");
+          const vid = el.querySelector("video");
+          if (vid && !ok) vid.pause();
+        });
+        document.getElementById("filter-count").textContent =
+          filter === "all" ? `${total} worlds` : `${shown} · ${filter}`;
+      }
+      document.querySelectorAll(".filters [data-filter]").forEach((b) => {
+        b.addEventListener("click", () => applyFilter(b.dataset.filter));
+      });
+      document.querySelectorAll(".reg").forEach((reg) => {
+        const go = () =>
+          applyFilter(
+            filter === reg.dataset.regime ? "all" : reg.dataset.regime,
+          );
+        reg.addEventListener("click", go);
+        reg.addEventListener("keydown", (e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            go();
+          }
+        });
+      });
+      applyFilter("all");
+
+      /* media: slower playback, pause when off-screen */
+      const PLAYBACK = 0.7;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      document.querySelectorAll("video").forEach((vid) => {
+        const applyRate = () => {
+          vid.playbackRate = PLAYBACK;
+          vid.defaultPlaybackRate = PLAYBACK;
+        };
+        applyRate();
+        vid.addEventListener("play", applyRate);
+        vid.addEventListener("loadedmetadata", applyRate);
+        vid.dataset.want = reduce ? "0" : "1";
+      });
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            const v = e.target.querySelector("video");
+            if (!v) return;
+            if (e.isIntersecting && v.dataset.want !== "0")
+              v.play().catch(() => {});
+            else v.pause();
+          });
+        },
+        { threshold: 0.2 },
+      );
+      document.querySelectorAll(".stage").forEach((s) => {
+        if (s.querySelector("video")) io.observe(s);
+      });
+
+      /* playground */
+      const OSC = [
+        { k: "dx", label: "dx", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "dy", label: "dy", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "dz", label: "dz", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "dax", label: "dax", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "day", label: "day", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "daz", label: "daz", min: -1, max: 1, step: 0.01, v: 0 },
+        { k: "grip", label: "grip", min: -1, max: 1, step: 0.01, v: 1 },
+      ];
+      const EGO = [
+        { k: "tx", label: "tx", min: -0.4, max: 0.4, step: 0.01, v: 0.12 },
+        { k: "ty", label: "ty", min: -0.3, max: 0.3, step: 0.01, v: 0.02 },
+        { k: "tz", label: "tz", min: -0.4, max: 0.4, step: 0.01, v: 0.28 },
+        { k: "yaw", label: "yaw", min: -1.2, max: 1.2, step: 0.01, v: 0.15 },
+        { k: "grip", label: "g", min: 0, max: 1, step: 0.01, v: 0 },
+      ];
+      let mode = "osc";
+      let hot = "";
+      const canvas = document.getElementById("arm");
+      const ctx = canvas.getContext("2d");
+      const form = document.getElementById("sliders");
+      form.addEventListener("submit", (e) => e.preventDefault());
+      const live = document.getElementById("live-vec");
+      const matEl = document.getElementById("mat-live");
+      const hint = document.getElementById("play-hint");
+
+      function dims() {
+        return mode === "osc" ? OSC : EGO;
+      }
+      function val(k) {
+        return dims().find((d) => d.k === k).v;
+      }
+
+      function rebuildSliders() {
+        form.innerHTML = dims()
+          .map(
+            (d) => `
+    <label>
+      <span>${d.label}</span>
+      <input type="range" name="${d.k}" min="${d.min}" max="${d.max}" step="${d.step}" value="${d.v}">
+      <em data-k="${d.k}">${d.v.toFixed(2)}</em>
+    </label>`,
+          )
+          .join("");
+        form.querySelectorAll("input").forEach((inp) => {
+          const set = () => {
+            const d = dims().find((x) => x.k === inp.name);
+            d.v = Number(inp.value);
+            hot = d.k;
+            form.querySelector(`[data-k="${d.k}"]`).textContent =
+              d.v.toFixed(2);
+            draw();
+          };
+          inp.addEventListener("input", set);
+        });
+      }
+
+      function egoMatrix() {
+        const c = Math.cos(val("yaw")),
+          s = Math.sin(val("yaw"));
+        const tx = val("tx"),
+          ty = val("ty"),
+          tz = val("tz");
+        return [
+          [c, 0, s, tx],
+          [0, 1, 0, ty],
+          [-s, 0, c, tz],
+          [0, 0, 0, 1],
+        ];
+      }
+
+      function sizeCanvas() {
+        const dpr = Math.min(devicePixelRatio || 1, 2);
+        const w = canvas.clientWidth,
+          h = canvas.clientHeight;
+        canvas.width = Math.round(w * dpr);
+        canvas.height = Math.round(h * dpr);
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        return { w, h };
+      }
+
+      function oscLayout(w, h) {
+        return {
+          rest: { x: w * 0.44, y: h * 0.48 },
+          scale: Math.min(w, h) * 0.28,
+          base: { x: w * 0.14, y: h * 0.74 },
+        };
+      }
+      function egoLayout(w, h) {
+        return { cam: { x: w * 0.2, y: h * 0.5 } };
+      }
+
+      function drawGripper(x, y, ang, open, scale, color) {
+        ctx.save();
+        ctx.translate(x, y);
+        ctx.rotate(ang);
+        ctx.strokeStyle = color;
+        ctx.lineWidth = 2.6;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(-20 * scale, 0);
+        ctx.lineTo(10 * scale, 0);
+        ctx.stroke();
+        const jaw = 10 * scale + open * 12 * scale;
+        ctx.beginPath();
+        ctx.moveTo(10 * scale, -jaw);
+        ctx.lineTo(26 * scale, -jaw);
+        ctx.moveTo(10 * scale, jaw);
+        ctx.lineTo(26 * scale, jaw);
+        ctx.stroke();
+        ctx.restore();
+      }
+
+      function drawCube(x, y, s, fill, side) {
+        ctx.fillStyle = fill;
+        ctx.fillRect(x, y, s, s);
+        ctx.fillStyle = side;
+        ctx.beginPath();
+        ctx.moveTo(x, y);
+        ctx.lineTo(x + s * 0.35, y - s * 0.28);
+        ctx.lineTo(x + s * 1.35, y - s * 0.28);
+        ctx.lineTo(x + s, y);
+        ctx.closePath();
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(x + s, y);
+        ctx.lineTo(x + s * 1.35, y - s * 0.28);
+        ctx.lineTo(x + s * 1.35, y + s * 0.72);
+        ctx.lineTo(x + s, y + s);
+        ctx.closePath();
+        ctx.fill();
+      }
+
+      function drawOsc(w, h) {
+        ctx.fillStyle = "#0b0d12";
+        ctx.fillRect(0, 0, w, h);
+        ctx.strokeStyle = "#1a2230";
+        ctx.lineWidth = 1;
+        for (let i = 0; i < 10; i++) {
+          const y = h * 0.58 + i * h * 0.042;
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(w, y);
+          ctx.stroke();
+        }
+        const tw = w * 0.78,
+          th = h * 0.13;
+        const tx0 = w * 0.1,
+          ty0 = h * 0.66;
+        ctx.fillStyle = "#4a3c2c";
+        ctx.beginPath();
+        ctx.moveTo(tx0, ty0);
+        ctx.lineTo(tx0 + 22, ty0 - 26);
+        ctx.lineTo(tx0 + tw + 22, ty0 - 26);
+        ctx.lineTo(tx0 + tw, ty0);
+        ctx.closePath();
+        ctx.fill();
+        ctx.fillStyle = "#2f261c";
+        ctx.fillRect(tx0, ty0, tw, th);
+        ctx.strokeStyle = "#6b5a44";
+        ctx.strokeRect(tx0, ty0, tw, th);
+        drawCube(tx0 + tw * 0.58, ty0 - 52, 26, "#f5c518", "#c9a014");
+        drawCube(tx0 + tw * 0.72, ty0 - 40, 18, "#7aa2ff", "#4d6cb0");
+
+        const { rest, scale, base } = oscLayout(w, h);
+        const gx = rest.x + val("dx") * scale;
+        const gy = rest.y - val("dy") * scale;
+        const mid = { x: (base.x + gx) / 2 + 8, y: (base.y + gy) / 2 - 36 };
+
+        ctx.setLineDash([5, 5]);
+        ctx.strokeStyle = "rgba(122,162,255,.55)";
+        ctx.lineWidth = 1.6;
+        ctx.beginPath();
+        ctx.arc(rest.x, rest.y, 11, 0, Math.PI * 2);
+        ctx.stroke();
+        ctx.beginPath();
+        ctx.moveTo(rest.x, rest.y);
+        ctx.lineTo(gx, gy);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        ctx.strokeStyle = "#8aa0c8";
+        ctx.lineWidth = 8;
+        ctx.lineCap = "round";
+        ctx.beginPath();
+        ctx.moveTo(base.x, base.y);
+        ctx.lineTo(mid.x, mid.y);
+        ctx.lineTo(gx, gy);
+        ctx.stroke();
+        ctx.fillStyle = "#c9d4ea";
+        ctx.beginPath();
+        ctx.arc(base.x, base.y, 9, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(mid.x, mid.y, 7, 0, Math.PI * 2);
+        ctx.fill();
+        const ang =
+          Math.atan2(gy - mid.y, gx - mid.x) +
+          val("daz") * 0.9 +
+          val("dax") * 0.35;
+        const open = (1 - val("grip")) * 0.5 + 0.15;
+        const z = 1.15 + val("dz") * 0.28;
+        drawGripper(gx, gy, ang, open, z, "#f5c518");
+        ctx.font = "11px IBM Plex Mono, monospace";
+        ctx.fillStyle = "#ff5a4a";
+        ctx.fillText("Δx", gx + 18, gy - 10);
+        ctx.fillStyle = "#3ee0a0";
+        ctx.fillText("Δy", gx + 18, gy + 6);
+      }
+
+      function drawEgo(w, h) {
+        const { cam } = egoLayout(w, h);
+        ctx.fillStyle = "#10141c";
+        ctx.fillRect(0, 0, w, h);
+        ctx.fillStyle = "rgba(42,51,68,.45)";
+        ctx.beginPath();
+        ctx.moveTo(cam.x, cam.y);
+        ctx.lineTo(w * 0.94, h * 0.16);
+        ctx.lineTo(w * 0.94, h * 0.86);
+        ctx.closePath();
+        ctx.fill();
+        ctx.strokeStyle = "#3a465c";
+        ctx.lineWidth = 1.4;
+        ctx.stroke();
+
+        const shelfY = h * 0.62;
+        ctx.fillStyle = "#2a2118";
+        ctx.beginPath();
+        ctx.moveTo(w * 0.42, shelfY);
+        ctx.lineTo(w * 0.92, h * 0.52);
+        ctx.lineTo(w * 0.92, h * 0.62);
+        ctx.lineTo(w * 0.42, shelfY + 28);
+        ctx.closePath();
+        ctx.fill();
+        drawCube(w * 0.58, shelfY - 28, 22, "#f5c518", "#c9a014");
+        drawCube(w * 0.72, shelfY - 18, 16, "#7aa2ff", "#4d6cb0");
+        drawCube(w * 0.8, shelfY - 36, 14, "#3ee0a0", "#1f9a6a");
+
+        ctx.strokeStyle = "#7aa2ff";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(cam.x - 46, cam.y - 34, 70, 50);
+        ctx.fillStyle = "#7aa2ff";
+        ctx.font = "12px IBM Plex Mono, monospace";
+        ctx.fillText("wrist cam", cam.x - 44, cam.y - 44);
+        const axis = (dx, dy, label, col) => {
+          ctx.strokeStyle = col;
+          ctx.lineWidth = 2.2;
+          ctx.beginPath();
+          ctx.moveTo(cam.x, cam.y);
+          ctx.lineTo(cam.x + dx, cam.y + dy);
+          ctx.stroke();
+          ctx.fillStyle = col;
+          ctx.fillText(label, cam.x + dx + 6, cam.y + dy);
+        };
+        axis(78, 0, "X right", "#ff5a4a");
+        axis(0, -78, "Y up", "#3ee0a0");
+        axis(-32, 28, "Z back", "#f5c518");
+        const px = cam.x + 130 + val("tx") * 220;
+        const py = cam.y - val("ty") * 200;
+        const sc = 1.35 + val("tz") * 1.1;
+        drawGripper(
+          px,
+          py,
+          val("yaw"),
+          0.2 + (1 - val("grip")) * 0.7,
+          sc,
+          "#f5c518",
+        );
+      }
+
+      function renderVec() {
+        const must = document.getElementById("ego-must");
+        const cap = document.getElementById("ego-cap");
+        const tag = document.getElementById("ego-tag");
+        if (mode === "osc") {
+          matEl.hidden = true;
+          live.innerHTML =
+            OSC.map(
+              (d) =>
+                `<span class="vec-chip${hot === d.k ? " hot" : ""}">${d.label} <b>${d.v.toFixed(2)}</b></span>`,
+            ).join("") + `<span class="vec-chip">shape (7,)</span>`;
+          hint.innerHTML =
+            "Relative Δ in the EEF frame, each dim ∈ [-1, 1]. Same family as <code>pd_ee_delta_pose</code> / OSC_POSE.";
+          must.innerHTML =
+            "<b>Would send (LIBERO family):</b> 7-D <code>pd_ee_delta_pose</code> — Δxyz, Δrot, gripper. Not what EgoGym consumes. Flip to <b>17-D camera</b> for the real vector.";
+          cap.textContent = "7-D OSC · table / EEF Δ  ·  drag the gripper";
+          tag.textContent = "contrast · 7-D OSC";
+        } else {
+          const M = egoMatrix();
+          const flat = M.flat();
+          const hotIdx = { tx: 3, ty: 7, tz: 11, yaw: -1, grip: 16 };
+          matEl.hidden = false;
+          matEl.innerHTML = flat
+            .map((n, i) => {
+              const on =
+                (hot === "yaw" && [0, 2, 8, 10].includes(i)) ||
+                hotIdx[hot] === i;
+              return `<span class="${on ? "hot" : ""}">${n.toFixed(2)}</span>`;
+            })
+            .join("");
+          live.innerHTML = `<span class="vec-chip">[0–15] flattened 4×4</span><span class="vec-chip${hot === "grip" ? " hot" : ""}">[16] grip <b>${val("grip").toFixed(2)}</b></span>`;
+          hint.innerHTML =
+            "Camera frame: X right, Y up, Z backward. Cells [0–15] are the 4×4; [16] is gripper. Toy yaw around Y.";
+          must.innerHTML =
+            "<b>Must send:</b> flattened 4×4 in the camera frame [0–15] + gripper [16]. X right, Y up, Z backward. Flip to <b>7-D OSC</b> to see what LIBERO would have sent instead.";
+          cap.textContent = "17-D · camera 4×4 + gripper  ·  drag the gripper";
+          tag.textContent = "not 7-D OSC";
+        }
+      }
+
+      function draw() {
+        const { w, h } = sizeCanvas();
+        ctx.clearRect(0, 0, w, h);
+        if (mode === "osc") drawOsc(w, h);
+        else drawEgo(w, h);
+        renderVec();
+      }
+
+      document.querySelectorAll(".play-modes [data-mode]").forEach((b) => {
+        b.addEventListener("click", () => {
+          mode = b.dataset.mode;
+          document
+            .querySelectorAll(".play-modes [data-mode]")
+            .forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+          hot = "";
+          rebuildSliders();
+          draw();
+        });
+      });
+
+      let dragging = false;
+      canvas.addEventListener("pointerdown", (e) => {
+        dragging = true;
+        canvas.setPointerCapture(e.pointerId);
+        movePtr(e);
+      });
+      canvas.addEventListener("pointerup", () => {
+        dragging = false;
+      });
+      canvas.addEventListener("pointermove", (e) => {
+        if (dragging) movePtr(e);
+      });
+      function syncSliders() {
+        dims().forEach((d) => {
+          const inp = form.querySelector(`input[name="${d.k}"]`);
+          const em = form.querySelector(`[data-k="${d.k}"]`);
+          if (inp) inp.value = d.v;
+          if (em) em.textContent = d.v.toFixed(2);
+        });
+      }
+      function movePtr(e) {
+        const r = canvas.getBoundingClientRect();
+        const x = e.clientX - r.left,
+          y = e.clientY - r.top;
+        const w = r.width,
+          h = r.height;
+        if (mode === "osc") {
+          const { rest, scale } = oscLayout(w, h);
+          OSC.find((d) => d.k === "dx").v = Math.max(
+            -1,
+            Math.min(1, (x - rest.x) / scale),
+          );
+          OSC.find((d) => d.k === "dy").v = Math.max(
+            -1,
+            Math.min(1, (rest.y - y) / scale),
+          );
+          hot = "dx";
+        } else {
+          const { cam } = egoLayout(w, h);
+          EGO.find((d) => d.k === "tx").v = Math.max(
+            -0.4,
+            Math.min(0.4, (x - cam.x - 130) / 220),
+          );
+          EGO.find((d) => d.k === "ty").v = Math.max(
+            -0.3,
+            Math.min(0.3, (cam.y - y) / 200),
+          );
+          hot = "tx";
+        }
+        syncSliders();
+        draw();
+      }
+      addEventListener("resize", draw);
+      rebuildSliders();
+      draw();
+    </script>
+  </body>
+</html>
