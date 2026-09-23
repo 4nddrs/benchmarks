@@ -13,7 +13,7 @@ bash serve.sh          # http://127.0.0.1:8767/
 
 ## What the page teaches
 
-1. **Long ≠ memory.** CALVIN / LIBERO / RoboCasa can run for hundreds of steps with every object still on camera. MIKASA RememberColor hides the cue (the yellow square).
+1. **Long ≠ memory.** CALVIN / LIBERO / RoboCasa can run for hundreds of steps with every object still on camera. MIKASA RememberColor hides the cue (the yellow cube).
 2. **Three regimes** (MemMimic / Gated Memory Policy): Markovian, in-trial, cross-trial.
 3. **Worlds, not papers:** RememberColor, ShellGameTouch, TakeItBack, Intercept (MIKASA-Robo); Match Color, Iterative Pushing, Place Back (MemMimic); CALVIN as the long-but-visible contrast; EgoGym as the 17-D exception.
 4. **Action layouts** from published env specs only — no live probe, no invented step values. MIKASA/LIBERO: 7-D `pd_ee_delta_pose`. EgoGym: flattened 4×4 + gripper.
@@ -22,7 +22,7 @@ bash serve.sh          # http://127.0.0.1:8767/
 
 Footage is stored under `assets/` from the projects’ public pages (MIKASA-Robo docs, GMP site, CALVIN repo).
 
-Interactive bits: regime filters, EgoGym card with a live 7-D / 17-D arm switch, play/pause on clips, dark/light theme. Clone buttons copy the public GitHub URL — those folders are not on this laptop.
+Interactive bits: regime filters (EgoGym is the 17-D action contrast and stays on All), EgoGym card with a live 7-D / 17-D arm switch, dark/light theme. Clone buttons copy the public GitHub URL — those folders are not on this laptop.
 
 ## Relationship to code_flow
 
