@@ -398,58 +398,168 @@
         color: var(--cue);
         font-weight: 650;
       }
-      .trail {
+      .reel {
         margin-top: 0.75rem;
       }
-      .trail-crumbs {
+      .reel-bar {
         display: flex;
-        flex-wrap: wrap;
-        gap: 0.35rem 0.75rem;
-        margin: 0 0 0.45rem;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin: 0 0 0.35rem;
       }
-      .trail-crumbs[hidden] {
-        display: none !important;
-      }
-      .trail-crumbs button {
+      .reel-name {
         font: 600 0.68rem var(--mono);
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--faint);
+      }
+      .reel-btn {
+        font: 600 1rem var(--mono);
+        line-height: 1;
+        color: var(--ink);
+        background: none;
+        border: 0;
+        padding: 0 0.15rem;
+        cursor: pointer;
+      }
+      .reel-btn:disabled {
+        color: var(--line);
+        cursor: default;
+      }
+      .reel-view {
+        display: grid;
+        position: relative;
+        overflow: hidden;
+        background: var(--hud);
+        border: 1px solid var(--line);
+        border-radius: 10px;
+        padding: 0.7rem 0.75rem;
+        touch-action: pan-y;
+        cursor: grab;
+      }
+      .reel-view:active {
+        cursor: grabbing;
+      }
+      .reel .hud {
+        background: none;
+        border: 0;
+        padding: 0;
+        border-radius: 0;
+      }
+      .reel-slide {
+        grid-area: 1 / 1;
+        visibility: hidden;
+        min-width: 0;
+      }
+      .reel-slide.is-on {
+        visibility: visible;
+        z-index: 1;
+      }
+      .reel-view.moved .reel-slide.is-on {
+        animation: reel-in 0.28s ease;
+      }
+      .reel-slide:not(:first-child) {
+        position: absolute;
+        overflow: auto;
+      }
+      .reel-slide > b {
+        display: block;
+        font-family: var(--serif);
+        font-weight: 600;
+        font-size: 1.15rem;
+        line-height: 1.2;
+        margin: 0.08rem 0 0.1rem;
+      }
+      .reel .trail-foot {
+        margin: 0.35rem 0 0;
+        font-size: 0.82rem;
+      }
+      @keyframes reel-in {
+        from {
+          transform: translateX(var(--reel-from, 14%));
+        }
+        to {
+          transform: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .reel-view.moved .reel-slide.is-on {
+          animation: none;
+        }
+      }
+      .task-shot {
+        margin: 0.45rem 0 0.35rem;
+        background: #000;
+        border-radius: 8px;
+        overflow: hidden;
+      }
+      .task-shot video,
+      .asset-still {
+        width: 100%;
+        max-height: 168px;
+        object-fit: contain;
+        display: block;
+        background: #000;
+      }
+      .reel .task-shot {
+        margin: 0.2rem 0;
+      }
+      .reel .task-shot video,
+      .reel .asset-still {
+        max-height: 148px;
+      }
+      .task-shot video {
+        cursor: zoom-in;
+      }
+      .vid-zoom {
+        position: fixed;
+        inset: 0;
+        z-index: 30;
+        background: rgba(0, 0, 0, 0.84);
+        cursor: zoom-out;
+      }
+      .vid-zoom[hidden] {
+        display: none;
+      }
+      .reel.is-zoomed {
+        position: fixed;
+        z-index: 31;
+        left: 50%;
+        top: 50%;
+        margin: 0;
+        transform: translate(-50%, -50%) scale(var(--zoom, 1));
+      }
+      .reel.is-zoomed .task-shot video {
+        cursor: zoom-out;
+      }
+      .asset-still {
+        border-radius: 8px;
+        max-height: 220px;
+      }
+      .ov {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.82rem;
+        margin: 0;
+      }
+      .ov th,
+      .ov td {
+        text-align: left;
+        padding: 0.38rem 0.35rem;
+        border-bottom: 1px solid var(--line);
+        vertical-align: top;
+      }
+      .ov th {
+        font-family: var(--mono);
+        font-size: 0.64rem;
         letter-spacing: 0.06em;
         text-transform: uppercase;
         color: var(--faint);
-        background: none;
-        border: 0;
-        border-bottom: 1px solid transparent;
-        padding: 0;
-        cursor: pointer;
+        font-weight: 600;
       }
-      .trail-crumbs button:hover,
-      .trail-crumbs button[aria-pressed="true"] {
-        color: var(--ink);
-      }
-      .trail-crumbs button[aria-pressed="true"] {
-        border-bottom-color: var(--cue);
-      }
-      .trail-go {
-        font: 600 0.78rem var(--mono);
-        color: var(--accent);
-        background: transparent;
-        border: 1px dashed var(--line);
-        border-radius: 999px;
-        padding: 0.38rem 0.8rem;
-        cursor: pointer;
-      }
-      .trail-go:hover,
-      .trail-go:focus-visible {
-        border-color: var(--accent);
-        background: var(--hover);
-      }
-      .trail-go::after {
-        content: " →";
-      }
-      .trail-body {
-        margin-bottom: 0.65rem;
-      }
-      .trail-body[hidden] {
-        display: none !important;
+      .ov td:first-child {
+        font-weight: 600;
       }
       .trail-foot {
         margin: 0.5rem 0 0;
@@ -482,6 +592,9 @@
       }
       .pair {
         grid-template-columns: 1fr 1fr;
+      }
+      .pair.stack {
+        grid-template-columns: 1fr;
       }
       .lens,
       .pair > div {
@@ -521,21 +634,6 @@
         .pair,
         .pair.trio {
           grid-template-columns: 1fr;
-        }
-      }
-      @media (prefers-reduced-motion: no-preference) {
-        .trail-body {
-          animation: trail-in 0.28s ease;
-        }
-      }
-      @keyframes trail-in {
-        from {
-          opacity: 0;
-          transform: translateY(4px);
-        }
-        to {
-          opacity: 1;
-          transform: none;
         }
       }
       .jump {
@@ -1055,10 +1153,13 @@
             not a memory test.
           </p>
           <div class="hud" data-kind="robocasa"></div>
-          <div class="trail" id="rc-trail">
-            <div class="trail-crumbs" hidden></div>
-            <div class="trail-body" hidden></div>
-            <button type="button" class="trail-go">What the cameras see</button>
+          <div class="reel" id="rc-trail">
+            <div class="reel-bar">
+              <button type="button" class="reel-btn" data-dir="-1" aria-label="Previous detail">‹</button>
+              <span class="reel-name">Action</span>
+              <button type="button" class="reel-btn" data-dir="1" aria-label="Next detail">›</button>
+            </div>
+            <div class="reel-view" tabindex="0" aria-roledescription="carousel" aria-label="RoboCasa details"></div>
           </div>
         </div>
       </article>
@@ -1742,102 +1843,166 @@
       }
       document.querySelectorAll(".hud").forEach(hud);
 
-      /* RoboCasa365, one layer at a time */
+      /* RoboCasa details share the action panel. Swipe or the arrows. */
       const rcTrail = document.getElementById("rc-trail");
       if (rcTrail) {
+        const view = rcTrail.querySelector(".reel-view");
+        const nameEl = rcTrail.querySelector(".reel-name");
+        const prevBtn = rcTrail.querySelector('[data-dir="-1"]');
+        const nextBtn = rcTrail.querySelector('[data-dir="1"]');
+        const hudEl = document.querySelector("#robocasa .hud");
         const rcSteps = [
+          { crumb: "Action", node: hudEl },
           {
             crumb: "Cameras",
-            go: "What the cameras see",
             html: `<div class="lenses">
               <div class="lens"><i>left</i><b>Agent view</b><span>Third person, left of the base.</span></div>
               <div class="lens"><i>right</i><b>Agent view</b><span>Third person, from the other side.</span></div>
               <div class="lens"><i>wrist</i><b>Eye in hand</b><span>The gripper’s own camera.</span></div>
             </div>
-            <p class="trail-foot">Env names: <code>robot0_agentview_left</code>, <code>robot0_agentview_right</code>, <code>robot0_eye_in_hand</code>. The clip above is one of these. The mug stays in frame.</p>`,
+            <p class="trail-foot">Env names: <code>robot0_agentview_left</code>, <code>robot0_agentview_right</code>, <code>robot0_eye_in_hand</code>. The clip on the left is one of these. The mug stays in frame.</p>`,
           },
           {
             crumb: "Horizon",
-            go: "How long a task runs",
             html: `<div class="pair">
-              <div><div class="n">Atomic</div><b>One skill</b><span>300–1,050 steps · 15–52 s. Success is checked the whole way.</span></div>
-              <div><div class="n">Composite</div><b>A chain</b><span>600–7,200 steps · 30 s–6 min. Success only at the end.</span></div>
+              <div><div class="n">Atomic</div><b>15–52 s</b><span>300–1,050 steps. One skill. Success is checked the whole way.</span></div>
+              <div><div class="n">Composite</div><b>30 s–6 min</b><span>600–7,200 steps. A chain. Success only at the end.</span></div>
             </div>
-            <p class="trail-kicker">What the 65 atomic skills are</p>
-            <div class="dims">
-              <div class="dim"><i>22</i><b>open</b><span>or close a cabinet, drawer, fridge, microwave, oven</span></div>
-              <div class="dim"><i>12</i><b>on</b><span>or off: microwave, stove, toaster, faucet</span></div>
-              <div class="dim"><i>18</i><b>pick</b><span>counter to cabinet, drawer, fridge, microwave, sink</span></div>
-              <div class="dim"><i>3</i><b>slide</b><span>the dishwasher, oven, or toaster-oven rack</span></div>
-            </div>
-            <p class="trail-kicker">Same chain, two lengths</p>
-            <div class="pair">
-              <div><div class="n">30 s</div><b class="task-id">JuiceFruitReamer</b><span>600 steps. Shortest composite.</span></div>
-              <div><div class="n">6 min</div><b class="task-id">DivideBuffetTrays</b><span>7,200 steps. Twelve times longer.</span></div>
-            </div>
-            <p class="trail-foot">The base lines up, the arm approaches, then the skill runs. Control is 20 Hz. The other 10 atomic tasks are navigate, adjust, and a few recipes counted as one skill. On target data, each frame is tagged <code>pick</code>, <code>place</code>, or <code>navigate</code>.</p>`,
+            <p class="trail-foot">65 skills: 22 open or close, 12 on or off, 18 pick, 3 slide. The other 10 are navigate and adjust. Shortest composite <code>JuiceFruitReamer</code>, 30 s. Longest <code>DivideBuffetTrays</code>, 6 min. Target frames are tagged <code>pick</code>, <code>place</code>, or <code>navigate</code>.</p>`,
           },
           {
-            crumb: "Data",
-            go: "What was recorded",
-            html: `<div class="pair trio">
-              <div><div class="n">Human pretrain</div><b>482 h</b><span>300 tasks · 2,500 scenes · 100 demos</span></div>
-              <div><div class="n">MimicGen</div><b>1,615 h</b><span>60 atomic tasks · ~10,000 demos</span></div>
-              <div><div class="n">Target</div><b>193 h</b><span>50 tasks · 10 new kitchens · 500 demos</span></div>
-            </div>
-            <p class="trail-foot">Target splits: Atomic-Seen 18, Composite-Seen 16, Composite-Unseen 16. Same 12-D action. Unseen is a new chain, not an object that left the camera.</p>`,
+            crumb: "Overview",
+            html: `<table class="ov">
+              <thead>
+                <tr><th>Setting</th><th>Tasks</th><th>Scenes</th><th>Demos / task</th><th>Hours</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Pretrain, human</td><td>300</td><td>2,500</td><td>100</td><td>482</td></tr>
+                <tr><td>Pretrain, MimicGen</td><td>60</td><td>2,500</td><td>10,000</td><td>1,615</td></tr>
+                <tr><td>Target, human</td><td>50</td><td>10</td><td>500</td><td>193</td></tr>
+              </tbody>
+            </table>
+            <p class="trail-foot">Human pretrain is 65 atomic and 235 composite. MimicGen is atomic only. Target kitchens are new: Atomic-Seen 18, Composite-Seen 16, Composite-Unseen 16.</p>`,
+          },
+          {
+            crumb: "Atomic",
+            html: `<div class="n">Atomic</div>
+              <b>One motion</b>
+              <p class="trail-foot">Open a lid, or press a button. That single motion is the whole task.</p>
+              <div class="task-shot">
+                <video src="assets/robocasa_atomic_microwave.mp4" muted loop playsinline preload="metadata" aria-label="TurnOnMicrowave: press the microwave start button"></video>
+              </div>
+              <p class="trail-foot"><code>TurnOnMicrowave</code> · press the start button. 23 s.</p>`,
+          },
+          {
+            crumb: "Composite",
+            html: `<div class="n">Composite</div>
+              <b>Those motions, in order</b>
+              <p class="trail-foot">Press the button, open the lid, and pour. Each of those is its own atomic task. Lined up, they are one composite.</p>
+              <div class="task-shot">
+                <video src="assets/robocasa_composite_coffee.mp4" muted loop playsinline preload="metadata" aria-label="PrepareCoffee: place the mug, then press start"></video>
+              </div>
+              <p class="trail-foot"><code>PrepareCoffee</code> · set the mug under the dispenser, then press start. 39 s. The button press is only one step.</p>`,
           },
           {
             crumb: "State",
-            go: "The 16 numbers beside the action",
-            html: `<div class="hud"><div class="dims">
+            html: `<div class="dims">
               <div class="dim"><i>0–2</i><b>base</b><span>base position</span><em>xyz</em></div>
               <div class="dim"><i>3–6</i><b>quat</b><span>base orientation</span><em>4-D</em></div>
               <div class="dim"><i>7–9</i><b>eef</b><span>end-effector position, relative</span><em>xyz</em></div>
               <div class="dim"><i>10–13</i><b>quat</b><span>end-effector orientation, relative</span><em>4-D</em></div>
               <div class="dim"><i>14–15</i><b>grip</b><span>gripper joints</span><em>2-D</em></div>
-            </div></div>
-            <p class="trail-foot">Proprioception. The command in the HUD stays the 12-D action, sent at 20 Hz.</p>`,
+            </div>
+            <p class="trail-foot">Proprioception, 16 numbers. The command above stays the 12-D action, sent at 20 Hz.</p>`,
+          },
+          {
+            crumb: "Assets",
+            html: `<img class="asset-still" src="assets/robocasa_kitchen.png" alt="A RoboCasa target kitchen rendered in 3D">
+            <p class="trail-foot">One target kitchen. There are 10 of these, plus 2,500 pretraining kitchens. 3,200 objects in 150 categories, from Objaverse, LightWheel, and Luma.</p>`,
           },
         ];
-        const crumbsEl = rcTrail.querySelector(".trail-crumbs");
-        const bodyEl = rcTrail.querySelector(".trail-body");
-        const goBtn = rcTrail.querySelector(".trail-go");
-        let opened = 0;
-        let viewing = -1;
-        function paintTrail() {
-          const seen = opened > 0;
-          crumbsEl.hidden = !seen;
-          bodyEl.hidden = !seen;
-          crumbsEl.innerHTML = rcSteps
-            .slice(0, opened)
-            .map(
-              (s, i) =>
-                `<button type="button" data-i="${i}" aria-pressed="${i === viewing}">${s.crumb}</button>`,
-            )
-            .join("");
-          if (seen) {
-            bodyEl.innerHTML = rcSteps[viewing].html;
-            bodyEl.style.animation = "none";
-            void bodyEl.offsetWidth;
-            bodyEl.style.animation = "";
-          }
-          if (opened < rcSteps.length) {
-            goBtn.hidden = false;
-            goBtn.textContent = rcSteps[opened].go;
-          } else goBtn.hidden = true;
+        const slides = rcSteps.map((s, i) => {
+          const el = document.createElement("div");
+          el.className = "reel-slide";
+          el.id = `rc-slide-${i}`;
+          el.setAttribute("role", "group");
+          el.setAttribute("aria-label", s.crumb);
+          if (s.node) el.appendChild(s.node);
+          else el.innerHTML = s.html;
+          view.appendChild(el);
+          return el;
+        });
+        let index = 0;
+        function playSlide(slide, on) {
+          slide.querySelectorAll("video").forEach((v) => {
+            if (!on || v.dataset.want === "0") {
+              v.pause();
+              return;
+            }
+            const r = v.getBoundingClientRect();
+            if (r.bottom > 40 && r.top < window.innerHeight - 40)
+              v.play().catch(() => {});
+          });
         }
-        goBtn.addEventListener("click", () => {
-          viewing = opened;
-          opened += 1;
-          paintTrail();
+        function showReel(i) {
+          const next = Math.max(0, Math.min(slides.length - 1, i));
+          if (next !== index) view.classList.add("moved");
+          view.style.setProperty("--reel-from", next > index ? "16%" : "-16%");
+          index = next;
+          slides.forEach((slide, n) => {
+            const on = n === index;
+            slide.classList.toggle("is-on", on);
+            slide.inert = !on;
+            slide.style.transform = "";
+            playSlide(slide, on);
+          });
+          nameEl.textContent = rcSteps[index].crumb;
+          prevBtn.disabled = index === 0;
+          nextBtn.disabled = index === slides.length - 1;
+          view.setAttribute(
+            "aria-label",
+            `${rcSteps[index].crumb}, ${index + 1} of ${slides.length}`,
+          );
+        }
+        prevBtn.addEventListener("click", () => showReel(index - 1));
+        nextBtn.addEventListener("click", () => showReel(index + 1));
+        view.addEventListener("keydown", (e) => {
+          if (e.key === "ArrowRight") {
+            e.preventDefault();
+            showReel(index + 1);
+          } else if (e.key === "ArrowLeft") {
+            e.preventDefault();
+            showReel(index - 1);
+          }
         });
-        crumbsEl.addEventListener("click", (e) => {
-          const b = e.target.closest("button");
-          if (!b) return;
-          viewing = Number(b.dataset.i);
-          paintTrail();
+        let pid = null;
+        let origin = 0;
+        let dx = 0;
+        view.addEventListener("pointerdown", (e) => {
+          if (e.button !== 0 || e.target.closest("a, button, video")) return;
+          pid = e.pointerId;
+          origin = e.clientX;
+          dx = 0;
+          view.setPointerCapture(pid);
         });
+        view.addEventListener("pointermove", (e) => {
+          if (e.pointerId !== pid) return;
+          dx = e.clientX - origin;
+          const atEnd =
+            (index === 0 && dx > 0) || (index === slides.length - 1 && dx < 0);
+          slides[index].style.transform = `translateX(${atEnd ? dx * 0.3 : dx}px)`;
+        });
+        function endDrag(e) {
+          if (e.pointerId !== pid) return;
+          slides[index].style.transform = "";
+          pid = null;
+          if (dx <= -56) showReel(index + 1);
+          else if (dx >= 56) showReel(index - 1);
+          dx = 0;
+        }
+        view.addEventListener("pointerup", endDrag);
+        view.addEventListener("pointercancel", endDrag);
+        showReel(0);
       }
 
       document.querySelectorAll('nav a[href^="#"]').forEach((a) => {
@@ -1962,6 +2127,11 @@
           entries.forEach((e) => {
             const v = e.target.querySelector("video");
             if (!v) return;
+            const pane = e.target.closest(".reel-slide");
+            if (pane && !pane.classList.contains("is-on")) {
+              v.pause();
+              return;
+            }
             if (e.isIntersecting && v.dataset.want !== "0")
               v.play().catch(() => {});
             else v.pause();
@@ -1969,8 +2139,53 @@
         },
         { threshold: 0.2 },
       );
-      document.querySelectorAll(".stage").forEach((s) => {
+      document.querySelectorAll(".stage, .task-shot").forEach((s) => {
         if (s.querySelector("video")) io.observe(s);
+      });
+
+      const vidZoom = document.createElement("div");
+      vidZoom.className = "vid-zoom";
+      vidZoom.hidden = true;
+      document.body.appendChild(vidZoom);
+      const reel = document.getElementById("rc-trail");
+      let reelHold = null;
+      function closeVidZoom() {
+        if (!reel.classList.contains("is-zoomed")) return;
+        reel.classList.remove("is-zoomed");
+        reel.style.width = "";
+        reel.style.removeProperty("--zoom");
+        reelHold?.remove();
+        reelHold = null;
+        vidZoom.hidden = true;
+        document.body.style.overflow = "";
+      }
+      function openCardZoom() {
+        if (reel.classList.contains("is-zoomed")) return;
+        const rect = reel.getBoundingClientRect();
+        reelHold = document.createElement("div");
+        reelHold.style.height = reel.offsetHeight + "px";
+        reelHold.style.marginTop = getComputedStyle(reel).marginTop;
+        reel.before(reelHold);
+        const scale = Math.min(
+          (window.innerWidth * 0.92) / rect.width,
+          (window.innerHeight * 0.9) / rect.height,
+        );
+        reel.style.width = rect.width + "px";
+        reel.style.setProperty("--zoom", String(scale));
+        reel.classList.add("is-zoomed");
+        vidZoom.hidden = false;
+        document.body.style.overflow = "hidden";
+      }
+      document.querySelectorAll(".task-shot video").forEach((video) => {
+        video.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (reel.classList.contains("is-zoomed")) closeVidZoom();
+          else openCardZoom();
+        });
+      });
+      vidZoom.addEventListener("click", closeVidZoom);
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeVidZoom();
       });
 
       /* playground */
