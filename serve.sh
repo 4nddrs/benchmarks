@@ -4,5 +4,5 @@ set -euo pipefail
 PORT="${1:-8767}"
 BIND="${2:-127.0.0.1}"
 cd "$(dirname "$0")"
-echo "Memory worlds  →  http://${BIND}:${PORT}/"
+echo "Robot Benchmark Atlas  →  http://${BIND}:${PORT}/"
 exec python3 -m http.server "$PORT" --bind "$BIND"

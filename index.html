@@ -1,2579 +1,963 @@
-<!doctype html>
-<html lang="en" data-theme="dark">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Memory worlds · long-horizon is not memory</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
-    />
-    <style>
-      :root,
-      html[data-theme="dark"] {
-        --bg: #08090b;
-        --panel: #111318;
-        --ink: #f2eee6;
-        --muted: #9aa3b2;
-        --faint: #6b7382;
-        --line: #242a33;
-        --cue: #f5c518;
-        --gone: #ff5a4a;
-        --ok: #3ee0a0;
-        --accent: #7aa2ff;
-        --hud: #0b0d11;
-        --hover: #1a2230;
-        --stage: #000;
-        --code-bg: #1c222c;
-        --still: #f4f1ea;
-        --btn: #1c222c;
-        --serif: "Newsreader", Georgia, serif;
-        --sans: "Source Sans 3", system-ui, sans-serif;
-        --mono: "IBM Plex Mono", ui-monospace, monospace;
-        color-scheme: dark;
-      }
-      html[data-theme="light"] {
-        --bg: #f6f4ef;
-        --panel: #fffdf8;
-        --ink: #1c1f26;
-        --muted: #5a6270;
-        --faint: #8a919c;
-        --line: #e4e0d6;
-        --cue: #b45309;
-        --gone: #c2410c;
-        --ok: #0f766e;
-        --accent: #1d4ed8;
-        --hud: #f3f1eb;
-        --hover: #ece8de;
-        --stage: #111;
-        --code-bg: #ece8de;
-        --still: #f4f1ea;
-        --btn: #ece8de;
-        color-scheme: light;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html {
-        scroll-behavior: smooth;
-      }
-      h2,
-      .ep,
-      #split {
-        scroll-margin-top: 5.5rem;
-      }
-      body {
-        margin: 0;
-        background: var(--bg);
-        color: var(--ink);
-        font: 17px/1.5 var(--sans);
-      }
-      a {
-        color: var(--accent);
-      }
-      a:hover {
-        text-decoration: none;
-      }
-      code {
-        font-family: var(--mono);
-        font-size: 0.86em;
-        background: var(--code-bg);
-        padding: 0.12em 0.38em;
-        border-radius: 4px;
-      }
-      .wrap {
-        width: min(1180px, calc(100% - 2rem));
-        margin: 0 auto;
-      }
-      header.top {
-        position: sticky;
-        top: 0;
-        z-index: 8;
-        background: color-mix(in srgb, var(--bg) 88%, transparent);
-        backdrop-filter: blur(16px);
-        border-bottom: 1px solid var(--line);
-      }
-      .top-in {
-        display: flex;
-        justify-content: space-between;
-        gap: 1rem;
-        align-items: center;
-        padding: 0.8rem 0;
-        flex-wrap: wrap;
-      }
-      .brand {
-        font-family: var(--serif);
-        font-weight: 700;
-        letter-spacing: -0.02em;
-      }
-      .brand em {
-        color: var(--faint);
-        font-weight: 400;
-        font-style: italic;
-      }
-      nav {
-        display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        gap: 0.15rem 0.85rem;
-      }
-      nav a {
-        color: var(--muted);
-        text-decoration: none;
-        font-size: 0.92rem;
-      }
-      nav a:hover {
-        color: var(--ink);
-      }
-      .icon-btn {
-        font: 600 0.78rem var(--mono);
-        letter-spacing: 0.04em;
-        background: var(--btn);
-        color: var(--ink);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 0.28rem 0.7rem;
-        cursor: pointer;
-      }
-      .icon-btn:hover {
-        border-color: var(--accent);
-      }
-      .hero {
-        padding: 2.8rem 0 1.2rem;
-      }
-      .kicker {
-        font-family: var(--mono);
-        font-size: 0.72rem;
-        letter-spacing: 0.18em;
-        text-transform: uppercase;
-        color: var(--cue);
-        font-weight: 600;
-      }
-      h1 {
-        font-family: var(--serif);
-        font-size: clamp(2.3rem, 6vw, 4.1rem);
-        line-height: 1.02;
-        letter-spacing: -0.03em;
-        margin: 0.4rem 0 0.8rem;
-        font-weight: 700;
-      }
-      .lede {
-        max-width: 40rem;
-        color: var(--muted);
-        font-size: 1.15rem;
-      }
-      .lede strong {
-        color: var(--ink);
-      }
-      .filters {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.4rem;
-        margin: 0 0 1.4rem;
-      }
-      .filters button {
-        font: 600 0.78rem var(--mono);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        background: transparent;
-        color: var(--muted);
-        border: 1px solid var(--line);
-        border-radius: 999px;
-        padding: 0.38rem 0.8rem;
-        cursor: pointer;
-      }
-      .filters button:hover {
-        color: var(--ink);
-        border-color: var(--muted);
-      }
-      .filters button[aria-pressed="true"] {
-        color: var(--bg);
-        background: var(--ink);
-        border-color: var(--ink);
-      }
-      html[data-theme="light"] .filters button[aria-pressed="true"] {
-        color: #fffdf8;
-      }
-      .filter-count {
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        color: var(--faint);
-        align-self: center;
-      }
-      .split {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.7rem;
-        margin: 0 0 2.2rem;
-      }
-      @media (max-width: 800px) {
-        .split {
-          grid-template-columns: 1fr;
-        }
-      }
-      .film,
-      .reg,
-      .ep {
-        background: var(--panel);
-        border: 1px solid var(--line);
-        border-radius: 14px;
-        overflow: hidden;
-      }
-      .film {
-        display: flex;
-        flex-direction: column;
-      }
-      .film .stage,
-      .reg .stage,
-      .ep .stage {
-        background: var(--stage);
-        overflow: hidden;
-        position: relative;
-      }
-      .film .stage,
-      .reg .stage {
-        aspect-ratio: 16/10;
-        max-height: 340px;
-      }
-      .ep .stage {
-        min-height: 260px;
-      }
-      .film img,
-      .film video,
-      .reg img,
-      .reg video,
-      .ep img,
-      .ep video {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-        background: var(--stage);
-      }
-      .film.still img {
-        background: var(--still);
-      }
-      .film .cap {
-        padding: 0.85rem 1rem 1rem;
-      }
-      .pill {
-        display: inline-block;
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        font-weight: 600;
-        padding: 0.18rem 0.5rem;
-        border-radius: 999px;
-        margin-bottom: 0.4rem;
-      }
-      .pill.no {
-        background: color-mix(in srgb, var(--ok) 16%, transparent);
-        color: var(--ok);
-      }
-      .pill.yes {
-        background: color-mix(in srgb, var(--gone) 16%, transparent);
-        color: var(--gone);
-      }
-      .film h3 {
-        margin: 0 0 0.3rem;
-        font-family: var(--serif);
-        font-size: 1.35rem;
-      }
-      .film p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 0.95rem;
-      }
-      h2 {
-        font-family: var(--serif);
-        font-size: 1.7rem;
-        margin: 2.4rem 0 0.7rem;
-        letter-spacing: -0.02em;
-      }
-      .note {
-        color: var(--muted);
-        max-width: 46rem;
-        margin: 0 0 1.1rem;
-      }
-      .regimes {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 0.7rem;
-      }
-      @media (max-width: 900px) {
-        .regimes {
-          grid-template-columns: 1fr;
-        }
-      }
-      .reg {
-        cursor: pointer;
-      }
-      .reg:focus-visible {
-        outline: 2px solid var(--accent);
-        outline-offset: 2px;
-      }
-      .reg.is-off {
-        opacity: 0.42;
-      }
-      .reg .body {
-        padding: 0.9rem 1rem 1.1rem;
-      }
-      .reg h3 {
-        margin: 0 0 0.25rem;
-        font-size: 1.15rem;
-        font-family: var(--serif);
-      }
-      .n {
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--faint);
-      }
-      .ep {
-        display: grid;
-        grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
-        gap: 0;
-        border-radius: 16px;
-        margin: 0 0 1.1rem;
-      }
-      @media (max-width: 860px) {
-        .ep {
-          grid-template-columns: 1fr;
-        }
-      }
-      .film[hidden],
-      .reg[hidden],
-      .ep[hidden] {
-        display: none !important;
-      }
-      .split:has(.film[hidden]) {
-        grid-template-columns: 1fr;
-        max-width: 720px;
-      }
-      .regimes:has(.reg[hidden]) {
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      }
-      .ep img,
-      .ep video {
-        max-height: 420px;
-      }
-      .ep .stage video {
-        height: 100%;
-        min-height: 320px;
-        max-height: none;
-        object-fit: cover;
-      }
-      .ep .copy {
-        padding: 1.1rem 1.15rem 1.2rem;
-      }
-      .ep h3 {
-        font-family: var(--serif);
-        margin: 0 0 0.35rem;
-        font-size: 1.45rem;
-      }
-      .tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-        margin: 0 0 0.6rem;
-      }
-      .tag {
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        background: var(--code-bg);
-        color: var(--muted);
-        border-radius: 999px;
-        padding: 0.15rem 0.5rem;
-      }
-      .must {
-        border-left: 3px solid var(--cue);
-        padding: 0.15rem 0 0.15rem 0.7rem;
-        margin: 0.6rem 0 0.8rem;
-      }
-      .must b {
-        color: var(--cue);
-        font-weight: 650;
-      }
-      .reel {
-        margin-top: 0.75rem;
-      }
-      .reel-bar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 0.5rem;
-        margin: 0 0 0.35rem;
-      }
-      .reel-name {
-        font: 600 0.68rem var(--mono);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--faint);
-      }
-      .reel-btn {
-        font: 600 1rem var(--mono);
-        line-height: 1;
-        color: var(--ink);
-        background: none;
-        border: 0;
-        padding: 0 0.15rem;
-        cursor: pointer;
-      }
-      .reel-btn:disabled {
-        color: var(--line);
-        cursor: default;
-      }
-      .reel-view {
-        display: grid;
-        position: relative;
-        overflow: hidden;
-        background: var(--hud);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 0.7rem 0.75rem;
-        touch-action: pan-y;
-        cursor: grab;
-      }
-      .reel-view:active {
-        cursor: grabbing;
-      }
-      .reel .hud {
-        background: none;
-        border: 0;
-        padding: 0;
-        border-radius: 0;
-      }
-      .reel-slide {
-        grid-area: 1 / 1;
-        visibility: hidden;
-        min-width: 0;
-      }
-      .reel-slide.is-on {
-        visibility: visible;
-        z-index: 1;
-      }
-      .reel-view.moved .reel-slide.is-on {
-        animation: reel-in 0.28s ease;
-      }
-      .reel-slide:not(:first-child) {
-        position: absolute;
-        overflow: auto;
-      }
-      .reel-slide > b {
-        display: block;
-        font-family: var(--serif);
-        font-weight: 600;
-        font-size: 1.15rem;
-        line-height: 1.2;
-        margin: 0.08rem 0 0.1rem;
-      }
-      .reel .trail-foot {
-        margin: 0.35rem 0 0;
-        font-size: 0.82rem;
-      }
-      @keyframes reel-in {
-        from {
-          transform: translateX(var(--reel-from, 14%));
-        }
-        to {
-          transform: none;
-        }
-      }
-      @media (prefers-reduced-motion: reduce) {
-        .reel-view.moved .reel-slide.is-on {
-          animation: none;
-        }
-      }
-      .task-shot {
-        margin: 0.45rem 0 0.35rem;
-        background: #000;
-        border-radius: 8px;
-        overflow: hidden;
-      }
-      .task-shot video,
-      .asset-still {
-        width: 100%;
-        max-height: 168px;
-        object-fit: contain;
-        display: block;
-        background: #000;
-      }
-      .reel .task-shot {
-        margin: 0.2rem 0;
-      }
-      .reel .task-shot video,
-      .reel .asset-still {
-        max-height: 148px;
-      }
-      .task-shot video {
-        cursor: zoom-in;
-      }
-      .vid-zoom {
-        position: fixed;
-        inset: 0;
-        z-index: 30;
-        background: rgba(0, 0, 0, 0.84);
-        cursor: zoom-out;
-      }
-      .vid-zoom[hidden] {
-        display: none;
-      }
-      .reel.is-zoomed {
-        position: fixed;
-        z-index: 31;
-        left: 50%;
-        top: 50%;
-        margin: 0;
-        transform: translate(-50%, -50%) scale(var(--zoom, 1));
-      }
-      .reel.is-zoomed .task-shot video {
-        cursor: zoom-out;
-      }
-      .asset-still {
-        border-radius: 8px;
-        max-height: 220px;
-      }
-      .ov {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.82rem;
-        margin: 0;
-      }
-      .ov th,
-      .ov td {
-        text-align: left;
-        padding: 0.38rem 0.35rem;
-        border-bottom: 1px solid var(--line);
-        vertical-align: top;
-      }
-      .ov th {
-        font-family: var(--mono);
-        font-size: 0.64rem;
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        color: var(--faint);
-        font-weight: 600;
-      }
-      .ov td:first-child {
-        font-weight: 600;
-      }
-      .trail-foot {
-        margin: 0.5rem 0 0;
-        color: var(--muted);
-        font-size: 0.88rem;
-      }
-      .trail-kicker {
-        margin: 0.75rem 0 0.35rem;
-        font-family: var(--mono);
-        font-size: 0.66rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--faint);
-        font-weight: 600;
-      }
-      .pair b.task-id {
-        font-family: var(--mono);
-        font-size: 0.78rem;
-        font-weight: 600;
-        letter-spacing: -0.03em;
-      }
-      .lenses,
-      .pair {
-        display: grid;
-        gap: 0.4rem;
-      }
-      .lenses,
-      .pair.trio {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-      .pair {
-        grid-template-columns: 1fr 1fr;
-      }
-      .pair.stack {
-        grid-template-columns: 1fr;
-      }
-      .lens,
-      .pair > div {
-        background: var(--hover);
-        border-radius: 8px;
-        padding: 0.5rem 0.55rem 0.55rem;
-      }
-      .lens i,
-      .pair .n {
-        display: block;
-        font-family: var(--mono);
-        font-style: normal;
-        font-size: 0.66rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: var(--cue);
-        font-weight: 600;
-      }
-      .lens b,
-      .pair b {
-        display: block;
-        font-family: var(--serif);
-        font-weight: 600;
-        font-size: 1.05rem;
-        line-height: 1.2;
-        margin: 0.12rem 0 0.15rem;
-      }
-      .lens span,
-      .pair span {
-        display: block;
-        color: var(--muted);
-        font-size: 0.78rem;
-        line-height: 1.35;
-      }
-      @media (max-width: 640px) {
-        .lenses,
-        .pair,
-        .pair.trio {
-          grid-template-columns: 1fr;
-        }
-      }
-      .jump {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.45rem 0.7rem;
-        margin: 0.2rem 0 0.7rem;
-        font-size: 0.82rem;
-      }
-      .jump a,
-      .jump button {
-        font-family: var(--mono);
-        font-size: 0.72rem;
-        color: var(--accent);
-        background: none;
-        border: 0;
-        padding: 0;
-        cursor: pointer;
-        text-decoration: underline;
-      }
-      .jump button {
-        color: var(--muted);
-        text-decoration: none;
-      }
-      .jump button:hover {
-        color: var(--ink);
-      }
-      .hud {
-        background: var(--hud);
-        border: 1px solid var(--line);
-        border-radius: 10px;
-        padding: 0.7rem 0.75rem;
-      }
-      .hud .who {
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--accent);
-        margin-bottom: 0.45rem;
-      }
-      .dims {
-        display: grid;
-        gap: 0.22rem;
-      }
-      .dim {
-        display: grid;
-        grid-template-columns: auto 3.6rem minmax(0, 1fr) auto;
-        gap: 0.45rem;
-        align-items: baseline;
-        font-size: 0.84rem;
-        padding: 0.12rem 0.2rem;
-        border-radius: 6px;
-      }
-      .dim:hover,
-      .dim.on,
-      .vec-chip.hot {
-        background: var(--hover);
-      }
-      .dim i {
-        font-family: var(--mono);
-        font-style: normal;
-        color: var(--cue);
-        font-weight: 600;
-      }
-      .dim b {
-        font-family: var(--mono);
-        font-weight: 500;
-      }
-      .dim span {
-        color: var(--muted);
-      }
-      .dim em {
-        font-family: var(--mono);
-        font-style: normal;
-        color: var(--ok);
-        font-size: 0.78rem;
-      }
-      .vec {
-        font-family: var(--mono);
-        font-size: 0.75rem;
-        color: var(--muted);
-        margin-top: 0.55rem;
-        overflow-x: auto;
-      }
-      @media (max-width: 860px) {
-        .dim {
-          grid-template-columns: auto 3.4rem minmax(0, 1fr);
-          font-size: 0.8rem;
-        }
-        .dim em {
-          grid-column: 2 / -1;
-          justify-self: start;
-        }
-        header.top {
-          position: static;
-        }
-        .top-in {
-          align-items: flex-start;
-          padding: 0.55rem 0 0.65rem;
-        }
-        nav {
-          width: 100%;
-          gap: 0.15rem 0.7rem;
-        }
-      }
-      .frames {
-        width: 100%;
-        border-collapse: collapse;
-        font-size: 0.9rem;
-        margin: 1rem 0 1.4rem;
-      }
-      .frames th,
-      .frames td {
-        text-align: left;
-        padding: 0.55rem 0.65rem;
-        border-bottom: 1px solid var(--line);
-        vertical-align: top;
-      }
-      .frames th {
-        font-family: var(--mono);
-        font-size: 0.68rem;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: var(--faint);
-        font-weight: 600;
-      }
-      .frames td:first-child {
-        font-weight: 600;
-      }
-      .frames code {
-        font-size: 0.78em;
-      }
-      .play-modes {
-        position: absolute;
-        top: 0.5rem;
-        left: 0.5rem;
-        z-index: 2;
-        display: flex;
-        margin: 0;
-        padding: 3px;
-        gap: 0;
-        background: rgba(8, 9, 11, 0.82);
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 999px;
-      }
-      .play-modes button {
-        font: 600 0.68rem var(--mono);
-        letter-spacing: 0.06em;
-        text-transform: uppercase;
-        background: transparent;
-        color: #9aa3b2;
-        border: 0;
-        border-radius: 999px;
-        padding: 0.32rem 0.7rem;
-        cursor: pointer;
-      }
-      .play-modes button[aria-pressed="true"] {
-        color: #fff;
-        background: #2a4a8a;
-      }
-      .stage-cap {
-        position: absolute;
-        bottom: 0.55rem;
-        left: 0.55rem;
-        z-index: 2;
-        margin: 0;
-        font: 600 0.68rem var(--mono);
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        color: #c9d4ea;
-        pointer-events: none;
-        text-shadow: 0 1px 8px #000;
-      }
-      .ep.egogym .stage {
-        min-height: 340px;
-      }
-      #arm {
-        width: 100%;
-        height: 100%;
-        min-height: 340px;
-        aspect-ratio: 16/10;
-        display: block;
-        background: var(--stage);
-        cursor: grab;
-        touch-action: none;
-      }
-      #arm:active {
-        cursor: grabbing;
-      }
-      .sliders label {
-        display: grid;
-        grid-template-columns: 3.2rem 1fr 3.2rem;
-        gap: 0.45rem;
-        align-items: center;
-        font-size: 0.82rem;
-        margin: 0 0 0.45rem;
-      }
-      .sliders label span {
-        font-family: var(--mono);
-        color: var(--cue);
-        font-size: 0.72rem;
-      }
-      .sliders label em {
-        font-family: var(--mono);
-        font-style: normal;
-        color: var(--ok);
-        font-size: 0.72rem;
-        text-align: right;
-      }
-      .sliders input[type="range"] {
-        width: 100%;
-        accent-color: var(--accent);
-      }
-      .live-vec {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.3rem;
-        margin: 0.55rem 0 0.35rem;
-        font-family: var(--mono);
-        font-size: 0.78rem;
-      }
-      .vec-chip {
-        background: var(--hud);
-        border: 1px solid var(--line);
-        border-radius: 6px;
-        padding: 0.18rem 0.4rem;
-        color: var(--muted);
-      }
-      .vec-chip b {
-        color: var(--ink);
-        font-weight: 500;
-      }
-      .mat-live {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 3px;
-        max-width: 280px;
-        margin: 0.5rem 0;
-        font-family: var(--mono);
-        font-size: 0.72rem;
-      }
-      .mat-live span {
-        background: var(--hover);
-        padding: 0.28rem;
-        text-align: center;
-        border-radius: 4px;
-        color: var(--ok);
-      }
-      .mat-live span.hot {
-        outline: 1px solid var(--cue);
-        color: var(--cue);
-      }
-      .mat-live[hidden] {
-        display: none !important;
-      }
-      .aside {
-        margin: 2rem 0;
-        padding: 1rem 1.1rem;
-        border: 1px dashed var(--line);
-        border-radius: 12px;
-        color: var(--muted);
-      }
-      .aside strong {
-        color: var(--ink);
-      }
-      footer.end {
-        padding: 1.6rem 0 3rem;
-        color: var(--faint);
-        font-size: 0.82rem;
-      }
-      footer.end p {
-        max-width: 46rem;
-      }
-      .toast {
-        position: fixed;
-        bottom: 1.2rem;
-        right: 1.2rem;
-        z-index: 20;
-        background: var(--ink);
-        color: var(--bg);
-        font: 600 0.8rem var(--mono);
-        padding: 0.5rem 0.8rem;
-        border-radius: 8px;
-        opacity: 0;
-        pointer-events: none;
-        transition: opacity 0.2s;
-      }
-      .toast.on {
-        opacity: 1;
-      }
-    </style>
-  </head>
-  <body>
-    <header class="top">
-      <div class="wrap top-in">
-        <div class="brand">Memory worlds</div>
-        <nav>
-          <a href="#split">the difference</a>
-          <a href="#regimes">3 regimes</a>
-          <a href="#episodes">tasks</a>
-          <a href="#actions">action data</a>
-          <a href="https://roaring-kringle-be46b2.netlify.app/"
-            >code_flow menu</a
-          >
-          <button
-            type="button"
-            class="icon-btn"
-            id="theme-btn"
-            aria-label="Toggle color theme"
-          >
-            theme
-          </button>
-        </nav>
+<title>Robot Benchmark Atlas</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:opsz,wght@6..72,400;6..72,600;6..72,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
+/>
+<style>
+  :root {
+    --bg: #f5f6f8;
+    --panel: #ffffff;
+    --sunk: #eceef2;
+    --ink: #151920;
+    --muted: #535c6b;
+    --faint: #7b8494;
+    --line: #dbdfe6;
+    --accent: #2f55c8;
+    --stage: #0d0f13;
+    --tip-bg: #151920;
+    --tip-ink: #f3f4f7;
+    /* one identity colour per benchmark */
+    --robocasa: #c26a12;
+    --mikasa: #6a44d8;
+    --libero: #0b8574;
+    --egogym: #c42a62;
+    --serif: "Newsreader", Georgia, "Times New Roman", serif;
+    --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+    --radius: 10px;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0c0e12;
+      --panel: #14171d;
+      --sunk: #1b1f27;
+      --ink: #eef0f4;
+      --muted: #a3abb9;
+      --faint: #757e8d;
+      --line: #272c36;
+      --accent: #86a4ff;
+      --stage: #000;
+      --tip-bg: #eef0f4;
+      --tip-ink: #111419;
+      --robocasa: #f0a049;
+      --mikasa: #a58bff;
+      --libero: #3fcfb6;
+      --egogym: #ff6f9f;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0c0e12;
+    --panel: #14171d;
+    --sunk: #1b1f27;
+    --ink: #eef0f4;
+    --muted: #a3abb9;
+    --faint: #757e8d;
+    --line: #272c36;
+    --accent: #86a4ff;
+    --stage: #000;
+    --tip-bg: #eef0f4;
+    --tip-ink: #111419;
+    --robocasa: #f0a049;
+    --mikasa: #a58bff;
+    --libero: #3fcfb6;
+    --egogym: #ff6f9f;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font: 400 17px/1.55 var(--sans);
+    padding-inline: 16px;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  code, .mono { font-family: var(--mono); font-size: 0.86em; }
+  code { background: var(--sunk); padding: 1px 5px; border-radius: 4px; }
+  h1, h2, h3 { font-family: var(--serif); font-weight: 600; line-height: 1.15; text-wrap: balance; margin: 0; }
+  p { margin: 0; }
+  .wrap { max-width: 1160px; margin-inline: auto; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+
+  /* ---------- top bar + tabs ---------- */
+  .bar {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 20;
+    background: color-mix(in srgb, var(--bg) 92%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+    margin-inline: -16px;
+    padding-inline: 16px;
+  }
+  .bar .wrap { display: flex; align-items: center; gap: 18px; min-height: 58px; }
+  .brand { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
+  .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; }
+  .tabs::-webkit-scrollbar { display: none; }
+  .tab {
+    --c: var(--ink);
+    appearance: none; border: 0; background: none; color: var(--muted);
+    font: 600 15px/1 var(--sans);
+    padding: 10px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .tab .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
+  .tab:hover { background: var(--sunk); color: var(--ink); }
+  .tab[aria-selected="true"] { background: var(--ink); color: var(--bg); }
+  .tab[aria-selected="true"] .dot { background: var(--bg); }
+  .theme-btn {
+    appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--muted);
+    font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+  }
+  @media (max-width: 640px) { .brand { display: none; } .theme-btn { display: none; } }
+
+  main { padding-block: 32px 80px; }
+  section.panel { display: grid; gap: 44px; }
+  section.panel > *, .top > *, .step > * { min-width: 0; }
+
+  .eyebrow { font: 600 12px/1.2 var(--mono); letter-spacing: 0.12em; text-transform: uppercase; color: var(--c, var(--muted)); }
+  .lede { font-size: 19px; color: var(--muted); max-width: 64ch; }
+  h2.section { font-size: 26px; margin-bottom: 14px; }
+  .sub { color: var(--muted); max-width: 68ch; margin-bottom: 18px; }
+
+  /* ---------- glossary terms ---------- */
+  .term {
+    border-bottom: 1.5px dotted var(--c, var(--accent));
+    cursor: help;
+    font-weight: 600;
+  }
+  .tip {
+    position: fixed; z-index: 50; max-width: 300px;
+    background: var(--tip-bg); color: var(--tip-ink);
+    font: 400 14px/1.45 var(--sans);
+    padding: 10px 12px; border-radius: 8px;
+    box-shadow: 0 8px 28px rgb(0 0 0 / 0.28);
+    pointer-events: none;
+  }
+  .tip b { display: block; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 3px; opacity: 0.7; }
+
+  /* ---------- media ---------- */
+  figure { margin: 0; display: grid; gap: 8px; align-content: start; }
+  .vid {
+    width: 100%; max-width: 100%; display: block;
+    background: var(--stage); border-radius: var(--radius);
+    aspect-ratio: 16 / 9; object-fit: cover;
+  }
+  .vid.contain { object-fit: contain; }
+  .vid.r32 { aspect-ratio: 3 / 2; }
+  figcaption { font-size: 14.5px; color: var(--muted); line-height: 1.4; }
+  figcaption b { color: var(--ink); font-weight: 600; }
+
+  /* ---------- landing ---------- */
+  .hero-home { display: grid; gap: 14px; padding-top: 8px; }
+  .hero-home h1 { font-size: clamp(44px, 8vw, 84px); letter-spacing: -0.02em; font-weight: 700; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .card {
+    --c: var(--accent);
+    appearance: none; text-align: left; font: inherit; color: inherit; cursor: pointer;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 14px;
+    padding: 10px 10px 16px; display: grid; gap: 12px; align-content: start;
+    transition: transform 0.15s ease, border-color 0.15s ease;
+  }
+  .card:hover { transform: translateY(-2px); border-color: var(--c); }
+  @media (prefers-reduced-motion: reduce) { .card, .card:hover { transition: none; transform: none; } }
+  .card .vid { border-radius: 8px; aspect-ratio: 16 / 9; }
+  .card .body { display: grid; gap: 8px; padding-inline: 6px; }
+  .card h3 { font-size: 24px; }
+  .card p { font-size: 15.5px; color: var(--muted); }
+  .card .go { font: 600 13px/1 var(--mono); color: var(--c); margin-top: 4px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; width: fit-content;
+    font: 600 11.5px/1 var(--mono); letter-spacing: 0.04em; text-transform: uppercase;
+    color: var(--c); background: color-mix(in srgb, var(--c) 12%, transparent);
+    padding: 5px 8px; border-radius: 999px;
+  }
+
+  /* loop diagram on landing */
+  .loop { display: grid; grid-template-columns: repeat(5, auto); align-items: center; justify-content: start; gap: 10px; overflow-x: auto; padding-bottom: 4px; }
+  .node { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; min-width: 150px; max-width: 220px; }
+  .node .k { font: 600 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); }
+  .node .v { font-weight: 600; margin-top: 6px; }
+  .node .d { font-size: 14px; color: var(--muted); margin-top: 2px; }
+  .arrow { font: 500 20px/1 var(--mono); color: var(--faint); }
+  @media (max-width: 760px) {
+    .loop { grid-template-columns: 1fr; }
+    .node { max-width: none; }
+    .arrow { transform: rotate(90deg); justify-self: start; margin-left: 20px; }
+  }
+
+  .tablebox { overflow-x: auto; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 760px; font-size: 15px; }
+  th, td { text-align: left; padding: 12px 14px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr:last-child td { border-bottom: 0; }
+  thead th { font: 600 11.5px/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); background: var(--sunk); }
+  tbody th { font-family: var(--serif); font-size: 18px; white-space: nowrap; }
+  tbody th span { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  td { color: var(--muted); }
+  td strong { color: var(--ink); font-weight: 600; }
+  .num { font-variant-numeric: tabular-nums; }
+
+  /* ---------- benchmark tab ---------- */
+  .top { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+  @media (max-width: 880px) { .top { grid-template-columns: 1fr; } }
+  .top h1 { font-size: clamp(38px, 6vw, 60px); letter-spacing: -0.015em; font-weight: 700; margin-top: 6px; }
+  .oneliner { font-family: var(--serif); font-size: 22px; line-height: 1.35; margin-top: 12px; }
+  .oneliner em { font-style: normal; background: color-mix(in srgb, var(--c) 18%, transparent); padding: 0 3px; border-radius: 3px; }
+  .facts { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); margin-top: 20px; }
+  .fact { padding: 14px 16px; border-bottom: 1px solid var(--line); }
+  .fact:nth-child(odd) { border-right: 1px solid var(--line); }
+  .fact:nth-last-child(-n+2) { border-bottom: 0; }
+  .fact .k { font: 600 11px/1 var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); }
+  .fact .v { margin-top: 6px; font-size: 15.5px; line-height: 1.4; }
+  @media (max-width: 520px) {
+    .facts { grid-template-columns: 1fr; }
+    .fact:nth-child(odd) { border-right: 0; }
+    .fact:nth-last-child(2) { border-bottom: 1px solid var(--line); }
+  }
+  .timer { font: 500 12px/1 var(--mono); color: var(--faint); margin-top: 14px; }
+
+  .stats { display: flex; flex-wrap: wrap; gap: 10px 28px; padding: 18px 0; border-block: 1px solid var(--line); }
+  .stat .n { font-family: var(--serif); font-size: 34px; font-weight: 700; line-height: 1; font-variant-numeric: tabular-nums; color: var(--c); }
+  .stat .l { font-size: 14px; color: var(--muted); margin-top: 4px; max-width: 18ch; }
+
+  .grid-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 18px; }
+  .grid-2 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: repeat(auto-fill, minmax(170px, 1fr)); gap: 14px; }
+
+  /* one timestep of data */
+  .step { display: grid; grid-template-columns: minmax(0, 1.2fr) auto minmax(0, 0.7fr) auto minmax(0, 1.3fr); gap: 12px; align-items: stretch; }
+  .step .box { background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 16px; display: grid; gap: 10px; align-content: start; }
+  .step .box h3 { font-family: var(--mono); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); font-weight: 600; }
+  .step .box ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 15px; }
+  .step .box li::marker { color: var(--c); }
+  .step .policy { display: grid; place-items: center; text-align: center; background: color-mix(in srgb, var(--c) 10%, var(--panel)); }
+  .step .policy .big { font-family: var(--serif); font-size: 22px; font-weight: 600; }
+  .step .policy .d { font-size: 13.5px; color: var(--muted); }
+  .step .arr { align-self: center; font: 500 22px/1 var(--mono); color: var(--faint); }
+  @media (max-width: 900px) {
+    .step { grid-template-columns: 1fr; }
+    .step .arr { transform: rotate(90deg); justify-self: center; }
+  }
+  .vec { display: flex; flex-wrap: wrap; gap: 4px; }
+  .vec span {
+    font: 500 11.5px/1 var(--mono); padding: 8px 6px; min-width: 38px; text-align: center;
+    border-radius: 5px; background: var(--sunk); border: 1px solid var(--line);
+  }
+  .vec span.g { background: color-mix(in srgb, var(--c) 20%, transparent); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
+  .vec span.b { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  .note { font-size: 13.5px; color: var(--muted); }
+
+  /* tasks list */
+  .tasks { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
+  .task { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .task h3 { font-family: var(--sans); font-size: 16.5px; font-weight: 700; }
+  .task p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
+  .task .ex { font: 500 12px/1.4 var(--mono); color: var(--c); margin-top: 8px; }
+
+  .glossary { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 28px; }
+  .glossary div { padding: 12px 0; border-top: 1px solid var(--line); }
+  .glossary dt { font-weight: 700; }
+  .glossary dd { margin: 3px 0 0; font-size: 15px; color: var(--muted); }
+
+  .links { display: flex; flex-wrap: wrap; gap: 10px; }
+  .links a {
+    font: 500 14px/1 var(--mono); text-decoration: none; color: var(--ink);
+    border: 1px solid var(--line); background: var(--panel); padding: 10px 12px; border-radius: 8px;
+  }
+  .links a:hover { border-color: var(--c, var(--accent)); color: var(--c, var(--accent)); }
+  .callout {
+    border-left: 3px solid var(--c); padding: 4px 0 4px 16px; max-width: 76ch; color: var(--muted);
+  }
+  .callout strong { color: var(--ink); }
+  footer { color: var(--faint); font-size: 14px; padding-top: 30px; border-top: 1px solid var(--line); margin-top: 60px; }
+</style>
+
+<header class="bar">
+  <div class="wrap">
+    <span class="brand">Robot benchmark atlas</span>
+    <nav class="tabs" role="tablist" aria-label="Benchmarks">
+      <button class="tab" role="tab" id="tab-home" aria-controls="home" data-target="home">Benchmarks</button>
+      <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
+      <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
+      <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
+      <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
+    </nav>
+    <button class="theme-btn" id="theme-btn" type="button">theme</button>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ============================ LANDING ============================ -->
+<section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
+  <div class="hero-home">
+    <span class="eyebrow">Robot learning · four benchmarks</span>
+    <h1>Benchmarks</h1>
+    <p class="lede">
+      A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
+      fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
+      compared fairly. These four test very different things. Pick a tab; each one is built to be
+      understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
+    </p>
+  </div>
+
+  <div class="cards">
+    <button class="card" data-go="robocasa" style="--c: var(--robocasa)">
+      <video class="vid" src="media/robocasa_steaming_veg.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Large-scale sim · multi-task</span>
+        <h3>RoboCasa</h3>
+        <p>A mobile robot doing chores in 2,500 simulated kitchens. 365 tasks and 2,200+ hours of demonstrations for training generalist robots.</p>
+        <span class="go">Tests: breadth and generalisation →</span>
       </div>
-    </header>
-
-    <main class="wrap">
-      <section class="hero">
-        <div class="kicker">long-horizon · memory · simulation</div>
-        <h1>Long-horizon is not memory.</h1>
-        <p class="lede">
-          LIBERO and RoboCasa can run for hundreds of steps and still be
-          solvable from the <strong>current camera frame</strong>. A memory
-          benchmark hides the answer. Watch the yellow cube: it is the whole
-          point.
-        </p>
-      </section>
-
-      <div class="filters" role="group" aria-label="Filter by memory regime">
-        <button type="button" data-filter="all" aria-pressed="true">All</button>
-        <button type="button" data-filter="markovian" aria-pressed="false">
-          Markovian
-        </button>
-        <button type="button" data-filter="in-trial" aria-pressed="false">
-          In-trial
-        </button>
-        <button type="button" data-filter="cross-trial" aria-pressed="false">
-          Cross-trial
-        </button>
-        <span class="filter-count" id="filter-count"></span>
+    </button>
+    <button class="card" data-go="mikasa" style="--c: var(--mikasa)">
+      <video class="vid r32" src="media/mikasa_RememberColor9.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Memory · VLA</span>
+        <h3>MIKASA-Robo</h3>
+        <p>Tabletop puzzles where the answer disappears from view. The robot must remember a colour, a hidden ball, a count, or an order.</p>
+        <span class="go">Tests: memory →</span>
       </div>
-
-      <section class="split" id="split">
-        <article class="film" data-regime="markovian">
-          <div class="stage">
-            <video
-              src="assets/robocasa_pnp.mp4"
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            ></video>
-          </div>
-          <div class="cap">
-            <span class="pill no">no memory required</span>
-            <h3>RoboCasa</h3>
-            <p>
-              Pick, open a cabinet, press the microwave. The appliance stays on
-              camera for the whole episode. Long-horizon, not a memory test —
-              unlike RememberColor, where the yellow cube vanishes.
-            </p>
-          </div>
-        </article>
-        <article class="film" data-regime="in-trial">
-          <div class="stage">
-            <img
-              src="assets/remember_color.gif?v=slow2"
-              alt="MIKASA RememberColor: a yellow target appears, then the table is empty"
-            />
-          </div>
-          <div class="cap">
-            <span class="pill yes">memory required</span>
-            <h3>MIKASA RememberColor</h3>
-            <p>
-              t = 0–4: a yellow cube is the target. Then it vanishes. Later,
-              several colors appear. If you forgot the yellow, you fail — even
-              though the robot, the table, and the 7-D action look like LIBERO.
-            </p>
-          </div>
-        </article>
-      </section>
-
-      <h2 id="regimes">Three memory regimes</h2>
-      <p class="note">
-        From Gated Memory Policy’s MemMimic. This is the map. Click a tile to
-        keep only that kind of world.
-      </p>
-      <div class="regimes">
-        <article class="reg" data-regime="markovian" tabindex="0">
-          <div class="stage">
-            <video
-              src="assets/robocasa_door.mp4"
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            ></video>
-          </div>
-          <div class="body">
-            <div class="n">1 · Markovian</div>
-            <h3>Current frame is enough</h3>
-            <p>
-              Tool Hang, LIBERO pick, RoboCasa microwave. History can even
-              <em>hurt</em> a precise policy. Long ≠ memory.
-            </p>
-          </div>
-        </article>
-        <article class="reg" data-regime="in-trial" tabindex="0">
-          <div class="stage">
-            <video
-              src="assets/match_color.mp4"
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            ></video>
-          </div>
-          <div class="body">
-            <div class="n">2 · In-trial</div>
-            <h3>The cue appears once</h3>
-            <p>
-              Match Color, RememberColor, Place Back, Shell Game. See a color or
-              a start pose, then it leaves the camera. Hold it until the
-              decision.
-            </p>
-          </div>
-        </article>
-        <article class="reg" data-regime="cross-trial" tabindex="0">
-          <div class="stage">
-            <video
-              src="assets/iterative_pushing.mp4"
-              muted
-              loop
-              playsinline
-              preload="metadata"
-            ></video>
-          </div>
-          <div class="body">
-            <div class="n">3 · Cross-trial</div>
-            <h3>Learn across attempts</h3>
-            <p>
-              Iterative Pushing (MemMimic): friction is secret. Push, miss,
-              remember the miss, push again. Memory is the last trial’s outcome,
-              not the current RGB.
-            </p>
-          </div>
-        </article>
+    </button>
+    <button class="card" data-go="libero" style="--c: var(--libero)">
+      <video class="vid" src="media/libero_demos.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Lifelong learning</span>
+        <h3>LIBERO</h3>
+        <p>130 tabletop tasks learned one after another. Can the robot pick up new skills without forgetting old ones?</p>
+        <span class="go">Tests: knowledge transfer →</span>
       </div>
+    </button>
+    <button class="card" data-go="egogym" style="--c: var(--egogym)">
+      <video class="vid" src="media/egogym_simpick.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Zero-shot evaluation</span>
+        <h3>EgoGym</h3>
+        <p>A small, fast simulator for grading already-trained policies on pick, open and close, seen from a camera on the gripper.</p>
+        <span class="go">Tests: out-of-the-box skill →</span>
+      </div>
+    </button>
+  </div>
 
-      <h2 id="episodes">What the other worlds look like</h2>
-      <p class="note">
-        Each row is a <strong>task</strong>, not a paper. The action HUD is the
-        vector <code>env.step</code> consumes. GitHub is the jump to practice —
-        these folders are not cloned on this machine. EgoGym is the 17-D action
-        contrast, so the Markovian, in-trial, and cross-trial filters leave it
-        out.
-      </p>
+  <div>
+    <h2 class="section">The loop every benchmark measures</h2>
+    <p class="sub">Every task here is the same loop, repeated many times a second until the episode ends. Benchmarks differ in what the world looks like, what data you get to learn from, and how success is counted.</p>
+    <div class="loop" aria-label="Observation to action loop">
+      <div class="node"><div class="k">1 · Observation</div><div class="v">What the robot senses</div><div class="d">Camera images, joint angles, a text instruction</div></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node"><div class="k">2 · Policy</div><div class="v">The robot's "brain"</div><div class="d">Usually a neural network being tested</div></div>
+      <span class="arrow" aria-hidden="true">→</span>
+      <div class="node"><div class="k">3 · Action</div><div class="v">A short list of numbers</div><div class="d">e.g. move gripper 1 cm left, close fingers</div></div>
+    </div>
+  </div>
 
-      <article class="ep" id="robocasa" data-regime="markovian">
-        <div class="stage">
-          <video
-            src="assets/robocasa_button.mp4"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label="RoboCasa: pressing a kitchen appliance button"
-          ></video>
-        </div>
-        <div class="copy">
-          <h3>RoboCasa</h3>
-          <div class="tags">
-            <span class="tag">not memory</span
-            ><span class="tag">PandaOmron</span
-            ><span class="tag">12-D action</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/robocasa/robocasa"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <a href="https://robocasa.ai/" target="_blank" rel="noreferrer"
-              >site</a
-            >
-            <a
-              href="https://robocasa.ai/docs/build/html/v0.2/tasks_scenes_assets/atomic_tasks.html"
-              target="_blank"
-              rel="noreferrer"
-              >atomic tasks</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/robocasa/robocasa.git"
-            >
-              copy clone
-            </button>
-            <button
-              type="button"
-              data-copy='env = gym.make("robocasa/PickPlaceCounterToCabinet", split="pretrain", seed=0)'
-            >
-              copy gym.make
-            </button>
-          </p>
-          <p>
-            A mobile Franka (PandaOmron) in a full kitchen. Original release: 25
-            atomic skills — pick-and-place, doors, drawers, knobs, levers,
-            buttons, insertion, navigation — then LLM-authored composite
-            recipes. RoboCasa365 scales that to hundreds of tasks and thousands
-            of scenes. The microwave, the cabinet, the mug stay in RGB.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the language instruction. Not a hidden object
-            property. Pressing <code>TurnOffMicrowave</code> is long-horizon,
-            not a memory test.
-          </p>
-          <div class="hud" data-kind="robocasa"></div>
-          <div class="reel" id="rc-trail">
-            <div class="reel-bar">
-              <button type="button" class="reel-btn" data-dir="-1" aria-label="Previous detail">‹</button>
-              <span class="reel-name">Action</span>
-              <button type="button" class="reel-btn" data-dir="1" aria-label="Next detail">›</button>
-            </div>
-            <div class="reel-view" tabindex="0" aria-roledescription="carousel" aria-label="RoboCasa details"></div>
-          </div>
-        </div>
-      </article>
-
-      <article class="ep" id="libero" data-regime="markovian">
-        <div class="stage">
-          <video
-            src="assets/libero_spatial.mp4"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            aria-label="LIBERO Spatial: pick and place on a table, objects stay in view"
-          ></video>
-        </div>
-        <div class="copy">
-          <h3>LIBERO</h3>
-          <div class="tags">
-            <span class="tag">not memory</span><span class="tag">OSC_POSE</span
-            ><span class="tag">4 suites</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/Lifelong-Robot-Learning/LIBERO"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <a
-              href="https://libero-project.github.io/"
-              target="_blank"
-              rel="noreferrer"
-              >site</a
-            >
-            <a
-              href="https://lifelong-robot-learning.github.io/LIBERO/"
-              target="_blank"
-              rel="noreferrer"
-              >docs</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/Lifelong-Robot-Learning/LIBERO.git"
-            >
-              copy clone
-            </button>
-            <button
-              type="button"
-              data-copy='from libero.libero import benchmark; task_suite = benchmark.get_benchmark_dict()["libero_spatial"]()'
-            >
-              copy get suite
-            </button>
-          </p>
-          <p>
-            130 tabletop tasks in four suites: Spatial, Object, Goal, and
-            LIBERO-100 (90 short + 10 long). The research question is
-            <em>lifelong transfer</em> across those suites — not a cue that
-            leaves the camera. Bowls, plates, and cabinets stay in RGB. Same 7-D
-            OSC family as MIKASA; the world is the opposite of RememberColor.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the language instruction for this task. Not a
-            hidden object property. <code>env.step([0.]*7)</code> is the
-            published dummy.
-          </p>
-          <div class="hud" data-kind="libero"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="remember" data-regime="in-trial">
-        <div class="stage">
-          <img
-            src="assets/remember_color.gif?v=slow2"
-            alt="RememberColor looping episode"
-          />
-        </div>
-        <div class="copy">
-          <h3>RememberColor</h3>
-          <div class="tags">
-            <span class="tag">MIKASA-Robo</span
-            ><span class="tag">object memory</span
-            ><span class="tag">ManiSkill3</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <a
-              href="https://mikasarobo.github.io/quickstart.html"
-              target="_blank"
-              rel="noreferrer"
-              >docs</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            Watch a cube’s color for ~5 steps. Wait on an empty table. Then
-            touch the matching color among 3 / 5 / 9 cubes.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the target color. It is gone from RGB after
-            the delay.
-          </p>
-          <div class="hud"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="shell" data-regime="in-trial">
-        <div class="stage">
-          <img
-            src="assets/shell_game_touch.gif?v=slow2"
-            alt="ShellGameTouch looping episode"
-          />
-        </div>
-        <div class="copy">
-          <h3>ShellGameTouch</h3>
-          <div class="tags">
-            <span class="tag">MIKASA-Robo</span
-            ><span class="tag">spatial memory</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <a
-              href="https://mikasarobo.github.io/quickstart.html"
-              target="_blank"
-              rel="noreferrer"
-              >docs</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            A ball sits in one of three spots. Mugs cover the spots. Touch the
-            mug that hides the ball.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> which seat had the ball before the cover. The
-            current frame is three identical mugs.
-          </p>
-          <div class="hud"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="takeback" data-regime="in-trial">
-        <div class="stage">
-          <img
-            src="assets/take_it_back.gif?v=slow2"
-            alt="TakeItBack looping episode"
-          />
-        </div>
-        <div class="copy">
-          <h3>TakeItBack</h3>
-          <div class="tags">
-            <span class="tag">MIKASA-Robo</span
-            ><span class="tag">spatial memory</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            Pick an object from a random start, then return it to that start.
-            Same idea as MemMimic Place Back.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the start pose. Once lifted, the table no
-            longer shows where it came from.
-          </p>
-          <div class="hud"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="match" data-regime="in-trial">
-        <div class="stage">
-          <video
-            src="assets/match_color.mp4"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          ></video>
-        </div>
-        <div class="copy">
-          <h3>Match Color</h3>
-          <div class="tags">
-            <span class="tag">MemMimic</span><span class="tag">in-trial</span
-            ><span class="tag">GMP’s benchmark</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/real-stanford/gated-memory-policy"
-              target="_blank"
-              rel="noreferrer"
-              >GMP GitHub</a
-            >
-            <a
-              href="https://gated-memory-policy.github.io/"
-              target="_blank"
-              rel="noreferrer"
-              >paper site</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            Pick a cube from one of four colored bins. Bins shuffle. Put it back
-            in the original color. Gated Memory Policy is the <em>method</em>;
-            this is the <em>world</em>.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the bin color at pickup. After the shuffle,
-            RGB lies.
-          </p>
-          <div class="hud" data-kind="mem_abs"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="push" data-regime="cross-trial">
-        <div class="stage">
-          <video
-            src="assets/iterative_pushing.mp4"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          ></video>
-        </div>
-        <div class="copy">
-          <h3>Iterative Pushing</h3>
-          <div class="tags">
-            <span class="tag">MemMimic</span
-            ><span class="tag">cross-trial</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/real-stanford/gated-memory-policy"
-              target="_blank"
-              rel="noreferrer"
-              >GMP GitHub</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            Cube friction is sampled and hidden. Six pushes. Success = last
-            three land in the red box. The policy has to remember overshoots and
-            undershoots.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> outcomes of prior trials, not a color on the
-            table.
-          </p>
-          <div class="hud" data-kind="mem_push"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="place" data-regime="in-trial">
-        <div class="stage">
-          <video
-            src="assets/place_back.mp4"
-            muted
-            loop
-            playsinline
-            preload="metadata"
-          ></video>
-        </div>
-        <div class="copy">
-          <h3>Continuous Place Back</h3>
-          <div class="tags">
-            <span class="tag">MemMimic · real</span
-            ><span class="tag">in-trial</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/real-stanford/gated-memory-policy"
-              target="_blank"
-              rel="noreferrer"
-              >GMP GitHub</a
-            >
-            <a
-              href="https://gated-memory-policy.github.io/"
-              target="_blank"
-              rel="noreferrer"
-              >paper site</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/real-stanford/gated-memory-policy.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            Cup on saucer, then back within 5 cm of the start. The start pose
-            leaves the camera the moment the cup lifts. Same memory demand as
-            TakeItBack, on hardware.
-          </p>
-          <p class="must"><b>Must remember:</b> the cup’s original XY.</p>
-          <div class="hud" data-kind="mem_umi"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="intercept" data-regime="in-trial">
-        <div class="stage">
-          <img
-            src="assets/intercept.gif?v=slow2"
-            alt="MIKASA Intercept episode"
-          />
-        </div>
-        <div class="copy">
-          <h3>Intercept</h3>
-          <div class="tags">
-            <span class="tag">MIKASA-Robo</span
-            ><span class="tag">sequential / timing</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/CognitiveAISystems/MIKASA-Robo"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/CognitiveAISystems/MIKASA-Robo.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            A moving object. The arm has to meet it. Timing is the memory: where
-            it was, where it will be.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> recent motion, not a static property written
-            on the table.
-          </p>
-          <div class="hud"></div>
-        </div>
-      </article>
-
-      <article class="ep" id="calvin" data-regime="markovian">
-        <div class="stage">
-          <img
-            src="assets/calvin_sensors.png"
-            alt="CALVIN RGB, wrist, depth and gripper cameras"
-          />
-        </div>
-        <div class="copy">
-          <h3>CALVIN</h3>
-          <div class="tags">
-            <span class="tag">long-horizon</span
-            ><span class="tag">language</span
-            ><span class="tag">mostly Markovian</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/mees/calvin"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/mees/calvin.git"
-            >
-              copy clone
-            </button>
-          </p>
-          <p>
-            String language skills: open drawer, push button, place block.
-            Horizon is long. The blocks and drawers stay visible — useful
-            contrast, not a memory test.
-          </p>
-          <p class="must">
-            <b>Must remember:</b> the instruction chain. Not a hidden object
-            property.
-          </p>
-          <div class="hud" data-kind="calvin"></div>
-        </div>
-      </article>
-
-      <article class="ep egogym" id="egogym" data-regime="contrast">
-        <div class="stage">
-          <div class="play-modes">
-            <button type="button" data-mode="ego" aria-pressed="false">
-              17-D camera
-            </button>
-            <button type="button" data-mode="osc" aria-pressed="true">
-              7-D OSC
-            </button>
-          </div>
-          <canvas
-            id="arm"
-            width="640"
-            height="400"
-            aria-label="Drag the hypothetical gripper"
-          ></canvas>
-          <p class="stage-cap" id="ego-cap">
-            7-D OSC · table / EEF Δ · drag the gripper
-          </p>
-        </div>
-        <div class="copy">
-          <h3>EgoGym</h3>
-          <div class="tags">
-            <span class="tag">17-D exception</span
-            ><span class="tag">egocentric</span
-            ><span class="tag" id="ego-tag">contrast · 7-D OSC</span>
-          </div>
-          <p class="jump">
-            <a
-              href="https://github.com/omarrayyann/EgoGym"
-              target="_blank"
-              rel="noreferrer"
-              >GitHub</a
-            >
-            <button
-              type="button"
-              data-copy="git clone https://github.com/omarrayyann/EgoGym.git"
-            >
-              copy clone
-            </button>
-            <button
-              type="button"
-              data-copy='env = gym.make("Egogym-Pick-v0", robot="rum", action_space="delta", num_objs=5)'
-            >
-              copy gym.make
-            </button>
-          </p>
-          <p>
-            Pick / Open / Close, wrist camera, robots <code>rum</code> or
-            <code>droid</code>. Drag the gripper. The switch on the frame is the
-            whole point: same motion, different vector.
-          </p>
-          <p class="must" id="ego-must">
-            <b>Would send (LIBERO family):</b> 7-D
-            <code>pd_ee_delta_pose</code> — Δxyz, Δrot, gripper. Not what EgoGym
-            consumes. Flip to <b>17-D camera</b> for the real vector.
-          </p>
-          <form class="sliders" id="sliders"></form>
-          <div class="live-vec" id="live-vec"></div>
-          <div class="mat-live" id="mat-live"></div>
-          <p class="n" id="play-hint"></p>
-        </div>
-      </article>
-
-      <h2 id="actions">
-        The action is usually 7 numbers — except when it isn’t
-      </h2>
-      <p class="note">
-        The trap when you switch simulators is not the length of the vector. It
-        is the <strong>frame</strong> and whether the numbers are a
-        <em>delta</em> or a pose in the world.
-      </p>
-      <table class="frames">
+  <div>
+    <h2 class="section">Side by side</h2>
+    <div class="tablebox">
+      <table>
         <thead>
-          <tr>
-            <th>World</th>
-            <th>What you send</th>
-            <th>Frame</th>
-            <th>Relative or absolute</th>
-          </tr>
+          <tr><th>Benchmark</th><th>Main question</th><th>World</th><th>Data you get</th><th>Tasks</th><th>Action</th></tr>
         </thead>
         <tbody>
           <tr>
-            <td>MIKASA-Robo VLA</td>
-            <td>
-              <code>(7,) float32</code> · <code>[0:3]</code> Δxyz ·
-              <code>[3:6]</code> Δrot · <code>[6]</code> gripper
-            </td>
-            <td>End-effector (<code>pd_ee_delta_pose</code>)</td>
-            <td>Relative, normalized <code>[-1, 1]</code></td>
+            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
+            <td><strong>Can one policy do hundreds of household tasks?</strong></td>
+            <td>Full kitchens, mobile robot, MuJoCo sim</td>
+            <td class="num">600+ h human demos + 1,600+ h synthetic</td>
+            <td class="num">365 (65 atomic, rest composite)</td>
+            <td class="num">12 numbers (arm + gripper + base)</td>
           </tr>
           <tr>
-            <td>LIBERO OSC_POSE</td>
-            <td>
-              <code>(7,) float32</code> · <code>[0:3]</code> Δxyz ·
-              <code>[3:6]</code> Δrot · <code>[6]</code> gripper
-            </td>
-            <td>End-effector OSC (<code>dummy_action = [0.]*7</code>)</td>
-            <td>
-              Relative, scaled deltas, <code>[-1, 1]</code>. Objects stay
-              visible.
-            </td>
+            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
+            <td><strong>Can the robot remember what it no longer sees?</strong></td>
+            <td>Tabletop, Franka arm, ManiSkill3 GPU sim</td>
+            <td class="num">22,500 expert trajectories (6M+ steps)</td>
+            <td class="num">90 across 10 memory types</td>
+            <td class="num">7 numbers (Δ pose + gripper)</td>
           </tr>
           <tr>
-            <td>CALVIN</td>
-            <td><code>(7,)</code> Δxyz, Δrpy, gripper <code>−1/+1</code></td>
-            <td>Cartesian world axes</td>
-            <td>Relative; env scales to metres / radians</td>
+            <th><span style="background: var(--libero)"></span>LIBERO</th>
+            <td><strong>Can it keep learning without forgetting?</strong></td>
+            <td>Tabletop & kitchen, Franka arm, robosuite sim</td>
+            <td class="num">50 human demos per task</td>
+            <td class="num">130 in 4 suites</td>
+            <td class="num">7 numbers (Δ pose + gripper)</td>
           </tr>
           <tr>
-            <td>MemMimic Match Color</td>
-            <td>End-effector pose (paper: action + proprio)</td>
-            <td>World / table</td>
-            <td><strong>Absolute</strong> pose @ 10 Hz</td>
-          </tr>
-          <tr>
-            <td>Place Back (UMI, real)</td>
-            <td>End-effector pose as in UMI</td>
-            <td>UMI gripper / iPhone</td>
-            <td><strong>Relative</strong> pose @ 15–20 Hz</td>
-          </tr>
-          <tr>
-            <td>EgoGym</td>
-            <td>
-              <code>(17,)</code> flattened 4×4 <code>[0–15]</code> + gripper
-              <code>[16]</code>
-            </td>
-            <td>Camera: X right, Y up, Z backward</td>
-            <td><code>delta</code> or <code>absolute</code> (env flag)</td>
-          </tr>
-          <tr>
-            <td>RoboCasa (PandaOmron datasets)</td>
-            <td>
-              <code>(12,) float32</code> · arm 6 + gripper 1 + base 4 + arm/base
-              switch 1
-            </td>
-            <td>EEF cartesian, then holonomic base</td>
-            <td>Relative, <code>[-1, 1]</code>. Not a 7-D OSC vector.</td>
+            <th><span style="background: var(--egogym)"></span>EgoGym</th>
+            <td><strong>Does a pre-trained policy work out of the box?</strong></td>
+            <td>Simple table / cabinet scenes, MuJoCo</td>
+            <td>None. Evaluation only</td>
+            <td class="num">3 (pick, open, close)</td>
+            <td class="num">17 numbers (4×4 pose + gripper)</td>
           </tr>
         </tbody>
       </table>
-    </main>
+    </div>
+  </div>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <div>
+    <h2 class="section">Four words you'll see everywhere</h2>
+    <dl class="glossary" data-glossary="simulation,demonstration,imitation,vla"></dl>
+  </div>
+</section>
 
-    <script>
-      const HUDS = {
-        seven: {
-          label: "env.step · (7,) float32  ∈ [-1, 1]  ·  pd_ee_delta_pose",
-          foot: "MIKASA / ManiSkill3 spec. Relative EEF frame. Same 7-D family as LIBERO OSC_POSE. No live step on this page.",
-          dims: [
-            ["0", "dx", "relative EEF translation X", "∈ [-1, 1]"],
-            ["1", "dy", "relative EEF translation Y", "∈ [-1, 1]"],
-            ["2", "dz", "relative EEF translation Z", "∈ [-1, 1]"],
-            ["3", "dax", "relative EEF rotation X", "∈ [-1, 1]"],
-            ["4", "day", "relative EEF rotation Y", "∈ [-1, 1]"],
-            ["5", "daz", "relative EEF rotation Z", "∈ [-1, 1]"],
-            ["6", "grip", "gripper target", "open ↔ close"],
-          ],
-        },
-        calvin: {
-          label: "env.step · (7,) relative cartesian",
-          foot: "CALVIN: Δxyz, Δrpy, gripper. Cartesian axes; scaled to metres / radians inside the env.",
-          dims: [
-            ["0", "dx", "relative cartesian X", "m, scaled"],
-            ["1", "dy", "relative cartesian Y", "m, scaled"],
-            ["2", "dz", "relative cartesian Z", "m, scaled"],
-            ["3", "droll", "relative roll", "rad, scaled"],
-            ["4", "dpitch", "relative pitch", "rad, scaled"],
-            ["5", "dyaw", "relative yaw", "rad, scaled"],
-            ["6", "grip", "gripper", "−1 open / +1 close"],
-          ],
-        },
-        libero: {
-          label: "env.step · (7,) float32  ∈ [-1, 1]  ·  OSC_POSE",
-          foot: "LIBERO README: dummy_action = [0.]*7. Maintainer (issue #26): OSC_POSE delta EEF + gripper. Lifelong transfer is across task suites, not a vanished cube.",
-          dims: [
-            ["0", "dx", "relative EEF translation X", "∈ [-1, 1]"],
-            ["1", "dy", "relative EEF translation Y", "∈ [-1, 1]"],
-            ["2", "dz", "relative EEF translation Z", "∈ [-1, 1]"],
-            ["3", "dax", "relative EEF rotation X", "∈ [-1, 1]"],
-            ["4", "day", "relative EEF rotation Y", "∈ [-1, 1]"],
-            ["5", "daz", "relative EEF rotation Z", "∈ [-1, 1]"],
-            ["6", "grip", "gripper", "open ↔ close"],
-          ],
-        },
-        robocasa: {
-          label: "env.step · (12,) float32  ∈ [-1, 1]  ·  PandaOmron datasets",
-          foot: "Maintainer (issue #24) and dataset modality.json: cartesian arm 6-D, gripper 1, base 4, then a binary arm-vs-base switch. LeRobot wrappers sometimes reorder the same 12 numbers. Objects stay in view — not a memory vector.",
-          dims: [
-            ["0–2", "ee pos", "end-effector cartesian position", "3-D"],
-            ["3–5", "ee rot", "end-effector cartesian rotation", "3-D"],
-            ["6", "grip", "gripper", "1-D"],
-            ["7–10", "base", "mobile base motion", "4-D"],
-            ["11", "mode", "control arm or base (binary)", "±1"],
-          ],
-        },
-        ego: {
-          label: "env.step · (17,)  flattened 4×4 + gripper",
-          foot: "EgoGym: camera frame, X right, Y up, Z backward. action_space is delta or absolute. Not OSC 7-D.",
-          dims: [
-            ["0–15", "T", "4×4 pose in camera frame", "flattened row-major"],
-            ["16", "grip", "gripper", "0 open · 1 close"],
-          ],
-        },
-        mem_abs: {
-          label: "command · absolute EEF pose · 10 Hz",
-          foot: "GMP appendix T1 (Match Color). Paper does not publish a numbered (7,) table. Not MIKASA pd_ee_delta_pose.",
-          dims: [
-            [
-              "act",
-              "EEF",
-              "absolute end-effector pose (action + proprio)",
-              "absolute",
-            ],
-            ["img", "RGB", "third-person RGB", "1 view"],
-            [
-              "hz",
-              "10",
-              "policy rate; interpolated to 500 Hz physics",
-              "MuJoCo",
-            ],
-            ["H", "16/8", "predict 16 steps, execute 8", "1.6 s / 0.8 s"],
-          ],
-        },
-        mem_push: {
-          label: "command · EEF pose, Y-only · 10 Hz",
-          foot: "GMP appendix T4 (Iterative Pushing). Action constrained to the Y axis. Top-down camera.",
-          dims: [
-            ["act", "EEF", "end-effector pose, constrained to Y", "push axis"],
-            ["img", "RGB", "top-down RGB", "1 view"],
-            ["hz", "10", "data collection and inference", "MuJoCo"],
-            ["H", "240", "GMP history covers ~2 full trials", "timesteps"],
-          ],
-        },
-        mem_umi: {
-          label: "command · relative EEF pose · UMI · 15–20 Hz",
-          foot: "GMP appendix T3 (Continuous Place Back). Relative poses as in the UMI paper. UR5 + WSG50, iPhone ultra-wide.",
-          dims: [
-            ["act", "ΔEEF", "relative end-effector pose (UMI)", "relative"],
-            ["img", "RGB", "iPhone ultra-wide", "UMI gripper"],
-            ["hz", "15–20", "train 20 Hz, deploy 15 Hz", "real"],
-            ["H", "16/8", "predict 16, execute 8", "async ok"],
-          ],
-        },
-      };
+<!-- ============================ ROBOCASA ============================ -->
+<section class="panel" id="robocasa" role="tabpanel" aria-labelledby="tab-robocasa" style="--c: var(--robocasa)" hidden>
+  <div class="top">
+    <video class="vid" src="media/robocasa_release.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Large-scale simulation · multi-task · generalist robots</span>
+      <h1>RoboCasa</h1>
+      <p class="oneliner">A robot in <em>2,500 virtual kitchens</em> learning <em>365 everyday chores</em>, from pressing a button to brewing coffee.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="simulation">Simulation</span> framework + dataset for <span class="term" data-t="multitask">multi-task</span> and <span class="term" data-t="foundation">foundation-model</span> training</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Photo-real kitchens with working fridges, stoves, sinks and microwaves</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v"><span class="term" data-t="demonstration">Demonstrations</span>: 600+ h from humans, 1,600+ h auto-generated</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">65 <span class="term" data-t="atomic">atomic</span> skills + ~300 <span class="term" data-t="composite">composite</span> chores</div></div>
+      </div>
+      <p class="timer">Video: official RoboCasa365 release reel (first 30 s)</p>
+    </div>
+  </div>
 
-      function hud(el) {
-        const spec = HUDS[el.dataset.kind || "seven"];
-        el.innerHTML = `<div class="who">${spec.label}</div><div class="dims">${spec.dims
-          .map(
-            (d) =>
-              `<div class="dim"><i>${d[0]}</i><b>${d[1]}</b><span>${d[2]}</span><em>${d[3]}</em></div>`,
-          )
-          .join("")}</div><div class="vec">${spec.foot}</div>`;
-        el.querySelectorAll(".dim").forEach((row) => {
-          row.addEventListener("pointerenter", () => {
-            el.querySelectorAll(".dim").forEach((r) =>
-              r.classList.remove("on"),
-            );
-            row.classList.add("on");
-          });
-        });
-      }
-      document.querySelectorAll(".hud").forEach(hud);
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Each demonstration is a recording of this loop, dozens of times per second. A policy learns to copy the action given the observation (<span class="term" data-t="imitation">imitation learning</span>). Since July 2026 the composite datasets also label every frame with its sub-task, skill name and instruction.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>RGB images from cameras left and right of the robot, plus a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: arm joint angles, gripper opening, base position</li>
+          <li>A language instruction, e.g. <i>"Place the toast on the dining counter"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">e.g. Diffusion Policy, π₀, GR00T</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 12 numbers</h3>
+        <div class="vec" aria-label="12-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span><span class="b">base</span><span class="b">base</span><span class="b">base</span><span class="b">base</span><span class="b">mode</span>
+        </div>
+        <p class="note">6 arm + 1 gripper + 4 mobile base + 1 arm/base switch, each scaled to [−1, 1]. This is for the default PandaOmron robot (a Franka arm on a wheeled base). Other robots, including humanoids, are supported.</p>
+      </div>
+    </div>
+  </div>
 
-      /* RoboCasa details share the action panel. Swipe or the arrows. */
-      const rcTrail = document.getElementById("rc-trail");
-      if (rcTrail) {
-        const view = rcTrail.querySelector(".reel-view");
-        const nameEl = rcTrail.querySelector(".reel-name");
-        const prevBtn = rcTrail.querySelector('[data-dir="-1"]');
-        const nextBtn = rcTrail.querySelector('[data-dir="1"]');
-        const hudEl = document.querySelector("#robocasa .hud");
-        const rcSteps = [
-          { crumb: "Action", node: hudEl },
-          {
-            crumb: "Cameras",
-            html: `<div class="lenses">
-              <div class="lens"><i>left</i><b>Agent view</b><span>Third person, left of the base.</span></div>
-              <div class="lens"><i>right</i><b>Agent view</b><span>Third person, from the other side.</span></div>
-              <div class="lens"><i>wrist</i><b>Eye in hand</b><span>The gripper’s own camera.</span></div>
-            </div>
-            <p class="trail-foot">Env names: <code>robot0_agentview_left</code>, <code>robot0_agentview_right</code>, <code>robot0_eye_in_hand</code>. The clip on the left is one of these. The mug stays in frame.</p>`,
-          },
-          {
-            crumb: "Horizon",
-            html: `<div class="pair">
-              <div><div class="n">Atomic</div><b>15–52 s</b><span>300–1,050 steps. One skill. Success is checked the whole way.</span></div>
-              <div><div class="n">Composite</div><b>30 s–6 min</b><span>600–7,200 steps. A chain. Success only at the end.</span></div>
-            </div>
-            <p class="trail-foot">65 skills: 22 open or close, 12 on or off, 18 pick, 3 slide. The other 10 are navigate and adjust. Shortest composite <code>JuiceFruitReamer</code>, 30 s. Longest <code>DivideBuffetTrays</code>, 6 min. Target frames are tagged <code>pick</code>, <code>place</code>, or <code>navigate</code>.</p>`,
-          },
-          {
-            crumb: "Overview",
-            html: `<table class="ov">
-              <thead>
-                <tr><th>Setting</th><th>Tasks</th><th>Scenes</th><th>Demos / task</th><th>Hours</th></tr>
-              </thead>
-              <tbody>
-                <tr><td>Pretrain, human</td><td>300</td><td>2,500</td><td>100</td><td>482</td></tr>
-                <tr><td>Pretrain, MimicGen</td><td>60</td><td>2,500</td><td>10,000</td><td>1,615</td></tr>
-                <tr><td>Target, human</td><td>50</td><td>10</td><td>500</td><td>193</td></tr>
-              </tbody>
-            </table>
-            <p class="trail-foot">Human pretrain is 65 atomic and 235 composite. MimicGen is atomic only. Target kitchens are new: Atomic-Seen 18, Composite-Seen 16, Composite-Unseen 16.</p>`,
-          },
-          {
-            crumb: "Atomic",
-            html: `<div class="n">Atomic</div>
-              <b>One motion</b>
-              <p class="trail-foot">Open a lid, or press a button. That single motion is the whole task.</p>
-              <div class="task-shot">
-                <video src="assets/robocasa_atomic_microwave.mp4" muted loop playsinline preload="metadata" aria-label="TurnOnMicrowave: press the microwave start button"></video>
-              </div>
-              <p class="trail-foot"><code>TurnOnMicrowave</code> · press the start button. 23 s.</p>`,
-          },
-          {
-            crumb: "Composite",
-            html: `<div class="n">Composite</div>
-              <b>Those motions, in order</b>
-              <p class="trail-foot">Press the button, open the lid, and pour. Each of those is its own atomic task. Lined up, they are one composite.</p>
-              <div class="task-shot">
-                <video src="assets/robocasa_composite_coffee.mp4" muted loop playsinline preload="metadata" aria-label="PrepareCoffee: place the mug, then press start"></video>
-              </div>
-              <p class="trail-foot"><code>PrepareCoffee</code> · set the mug under the dispenser, then press start. 39 s. The button press is only one step.</p>`,
-          },
-          {
-            crumb: "State",
-            html: `<div class="dims">
-              <div class="dim"><i>0–2</i><b>base</b><span>base position</span><em>xyz</em></div>
-              <div class="dim"><i>3–6</i><b>quat</b><span>base orientation</span><em>4-D</em></div>
-              <div class="dim"><i>7–9</i><b>eef</b><span>end-effector position, relative</span><em>xyz</em></div>
-              <div class="dim"><i>10–13</i><b>quat</b><span>end-effector orientation, relative</span><em>4-D</em></div>
-              <div class="dim"><i>14–15</i><b>grip</b><span>gripper joints</span><em>2-D</em></div>
-            </div>
-            <p class="trail-foot">Proprioception, 16 numbers. The command above stays the 12-D action, sent at 20 Hz.</p>`,
-          },
-          {
-            crumb: "Assets",
-            html: `<img class="asset-still" src="assets/robocasa_kitchen.png" alt="A RoboCasa target kitchen rendered in 3D">
-            <p class="trail-foot">One target kitchen. There are 10 of these, plus 2,500 pretraining kitchens. 3,200 objects in 150 categories, from Objaverse, LightWheel, and Luma.</p>`,
-          },
-        ];
-        const slides = rcSteps.map((s, i) => {
-          const el = document.createElement("div");
-          el.className = "reel-slide";
-          el.id = `rc-slide-${i}`;
-          el.setAttribute("role", "group");
-          el.setAttribute("aria-label", s.crumb);
-          if (s.node) el.appendChild(s.node);
-          else el.innerHTML = s.html;
-          view.appendChild(el);
-          return el;
-        });
-        let index = 0;
-        function playSlide(slide, on) {
-          slide.querySelectorAll("video").forEach((v) => {
-            if (!on || v.dataset.want === "0") {
-              v.pause();
-              return;
-            }
-            const r = v.getBoundingClientRect();
-            if (r.bottom > 40 && r.top < window.innerHeight - 40)
-              v.play().catch(() => {});
-          });
-        }
-        function showReel(i) {
-          const next = Math.max(0, Math.min(slides.length - 1, i));
-          if (next !== index) view.classList.add("moved");
-          view.style.setProperty("--reel-from", next > index ? "16%" : "-16%");
-          index = next;
-          slides.forEach((slide, n) => {
-            const on = n === index;
-            slide.classList.toggle("is-on", on);
-            slide.inert = !on;
-            slide.style.transform = "";
-            playSlide(slide, on);
-          });
-          nameEl.textContent = rcSteps[index].crumb;
-          prevBtn.disabled = index === 0;
-          nextBtn.disabled = index === slides.length - 1;
-          view.setAttribute(
-            "aria-label",
-            `${rcSteps[index].crumb}, ${index + 1} of ${slides.length}`,
-          );
-        }
-        prevBtn.addEventListener("click", () => showReel(index - 1));
-        nextBtn.addEventListener("click", () => showReel(index + 1));
-        view.addEventListener("keydown", (e) => {
-          if (e.key === "ArrowRight") {
-            e.preventDefault();
-            showReel(index + 1);
-          } else if (e.key === "ArrowLeft") {
-            e.preventDefault();
-            showReel(index - 1);
-          }
-        });
-        let pid = null;
-        let origin = 0;
-        let dx = 0;
-        view.addEventListener("pointerdown", (e) => {
-          if (e.button !== 0 || e.target.closest("a, button, video")) return;
-          pid = e.pointerId;
-          origin = e.clientX;
-          dx = 0;
-          view.setPointerCapture(pid);
-        });
-        view.addEventListener("pointermove", (e) => {
-          if (e.pointerId !== pid) return;
-          dx = e.clientX - origin;
-          const atEnd =
-            (index === 0 && dx > 0) || (index === slides.length - 1 && dx < 0);
-          slides[index].style.transform = `translateX(${atEnd ? dx * 0.3 : dx}px)`;
-        });
-        function endDrag(e) {
-          if (e.pointerId !== pid) return;
-          slides[index].style.transform = "";
-          pid = null;
-          if (dx <= -56) showReel(index + 1);
-          else if (dx >= 56) showReel(index - 1);
-          dx = 0;
-        }
-        view.addEventListener("pointerup", endDrag);
-        view.addEventListener("pointercancel", endDrag);
-        showReel(0);
-      }
+  <div class="stats">
+    <div class="stat"><div class="n">365</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">2,500</div><div class="l">kitchen scenes</div></div>
+    <div class="stat"><div class="n">3,200+</div><div class="l">objects in 150+ categories</div></div>
+    <div class="stat"><div class="n">2,200+ h</div><div class="l">of robot demonstration data</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">foundational skills</div></div>
+  </div>
 
-      document.querySelectorAll('nav a[href^="#"]').forEach((a) => {
-        a.addEventListener("click", (e) => {
-          const el = document.getElementById(a.getAttribute("href").slice(1));
-          if (!el) return;
-          e.preventDefault();
-          el.scrollIntoView({ behavior: "smooth", block: "start" });
-          history.replaceState(null, "", a.getAttribute("href"));
-        });
+  <div>
+    <h2 class="section">Atomic skills: the building blocks</h2>
+    <p class="sub">An <span class="term" data-t="atomic">atomic task</span> is one short skill. RoboCasa365 has 65 of them, covering ten skill families: pick and place, doors, drawers, knobs, levers, buttons, insertion, navigation, sliding racks, and lids.</p>
+    <div class="grid-3">
+      <figure><video class="vid" src="media/robocasa_pnp.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Pick and place.</b> Move an object from one spot to another.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_door.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Open / close doors.</b> Swing a hinged <span class="term" data-t="articulated">articulated</span> door.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_knob.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Twist knobs.</b> Turning a stove knob really lights the burner.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_lever.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Turn levers.</b> e.g. switch the sink faucet on or off.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_button.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Press buttons.</b> e.g. start the microwave or coffee machine.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_media11.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Interactive appliances.</b> Fixtures change state when used.</figcaption></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Composite tasks: real chores</h2>
+    <p class="sub">A <span class="term" data-t="composite">composite task</span> chains several atomic skills into something a person would actually ask for. The task list was drafted with help from an LLM (GPT-4) so it reflects common household activities. These are <span class="term" data-t="longhorizon">long-horizon</span>: many steps, but everything stays visible.</p>
+    <div class="grid-3">
+      <figure><video class="vid" src="media/robocasa_brewing_coffee.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Brewing coffee.</b> Get a mug, place it under the machine, press the button.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_steaming_veg.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Steaming vegetables.</b> Several picks, places and appliance actions in a row.</figcaption></figure>
+      <figure><video class="vid" src="media/robocasa_restock.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Restocking supplies.</b> Open cabinets and put items away.</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="grid-2">
+    <figure><video class="vid" src="media/robocasa_scenes.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Scene diversity.</b> 50 real-home layouts × 50 styles, plus AI-generated textures for walls, floors, counters and cabinets (a form of <span class="term" data-t="randomization">domain randomization</span>).</figcaption></figure>
+    <figure><video class="vid" src="media/robocasa_objects.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Objects.</b> 3,200+ items from Objaverse, Lightwheel and AI text-to-3D models: fruit, packaged food, cookware.</figcaption></figure>
+  </div>
+
+  <div>
+    <h2 class="section">Different robot bodies</h2>
+    <p class="sub">RoboCasa supports several <span class="term" data-t="embodiment">embodiments</span>: single-arm mobile robots, humanoids and quadrupeds with arms.</p>
+    <div class="grid-4">
+      <video class="vid" src="media/robocasa_media15.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 1"></video>
+      <video class="vid" src="media/robocasa_media16.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 2"></video>
+      <video class="vid" src="media/robocasa_media17.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 3"></video>
+      <video class="vid" src="media/robocasa_media18.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 4"></video>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> per task, averaged over task groups. RoboCasa365 is set up for three settings: <span class="term" data-t="multitask">multi-task learning</span>, <span class="term" data-t="foundation">foundation-model training</span>, and <span class="term" data-t="lifelong">lifelong learning</span>. A public leaderboard (live since April 2026) compares community submissions. Note: v1.0.1 raised every task's time limit by 1.5×, so use the latest version when comparing numbers.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="simulation,demonstration,synthetic,atomic,composite,articulated,embodiment,proprio,randomization,foundation"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robocasa.ai/" target="_blank" rel="noopener">robocasa.ai ↗</a>
+    <a href="https://github.com/robocasa/robocasa" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://robocasa.ai/docs/build/html/introduction/overview.html" target="_blank" rel="noopener">Docs ↗</a>
+  </div>
+</section>
+
+<!-- ============================ MIKASA ============================ -->
+<section class="panel" id="mikasa" role="tabpanel" aria-labelledby="tab-mikasa" style="--c: var(--mikasa)" hidden>
+  <div class="top">
+    <video class="vid r32 contain" src="media/mikasa_RememberColor9.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · VLA · tabletop</span>
+      <h1>MIKASA-Robo</h1>
+      <p class="oneliner">Tabletop tasks where <em>the answer disappears</em>. In the video, a yellow cube is shown, then hidden. Later the robot must touch the yellow one among 9.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> models and <span class="term" data-t="rl">RL</span> agents</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm at a table, simulated in <span class="term" data-t="maniskill">ManiSkill3</span></div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">22,500 expert trajectories with rewards and language, in RLDS and LeRobot format</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">90 tasks across 10 kinds of memory, in short / medium / long splits</div></div>
+      </div>
+      <p class="timer">Video: RememberColor9, slowed down (top view left, top + wrist camera right)</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Trajectories were produced by <span class="term" data-t="oracle">oracle</span> agents (a PPO policy that could see hidden state, or a motion planner), so they are clean expert examples. Each step also carries a dense reward, so the same data suits imitation learning and RL.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>RGB from a fixed top camera and a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>Robot state (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li>Instruction, e.g. <i>"remember the cube colour, then touch the matching one"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">needs memory: RNN, transformer over history, …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">Control mode <code>pd_ee_delta_pose</code>: small <span class="term" data-t="delta">delta</span> moves of the <span class="term" data-t="eef">end-effector</span>, normalised to [−1, 1].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">90</div><div class="l">tasks with language instructions</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">memory types</div></div>
+    <div class="stat"><div class="n">22,500</div><div class="l">oracle trajectories</div></div>
+    <div class="stat"><div class="n">6M+</div><div class="l">transitions (timesteps)</div></div>
+    <div class="stat"><div class="n">25–2,160</div><div class="l">steps per episode</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Most robot tasks are <span class="term" data-t="markov">Markovian</span>: the current camera frame shows everything you need. In MIKASA the key fact is shown once and then hidden, so a policy that only looks at the present frame can do no better than guess. <strong>Long is not the same as memory.</strong> A RoboCasa chore can take hundreds of steps without needing any memory.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Watch the memory tasks</h2>
+    <div class="grid-3">
+      <figure><video class="vid r32" src="media/mikasa_ShellGameTouch.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>ShellGameTouch</b> · spatial. A ball goes under one of three cups. Touch the right cup.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_ShellGameShuffleColorLampTouch.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>ShellGameShuffle</b> · tracking. The cups shuffle. Follow the hidden ball, then touch its cup.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_TakeItBack.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>TakeItBack</b> · spatial. Push a cube onto a target; when the target changes colour, return the cube to where it started.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_InterceptFast.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Intercept</b> · spatial. Deflect a rolling ball toward a target. Needs its recent motion.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_ChainOfColors7.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>ChainOfColors</b> · sequential. Cubes appear briefly. Touch them in the same order, then press the button.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_BlinkCountButtonPressMedium.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>BlinkCountButtonPress</b> · temporal. Count a lamp's blinks, then press a button exactly that many times.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_TraceShapeMedium.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>TraceShape</b> · procedural. Watch a cube trace a shape, then trace the same shape with another cube.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_GatherAndRecall9.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>GatherAndRecall</b> · prospective. Move all cubes onto a disc while a lamp flashes once; then press the button of that colour.</figcaption></figure>
+      <figure><video class="vid r32" src="media/mikasa_BatteriesCheckerHard-6.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>BatteriesChecker</b> · checklist. Test each battery in a socket, remember the results, and confirm.</figcaption></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">The 10 memory types</h2>
+    <div class="tasks">
+      <div class="task"><h3>Object</h3><p>Remember a colour, shape or identity that disappears.</p><div class="ex">RememberColor · RememberShape</div></div>
+      <div class="task"><h3>Spatial</h3><p>Remember where something was, or how it was moving.</p><div class="ex">ShellGameTouch · Intercept · Rotate</div></div>
+      <div class="task"><h3>Capacity</h3><p>Hold several items at once.</p><div class="ex">BunchOfColors · SeqOfColors</div></div>
+      <div class="task"><h3>Temporal</h3><p>Count events or track elapsed time.</p><div class="ex">BlinkCountButtonPress · TimedTransfer</div></div>
+      <div class="task"><h3>Negative</h3><p>Spot what is new or missing compared with before.</p><div class="ex">FindImposterColor · FindImposterShape</div></div>
+      <div class="task"><h3>Sequential</h3><p>Remember the order things appeared in.</p><div class="ex">ChainOfColors</div></div>
+      <div class="task"><h3>Procedural</h3><p>Replay a motion or path.</p><div class="ex">TraceShape · TraceShapeSeq</div></div>
+      <div class="task"><h3>Prospective</h3><p>Remember to do something later.</p><div class="ex">GatherAndRecall</div></div>
+      <div class="task"><h3>Tracking</h3><p>Keep track of hidden objects as they move.</p><div class="ex">ShellGameShuffle</div></div>
+      <div class="task"><h3>Checklist</h3><p>Remember which steps are already done.</p><div class="ex">BatteriesChecker</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>, reported per <span class="term" data-t="horizon">horizon</span> split with fixed seeds: <strong>Short</strong> (38 tasks, 25–200 steps, 1–8 s), <strong>Medium</strong> (30 tasks, 201–600 steps), <strong>Long</strong> (22 tasks, 601–2,160 steps, up to 86 s). The original RL-only release had 32 tasks and 4 memory types; it's still on the <code>mikasa-robo-rl</code> branch.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,vla,rl,oracle,maniskill,delta,eef,horizon,rlds"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/CognitiveAISystems/MIKASA-Robo" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://mikasarobo.github.io/" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://huggingface.co/mikasa-robo" target="_blank" rel="noopener">Datasets (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2502.10550" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ LIBERO ============================ -->
+<section class="panel" id="libero" role="tabpanel" aria-labelledby="tab-libero" style="--c: var(--libero)" hidden>
+  <div class="top">
+    <video class="vid" src="media/libero_demos.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Lifelong learning · knowledge transfer · tabletop</span>
+      <h1>LIBERO</h1>
+      <p class="oneliner">A robot learns <em>130 tasks one after another</em>. Does learning task 10 help with task 11, and does it still remember task 1?</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="lifelong">Lifelong learning</span> benchmark; now also the most common <span class="term" data-t="vla">VLA</span> scorecard</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Franka arm at tables and kitchen counters, built on <span class="term" data-t="robosuite">robosuite</span></div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">50 human <span class="term" data-t="teleop">teleoperated</span> demos per task, with images, robot state and language</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">130 tasks in 4 suites, each designed to test one kind of knowledge</div></div>
+      </div>
+      <p class="timer">Video: human demonstrations from the LIBERO dataset</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Demonstrations are stored per task, and a policy learns them by <span class="term" data-t="imitation">imitation</span>. Each scene also comes with a <span class="term" data-t="pddl">PDDL</span> description, which is how LIBERO can generate new tasks automatically.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Two RGB images: a workspace (third-person) camera and a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: joint angles, gripper state</li>
+          <li>The language task, e.g. <i>"turn on the stove"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">ResNet-RNN, ResNet-T, ViT-T baselines; OpenVLA, π₀ …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note"><span class="term" data-t="osc">OSC</span> end-effector <span class="term" data-t="delta">delta</span> control, scaled to [−1, 1].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">130</div><div class="l">language-specified tasks</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">task suites</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">human demos per task</div></div>
+    <div class="stat"><div class="n">128×128</div><div class="l">pixel images, 2 cameras</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The four suites</h2>
+    <p class="sub">Robots need two kinds of knowledge: <b>declarative</b> (what objects are and where they are) and <b>procedural</b> (how to move). The first three suites each change only one thing, so you can see which kind of knowledge transfers.</p>
+    <div class="tasks">
+      <div class="task"><h3>LIBERO-Spatial · 10 tasks</h3><p>Same objects, <b>different layouts</b>. Tests spatial relationships.</p><div class="ex">"pick up the black bowl between the plate and the ramekin and place it on the plate"</div></div>
+      <div class="task"><h3>LIBERO-Object · 10 tasks</h3><p><b>Different objects</b>, same layout. Tests recognising objects.</p><div class="ex">"pick up the alphabet soup and place it in the basket"</div></div>
+      <div class="task"><h3>LIBERO-Goal · 10 tasks</h3><p>Same objects and layout, <b>different goals</b>. Tests behaviour.</p><div class="ex">"open the middle drawer of the cabinet"</div></div>
+      <div class="task"><h3>LIBERO-100 · 100 tasks</h3><p>Everything varies at once (<span class="term" data-t="entangled">entangled</span>). Split into LIBERO-90 for pretraining and LIBERO-10 for longer test tasks.</p><div class="ex">"put both the soup and the sauce in the basket"</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">The 2-minute explainer</h2>
+    <p class="sub">Official LIBERO intro video: how tasks are generated from human activities, the four suites, and the main findings.</p>
+    <video class="vid" src="media/libero_intro.mp4" muted playsinline preload="metadata" controls></video>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">In the lifelong setting, tasks arrive one at a time. LIBERO reports <span class="term" data-t="fwt">forward transfer (FWT)</span>, <span class="term" data-t="nbt">negative backward transfer (NBT)</span>, which measures forgetting, and area under the success curve (AUC). Most VLA papers skip the lifelong part and simply report <strong>success rate on each suite</strong> after training on all of them together.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="lifelong,forgetting,fwt,nbt,entangled,teleop,pddl,osc,robosuite,imitation"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://libero-project.github.io/" target="_blank" rel="noopener">libero-project.github.io ↗</a>
+    <a href="https://github.com/Lifelong-Robot-Learning/LIBERO" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://lifelong-robot-learning.github.io/LIBERO/html/getting_started/overview.html" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://arxiv.org/abs/2306.03310" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ EGOGYM ============================ -->
+<section class="panel" id="egogym" role="tabpanel" aria-labelledby="tab-egogym" style="--c: var(--egogym)" hidden>
+  <div class="top">
+    <video class="vid" src="media/egogym_simpick.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Zero-shot evaluation · egocentric · lightweight</span>
+      <h1>EgoGym</h1>
+      <p class="oneliner">A small, fast simulator for <em>grading policies that are already trained</em>. The robot sees from a camera on its gripper.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Evaluation-only suite for <span class="term" data-t="zeroshot">zero-shot</span> policies (e.g. CAP, π₀.₅)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v"><span class="term" data-t="mujoco">MuJoCo</span> table and cabinet scenes with random textures and <span class="term" data-t="distractor">distractors</span></div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">No training set. You bring a policy; EgoGym measures it</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">Pick, Open, Close</div></div>
+      </div>
+      <p class="timer">Video: CAP policy running in EgoGym's Pick task (inset: the <span class="term" data-t="ego">egocentric</span> gripper camera)</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Two robot options: <code>cap</code>, a floating gripper with a camera, and <code>droid</code>, a Franka arm like the DROID dataset. Actions can be <span class="term" data-t="delta">delta</span> or absolute.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><code>rgb_ego</code>: <span class="term" data-t="ego">egocentric</span> gripper-camera image (960×720 by default)</li>
+          <li><code>rgb_exo</code>: third-person image</li>
+          <li><code>camera_pose</code>: the camera's position and rotation as a 4×4 matrix</li>
+          <li>Target <code>object_name</code> (Pick) or handle pose (Open)</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">CAP, π₀.₅, DreamZero baselines</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 17 numbers (cap gripper)</h3>
+        <div class="vec" aria-label="17-number action">
+          <span>r11</span><span>r12</span><span>r13</span><span class="b">x</span><span>r21</span><span>r22</span><span>r23</span><span class="b">y</span><span>r31</span><span>r32</span><span>r33</span><span class="b">z</span><span>0</span><span>0</span><span>0</span><span>1</span><span class="g">grip</span>
+        </div>
+        <p class="note">A full 4×4 <span class="term" data-t="pose">pose</span> matrix (rotation r + position xyz), flattened, then the gripper. The <code>droid</code> arm uses joint targets + gripper instead.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">3</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">911</div><div class="l">pickable object models</div></div>
+    <div class="stat"><div class="n">78</div><div class="l">object categories</div></div>
+    <div class="stat"><div class="n">1–5</div><div class="l">objects on the table</div></div>
+    <div class="stat"><div class="n">1,000</div><div class="l">default eval episodes</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The three tasks</h2>
+    <div class="tasks">
+      <div class="task"><h3>Egogym-Pick-v0</h3><p>Pick up the named object from a cluttered table. Success means lifting it more than 5 cm.</p><div class="ex">num_objs = 1–5 · wood textures · random wall colour</div></div>
+      <div class="task"><h3>Egogym-Open-v0</h3><p>Open a cabinet door or pull out a drawer by its handle.</p><div class="ex">objects: cabinet, drawer</div></div>
+      <div class="task"><h3>Egogym-Close-v0</h3><p>Push a cabinet or drawer closed.</p><div class="ex">objects: cabinet, drawer</div></div>
+    </div>
+  </div>
+
+  <figure>
+    <video class="vid" src="media/egogym_readme.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 400 / 226"></video>
+    <figcaption><b>From the EgoGym README.</b> Four Pick rollouts on different tables and walls. In each pair, left is the gripper's own camera (<code>rgb_ego</code>) and right is the outside view (<code>rgb_exo</code>). The policy only sees the left one.</figcaption>
+  </figure>
+
+  <div>
+    <h2 class="section">Where the policies come from</h2>
+    <p class="sub">EgoGym was released with <b>Contact-Anchored Policies (CAP)</b>. CAP learns from real-world human data collected with a handheld gripper, then runs in EgoGym with no extra training. These clips show that real-world data. It is <b>not</b> part of EgoGym; it shows what the evaluated policies learned from.</p>
+    <div class="grid-3">
+      <figure><video class="vid" src="media/cap_pickup.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Pickup</b> · real training data for CAP</figcaption></figure>
+      <figure><video class="vid" src="media/cap_opening.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Opening</b> · real training data for CAP</figcaption></figure>
+      <figure><video class="vid" src="media/cap_closing.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Closing</b> · real training data for CAP</figcaption></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> over many randomised episodes (1,000 by default). An episode succeeds when the reward crosses a threshold: lift over 5 cm for Pick, 0.5 for Open. Optional <span class="term" data-t="unprivileged">unprivileged</span> wrappers use a vision-language model (Molmo, Gemini, GPT, Moondream) to find the target, so the policy never gets hidden simulator information.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="zeroshot,ego,distractor,pose,delta,unprivileged,mujoco,embodiment"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/omarrayyann/EgoGym" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://cap-policy.github.io" target="_blank" rel="noopener">CAP project ↗</a>
+    <a href="https://arxiv.org/abs/2602.09017" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<footer>
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README and cap-policy.github.io. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers come from each project's site or code as of September 2026.
+</footer>
+</main>
+
+<script>
+  const GLOSSARY = {
+    benchmark: ["Benchmark", "A fixed set of tasks plus a fixed scoring rule, so different methods can be compared on equal terms."],
+    policy: ["Policy", "The controller being tested. It maps what the robot observes to what it does next, and is usually a neural network."],
+    simulation: ["Simulation", "A physics engine that imitates the real world on a computer. It is cheap, safe and repeatable, but never quite the same as reality."],
+    demonstration: ["Demonstration", "A recorded example of a task done correctly: the sequence of observations and actions from start to finish."],
+    teleop: ["Teleoperation", "A human steering the robot live, with a joystick, VR controller or phone, to record demonstrations."],
+    synthetic: ["Synthetic data", "Demonstrations created automatically, for example by adapting a few human demos to new scenes, instead of recording each one by hand."],
+    imitation: ["Imitation learning", "Training a policy to copy the actions in demonstrations. Also called behaviour cloning."],
+    rl: ["Reinforcement learning (RL)", "Learning by trial and error: the agent tries actions and is rewarded when they help."],
+    vla: ["VLA model", "Vision-Language-Action model: a large network that reads camera images and a text instruction and outputs robot actions. Examples: OpenVLA, π₀, GR00T."],
+    foundation: ["Foundation model", "One large model pretrained on lots of varied data, meant to be adapted to many tasks and robots."],
+    multitask: ["Multi-task learning", "Training one policy on many tasks at once instead of one policy per task."],
+    lifelong: ["Lifelong learning", "Learning tasks one after another over time, keeping old skills while adding new ones."],
+    forgetting: ["Catastrophic forgetting", "When training on a new task wipes out what the network knew about earlier tasks."],
+    fwt: ["Forward transfer", "How much earlier learning speeds up or improves learning a new task."],
+    nbt: ["Negative backward transfer", "How much performance on old tasks drops after learning new ones. It measures forgetting; lower is better."],
+    entangled: ["Entangled knowledge", "Tasks that differ in several ways at once (objects, layout and goal), so no single kind of knowledge explains success."],
+    episode: ["Episode", "One attempt at a task, from reset until success, failure or the time limit."],
+    horizon: ["Horizon", "How many control steps an episode lasts. Long-horizon tasks need many actions in a row."],
+    longhorizon: ["Long-horizon", "Tasks with many steps in sequence. Long does not mean memory is required if everything stays visible."],
+    memory: ["Memory task", "A task where information needed to succeed is shown and then hidden, so the policy must store it."],
+    markov: ["Markovian", "The current observation alone is enough to choose the right action. No history is needed."],
+    atomic: ["Atomic task", "One short, basic skill, such as open a door or press a button."],
+    composite: ["Composite task", "A longer chore built by chaining atomic skills, such as making coffee."],
+    articulated: ["Articulated object", "An object with moving parts joined by hinges or slides: doors, drawers, knobs."],
+    embodiment: ["Embodiment", "The robot's physical body: arm, gripper, wheels, legs. Cross-embodiment means one method works on different bodies."],
+    proprio: ["Proprioception", "The robot's sense of its own body: joint angles, gripper opening, base position."],
+    wrist: ["Wrist camera", "A camera mounted on the robot's hand. It gives a close-up view for fine grasping."],
+    ego: ["Egocentric", "Seen from the robot's own viewpoint, here a camera on the gripper. The opposite is exocentric, a fixed third-person view."],
+    randomization: ["Domain randomization", "Randomly changing textures, lighting and colours so a policy does not overfit to one look."],
+    eef: ["End-effector", "The tool at the end of the arm, usually the gripper. Actions often move this point in 3D."],
+    delta: ["Delta action", "Move relative to where you are now (e.g. +1 cm in x), as opposed to an absolute target position."],
+    osc: ["OSC", "Operational Space Control: you command where the gripper should go and the controller works out the joint torques."],
+    pose: ["Pose", "Position plus orientation. A 4×4 matrix stores both: a 3×3 rotation and a 3D position."],
+    oracle: ["Oracle", "An expert agent that is allowed to see hidden simulator information. It is used to produce perfect demonstrations."],
+    rlds: ["RLDS / LeRobot", "Standard dataset formats for robot trajectories, so the data loads directly into common training code."],
+    zeroshot: ["Zero-shot", "Tested on a setting it was never trained on, with no fine-tuning."],
+    distractor: ["Distractor", "An extra object that is not the target, placed there to make the task harder."],
+    unprivileged: ["Unprivileged", "The policy gets only what a real robot would have (camera images), not the simulator's exact object positions."],
+    maniskill: ["ManiSkill3", "A GPU-accelerated robot simulator that can run thousands of environments in parallel."],
+    mujoco: ["MuJoCo", "A widely used, fast physics engine for robotics simulation."],
+    robosuite: ["robosuite", "A robot-learning simulation toolkit built on MuJoCo. LIBERO and RoboCasa are built on it."],
+    pddl: ["PDDL", "A formal language for describing objects, their relations and goals. LIBERO uses it to define scenes and generate tasks."],
+  };
+
+  /* glossary lists */
+  document.querySelectorAll("[data-glossary]").forEach((dl) => {
+    dl.innerHTML = dl.dataset.glossary.split(",").map((k) => {
+      const [t, d] = GLOSSARY[k];
+      return `<div><dt>${t}</dt><dd>${d}</dd></div>`;
+    }).join("");
+  });
+
+  /* hover / focus / tap tooltips */
+  const tip = document.createElement("div");
+  tip.className = "tip"; tip.hidden = true; tip.setAttribute("role", "tooltip");
+  document.body.appendChild(tip);
+  let tipFor = null;
+  function showTip(el) {
+    const g = GLOSSARY[el.dataset.t]; if (!g) return;
+    tip.innerHTML = `<b>${g[0]}</b>${g[1]}`;
+    tip.hidden = false; tipFor = el;
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    let x = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), innerWidth - w - 8);
+    let y = r.top - h - 8; if (y < 64) y = r.bottom + 8;
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+  }
+  function hideTip() { tip.hidden = true; tipFor = null; }
+  document.querySelectorAll(".term").forEach((el) => {
+    el.tabIndex = 0;
+    el.addEventListener("mouseenter", () => showTip(el));
+    el.addEventListener("mouseleave", hideTip);
+    el.addEventListener("focus", () => showTip(el));
+    el.addEventListener("blur", hideTip);
+    el.addEventListener("click", (e) => { e.stopPropagation(); tipFor === el ? hideTip() : showTip(el); });
+  });
+  document.addEventListener("click", hideTip);
+  addEventListener("scroll", hideTip, { passive: true });
+
+  /* tabs */
+  const tabs = [...document.querySelectorAll(".tab")];
+  const panels = [...document.querySelectorAll("section.panel")];
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  // play videos only while their panel is showing and they're on screen
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(({ target: v, isIntersecting }) => {
+      if (isIntersecting && !v.closest("[hidden]") && !reduce && !v.hasAttribute("data-manual")) v.play().catch(() => {});
+      else if (!isIntersecting) v.pause();
+    });
+  }, { threshold: 0.25 });
+  document.querySelectorAll("video").forEach((v) => {
+    if (!v.loop) v.setAttribute("data-manual", "");
+    v.removeAttribute("autoplay");
+    io.observe(v);
+  });
+
+  function show(id, push) {
+    if (!panels.some((p) => p.id === id)) id = "home";
+    panels.forEach((p) => {
+      const on = p.id === id;
+      p.hidden = !on;
+      p.querySelectorAll("video").forEach((v) => {
+        if (!on) v.pause();
+        else { io.unobserve(v); io.observe(v); }
       });
-
-      /* theme */
-      const themeBtn = document.getElementById("theme-btn");
-      function setTheme(t) {
-        document.documentElement.dataset.theme = t;
-        localStorage.setItem("mw-theme", t);
-        themeBtn.textContent = t === "dark" ? "light" : "dark";
+    });
+    tabs.forEach((t) => {
+      const on = t.dataset.target === id;
+      t.setAttribute("aria-selected", on);
+      t.tabIndex = on ? 0 : -1;
+      if (on) {
+        const nav = t.parentElement;
+        if (t.offsetLeft < nav.scrollLeft || t.offsetLeft + t.offsetWidth > nav.scrollLeft + nav.clientWidth)
+          nav.scrollLeft = t.offsetLeft - 16;
       }
-      setTheme(
-        localStorage.getItem("mw-theme") ||
-          (matchMedia("(prefers-color-scheme: light)").matches
-            ? "light"
-            : "dark"),
-      );
-      themeBtn.addEventListener("click", () =>
-        setTheme(
-          document.documentElement.dataset.theme === "dark" ? "light" : "dark",
-        ),
-      );
+    });
+    hideTip();
+    if (push) {
+      try { history.replaceState(null, "", "#" + id); } catch (e) {}
+      scrollTo({ top: 0 });
+    }
+  }
+  tabs.forEach((t, i) => {
+    t.addEventListener("click", () => show(t.dataset.target, true));
+    t.addEventListener("keydown", (e) => {
+      const d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (!d) return;
+      const n = tabs[(i + d + tabs.length) % tabs.length];
+      n.focus(); show(n.dataset.target, true);
+    });
+  });
+  document.querySelectorAll("[data-go]").forEach((c) => c.addEventListener("click", () => show(c.dataset.go, true)));
+  addEventListener("hashchange", () => show(location.hash.slice(1), false));
+  show(location.hash.slice(1) || "home", false);
+  // the tab ids double as anchors; keep the page at the top instead of jumping to the panel
+  if (location.hash) addEventListener("load", () => scrollTo(0, 0));
+  if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 
-      /* copy */
-      const toast = document.getElementById("toast");
-      let toastT;
-      function ping(msg) {
-        toast.textContent = msg;
-        toast.classList.add("on");
-        clearTimeout(toastT);
-        toastT = setTimeout(() => toast.classList.remove("on"), 1400);
-      }
-      document.querySelectorAll("[data-copy]").forEach((btn) => {
-        btn.addEventListener("click", async () => {
-          const text = btn.dataset.copy;
-          try {
-            await navigator.clipboard.writeText(text);
-            ping("copied");
-          } catch {
-            const ta = document.createElement("textarea");
-            ta.value = text;
-            ta.setAttribute("readonly", "");
-            ta.style.position = "fixed";
-            ta.style.left = "-9999px";
-            document.body.appendChild(ta);
-            ta.select();
-            const ok = document.execCommand("copy");
-            ta.remove();
-            ping(ok ? "copied" : "copy failed");
-          }
-        });
-      });
-
-      /* filters */
-      let filter = "all";
-      function applyFilter(next) {
-        filter = next;
-        document.querySelectorAll(".filters [data-filter]").forEach((b) => {
-          b.setAttribute("aria-pressed", String(b.dataset.filter === filter));
-        });
-        let shown = 0,
-          total = 0;
-        document.querySelectorAll(".ep").forEach((ep) => {
-          total += 1;
-          const ok = filter === "all" || ep.dataset.regime === filter;
-          ep.hidden = !ok;
-          if (ok) shown += 1;
-          const vid = ep.querySelector("video");
-          if (vid && !ok) vid.pause();
-        });
-        document.querySelectorAll(".film, .reg").forEach((el) => {
-          const ok = filter === "all" || el.dataset.regime === filter;
-          el.hidden = !ok;
-          el.classList.remove("is-off");
-          const vid = el.querySelector("video");
-          if (vid && !ok) vid.pause();
-        });
-        document.getElementById("filter-count").textContent =
-          filter === "all" ? `${total} worlds` : `${shown} · ${filter}`;
-      }
-      document.querySelectorAll(".filters [data-filter]").forEach((b) => {
-        b.addEventListener("click", () => applyFilter(b.dataset.filter));
-      });
-      document.querySelectorAll(".reg").forEach((reg) => {
-        const go = () =>
-          applyFilter(
-            filter === reg.dataset.regime ? "all" : reg.dataset.regime,
-          );
-        reg.addEventListener("click", go);
-        reg.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            go();
-          }
-        });
-      });
-      applyFilter("all");
-
-      /* media: slower playback, pause when off-screen */
-      const PLAYBACK = 0.7;
-      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      document.querySelectorAll("video").forEach((vid) => {
-        const applyRate = () => {
-          vid.playbackRate = PLAYBACK;
-          vid.defaultPlaybackRate = PLAYBACK;
-        };
-        applyRate();
-        vid.addEventListener("play", applyRate);
-        vid.addEventListener("loadedmetadata", applyRate);
-        vid.dataset.want = reduce ? "0" : "1";
-      });
-      const io = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((e) => {
-            const v = e.target.querySelector("video");
-            if (!v) return;
-            const pane = e.target.closest(".reel-slide");
-            if (pane && !pane.classList.contains("is-on")) {
-              v.pause();
-              return;
-            }
-            if (e.isIntersecting && v.dataset.want !== "0")
-              v.play().catch(() => {});
-            else v.pause();
-          });
-        },
-        { threshold: 0.2 },
-      );
-      document.querySelectorAll(".stage, .task-shot").forEach((s) => {
-        if (s.querySelector("video")) io.observe(s);
-      });
-
-      const vidZoom = document.createElement("div");
-      vidZoom.className = "vid-zoom";
-      vidZoom.hidden = true;
-      document.body.appendChild(vidZoom);
-      const reel = document.getElementById("rc-trail");
-      let reelHold = null;
-      function closeVidZoom() {
-        if (!reel.classList.contains("is-zoomed")) return;
-        reel.classList.remove("is-zoomed");
-        reel.style.width = "";
-        reel.style.removeProperty("--zoom");
-        reelHold?.remove();
-        reelHold = null;
-        vidZoom.hidden = true;
-        document.body.style.overflow = "";
-      }
-      function openCardZoom() {
-        if (reel.classList.contains("is-zoomed")) return;
-        const rect = reel.getBoundingClientRect();
-        reelHold = document.createElement("div");
-        reelHold.style.height = reel.offsetHeight + "px";
-        reelHold.style.marginTop = getComputedStyle(reel).marginTop;
-        reel.before(reelHold);
-        const scale = Math.min(
-          (window.innerWidth * 0.92) / rect.width,
-          (window.innerHeight * 0.9) / rect.height,
-        );
-        reel.style.width = rect.width + "px";
-        reel.style.setProperty("--zoom", String(scale));
-        reel.classList.add("is-zoomed");
-        vidZoom.hidden = false;
-        document.body.style.overflow = "hidden";
-      }
-      document.querySelectorAll(".task-shot video").forEach((video) => {
-        video.addEventListener("click", (e) => {
-          e.stopPropagation();
-          if (reel.classList.contains("is-zoomed")) closeVidZoom();
-          else openCardZoom();
-        });
-      });
-      vidZoom.addEventListener("click", closeVidZoom);
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") closeVidZoom();
-      });
-
-      /* playground */
-      const OSC = [
-        { k: "dx", label: "dx", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "dy", label: "dy", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "dz", label: "dz", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "dax", label: "dax", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "day", label: "day", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "daz", label: "daz", min: -1, max: 1, step: 0.01, v: 0 },
-        { k: "grip", label: "grip", min: -1, max: 1, step: 0.01, v: 1 },
-      ];
-      const EGO = [
-        { k: "tx", label: "tx", min: -0.4, max: 0.4, step: 0.01, v: 0.12 },
-        { k: "ty", label: "ty", min: -0.3, max: 0.3, step: 0.01, v: 0.02 },
-        { k: "tz", label: "tz", min: -0.4, max: 0.4, step: 0.01, v: 0.28 },
-        { k: "yaw", label: "yaw", min: -1.2, max: 1.2, step: 0.01, v: 0.15 },
-        { k: "grip", label: "g", min: 0, max: 1, step: 0.01, v: 0 },
-      ];
-      let mode = "osc";
-      let hot = "";
-      const canvas = document.getElementById("arm");
-      const ctx = canvas.getContext("2d");
-      const form = document.getElementById("sliders");
-      form.addEventListener("submit", (e) => e.preventDefault());
-      const live = document.getElementById("live-vec");
-      const matEl = document.getElementById("mat-live");
-      const hint = document.getElementById("play-hint");
-
-      function dims() {
-        return mode === "osc" ? OSC : EGO;
-      }
-      function val(k) {
-        return dims().find((d) => d.k === k).v;
-      }
-
-      function rebuildSliders() {
-        form.innerHTML = dims()
-          .map(
-            (d) => `
-    <label>
-      <span>${d.label}</span>
-      <input type="range" name="${d.k}" min="${d.min}" max="${d.max}" step="${d.step}" value="${d.v}">
-      <em data-k="${d.k}">${d.v.toFixed(2)}</em>
-    </label>`,
-          )
-          .join("");
-        form.querySelectorAll("input").forEach((inp) => {
-          const set = () => {
-            const d = dims().find((x) => x.k === inp.name);
-            d.v = Number(inp.value);
-            hot = d.k;
-            form.querySelector(`[data-k="${d.k}"]`).textContent =
-              d.v.toFixed(2);
-            draw();
-          };
-          inp.addEventListener("input", set);
-        });
-      }
-
-      function egoMatrix() {
-        const c = Math.cos(val("yaw")),
-          s = Math.sin(val("yaw"));
-        const tx = val("tx"),
-          ty = val("ty"),
-          tz = val("tz");
-        return [
-          [c, 0, s, tx],
-          [0, 1, 0, ty],
-          [-s, 0, c, tz],
-          [0, 0, 0, 1],
-        ];
-      }
-
-      function sizeCanvas() {
-        const dpr = Math.min(devicePixelRatio || 1, 2);
-        const w = canvas.clientWidth,
-          h = canvas.clientHeight;
-        canvas.width = Math.round(w * dpr);
-        canvas.height = Math.round(h * dpr);
-        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        return { w, h };
-      }
-
-      function oscLayout(w, h) {
-        return {
-          rest: { x: w * 0.44, y: h * 0.48 },
-          scale: Math.min(w, h) * 0.28,
-          base: { x: w * 0.14, y: h * 0.74 },
-        };
-      }
-      function egoLayout(w, h) {
-        return { cam: { x: w * 0.2, y: h * 0.5 } };
-      }
-
-      function drawGripper(x, y, ang, open, scale, color) {
-        ctx.save();
-        ctx.translate(x, y);
-        ctx.rotate(ang);
-        ctx.strokeStyle = color;
-        ctx.lineWidth = 2.6;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(-20 * scale, 0);
-        ctx.lineTo(10 * scale, 0);
-        ctx.stroke();
-        const jaw = 10 * scale + open * 12 * scale;
-        ctx.beginPath();
-        ctx.moveTo(10 * scale, -jaw);
-        ctx.lineTo(26 * scale, -jaw);
-        ctx.moveTo(10 * scale, jaw);
-        ctx.lineTo(26 * scale, jaw);
-        ctx.stroke();
-        ctx.restore();
-      }
-
-      function drawCube(x, y, s, fill, side) {
-        ctx.fillStyle = fill;
-        ctx.fillRect(x, y, s, s);
-        ctx.fillStyle = side;
-        ctx.beginPath();
-        ctx.moveTo(x, y);
-        ctx.lineTo(x + s * 0.35, y - s * 0.28);
-        ctx.lineTo(x + s * 1.35, y - s * 0.28);
-        ctx.lineTo(x + s, y);
-        ctx.closePath();
-        ctx.fill();
-        ctx.beginPath();
-        ctx.moveTo(x + s, y);
-        ctx.lineTo(x + s * 1.35, y - s * 0.28);
-        ctx.lineTo(x + s * 1.35, y + s * 0.72);
-        ctx.lineTo(x + s, y + s);
-        ctx.closePath();
-        ctx.fill();
-      }
-
-      function drawOsc(w, h) {
-        ctx.fillStyle = "#0b0d12";
-        ctx.fillRect(0, 0, w, h);
-        ctx.strokeStyle = "#1a2230";
-        ctx.lineWidth = 1;
-        for (let i = 0; i < 10; i++) {
-          const y = h * 0.58 + i * h * 0.042;
-          ctx.beginPath();
-          ctx.moveTo(0, y);
-          ctx.lineTo(w, y);
-          ctx.stroke();
-        }
-        const tw = w * 0.78,
-          th = h * 0.13;
-        const tx0 = w * 0.1,
-          ty0 = h * 0.66;
-        ctx.fillStyle = "#4a3c2c";
-        ctx.beginPath();
-        ctx.moveTo(tx0, ty0);
-        ctx.lineTo(tx0 + 22, ty0 - 26);
-        ctx.lineTo(tx0 + tw + 22, ty0 - 26);
-        ctx.lineTo(tx0 + tw, ty0);
-        ctx.closePath();
-        ctx.fill();
-        ctx.fillStyle = "#2f261c";
-        ctx.fillRect(tx0, ty0, tw, th);
-        ctx.strokeStyle = "#6b5a44";
-        ctx.strokeRect(tx0, ty0, tw, th);
-        drawCube(tx0 + tw * 0.58, ty0 - 52, 26, "#f5c518", "#c9a014");
-        drawCube(tx0 + tw * 0.72, ty0 - 40, 18, "#7aa2ff", "#4d6cb0");
-
-        const { rest, scale, base } = oscLayout(w, h);
-        const gx = rest.x + val("dx") * scale;
-        const gy = rest.y - val("dy") * scale;
-        const mid = { x: (base.x + gx) / 2 + 8, y: (base.y + gy) / 2 - 36 };
-
-        ctx.setLineDash([5, 5]);
-        ctx.strokeStyle = "rgba(122,162,255,.55)";
-        ctx.lineWidth = 1.6;
-        ctx.beginPath();
-        ctx.arc(rest.x, rest.y, 11, 0, Math.PI * 2);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.moveTo(rest.x, rest.y);
-        ctx.lineTo(gx, gy);
-        ctx.stroke();
-        ctx.setLineDash([]);
-
-        ctx.strokeStyle = "#8aa0c8";
-        ctx.lineWidth = 8;
-        ctx.lineCap = "round";
-        ctx.beginPath();
-        ctx.moveTo(base.x, base.y);
-        ctx.lineTo(mid.x, mid.y);
-        ctx.lineTo(gx, gy);
-        ctx.stroke();
-        ctx.fillStyle = "#c9d4ea";
-        ctx.beginPath();
-        ctx.arc(base.x, base.y, 9, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.beginPath();
-        ctx.arc(mid.x, mid.y, 7, 0, Math.PI * 2);
-        ctx.fill();
-        const ang =
-          Math.atan2(gy - mid.y, gx - mid.x) +
-          val("daz") * 0.9 +
-          val("dax") * 0.35;
-        const open = (1 - val("grip")) * 0.5 + 0.15;
-        const z = 1.15 + val("dz") * 0.28;
-        drawGripper(gx, gy, ang, open, z, "#f5c518");
-        ctx.font = "11px IBM Plex Mono, monospace";
-        ctx.fillStyle = "#ff5a4a";
-        ctx.fillText("Δx", gx + 18, gy - 10);
-        ctx.fillStyle = "#3ee0a0";
-        ctx.fillText("Δy", gx + 18, gy + 6);
-      }
-
-      function drawEgo(w, h) {
-        const { cam } = egoLayout(w, h);
-        ctx.fillStyle = "#10141c";
-        ctx.fillRect(0, 0, w, h);
-        ctx.fillStyle = "rgba(42,51,68,.45)";
-        ctx.beginPath();
-        ctx.moveTo(cam.x, cam.y);
-        ctx.lineTo(w * 0.94, h * 0.16);
-        ctx.lineTo(w * 0.94, h * 0.86);
-        ctx.closePath();
-        ctx.fill();
-        ctx.strokeStyle = "#3a465c";
-        ctx.lineWidth = 1.4;
-        ctx.stroke();
-
-        const shelfY = h * 0.62;
-        ctx.fillStyle = "#2a2118";
-        ctx.beginPath();
-        ctx.moveTo(w * 0.42, shelfY);
-        ctx.lineTo(w * 0.92, h * 0.52);
-        ctx.lineTo(w * 0.92, h * 0.62);
-        ctx.lineTo(w * 0.42, shelfY + 28);
-        ctx.closePath();
-        ctx.fill();
-        drawCube(w * 0.58, shelfY - 28, 22, "#f5c518", "#c9a014");
-        drawCube(w * 0.72, shelfY - 18, 16, "#7aa2ff", "#4d6cb0");
-        drawCube(w * 0.8, shelfY - 36, 14, "#3ee0a0", "#1f9a6a");
-
-        ctx.strokeStyle = "#7aa2ff";
-        ctx.lineWidth = 2;
-        ctx.strokeRect(cam.x - 46, cam.y - 34, 70, 50);
-        ctx.fillStyle = "#7aa2ff";
-        ctx.font = "12px IBM Plex Mono, monospace";
-        ctx.fillText("wrist cam", cam.x - 44, cam.y - 44);
-        const axis = (dx, dy, label, col) => {
-          ctx.strokeStyle = col;
-          ctx.lineWidth = 2.2;
-          ctx.beginPath();
-          ctx.moveTo(cam.x, cam.y);
-          ctx.lineTo(cam.x + dx, cam.y + dy);
-          ctx.stroke();
-          ctx.fillStyle = col;
-          ctx.fillText(label, cam.x + dx + 6, cam.y + dy);
-        };
-        axis(78, 0, "X right", "#ff5a4a");
-        axis(0, -78, "Y up", "#3ee0a0");
-        axis(-32, 28, "Z back", "#f5c518");
-        const px = cam.x + 130 + val("tx") * 220;
-        const py = cam.y - val("ty") * 200;
-        const sc = 1.35 + val("tz") * 1.1;
-        drawGripper(
-          px,
-          py,
-          val("yaw"),
-          0.2 + (1 - val("grip")) * 0.7,
-          sc,
-          "#f5c518",
-        );
-      }
-
-      function renderVec() {
-        const must = document.getElementById("ego-must");
-        const cap = document.getElementById("ego-cap");
-        const tag = document.getElementById("ego-tag");
-        if (mode === "osc") {
-          matEl.hidden = true;
-          live.innerHTML =
-            OSC.map(
-              (d) =>
-                `<span class="vec-chip${hot === d.k ? " hot" : ""}">${d.label} <b>${d.v.toFixed(2)}</b></span>`,
-            ).join("") + `<span class="vec-chip">shape (7,)</span>`;
-          hint.innerHTML =
-            "Relative Δ in the EEF frame, each dim ∈ [-1, 1]. Same family as <code>pd_ee_delta_pose</code> / OSC_POSE.";
-          must.innerHTML =
-            "<b>Would send (LIBERO family):</b> 7-D <code>pd_ee_delta_pose</code> — Δxyz, Δrot, gripper. Not what EgoGym consumes. Flip to <b>17-D camera</b> for the real vector.";
-          cap.textContent = "7-D OSC · table / EEF Δ  ·  drag the gripper";
-          tag.textContent = "contrast · 7-D OSC";
-        } else {
-          const M = egoMatrix();
-          const flat = M.flat();
-          const hotIdx = { tx: 3, ty: 7, tz: 11, yaw: -1, grip: 16 };
-          matEl.hidden = false;
-          matEl.innerHTML = flat
-            .map((n, i) => {
-              const on =
-                (hot === "yaw" && [0, 2, 8, 10].includes(i)) ||
-                hotIdx[hot] === i;
-              return `<span class="${on ? "hot" : ""}">${n.toFixed(2)}</span>`;
-            })
-            .join("");
-          live.innerHTML = `<span class="vec-chip">[0–15] flattened 4×4</span><span class="vec-chip${hot === "grip" ? " hot" : ""}">[16] grip <b>${val("grip").toFixed(2)}</b></span>`;
-          hint.innerHTML =
-            "Camera frame: X right, Y up, Z backward. Cells [0–15] are the 4×4; [16] is gripper. Toy yaw around Y.";
-          must.innerHTML =
-            "<b>Must send:</b> flattened 4×4 in the camera frame [0–15] + gripper [16]. X right, Y up, Z backward. Flip to <b>7-D OSC</b> to see what LIBERO would have sent instead.";
-          cap.textContent = "17-D · camera 4×4 + gripper  ·  drag the gripper";
-          tag.textContent = "not 7-D OSC";
-        }
-      }
-
-      function draw() {
-        const { w, h } = sizeCanvas();
-        ctx.clearRect(0, 0, w, h);
-        if (mode === "osc") drawOsc(w, h);
-        else drawEgo(w, h);
-        renderVec();
-      }
-
-      document.querySelectorAll(".play-modes [data-mode]").forEach((b) => {
-        b.addEventListener("click", () => {
-          mode = b.dataset.mode;
-          document
-            .querySelectorAll(".play-modes [data-mode]")
-            .forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-          hot = "";
-          rebuildSliders();
-          draw();
-        });
-      });
-
-      let dragging = false;
-      canvas.addEventListener("pointerdown", (e) => {
-        dragging = true;
-        canvas.setPointerCapture(e.pointerId);
-        movePtr(e);
-      });
-      canvas.addEventListener("pointerup", () => {
-        dragging = false;
-      });
-      canvas.addEventListener("pointermove", (e) => {
-        if (dragging) movePtr(e);
-      });
-      function syncSliders() {
-        dims().forEach((d) => {
-          const inp = form.querySelector(`input[name="${d.k}"]`);
-          const em = form.querySelector(`[data-k="${d.k}"]`);
-          if (inp) inp.value = d.v;
-          if (em) em.textContent = d.v.toFixed(2);
-        });
-      }
-      function movePtr(e) {
-        const r = canvas.getBoundingClientRect();
-        const x = e.clientX - r.left,
-          y = e.clientY - r.top;
-        const w = r.width,
-          h = r.height;
-        if (mode === "osc") {
-          const { rest, scale } = oscLayout(w, h);
-          OSC.find((d) => d.k === "dx").v = Math.max(
-            -1,
-            Math.min(1, (x - rest.x) / scale),
-          );
-          OSC.find((d) => d.k === "dy").v = Math.max(
-            -1,
-            Math.min(1, (rest.y - y) / scale),
-          );
-          hot = "dx";
-        } else {
-          const { cam } = egoLayout(w, h);
-          EGO.find((d) => d.k === "tx").v = Math.max(
-            -0.4,
-            Math.min(0.4, (x - cam.x - 130) / 220),
-          );
-          EGO.find((d) => d.k === "ty").v = Math.max(
-            -0.3,
-            Math.min(0.3, (cam.y - y) / 200),
-          );
-          hot = "tx";
-        }
-        syncSliders();
-        draw();
-      }
-      addEventListener("resize", draw);
-      rebuildSliders();
-      draw();
-    </script>
-  </body>
-</html>
+  /* theme toggle */
+  const root = document.documentElement, btn = document.getElementById("theme-btn");
+  function label() {
+    const t = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    btn.textContent = t === "dark" ? "light mode" : "dark mode";
+  }
+  try { const s = localStorage.getItem("atlas-theme"); if (s) root.dataset.theme = s; } catch (e) {}
+  label();
+  btn.addEventListener("click", () => {
+    const cur = root.dataset.theme || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+    root.dataset.theme = cur === "dark" ? "light" : "dark";
+    try { localStorage.setItem("atlas-theme", root.dataset.theme); } catch (e) {}
+    label();
+  });
+</script>

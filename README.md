@@ -1,4 +1,18 @@
-# Memory worlds
+# Robot Benchmark Atlas
+
+`index.html` is a tabbed explainer for four robot-learning benchmarks: **RoboCasa**, **MIKASA-Robo**, **LIBERO** and **EgoGym**. The landing tab compares them side by side. Each benchmark tab is meant to be understood in about 30 seconds: what kind of benchmark it is, what the data looks like (observation → policy → action), what the tasks are, and how it's scored. Robotics terms have hover or tap definitions for newcomers.
+
+Demo videos live in `media/`. They were re-encoded from each project's public site or repo (robocasa.ai, the MIKASA-Robo README GIFs, libero-project.github.io, the EgoGym README, cap-policy.github.io). Deep links: `#robocasa`, `#mikasa`, `#libero`, `#egogym`.
+
+```bash
+bash serve.sh          # http://127.0.0.1:8767/
+```
+
+The earlier "Memory worlds" page now lives at `memory-worlds.html` (it still uses `assets/`).
+
+---
+
+# Memory worlds (`memory-worlds.html`)
 
 A five-minute visual lesson: **long-horizon is not memory**. Real GIFs and clips, then the action vector `env.step` actually consumes.
 
