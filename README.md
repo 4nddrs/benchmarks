@@ -2,7 +2,9 @@
 
 `index.html` is a tabbed explainer for four robot-learning benchmarks: **RoboCasa**, **MIKASA-Robo**, **LIBERO** and **EgoGym**. The landing tab compares them side by side. Each benchmark tab is meant to be understood in about 30 seconds: what kind of benchmark it is, what the data looks like (observation → policy → action), what the tasks are, and how it's scored. Robotics terms have hover or tap definitions for newcomers.
 
-Demo videos live in `media/`. They were re-encoded from each project's public site or repo (robocasa.ai, the MIKASA-Robo README GIFs, libero-project.github.io, the EgoGym README, cap-policy.github.io). Deep links: `#robocasa`, `#mikasa`, `#libero`, `#egogym`.
+Demo videos live in `media/`. They were re-encoded from each project's public site or repo (robocasa.ai, the MIKASA-Robo README GIFs, libero-project.github.io, the EgoGym README, cap-policy.github.io). The `libero_sim_*.mp4` clips are real simulator frames (agentview + wrist, 256 px, 20 fps) taken from episode 0 of each suite in `lerobot/libero_{spatial,object,goal,10}_image` on Hugging Face.
+
+Each benchmark tab also has a **State of the art** table, and the controller conventions (step sizes, rotation format, frame, gripper sign) were checked against each project's default configs. Deep links: `#robocasa`, `#mikasa`, `#libero`, `#egogym`.
 
 ```bash
 bash serve.sh          # http://127.0.0.1:8767/

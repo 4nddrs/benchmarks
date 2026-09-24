@@ -1,3 +1,6 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8" />
 <title>Robot Benchmark Atlas</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -153,6 +156,8 @@
   }
   .vid.contain { object-fit: contain; }
   .vid.r32 { aspect-ratio: 3 / 2; }
+  .vid.sq { aspect-ratio: 1; max-width: 520px; }
+  .vid.r21 { aspect-ratio: 2 / 1; }
   figcaption { font-size: 14.5px; color: var(--muted); line-height: 1.4; }
   figcaption b { color: var(--ink); font-weight: 600; }
 
@@ -254,6 +259,27 @@
   .vec span.g { background: color-mix(in srgb, var(--c) 20%, transparent); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
   .vec span.b { background: color-mix(in srgb, var(--accent) 14%, transparent); }
   .note { font-size: 13.5px; color: var(--muted); }
+  .note b { color: var(--ink); font-weight: 600; }
+  .vec span.k { background: none; border-style: dashed; color: var(--faint); }
+  .vec .sep { width: 100%; height: 0; padding: 0; border: 0; min-width: 0; background: none; }
+  .mat { display: grid; grid-template-columns: repeat(4, minmax(38px, auto)) auto; gap: 4px; width: fit-content; align-items: center; }
+  .mat span {
+    font: 500 11.5px/1 var(--mono); padding: 8px 6px; text-align: center;
+    border-radius: 5px; background: var(--sunk); border: 1px solid var(--line);
+  }
+  .mat span.b { background: color-mix(in srgb, var(--accent) 14%, transparent); }
+  .mat span.k { background: none; border-style: dashed; color: var(--faint); }
+  .mat span.g { background: color-mix(in srgb, var(--c) 20%, transparent); border-color: color-mix(in srgb, var(--c) 40%, transparent); }
+  .mat i { font: 400 12px/1.2 var(--sans); color: var(--faint); font-style: normal; padding-left: 4px; }
+  .step .box ul.legend { padding-left: 0; }
+  .legend { display: grid; gap: 4px; font-size: 13.5px; color: var(--muted); margin: 0; padding: 0; list-style: none; }
+  .legend code { font-size: 12px; }
+
+  /* compact tables (conventions, SOTA) */
+  .tablebox.compact table { min-width: 560px; font-size: 14.5px; }
+  .tablebox.compact tbody th { font-family: var(--sans); font-size: 15px; font-weight: 600; white-space: normal; }
+  .tablebox.compact td.num, .tablebox.compact td b { color: var(--ink); }
+  .src { font-size: 13px; color: var(--faint); margin-top: 8px; }
 
   /* tasks list */
   .tasks { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 12px; }
@@ -329,7 +355,7 @@
       </div>
     </button>
     <button class="card" data-go="libero" style="--c: var(--libero)">
-      <video class="vid" src="media/libero_demos.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <video class="vid contain" src="media/libero_sim_grid.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
         <span class="chip">Lifelong learning</span>
         <h3>LIBERO</h3>
@@ -363,46 +389,51 @@
   <div>
     <h2 class="section">Side by side</h2>
     <div class="tablebox">
-      <table>
+      <table style="min-width: 940px">
         <thead>
-          <tr><th>Benchmark</th><th>Main question</th><th>World</th><th>Data you get</th><th>Tasks</th><th>Action</th></tr>
+          <tr><th>Benchmark</th><th>Main question</th><th>World</th><th>Data you get</th><th>Tasks</th><th>Action</th><th>Best reported</th></tr>
         </thead>
         <tbody>
           <tr>
             <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
             <td><strong>Can one policy do hundreds of household tasks?</strong></td>
-            <td>Full kitchens, mobile robot, MuJoCo sim</td>
+            <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
             <td class="num">600+ h human demos + 1,600+ h synthetic</td>
             <td class="num">365 (65 atomic, rest composite)</td>
-            <td class="num">12 numbers (arm + gripper + base)</td>
+            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
+            <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
           </tr>
           <tr>
             <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
             <td><strong>Can the robot remember what it no longer sees?</strong></td>
-            <td>Tabletop, Franka arm, ManiSkill3 GPU sim</td>
+            <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
             <td class="num">22,500 expert trajectories (6M+ steps)</td>
             <td class="num">90 across 10 memory types</td>
             <td class="num">7 numbers (Δ pose + gripper)</td>
+            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
           </tr>
           <tr>
             <th><span style="background: var(--libero)"></span>LIBERO</th>
             <td><strong>Can it keep learning without forgetting?</strong></td>
-            <td>Tabletop & kitchen, Franka arm, robosuite sim</td>
+            <td>Tabletop & kitchen, Franka arm, robosuite (MuJoCo)</td>
             <td class="num">50 human demos per task</td>
             <td class="num">130 in 4 suites</td>
             <td class="num">7 numbers (Δ pose + gripper)</td>
+            <td class="num"><strong>97–99.9%</strong> average over 4 suites (saturated)</td>
           </tr>
           <tr>
             <th><span style="background: var(--egogym)"></span>EgoGym</th>
             <td><strong>Does a pre-trained policy work out of the box?</strong></td>
-            <td>Simple table / cabinet scenes, MuJoCo</td>
+            <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
             <td>None. Evaluation only</td>
             <td class="num">3 (pick, open, close)</td>
             <td class="num">17 numbers (4×4 pose + gripper)</td>
+            <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
           </tr>
         </tbody>
       </table>
     </div>
+    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -421,7 +452,7 @@
       <p class="oneliner">A robot in <em>2,500 virtual kitchens</em> learning <em>365 everyday chores</em>, from pressing a button to brewing coffee.</p>
       <div class="facts">
         <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="simulation">Simulation</span> framework + dataset for <span class="term" data-t="multitask">multi-task</span> and <span class="term" data-t="foundation">foundation-model</span> training</div></div>
-        <div class="fact"><div class="k">The world</div><div class="v">Photo-real kitchens with working fridges, stoves, sinks and microwaves</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Photo-real kitchens with working fridges, stoves and sinks, simulated in <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>). Not ManiSkill3.</div></div>
         <div class="fact"><div class="k">The data</div><div class="v"><span class="term" data-t="demonstration">Demonstrations</span>: 600+ h from humans, 1,600+ h auto-generated</div></div>
         <div class="fact"><div class="k">The tasks</div><div class="v">65 <span class="term" data-t="atomic">atomic</span> skills + ~300 <span class="term" data-t="composite">composite</span> chores</div></div>
       </div>
@@ -436,7 +467,8 @@
       <div class="box">
         <h3>Observation</h3>
         <ul>
-          <li>RGB images from cameras left and right of the robot, plus a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>Two <span class="term" data-t="thirdperson">third-person cameras</span>, <code>robot0_agentview_left</code> and <code>_right</code>. Unlike LIBERO's and MIKASA's, they are <b>mounted on the robot's mobile base</b>, behind and above the arm, so they move and turn with the robot as it drives</li>
+          <li>A <span class="term" data-t="wrist">wrist camera</span> (<code>robot0_eye_in_hand</code>)</li>
           <li><span class="term" data-t="proprio">Proprioception</span>: arm joint angles, gripper opening, base position</li>
           <li>A language instruction, e.g. <i>"Place the toast on the dining counter"</i></li>
         </ul>
@@ -447,9 +479,16 @@
       <div class="box">
         <h3>Action · 12 numbers</h3>
         <div class="vec" aria-label="12-number action">
-          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span><span class="b">base</span><span class="b">base</span><span class="b">base</span><span class="b">base</span><span class="b">mode</span>
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span><span class="b">fwd</span><span class="b">side</span><span class="b">yaw</span><span class="b">torso</span><span class="k">mode</span>
         </div>
-        <p class="note">6 arm + 1 gripper + 4 mobile base + 1 arm/base switch, each scaled to [−1, 1]. This is for the default PandaOmron robot (a Franka arm on a wheeled base). Other robots, including humanoids, are supported.</p>
+        <ul class="legend">
+          <li><b>0–5 · arm.</b> Same controller as LIBERO: robosuite <span class="term" data-t="osc">OSC</span> <span class="term" data-t="delta">delta</span> pose, [−1, 1] → ±5 cm and ±0.5 rad (axis-angle) per step. Here the <span class="term" data-t="frame">frame</span> is the <b>mobile base</b>, because the base can move.</li>
+          <li><b>6 · gripper.</b> −1 open, +1 close.</li>
+          <li><b>7–9 · wheeled base.</b> Velocity commands: forward/back, sideways (the base is omnidirectional), turn (yaw).</li>
+          <li><b>10 · torso.</b> Raises or lowers the lift the arm sits on.</li>
+          <li><b>11 · mode.</b> A switch, not a motion. &gt; 0 means base mode: the base drives and the arm holds its pose in the world. &lt; 0 means arm mode: the base stays put.</li>
+        </ul>
+        <p class="note">This 12-number layout is for the default <b>PandaOmron</b> robot (a Franka arm on an Omron wheeled base with a lift). Slots 7–11 belong to that body. Other <span class="term" data-t="embodiment">embodiments</span> have different layouts, e.g. a humanoid has two arms and two hands.</p>
       </div>
     </div>
   </div>
@@ -492,7 +531,7 @@
 
   <div>
     <h2 class="section">Different robot bodies</h2>
-    <p class="sub">RoboCasa supports several <span class="term" data-t="embodiment">embodiments</span>: single-arm mobile robots, humanoids and quadrupeds with arms.</p>
+    <p class="sub">RoboCasa supports several <span class="term" data-t="embodiment">embodiments</span>: single-arm mobile robots, humanoids and quadrupeds with arms. The action vector depends on the body. The arm and gripper part stays similar, but the base, torso and mode slots above are specific to PandaOmron.</p>
     <div class="grid-4">
       <video class="vid" src="media/robocasa_media15.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 1"></video>
       <video class="vid" src="media/robocasa_media16.mp4" muted loop playsinline preload="metadata" aria-label="Robot embodiment 2"></video>
@@ -507,8 +546,26 @@
   </div>
 
   <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">From the official RoboCasa365 leaderboard (updated 23 Sep 2026). Every model trains on the same Human300 dataset (300 tasks) and is tested on 50 target tasks in three splits. "Unseen" composite tasks were never in the training data.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Overall</th><th>Atomic · seen</th><th>Composite · seen</th><th>Composite · unseen</th></tr></thead>
+        <tbody>
+          <tr><th>Paimon-0 (Primotion) · #1</th><td class="num"><b>58.1%</b></td><td class="num">79.3%</td><td class="num">55.8%</td><td class="num">36.7%</td></tr>
+          <tr><th>Xiaomi-Robotics-1 · best open-source</th><td class="num"><b>57.4%</b></td><td class="num">80.2%</td><td class="num">57.1%</td><td class="num">32.1%</td></tr>
+          <tr><th>GR00T N1.5 (baseline)</th><td class="num">23.9%</td><td class="num">50.7%</td><td class="num">14.8%</td><td class="num">2.7%</td></tr>
+          <tr><th>π₀.₅ (baseline)</th><td class="num">16.9%</td><td class="num">39.6%</td><td class="num">7.1%</td><td class="num">1.2%</td></tr>
+          <tr><th>Diffusion Policy (baseline)</th><td class="num">6.1%</td><td class="num">15.7%</td><td class="num">0.2%</td><td class="num">1.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Far from solved. Even the best model finishes about a third of unseen chores. Source: <a href="https://robocasa.ai/leaderboard.html" target="_blank" rel="noopener">robocasa.ai/leaderboard</a>.</p>
+  </div>
+
+  <div>
     <h2 class="section">Key terms</h2>
-    <dl class="glossary" data-glossary="simulation,demonstration,synthetic,atomic,composite,articulated,embodiment,proprio,randomization,foundation"></dl>
+    <dl class="glossary" data-glossary="simulation,demonstration,synthetic,atomic,composite,articulated,embodiment,proprio,thirdperson,frame,randomization,foundation"></dl>
   </div>
 
   <div class="links">
@@ -528,11 +585,11 @@
       <p class="oneliner">Tabletop tasks where <em>the answer disappears</em>. In the video, a yellow cube is shown, then hidden. Later the robot must touch the yellow one among 9.</p>
       <div class="facts">
         <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> models and <span class="term" data-t="rl">RL</span> agents</div></div>
-        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm at a table, simulated in <span class="term" data-t="maniskill">ManiSkill3</span></div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm at a table, simulated in <span class="term" data-t="maniskill">ManiSkill3</span> (SAPIEN physics, not MuJoCo)</div></div>
         <div class="fact"><div class="k">The data</div><div class="v">22,500 expert trajectories with rewards and language, in RLDS and LeRobot format</div></div>
         <div class="fact"><div class="k">The tasks</div><div class="v">90 tasks across 10 kinds of memory, in short / medium / long splits</div></div>
       </div>
-      <p class="timer">Video: RememberColor9, slowed down (top view left, top + wrist camera right)</p>
+      <p class="timer">Video: RememberColor9, slowed down (left: a render view for humans; right: what the policy sees, the fixed third-person camera, labelled "top" in the clip, and the wrist camera)</p>
     </div>
   </div>
 
@@ -543,7 +600,7 @@
       <div class="box">
         <h3>Observation</h3>
         <ul>
-          <li>RGB from a fixed top camera and a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>Two 128×128 RGB images: a <span class="term" data-t="thirdperson">fixed third-person camera</span> (<code>base_camera</code>, fixed in the world above the far side of the table, looking down at the robot) and a <span class="term" data-t="wrist">wrist camera</span> (<code>hand_camera</code>)</li>
           <li>Robot state (<span class="term" data-t="proprio">proprioception</span>)</li>
           <li>Instruction, e.g. <i>"remember the cube colour, then touch the matching one"</i></li>
         </ul>
@@ -556,7 +613,7 @@
         <div class="vec" aria-label="7-number action">
           <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
         </div>
-        <p class="note">Control mode <code>pd_ee_delta_pose</code>: small <span class="term" data-t="delta">delta</span> moves of the <span class="term" data-t="eef">end-effector</span>, normalised to [−1, 1].</p>
+        <p class="note">ManiSkill3 control mode <code>pd_ee_delta_pose</code>: small <span class="term" data-t="delta">delta</span> moves of the <span class="term" data-t="eef">end-effector</span>, normalised to [−1, 1] → <b>±10 cm</b> and <b>±0.1 rad</b> per step. Translation is in the robot-base <span class="term" data-t="frame">frame</span>; rotation is <b>XYZ Euler angles</b> around the gripper, with axes aligned to the base. Gripper: <b>+1 open, −1 closed</b>. Same layout as LIBERO, different conventions (see the LIBERO tab).</p>
       </div>
     </div>
   </div>
@@ -611,8 +668,23 @@
   </div>
 
   <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">The 90-task protocol is new, and we found no published results on the full benchmark yet. VLA papers so far fine-tune on a handful of MIKASA tasks (with 250 demos each, 128×128 images, end-effector control) and report the average. The subsets differ, so the numbers below aren't directly comparable.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Task set</th><th>Avg. success</th><th>π₀ on same set</th></tr></thead>
+        <tbody>
+          <tr><th>FibVLA (Jul 2026)</th><td>4 tasks: ShellGameTouch, InterceptMedium, TakeItBack, RememberShape5</td><td class="num"><b>46.5%</b></td><td class="num">33.0%</td></tr>
+          <tr><th>MemoryVLA (ICLR 2026)</th><td>The standard 5-task VLA subset from the MIKASA-Robo paper</td><td class="num"><b>41.2%</b></td><td class="num">29.4%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Models with explicit memory beat memoryless VLAs by 12–13 points, but none gets past 50%. Sources: <a href="https://arxiv.org/abs/2607.29596" target="_blank" rel="noopener">FibVLA</a>, <a href="https://arxiv.org/abs/2508.19236" target="_blank" rel="noopener">MemoryVLA</a>.</p>
+  </div>
+
+  <div>
     <h2 class="section">Key terms</h2>
-    <dl class="glossary" data-glossary="memory,markov,vla,rl,oracle,maniskill,delta,eef,horizon,rlds"></dl>
+    <dl class="glossary" data-glossary="memory,markov,vla,rl,oracle,maniskill,delta,eef,thirdperson,frame,horizon,rlds"></dl>
   </div>
 
   <div class="links">
@@ -626,7 +698,7 @@
 <!-- ============================ LIBERO ============================ -->
 <section class="panel" id="libero" role="tabpanel" aria-labelledby="tab-libero" style="--c: var(--libero)" hidden>
   <div class="top">
-    <video class="vid" src="media/libero_demos.mp4" muted loop playsinline preload="metadata" controls></video>
+    <video class="vid sq contain" src="media/libero_sim_grid.mp4" muted loop playsinline preload="metadata" controls></video>
     <div>
       <span class="eyebrow">Lifelong learning · knowledge transfer · tabletop</span>
       <h1>LIBERO</h1>
@@ -637,7 +709,7 @@
         <div class="fact"><div class="k">The data</div><div class="v">50 human <span class="term" data-t="teleop">teleoperated</span> demos per task, with images, robot state and language</div></div>
         <div class="fact"><div class="k">The tasks</div><div class="v">130 tasks in 4 suites, each designed to test one kind of knowledge</div></div>
       </div>
-      <p class="timer">Video: human demonstrations from the LIBERO dataset</p>
+      <p class="timer">Video: real LIBERO simulator frames. One human demo from each suite (top: Spatial, Object; bottom: Goal, Long), seen through the fixed third-person camera the policy uses, at the real 20 Hz. This is what the benchmark actually looks like: low-res and simple.</p>
     </div>
   </div>
 
@@ -648,7 +720,7 @@
       <div class="box">
         <h3>Observation</h3>
         <ul>
-          <li>Two RGB images: a workspace (third-person) camera and a <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>Two RGB images: a <span class="term" data-t="thirdperson">fixed third-person camera</span> (<code>agentview</code>, fixed in the world above the far side of the table, looking back at the robot) and a <span class="term" data-t="wrist">wrist camera</span> (<code>robot0_eye_in_hand</code>). Same setup as MIKASA-Robo.</li>
           <li><span class="term" data-t="proprio">Proprioception</span>: joint angles, gripper state</li>
           <li>The language task, e.g. <i>"turn on the stove"</i></li>
         </ul>
@@ -661,32 +733,61 @@
         <div class="vec" aria-label="7-number action">
           <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
         </div>
-        <p class="note"><span class="term" data-t="osc">OSC</span> end-effector <span class="term" data-t="delta">delta</span> control, scaled to [−1, 1].</p>
+        <p class="note">robosuite <span class="term" data-t="osc">OSC_POSE</span> end-effector <span class="term" data-t="delta">delta</span> control, [−1, 1] → <b>±5 cm</b> and <b>±0.5 rad</b> per step. Rotation is <b>axis-angle</b>, in the world <span class="term" data-t="frame">frame</span> (the arm's base never moves). Gripper: <b>−1 open, +1 close</b>.</p>
       </div>
     </div>
+  </div>
+
+  <div>
+    <h2 class="section">Same 7 numbers as MIKASA-Robo, different meaning</h2>
+    <p class="sub">Both benchmarks send <code>[Δx, Δy, Δz, Δrx, Δry, Δrz, grip]</code> to a Franka arm, but they run in different simulators with different controller conventions. A policy trained on one can't be dropped into the other without converting its actions.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th></th><th>LIBERO</th><th>MIKASA-Robo</th></tr></thead>
+        <tbody>
+          <tr><th>Simulator</th><td>robosuite 1.4 on MuJoCo</td><td>ManiSkill3 on SAPIEN</td></tr>
+          <tr><th>Controller</th><td><code>OSC_POSE</code> (operational-space torque control)</td><td><code>pd_ee_delta_pose</code> (IK → joint PD targets)</td></tr>
+          <tr><th>Max step, position</th><td class="num">±0.05 m</td><td class="num">±0.10 m</td></tr>
+          <tr><th>Max step, rotation</th><td class="num">±0.5 rad</td><td class="num">±0.1 rad</td></tr>
+          <tr><th>Rotation format</th><td>axis-angle</td><td>XYZ Euler angles</td></tr>
+          <tr><th>Frame</th><td>world (= fixed robot base)</td><td>robot base, rotation about the gripper</td></tr>
+          <tr><th>Gripper</th><td><b>−1 open</b>, +1 close</td><td><b>+1 open</b>, −1 close</td></tr>
+          <tr><th>Control rate</th><td class="num">20 Hz</td><td class="num">20 Hz</td></tr>
+          <tr><th>Third-person camera</th><td><code>agentview</code>, 128×128</td><td><code>base_camera</code>, 128×128</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The gripper sign is flipped and the step sizes differ by 2× (position) and 5× (rotation). Values come from each project's default controller configs.</p>
   </div>
 
   <div class="stats">
     <div class="stat"><div class="n">130</div><div class="l">language-specified tasks</div></div>
     <div class="stat"><div class="n">4</div><div class="l">task suites</div></div>
     <div class="stat"><div class="n">50</div><div class="l">human demos per task</div></div>
-    <div class="stat"><div class="n">128×128</div><div class="l">pixel images, 2 cameras</div></div>
+    <div class="stat"><div class="n">128×128</div><div class="l">pixel images, 2 cameras (many VLA papers re-render at 256×256)</div></div>
   </div>
 
   <div>
     <h2 class="section">The four suites</h2>
     <p class="sub">Robots need two kinds of knowledge: <b>declarative</b> (what objects are and where they are) and <b>procedural</b> (how to move). The first three suites each change only one thing, so you can see which kind of knowledge transfers.</p>
-    <div class="tasks">
+    <div class="tasks" style="margin-bottom: 18px">
       <div class="task"><h3>LIBERO-Spatial · 10 tasks</h3><p>Same objects, <b>different layouts</b>. Tests spatial relationships.</p><div class="ex">"pick up the black bowl between the plate and the ramekin and place it on the plate"</div></div>
       <div class="task"><h3>LIBERO-Object · 10 tasks</h3><p><b>Different objects</b>, same layout. Tests recognising objects.</p><div class="ex">"pick up the alphabet soup and place it in the basket"</div></div>
       <div class="task"><h3>LIBERO-Goal · 10 tasks</h3><p>Same objects and layout, <b>different goals</b>. Tests behaviour.</p><div class="ex">"open the middle drawer of the cabinet"</div></div>
       <div class="task"><h3>LIBERO-100 · 100 tasks</h3><p>Everything varies at once (<span class="term" data-t="entangled">entangled</span>). Split into LIBERO-90 for pretraining and LIBERO-10 for longer test tasks.</p><div class="ex">"put both the soup and the sauce in the basket"</div></div>
     </div>
+    <div class="grid-2" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr))">
+      <figure><video class="vid r21" src="media/libero_sim_spatial.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Spatial.</b> "pick up the black bowl next to the cookie box and place it on the plate"</figcaption></figure>
+      <figure><video class="vid r21" src="media/libero_sim_object.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Object.</b> "pick up the orange juice and place it in the basket"</figcaption></figure>
+      <figure><video class="vid r21" src="media/libero_sim_goal.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>Goal.</b> "put the bowl on the plate"</figcaption></figure>
+      <figure><video class="vid r21" src="media/libero_sim_10.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>LIBERO-10 (Long).</b> "put the white mug on the left plate and put the yellow and white mug on the right plate"</figcaption></figure>
+    </div>
+    <p class="src">Each clip shows one real demo, with the fixed third-person camera on the left and the wrist camera on the right, exactly the two images a policy receives. Frames come from the 256 px, upright-flipped copy of the demos used by OpenVLA and π₀ (<code>lerobot/libero_*_image</code> on Hugging Face). The raw LIBERO files store images upside-down at 128 px.</p>
   </div>
 
   <div>
     <h2 class="section">The 2-minute explainer</h2>
-    <p class="sub">Official LIBERO intro video: how tasks are generated from human activities, the four suites, and the main findings.</p>
+    <p class="sub">Official LIBERO intro video: how tasks are generated from human activities, the four suites, and the main findings. Its scenes are high-quality renders made for the video; the simulator frames above are what the policy actually sees.</p>
     <video class="vid" src="media/libero_intro.mp4" muted playsinline preload="metadata" controls></video>
   </div>
 
@@ -696,8 +797,24 @@
   </div>
 
   <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">The number everyone reports is multi-task success rate (%) on each of the four 10-task suites after fine-tuning on their demos, averaged over 500 episodes per suite. By this measure LIBERO is essentially <b>saturated</b>.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Spatial</th><th>Object</th><th>Goal</th><th>Long (LIBERO-10)</th><th>Average</th></tr></thead>
+        <tbody>
+          <tr><th>LaST-R1 + RL post-training (2026)</th><td colspan="4">all suites</td><td class="num"><b>99.9%</b></td></tr>
+          <tr><th>OpenVLA-OFT (2025)</th><td class="num">97.6</td><td class="num">98.4</td><td class="num">97.9</td><td class="num">94.5</td><td class="num"><b>97.1%</b></td></tr>
+          <tr><th>π₀.₅ (openpi, fine-tuned)</th><td class="num">98.8</td><td class="num">98.2</td><td class="num">98.0</td><td class="num">92.4</td><td class="num"><b>96.9%</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">High scores don't mean the problem is solved. LIBERO-Plus and LIBERO-PRO show these same models dropping from ~95% to under 30% when the camera, lighting or object positions change slightly, a sign they memorise the training scenes. Sources: <a href="https://arxiv.org/abs/2604.28192" target="_blank" rel="noopener">LaST-R1</a>, <a href="https://arxiv.org/abs/2502.19645" target="_blank" rel="noopener">OpenVLA-OFT</a>, <a href="https://github.com/Physical-Intelligence/openpi/tree/main/examples/libero" target="_blank" rel="noopener">openpi</a>, <a href="https://arxiv.org/abs/2510.13626" target="_blank" rel="noopener">LIBERO-Plus</a>.</p>
+  </div>
+
+  <div>
     <h2 class="section">Key terms</h2>
-    <dl class="glossary" data-glossary="lifelong,forgetting,fwt,nbt,entangled,teleop,pddl,osc,robosuite,imitation"></dl>
+    <dl class="glossary" data-glossary="lifelong,forgetting,fwt,nbt,entangled,teleop,pddl,osc,robosuite,thirdperson,frame,imitation"></dl>
   </div>
 
   <div class="links">
@@ -728,14 +845,14 @@
 
   <div>
     <h2 class="section">One timestep of data</h2>
-    <p class="sub">Two robot options: <code>cap</code>, a floating gripper with a camera, and <code>droid</code>, a Franka arm like the DROID dataset. Actions can be <span class="term" data-t="delta">delta</span> or absolute.</p>
+    <p class="sub">Two robot options: <code>cap</code>, a floating gripper with a camera (no arm), and <code>droid</code>, a Franka arm like the DROID dataset. Actions can be <span class="term" data-t="delta">delta</span> (the default) or absolute.</p>
     <div class="step">
       <div class="box">
         <h3>Observation</h3>
         <ul>
           <li><code>rgb_ego</code>: <span class="term" data-t="ego">egocentric</span> gripper-camera image (960×720 by default)</li>
-          <li><code>rgb_exo</code>: third-person image</li>
-          <li><code>camera_pose</code>: the camera's position and rotation as a 4×4 matrix</li>
+          <li><code>rgb_exo</code>: a <span class="term" data-t="thirdperson">fixed third-person camera</span> image, mostly for watching. CAP ignores it</li>
+          <li><code>camera_pose</code>: where the gripper camera is, as a 4×4 <span class="term" data-t="pose">pose</span> matrix in the MuJoCo world <span class="term" data-t="frame">frame</span></li>
           <li>Target <code>object_name</code> (Pick) or handle pose (Open)</li>
         </ul>
       </div>
@@ -744,10 +861,20 @@
       <span class="arr" aria-hidden="true">→</span>
       <div class="box">
         <h3>Action · 17 numbers (cap gripper)</h3>
-        <div class="vec" aria-label="17-number action">
-          <span>r11</span><span>r12</span><span>r13</span><span class="b">x</span><span>r21</span><span>r22</span><span>r23</span><span class="b">y</span><span>r31</span><span>r32</span><span>r33</span><span class="b">z</span><span>0</span><span>0</span><span>0</span><span>1</span><span class="g">grip</span>
+        <div class="mat" aria-label="17-number action: 4 by 4 pose matrix plus gripper">
+          <span>r11</span><span>r12</span><span>r13</span><span class="b">x</span><i>0–3</i>
+          <span>r21</span><span>r22</span><span>r23</span><span class="b">y</span><i>4–7</i>
+          <span>r31</span><span>r32</span><span>r33</span><span class="b">z</span><i>8–11</i>
+          <span class="k">0</span><span class="k">0</span><span class="k">0</span><span class="k">1</span><i>12–15 · always</i>
+          <span class="g">grip</span><i style="grid-column: 2 / -1">16</i>
         </div>
-        <p class="note">A full 4×4 <span class="term" data-t="pose">pose</span> matrix (rotation r + position xyz), flattened, then the gripper. The <code>droid</code> arm uses joint targets + gripper instead.</p>
+        <ul class="legend">
+          <li><b>r</b> is a 3×3 rotation matrix and <b>x y z</b> a position in metres. Together they make a 4×4 <span class="term" data-t="homogeneous">homogeneous transform</span>, flattened row by row into slots 0–15.</li>
+          <li><b>Why "0 0 0 1"?</b> The bottom row is always that constant, so it carries no information. It's there so poses can be chained by plain matrix multiplication. Only 12 of the 16 numbers are free, and <b>r</b> must be a valid rotation.</li>
+          <li><b>Which frame?</b> With <code>delta</code> (the default), the matrix is expressed in the <b>gripper camera's own frame</b>: the target is <code>camera_pose @ action</code>, so "x = 0.02" means 2 cm along the camera's x-axis, wherever it is pointing. With <code>absolute</code>, it is the target camera pose in the <b>MuJoCo world frame</b>, the same frame as <code>camera_pose</code>.</li>
+          <li><b>grip</b> is a command in [0, 1].</li>
+        </ul>
+        <p class="note">The <code>droid</code> arm uses a different action: <b>7 joint angles + gripper</b> (8 numbers). In delta mode these are added to the current joint angles.</p>
       </div>
     </div>
   </div>
@@ -786,12 +913,27 @@
 
   <div>
     <h2 class="section">How it's scored</h2>
-    <p class="callout"><strong>Success rate</strong> over many randomised episodes (1,000 by default). An episode succeeds when the reward crosses a threshold: lift over 5 cm for Pick, 0.5 for Open. Optional <span class="term" data-t="unprivileged">unprivileged</span> wrappers use a vision-language model (Molmo, Gemini, GPT, Moondream) to find the target, so the policy never gets hidden simulator information.</p>
+    <p class="callout"><strong>Success rate</strong> over many randomised episodes (1,000 by default). An episode succeeds when the reward crosses a threshold. In the code's defaults that is a lift over 5 cm for Pick and 0.5 for Open. Optional <span class="term" data-t="unprivileged">unprivileged</span> wrappers use a vision-language model (Molmo, Gemini, GPT, Moondream) to find the target, so the policy never gets hidden simulator information.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">EgoGym is new (Feb 2026), and the only published numbers so far are from the CAP paper, on <b>EgoGym-Pick</b>. Both policies run zero-shot: neither was trained in EgoGym.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Policy</th><th>Robot</th><th>Pick success</th><th>Setup</th></tr></thead>
+        <tbody>
+          <tr><th>CAP</th><td><code>cap</code> floating gripper</td><td class="num"><b>79.9% ± 1.1</b></td><td>oracle contact point given as the prompt</td></tr>
+          <tr><th>π₀.₅-DROID</th><td><code>droid</code> Franka arm, joint control</td><td class="num"><b>20.9% ± 1.1</b></td><td>language prompt, 350-step horizon</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">5,000 episodes each. Note that the paper counts a lift over <b>3 cm</b> as success, while the repo's <code>evaluate.py</code> defaults to 5 cm, so check the threshold before comparing. No sim numbers are published yet for Open or Close. Source: <a href="https://arxiv.org/abs/2602.09017" target="_blank" rel="noopener">CAP paper</a>, Table 1 and App. A.4.</p>
   </div>
 
   <div>
     <h2 class="section">Key terms</h2>
-    <dl class="glossary" data-glossary="zeroshot,ego,distractor,pose,delta,unprivileged,mujoco,embodiment"></dl>
+    <dl class="glossary" data-glossary="zeroshot,ego,thirdperson,distractor,pose,homogeneous,frame,delta,unprivileged,mujoco,embodiment"></dl>
   </div>
 
   <div class="links">
@@ -802,7 +944,7 @@
 </section>
 
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README and cap-policy.github.io. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers come from each project's site or code as of September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README and cap-policy.github.io. LIBERO simulator clips are built from the <code>lerobot/libero_*_image</code> demo frames on Hugging Face. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 24 September 2026.
 </footer>
 </main>
 
@@ -835,6 +977,9 @@
     embodiment: ["Embodiment", "The robot's physical body: arm, gripper, wheels, legs. Cross-embodiment means one method works on different bodies."],
     proprio: ["Proprioception", "The robot's sense of its own body: joint angles, gripper opening, base position."],
     wrist: ["Wrist camera", "A camera mounted on the robot's hand. It gives a close-up view for fine grasping."],
+    thirdperson: ["Third-person camera", "A camera that watches the robot from outside, not from its hand. In LIBERO and MIKASA-Robo it is fixed in the world. In RoboCasa it is mounted on the robot's mobile base, so it moves with the robot."],
+    frame: ["Coordinate frame", "The origin and x/y/z axes a position or rotation is measured from, e.g. the world, the robot's base, or a camera. The same numbers mean different motions in different frames."],
+    homogeneous: ["Homogeneous transform", "A 4×4 matrix [R t; 0 0 0 1] holding a rotation R and a translation t. The constant bottom row lets you combine poses by matrix multiplication."],
     ego: ["Egocentric", "Seen from the robot's own viewpoint, here a camera on the gripper. The opposite is exocentric, a fixed third-person view."],
     randomization: ["Domain randomization", "Randomly changing textures, lighting and colours so a policy does not overfit to one look."],
     eef: ["End-effector", "The tool at the end of the arm, usually the gripper. Actions often move this point in 3D."],
