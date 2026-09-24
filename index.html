@@ -488,22 +488,13 @@
         </thead>
         <tbody>
           <tr>
-            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
-            <td><strong>Can one policy do hundreds of household tasks?</strong></td>
-            <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
-            <td class="num">600+ h human demos + 1,600+ h synthetic</td>
-            <td class="num">365 (65 atomic, rest composite)</td>
-            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
-            <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
-          </tr>
-          <tr>
-            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
-            <td><strong>Can the robot remember what it no longer sees?</strong></td>
-            <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
-            <td class="num">22,500 expert trajectories (6M+ steps)</td>
-            <td class="num">90 across 10 memory types</td>
-            <td class="num">7 numbers (Δ pose + gripper)</td>
-            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
+            <th><span style="background: var(--egogym)"></span>EgoGym</th>
+            <td><strong>Does a pre-trained policy work out of the box?</strong></td>
+            <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
+            <td>None. Evaluation only</td>
+            <td class="num">3 (pick, open, close)</td>
+            <td class="num">17 numbers (4×4 pose + gripper)</td>
+            <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
           </tr>
           <tr>
             <th><span style="background: var(--libero)"></span>LIBERO</th>
@@ -515,22 +506,22 @@
             <td class="num"><strong>97–99.9%</strong> average over 4 suites (saturated)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--egogym)"></span>EgoGym</th>
-            <td><strong>Does a pre-trained policy work out of the box?</strong></td>
-            <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
-            <td>None. Evaluation only</td>
-            <td class="num">3 (pick, open, close)</td>
-            <td class="num">17 numbers (4×4 pose + gripper)</td>
-            <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
+            <th><span style="background: var(--liberoplus)"></span>LIBERO-Plus</th>
+            <td><strong>Does a LIBERO policy survive small changes to the scene?</strong></td>
+            <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with perturbations</td>
+            <td class="num">LIBERO demos; optional 14,347 perturbed demos</td>
+            <td class="num">10,030 variants of LIBERO's 40 tasks, 7 perturbation types</td>
+            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
+            <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
           <tr>
-            <th><span style="background: var(--robotwin)"></span>RoboTwin</th>
-            <td><strong>Can two arms work together, and survive a messy scene?</strong></td>
-            <td>Tabletop, dual-arm robot (5 embodiments), SAPIEN</td>
-            <td class="num">100,000+ scripted expert trajectories</td>
-            <td class="num">50 dual-arm tasks</td>
-            <td class="num">14 numbers (2 × (6 joints + gripper)), absolute</td>
-            <td class="num"><strong>89.6%</strong> clean / <strong>68.1%</strong> randomized (ME-Dex-1.0)</td>
+            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
+            <td><strong>Can the robot remember what it no longer sees?</strong></td>
+            <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
+            <td class="num">22,500 expert trajectories (6M+ steps)</td>
+            <td class="num">90 across 10 memory types</td>
+            <td class="num">7 numbers (Δ pose + gripper)</td>
+            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
           </tr>
           <tr>
             <th><span style="background: var(--rlbench)"></span>RLBench</th>
@@ -542,6 +533,24 @@
             <td class="num"><strong>93.7%</strong> on the 18-task set (BridgeVLA++)</td>
           </tr>
           <tr>
+            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
+            <td><strong>Can one policy do hundreds of household tasks?</strong></td>
+            <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
+            <td class="num">600+ h human demos + 1,600+ h synthetic</td>
+            <td class="num">365 (65 atomic, rest composite)</td>
+            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
+            <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--robotwin)"></span>RoboTwin</th>
+            <td><strong>Can two arms work together, and survive a messy scene?</strong></td>
+            <td>Tabletop, dual-arm robot (5 embodiments), SAPIEN</td>
+            <td class="num">100,000+ scripted expert trajectories</td>
+            <td class="num">50 dual-arm tasks</td>
+            <td class="num">14 numbers (2 × (6 joints + gripper)), absolute</td>
+            <td class="num"><strong>89.6%</strong> clean / <strong>68.1%</strong> randomized (ME-Dex-1.0)</td>
+          </tr>
+          <tr>
             <th><span style="background: var(--vlabench)"></span>VLABench</th>
             <td><strong>Does the policy understand the instruction, not just the scene?</strong></td>
             <td>Tabletop and home scenes, Franka arm, MuJoCo (dm_control)</td>
@@ -549,15 +558,6 @@
             <td class="num">100 task categories; 6 evaluation tracks of 10 tasks</td>
             <td class="num">7 numbers (xyz + Euler + gripper), absolute</td>
             <td class="num"><strong>51.2%</strong> on Track 1 (π₀-FAST, delta chunks)</td>
-          </tr>
-          <tr>
-            <th><span style="background: var(--liberoplus)"></span>LIBERO-Plus</th>
-            <td><strong>Does a LIBERO policy survive small changes to the scene?</strong></td>
-            <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with perturbations</td>
-            <td class="num">LIBERO demos; optional 14,347 perturbed demos</td>
-            <td class="num">10,030 variants of LIBERO's 40 tasks, 7 perturbation types</td>
-            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
-            <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
         </tbody>
       </table>
