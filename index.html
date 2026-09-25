@@ -31,6 +31,7 @@
     --rlbench: #0a7ea4;
     --vlabench: #9a7400;
     --liberoplus: #c23b3b;
+    --metaworld: #2a8a3e;
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -57,6 +58,7 @@
       --rlbench: #4cc9f0;
       --vlabench: #f2c94c;
       --liberoplus: #ff7f7f;
+    --metaworld: #6fd384;
       color-scheme: dark;
     }
   }
@@ -80,6 +82,7 @@
     --rlbench: #4cc9f0;
     --vlabench: #f2c94c;
     --liberoplus: #ff7f7f;
+    --metaworld: #6fd384;
     color-scheme: dark;
   }
 
@@ -361,6 +364,7 @@
       <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
       <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
       <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
+      <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
       <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
       <button class="tab" role="tab" id="tab-rlbench" aria-controls="rlbench" data-target="rlbench" style="--c: var(--rlbench)"><span class="dot"></span>RLBench</button>
       <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
@@ -378,12 +382,12 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · eight benchmarks</span>
+    <span class="eyebrow">Robot learning · nine benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These eight test very different things. Pick a tab; each one is built to be
+      compared fairly. These nine test very different things. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
   </div>
@@ -416,6 +420,15 @@
         <h3>LIBERO-Plus</h3>
         <p>LIBERO's 40 tasks, perturbed 10,030 ways: move the camera, shift the robot's start pose, change the lighting or reword the instruction. Scores collapse.</p>
         <span class="go">Tests: robustness to small changes →</span>
+      </div>
+    </button>
+    <button class="card" data-go="metaworld" style="--c: var(--metaworld)">
+      <video class="vid contain" src="media/metaworld_mt10.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Multi-task · meta-RL</span>
+        <h3>Meta-World</h3>
+        <p>50 tabletop skills for one Sawyer arm, from pressing a button to hammering a nail. Learn them all at once, or learn how to pick up a new one fast.</p>
+        <span class="go">Tests: many skills and fast adaptation →</span>
       </div>
     </button>
     <button class="card" data-go="mikasa" style="--c: var(--mikasa)">
@@ -515,6 +528,15 @@
             <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
           <tr>
+            <th><span style="background: var(--metaworld)"></span>Meta-World</th>
+            <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
+            <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
+            <td class="num">A scripted expert for every task; LeRobot set of 2,500 demos (50 per task)</td>
+            <td class="num">50, in multi-task (MT10 / MT50) and meta-learning (ML10 / ML45) splits</td>
+            <td class="num">4 numbers (Δ xyz + gripper), no rotation</td>
+            <td class="num"><strong>90.0%</strong> MT50 tier average from images (FabriVLA); ≈72% from state with RL (MOORE)</td>
+          </tr>
+          <tr>
             <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
             <td><strong>Can the robot remember what it no longer sees?</strong></td>
             <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
@@ -562,7 +584,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -1561,8 +1583,170 @@
   </div>
 </section>
 
+<!-- ============================ META-WORLD ============================ -->
+<section class="panel" id="metaworld" role="tabpanel" aria-labelledby="tab-metaworld" style="--c: var(--metaworld)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/metaworld_views.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Multi-task RL · meta-RL · tabletop</span>
+      <h1>Meta-World</h1>
+      <p class="oneliner">One Sawyer arm, <em>50 different skills</em> on the same table. Can a single policy learn them all, and can it <em>learn a new one from a few tries</em>?</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="multitask">Multi-task</span> and <span class="term" data-t="metarl">meta-reinforcement learning</span> benchmark (CoRL 2019). Now also a common <span class="term" data-t="vla">VLA</span> scorecard</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A <span class="term" data-t="sawyer">Sawyer</span> arm at a table, simulated in <span class="term" data-t="mujoco">MuJoCo</span> directly. Not robosuite</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">None needed for <span class="term" data-t="rl">RL</span>. Every task ships a scripted expert, and LeRobot's dataset has 50 of its <span class="term" data-t="demonstration">demos</span> per task</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">50 tasks, each with 50 <span class="term" data-t="goalvar">goal variations</span>, grouped into six official splits (MT1/10/50, ML1/10/45)</div></div>
+      </div>
+      <p class="timer">Video: three rollouts of <code>pick-place-v3</code> with three different goal positions (the blue dot), rendered from the simulator with Meta-World's built-in expert policy. Left: the <code>corner2</code> camera as LeRobot sets it up, the one image a VLA policy sees. Right: the <code>corner</code> camera. Shown at half speed; the simulator runs at 80 Hz.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Meta-World was built for <span class="term" data-t="rl">RL</span> from a state vector, with a <span class="term" data-t="shaped">shaped reward</span> after every step. VLA papers use the same simulator but feed the policy a camera image and a sentence instead. Both share the smallest action in this atlas.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>RL (native):</b> 39 numbers of state and no image: the gripper's position and opening, the pose of up to two objects, the same again from the previous step, and the goal position (below). MT10 / MT50 can append a <span class="term" data-t="onehot">one-hot task ID</span></li>
+          <li><b>VLA (LeRobot):</b> one RGB image from the <code>corner2</code> camera, 480×480, flipped upright (the raw render is upside-down and mirrored). There's no <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>A 4-number state for VLAs: gripper x, y, z and how open it is</li>
+          <li>A one-line task description, e.g. <i>"Pick up a nut and place it onto a peg"</i>. The native env has no text at all</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">RL: MT-SAC, MOORE, MAML …<br />VLA: π₀, SmolVLA, Evo-1 …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 4 numbers</h3>
+        <div class="vec" aria-label="4-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span class="g">grip</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–2 · position change</b> of the gripper, [−1, 1] → <b>±1 cm</b> per step, in the world <span class="term" data-t="frame">frame</span>. The target is clipped to a box above the table.</li>
+          <li><b>3 · gripper</b>: <b>+1 close</b>, −1 open (the same sign as LIBERO).</li>
+          <li><b>No rotation.</b> The gripper always points straight down: it's dragged by <span class="term" data-t="mocap">mocap control</span> with a fixed orientation, and the arm's joints just follow.</li>
+          <li><b>One action = one control step</b> of 12.5 ms (5 MuJoCo substeps), i.e. 80 Hz. Episodes are capped at 500 steps, about 6 seconds.</li>
+        </ul>
+        <p class="note">Every task shares this 4-number action and 39-number state, which is what lets one network be trained on all 50. Tasks that don't need the gripper just ignore dimension 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">What's in the 39 numbers</h2>
+    <p class="sub">The state has the same slots for every task, so some are padding. A task with one object leaves the second object's slots at zero. The goal slots are filled in the multi-task splits but <b>zeroed in the meta-learning splits</b>: there, the policy has to work out the goal from the rewards it gets while trying.</p>
+    <div class="vec" aria-label="39-number state layout" style="max-width: 760px">
+      <span class="b">hx</span><span class="b">hy</span><span class="b">hz</span><span class="g">grip</span>
+      <span>o1x</span><span>o1y</span><span>o1z</span><span>q</span><span>q</span><span>q</span><span>q</span>
+      <span>o2x</span><span>o2y</span><span>o2z</span><span>q</span><span>q</span><span>q</span><span>q</span>
+      <span class="sep"></span>
+      <span class="k" style="flex: 1">the same 18 numbers from the previous step</span>
+      <span class="sep"></span>
+      <span class="b">gx</span><span class="b">gy</span><span class="b">gz</span>
+    </div>
+    <ul class="legend" style="margin-top: 12px">
+      <li><b>0–3</b> · gripper (hand) position and finger opening · <b>4–10</b> · first object's position and <span class="term" data-t="quaternion">quaternion</span> · <b>11–17</b> · second object, or zeros</li>
+      <li><b>18–35</b> · the previous step's copy of 0–17, so velocity can be inferred · <b>36–38</b> · goal position (zeros in ML1 / ML10 / ML45)</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">50</div><div class="l">tasks, one shared action and state layout</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">goal variations per task</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">action numbers (xyz + gripper)</div></div>
+    <div class="stat"><div class="n">80 Hz</div><div class="l">control rate, 500-step cap</div></div>
+    <div class="stat"><div class="n">2,500</div><div class="l">expert demos in <code>lerobot/metaworld_mt50</code></div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Six splits from one pool of tasks</h2>
+    <p class="sub"><b>Multi-task (MT)</b> splits train and test on the same tasks and the same goal positions: can one policy hold many skills at once? <b>Meta-learning (ML)</b> splits test on things never seen in training (new goal positions in ML1, whole new tasks in ML10 and ML45), after a few trial episodes to adapt. Meta-World+ (2025) adds an in-between MT25 / ML25.</p>
+    <div class="tasks" style="margin-bottom: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr))">
+      <div class="task"><h3>MT1 · 1 task</h3><p>Learn one task across all 50 goal positions. The easy warm-up.</p><div class="ex">gym.make("Meta-World/MT1", env_name="reach-v3")</div></div>
+      <div class="task"><h3>MT10 · 10 tasks</h3><p>Ten tasks at once, shown below. The most-used RL setting.</p><div class="ex">reach · push · pick-place · door-open · drawer-open · …</div></div>
+      <div class="task"><h3>MT50 · 50 tasks</h3><p>Everything at once. The split VLA papers and LeRobot report.</p><div class="ex">gym.make_vec("Meta-World/MT50", vector_strategy="sync")</div></div>
+      <div class="task"><h3>ML1 · 1 task, new goals</h3><p>Adapt to goal positions held out from training.</p><div class="ex">Meta-World/ML1-train · Meta-World/ML1-test</div></div>
+      <div class="task"><h3>ML10 · 10 train, 5 test</h3><p>Adapt to 5 unseen tasks, shown below.</p><div class="ex">test: drawer-open · door-close · shelf-place · sweep-into · lever-pull</div></div>
+      <div class="task"><h3>ML45 · 45 train, 5 test</h3><p>More training variety, 5 different unseen tasks.</p><div class="ex">test: bin-picking · box-close · hand-insert · door-lock · door-unlock</div></div>
+    </div>
+    <figure>
+      <video class="vid" src="media/metaworld_mt10.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 5 / 2"></video>
+      <figcaption><b>MT10</b>, one expert episode per task from the <code>corner2</code> camera, half speed. Top: <code>reach</code>, <code>push</code>, <code>pick-place</code>, <code>door-open</code>, <code>drawer-open</code>. Bottom: <code>drawer-close</code>, <code>button-press-topdown</code>, <code>peg-insert-side</code>, <code>window-open</code>, <code>window-close</code>. Each tile freezes on success.</figcaption>
+    </figure>
+    <figure style="margin-top: 18px">
+      <video class="vid" src="media/metaworld_ml10_test.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 5 / 1"></video>
+      <figcaption><b>ML10's five held-out test tasks</b>: <code>drawer-open</code>, <code>door-close</code>, <code>shelf-place</code>, <code>sweep-into</code>, <code>lever-pull</code>. A meta-learner never trains on these; it gets 10 trial episodes per goal to adapt before it's scored.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">The four difficulty groups</h2>
+    <p class="sub">VLA papers and LeRobot split MT50 into four groups, a grouping taken from earlier visual-RL work. The counts are lopsided (28 / 11 / 6 / 5), so the average over groups and the average over all 50 tasks can differ a lot. LeRobot accepts a group name directly: <code>--env.task=medium</code>.</p>
+    <div class="grid-4" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr))">
+      <figure><video class="vid" src="media/metaworld_easy.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Easy · 28 tasks.</b> Single-step goals: buttons, doors, drawers, faucets, windows, reaching. Shown: <code>faucet-open</code>, <code>drawer-open</code>, <code>window-close</code>, <code>dial-turn</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_medium.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Medium · 11 tasks.</b> Grasp then move, or use a tool. Shown: <code>basketball</code>, <code>hammer</code>, <code>sweep-into</code>, <code>coffee-push</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_hard.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Hard · 6 tasks.</b> Precise contact and placing. Shown: <code>assembly</code>, <code>hand-insert</code>, <code>pick-out-of-hole</code>, <code>push-back</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_veryhard.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Very hard · 5 tasks.</b> Several stages or obstacles. Shown: <code>shelf-place</code>, <code>disassemble</code>, <code>stick-pull</code>, <code>pick-place-wall</code>.</figcaption></figure>
+    </div>
+    <p class="src">All clips here are rendered from Meta-World 3.1.1 with its scripted expert policies and LeRobot's camera setup, the same source as the demos in <code>lerobot/metaworld_mt50</code>. Each tile freezes on the frame after success.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>, never reward. Each task sets a <code>success</code> flag (e.g. object within a few cm of the goal), and an episode counts as a success if the flag is ever 1 within <strong>500 steps</strong>. <strong>MT splits</strong>: one episode per training goal position (50) per task, averaged over tasks. <strong>ML splits</strong>: for each held-out goal and task, the agent first collects adaptation episodes (10 by default), then is scored on 3 episodes. <strong>LeRobot / VLA protocol</strong>: 10 episodes per task with random object positions, 500 in total for MT50, reported per difficulty group. RL results also depend on the reward version (v1 or v2), so compare numbers only within one version and one protocol.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub"><b>From images (VLAs).</b> MT50 success (%) by difficulty group, trained on 50 expert demos per task and usually evaluated on 10 episodes per task. "Tier avg." is the mean of the four group scores, not of all 50 tasks. Numbers as collected in the FabriVLA paper.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Easy</th><th>Medium</th><th>Hard</th><th>Very hard</th><th>Tier avg.</th></tr></thead>
+        <tbody>
+          <tr><th>FabriVLA (0.9B, Jul 2026)</th><td class="num"><b>95.0</b></td><td class="num">88.2</td><td class="num">86.7</td><td class="num">90.0</td><td class="num"><b>90.0%</b></td></tr>
+          <tr><th>LA4VLA (1B)</th><td class="num">88.9</td><td class="num"><b>94.5</b></td><td class="num">66.7</td><td class="num"><b>100.0</b></td><td class="num">87.5%</td></tr>
+          <tr><th>Evo-Depth (0.9B)</th><td class="num">83.1</td><td class="num">84.7</td><td class="num"><b>87.3</b></td><td class="num">82.4</td><td class="num">84.4%</td></tr>
+          <tr><th>Evo-1 (0.8B)</th><td class="num">89.2</td><td class="num">76.8</td><td class="num">77.2</td><td class="num">79.2</td><td class="num">80.6%</td></tr>
+          <tr><th>SmolVLA (2.25B)</th><td class="num">87.1</td><td class="num">51.8</td><td class="num">70.0</td><td class="num">64.0</td><td class="num">68.2%</td></tr>
+          <tr><th>π₀ (3.3B)</th><td class="num">71.8</td><td class="num">48.2</td><td class="num">41.7</td><td class="num">30.0</td><td class="num">47.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top: 26px"><b>From state (RL).</b> Mean success (%) after training from scratch, re-run by the Meta-World+ authors under one protocol. The reward version alone moves results by up to 40 points.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>MT10 (v2 reward)</th><th>MT50 (v2 reward)</th><th>MT50 (v1 reward)</th></tr></thead>
+        <tbody>
+          <tr><th>MOORE</th><td class="num">83.4</td><td class="num"><b>72.0%</b></td><td class="num"><b>61.8%</b></td></tr>
+          <tr><th>PCGrad</th><td class="num"><b>85.5</b></td><td class="num">69.5%</td><td class="num">45.8%</td></tr>
+          <tr><th>Soft Modularization</th><td class="num">84.9</td><td class="num">65.8%</td><td class="num">60.6%</td></tr>
+          <tr><th>PaCo</th><td class="num">72.3</td><td class="num">58.9%</td><td class="num">18.6%</td></tr>
+          <tr><th>Multi-task multi-head SAC</th><td class="num">77.3</td><td class="num">54.9%</td><td class="num">31.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Meta-learning is far from solved: on ML45's unseen tasks, RL² reaches 36.8% and MAML 32.4% (v2 reward). VLA numbers also move with the protocol. A September 2026 study running 30 episodes per task measures SmolVLA at 60.7%, and 74.9% with tuned compute; another reproduction puts π₀ at 38–47% depending on chunk length. Sources: <a href="https://arxiv.org/abs/2607.08575" target="_blank" rel="noopener">FabriVLA</a>, <a href="https://arxiv.org/abs/2506.01844" target="_blank" rel="noopener">SmolVLA</a>, <a href="https://arxiv.org/abs/2505.11289" target="_blank" rel="noopener">Meta-World+</a>, <a href="https://arxiv.org/abs/2609.29382" target="_blank" rel="noopener">Decoupled Early Exits</a>, <a href="https://arxiv.org/abs/2605.07931" target="_blank" rel="noopener">OneWM-VLA</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="multitask,metarl,goalvar,onehot,mocap,shaped,sawyer,mujoco,rl,frame"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://meta-world.github.io/" target="_blank" rel="noopener">meta-world.github.io ↗</a>
+    <a href="https://github.com/Farama-Foundation/Metaworld" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://metaworld.farama.org/" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://huggingface.co/docs/lerobot/en/metaworld" target="_blank" rel="noopener">LeRobot docs ↗</a>
+    <a href="https://huggingface.co/datasets/lerobot/metaworld_mt50" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/1910.10897" target="_blank" rel="noopener">Paper ↗</a>
+    <a href="https://arxiv.org/abs/2505.11289" target="_blank" rel="noopener">Meta-World+ paper ↗</a>
+  </div>
+</section>
+
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench and LIBERO-Plus (whose failure rollouts are from its repository). LIBERO, RoboTwin, RLBench and VLABench simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 24 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench and LIBERO-Plus (whose failure rollouts are from its repository). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench and VLABench simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 25 September 2026.
 </footer>
 </main>
 
@@ -1622,6 +1806,12 @@
     maniskill: ["ManiSkill3", "A GPU-accelerated robot simulator that can run thousands of environments in parallel."],
     mujoco: ["MuJoCo", "A widely used, fast physics engine for robotics simulation."],
     robosuite: ["robosuite", "A robot-learning simulation toolkit built on MuJoCo. LIBERO and RoboCasa are built on it."],
+    metarl: ["Meta-reinforcement learning", "Learning how to learn: train on many tasks so that a brand-new task can be solved after only a few trial episodes."],
+    mocap: ["Mocap control", "The simulator drags the gripper towards a target point with a virtual weld (a \"mocap\" body) and lets the arm's joints follow. The policy never commands joints or rotation directly."],
+    onehot: ["One-hot task ID", "A list of zeros with a single 1 marking which task is running, e.g. 50 numbers for MT50. It tells a state-based policy which task it's doing, since there is no text instruction."],
+    goalvar: ["Goal variation", "The same task with the object and target in different places. Meta-World gives each task 50 for training, and the meta-learning splits keep separate ones for testing."],
+    shaped: ["Shaped reward", "A reward that gives partial credit along the way (getting closer, grasping) rather than only at success. It helps RL learn; Meta-World still scores only success."],
+    sawyer: ["Sawyer", "A 7-joint robot arm made by Rethink Robotics, with a two-finger gripper. Meta-World uses it for every task."],
     pddl: ["PDDL", "A formal language for describing objects, their relations and goals. LIBERO uses it to define scenes and generate tasks."],
   };
 
