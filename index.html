@@ -27,6 +27,11 @@
     --mikasa: #6a44d8;
     --libero: #0b8574;
     --egogym: #c42a62;
+    --robotwin: #5f7f0a;
+    --rlbench: #0a7ea4;
+    --vlabench: #9a7400;
+    --liberoplus: #c23b3b;
+    --metaworld: #2a8a3e;
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -49,6 +54,11 @@
       --mikasa: #a58bff;
       --libero: #3fcfb6;
       --egogym: #ff6f9f;
+      --robotwin: #b3d65a;
+      --rlbench: #4cc9f0;
+      --vlabench: #f2c94c;
+      --liberoplus: #ff7f7f;
+    --metaworld: #6fd384;
       color-scheme: dark;
     }
   }
@@ -68,6 +78,11 @@
     --mikasa: #a58bff;
     --libero: #3fcfb6;
     --egogym: #ff6f9f;
+    --robotwin: #b3d65a;
+    --rlbench: #4cc9f0;
+    --vlabench: #f2c94c;
+    --liberoplus: #ff7f7f;
+    --metaworld: #6fd384;
     color-scheme: dark;
   }
 
@@ -103,13 +118,35 @@
   }
   .bar .wrap { display: flex; align-items: center; gap: 18px; min-height: 58px; }
   .brand { font-family: var(--mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); white-space: nowrap; }
-  .tabs { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; flex: 1; }
-  .tabs::-webkit-scrollbar { display: none; }
+  .tabs { display: flex; gap: 4px; }
+  .bar .scroller { flex: 1; }
+
+  /* ---------- horizontal scrollers (tabs, cards) ---------- */
+  .scroller { position: relative; min-width: 0; }
+  .track { overflow-x: auto; scrollbar-width: none; scroll-behavior: smooth; overscroll-behavior-x: contain; }
+  .track::-webkit-scrollbar { display: none; }
+  @media (prefers-reduced-motion: reduce) { .track { scroll-behavior: auto; } }
+  .scroller[data-overflow] .track { --fl: 0px; --fr: 0px; mask-image: linear-gradient(to right, transparent 0, #000 var(--fl), #000 calc(100% - var(--fr)), transparent 100%); }
+  .scroller:not([data-start]) .track { --fl: 48px; }
+  .scroller:not([data-end]) .track { --fr: 48px; }
+  .scroll-btn {
+    position: absolute; top: 50%; translate: 0 -50%; z-index: 2;
+    width: 30px; height: 30px; border-radius: 50%; display: none; place-items: center;
+    appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--ink);
+    font: 600 20px/1 var(--sans); padding: 0 0 2px; cursor: pointer;
+    box-shadow: 0 2px 10px rgb(0 0 0 / 0.12);
+  }
+  .scroll-btn:hover { background: var(--sunk); }
+  .scroll-btn.prev { left: 0; }
+  .scroll-btn.next { right: 0; }
+  .scroller[data-overflow] .scroll-btn { display: grid; }
+  .scroller[data-start] .scroll-btn.prev, .scroller[data-end] .scroll-btn.next { opacity: 0.35; cursor: default; pointer-events: none; }
+  .scroller[data-overflow] .tabs { padding-inline: 34px; }
   .tab {
     --c: var(--ink);
     appearance: none; border: 0; background: none; color: var(--muted);
     font: 600 15px/1 var(--sans);
-    padding: 10px 14px; border-radius: 8px; cursor: pointer; white-space: nowrap;
+    padding: 10px 11px; border-radius: 8px; cursor: pointer; white-space: nowrap;
     display: inline-flex; align-items: center; gap: 8px;
   }
   .tab .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--c); }
@@ -120,7 +157,8 @@
     appearance: none; border: 1px solid var(--line); background: var(--panel); color: var(--muted);
     font: 500 12px/1 var(--mono); padding: 8px 10px; border-radius: 8px; cursor: pointer; white-space: nowrap;
   }
-  @media (max-width: 640px) { .brand { display: none; } .theme-btn { display: none; } }
+  @media (max-width: 1440px) { .brand { display: none; } }
+  @media (max-width: 640px) { .theme-btn { display: none; } }
 
   main { padding-block: 32px 80px; }
   section.panel { display: grid; gap: 44px; }
@@ -164,7 +202,17 @@
   /* ---------- landing ---------- */
   .hero-home { display: grid; gap: 14px; padding-top: 8px; }
   .hero-home h1 { font-size: clamp(44px, 8vw, 84px); letter-spacing: -0.02em; font-weight: 700; }
-  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+  .cards {
+    display: grid; grid-auto-flow: column; gap: 16px;
+    grid-auto-columns: calc((100% - 3 * 16px) / 4);
+    scroll-snap-type: x mandatory; padding-block: 4px 8px;
+  }
+  .cards .card { scroll-snap-align: start; }
+  @media (max-width: 980px) { .cards { grid-auto-columns: calc((100% - 16px) / 2); } }
+  @media (max-width: 560px) { .cards { grid-auto-columns: 85%; } }
+  .cards-scroller .scroll-btn { width: 40px; height: 40px; font-size: 26px; }
+  .cards-scroller .scroll-btn.prev { left: -12px; }
+  .cards-scroller .scroll-btn.next { right: -12px; }
   .card {
     --c: var(--accent);
     appearance: none; text-align: left; font: inherit; color: inherit; cursor: pointer;
@@ -286,7 +334,7 @@
   .task { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
   .task h3 { font-family: var(--sans); font-size: 16.5px; font-weight: 700; }
   .task p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
-  .task .ex { font: 500 12px/1.4 var(--mono); color: var(--c); margin-top: 8px; }
+  .task .ex { font: 500 12px/1.4 var(--mono); color: var(--c); margin-top: 8px; overflow-wrap: anywhere; }
 
   .glossary { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 28px; }
   .glossary div { padding: 12px 0; border-top: 1px solid var(--line); }
@@ -309,13 +357,22 @@
 <header class="bar">
   <div class="wrap">
     <span class="brand">Robot benchmark atlas</span>
-    <nav class="tabs" role="tablist" aria-label="Benchmarks">
+    <div class="scroller" data-wheel>
+    <button class="scroll-btn prev" type="button" aria-label="Scroll tabs left" tabindex="-1">‹</button>
+    <nav class="tabs track" role="tablist" aria-label="Benchmarks">
       <button class="tab" role="tab" id="tab-home" aria-controls="home" data-target="home">Benchmarks</button>
-      <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
-      <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
-      <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
       <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
+      <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
+      <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
+      <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
+      <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
+      <button class="tab" role="tab" id="tab-rlbench" aria-controls="rlbench" data-target="rlbench" style="--c: var(--rlbench)"><span class="dot"></span>RLBench</button>
+      <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
+      <button class="tab" role="tab" id="tab-robotwin" aria-controls="robotwin" data-target="robotwin" style="--c: var(--robotwin)"><span class="dot"></span>RoboTwin</button>
+      <button class="tab" role="tab" id="tab-vlabench" aria-controls="vlabench" data-target="vlabench" style="--c: var(--vlabench)"><span class="dot"></span>VLABench</button>
     </nav>
+    <button class="scroll-btn next" type="button" aria-label="Scroll tabs right" tabindex="-1">›</button>
+    </div>
     <button class="theme-btn" id="theme-btn" type="button">theme</button>
   </div>
 </header>
@@ -325,33 +382,26 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · four benchmarks</span>
+    <span class="eyebrow">Robot learning · nine benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These four test very different things. Pick a tab; each one is built to be
+      compared fairly. These nine test very different things. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
   </div>
 
-  <div class="cards">
-    <button class="card" data-go="robocasa" style="--c: var(--robocasa)">
-      <video class="vid" src="media/robocasa_steaming_veg.mp4" muted loop playsinline autoplay preload="metadata"></video>
+  <div class="scroller cards-scroller">
+    <button class="scroll-btn prev" type="button" aria-label="Scroll benchmarks left" tabindex="-1">‹</button>
+  <div class="cards track">
+    <button class="card" data-go="egogym" style="--c: var(--egogym)">
+      <video class="vid" src="media/egogym_simpick.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
-        <span class="chip">Large-scale sim · multi-task</span>
-        <h3>RoboCasa</h3>
-        <p>A mobile robot doing chores in 2,500 simulated kitchens. 365 tasks and 2,200+ hours of demonstrations for training generalist robots.</p>
-        <span class="go">Tests: breadth and generalisation →</span>
-      </div>
-    </button>
-    <button class="card" data-go="mikasa" style="--c: var(--mikasa)">
-      <video class="vid r32" src="media/mikasa_RememberColor9.mp4" muted loop playsinline autoplay preload="metadata"></video>
-      <div class="body">
-        <span class="chip">Memory · VLA</span>
-        <h3>MIKASA-Robo</h3>
-        <p>Tabletop puzzles where the answer disappears from view. The robot must remember a colour, a hidden ball, a count, or an order.</p>
-        <span class="go">Tests: memory →</span>
+        <span class="chip">Zero-shot evaluation</span>
+        <h3>EgoGym</h3>
+        <p>A small, fast simulator for grading already-trained policies on pick, open and close, seen from a camera on the gripper.</p>
+        <span class="go">Tests: out-of-the-box skill →</span>
       </div>
     </button>
     <button class="card" data-go="libero" style="--c: var(--libero)">
@@ -363,15 +413,71 @@
         <span class="go">Tests: knowledge transfer →</span>
       </div>
     </button>
-    <button class="card" data-go="egogym" style="--c: var(--egogym)">
-      <video class="vid" src="media/egogym_simpick.mp4" muted loop playsinline autoplay preload="metadata"></video>
+    <button class="card" data-go="liberoplus" style="--c: var(--liberoplus)">
+      <video class="vid contain" src="media/liberoplus_grid.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
-        <span class="chip">Zero-shot evaluation</span>
-        <h3>EgoGym</h3>
-        <p>A small, fast simulator for grading already-trained policies on pick, open and close, seen from a camera on the gripper.</p>
-        <span class="go">Tests: out-of-the-box skill →</span>
+        <span class="chip">Robustness · stress test</span>
+        <h3>LIBERO-Plus</h3>
+        <p>LIBERO's 40 tasks, perturbed 10,030 ways: move the camera, shift the robot's start pose, change the lighting or reword the instruction. Scores collapse.</p>
+        <span class="go">Tests: robustness to small changes →</span>
       </div>
     </button>
+    <button class="card" data-go="metaworld" style="--c: var(--metaworld)">
+      <video class="vid contain" src="media/metaworld_mt10.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Multi-task · meta-RL</span>
+        <h3>Meta-World</h3>
+        <p>50 tabletop skills for one Sawyer arm, from pressing a button to hammering a nail. Learn them all at once, or learn how to pick up a new one fast.</p>
+        <span class="go">Tests: many skills and fast adaptation →</span>
+      </div>
+    </button>
+    <button class="card" data-go="mikasa" style="--c: var(--mikasa)">
+      <video class="vid r32" src="media/mikasa_RememberColor9.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Memory · VLA</span>
+        <h3>MIKASA-Robo</h3>
+        <p>Tabletop puzzles where the answer disappears from view. The robot must remember a colour, a hidden ball, a count, or an order.</p>
+        <span class="go">Tests: memory →</span>
+      </div>
+    </button>
+    <button class="card" data-go="rlbench" style="--c: var(--rlbench)">
+      <video class="vid contain" src="media/rlbench_views.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Classic · many tasks</span>
+        <h3>RLBench</h3>
+        <p>The veteran: 100 hand-built tasks for one Franka arm, with unlimited demos made by a motion planner and five cameras.</p>
+        <span class="go">Tests: precise multi-task manipulation →</span>
+      </div>
+    </button>
+    <button class="card" data-go="robocasa" style="--c: var(--robocasa)">
+      <video class="vid" src="media/robocasa_steaming_veg.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Large-scale sim · multi-task</span>
+        <h3>RoboCasa</h3>
+        <p>A mobile robot doing chores in 2,500 simulated kitchens. 365 tasks and 2,200+ hours of demonstrations for training generalist robots.</p>
+        <span class="go">Tests: breadth and generalisation →</span>
+      </div>
+    </button>
+    <button class="card" data-go="robotwin" style="--c: var(--robotwin)">
+      <video class="vid contain" src="media/robotwin_handover.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Bimanual · robustness</span>
+        <h3>RoboTwin 2.0</h3>
+        <p>50 two-armed tasks, like handing a block from one gripper to the other. Train on clean scenes, then get tested in cluttered, re-lit ones.</p>
+        <span class="go">Tests: two-arm coordination and robustness →</span>
+      </div>
+    </button>
+    <button class="card" data-go="vlabench" style="--c: var(--vlabench)">
+      <video class="vid contain" src="media/vlabench_views.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Language · reasoning</span>
+        <h3>VLABench</h3>
+        <p>Instructions that need knowledge, not just vision: "pick the 2 of hearts", "take out the CuSO₄", or answer a maths question with number cubes.</p>
+        <span class="go">Tests: understanding and generalisation →</span>
+      </div>
+    </button>
+  </div>
+    <button class="scroll-btn next" type="button" aria-label="Scroll benchmarks right" tabindex="-1">›</button>
   </div>
 
   <div>
@@ -395,22 +501,13 @@
         </thead>
         <tbody>
           <tr>
-            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
-            <td><strong>Can one policy do hundreds of household tasks?</strong></td>
-            <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
-            <td class="num">600+ h human demos + 1,600+ h synthetic</td>
-            <td class="num">365 (65 atomic, rest composite)</td>
-            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
-            <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
-          </tr>
-          <tr>
-            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
-            <td><strong>Can the robot remember what it no longer sees?</strong></td>
-            <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
-            <td class="num">22,500 expert trajectories (6M+ steps)</td>
-            <td class="num">90 across 10 memory types</td>
-            <td class="num">7 numbers (Δ pose + gripper)</td>
-            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
+            <th><span style="background: var(--egogym)"></span>EgoGym</th>
+            <td><strong>Does a pre-trained policy work out of the box?</strong></td>
+            <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
+            <td>None. Evaluation only</td>
+            <td class="num">3 (pick, open, close)</td>
+            <td class="num">17 numbers (4×4 pose + gripper)</td>
+            <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
           </tr>
           <tr>
             <th><span style="background: var(--libero)"></span>LIBERO</th>
@@ -422,18 +519,72 @@
             <td class="num"><strong>97–99.9%</strong> average over 4 suites (saturated)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--egogym)"></span>EgoGym</th>
-            <td><strong>Does a pre-trained policy work out of the box?</strong></td>
-            <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
-            <td>None. Evaluation only</td>
-            <td class="num">3 (pick, open, close)</td>
-            <td class="num">17 numbers (4×4 pose + gripper)</td>
-            <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
+            <th><span style="background: var(--liberoplus)"></span>LIBERO-Plus</th>
+            <td><strong>Does a LIBERO policy survive small changes to the scene?</strong></td>
+            <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with perturbations</td>
+            <td class="num">LIBERO demos; optional 14,347 perturbed demos</td>
+            <td class="num">10,030 variants of LIBERO's 40 tasks, 7 perturbation types</td>
+            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
+            <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--metaworld)"></span>Meta-World</th>
+            <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
+            <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
+            <td class="num">A scripted expert for every task; LeRobot set of 2,500 demos (50 per task)</td>
+            <td class="num">50, in multi-task (MT10 / MT50) and meta-learning (ML10 / ML45) splits</td>
+            <td class="num">4 numbers (Δ xyz + gripper), no rotation</td>
+            <td class="num"><strong>90.0%</strong> MT50 tier average from images (FabriVLA); ≈72% from state with RL (MOORE)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
+            <td><strong>Can the robot remember what it no longer sees?</strong></td>
+            <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
+            <td class="num">22,500 expert trajectories (6M+ steps)</td>
+            <td class="num">90 across 10 memory types</td>
+            <td class="num">7 numbers (Δ pose + gripper)</td>
+            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--rlbench)"></span>RLBench</th>
+            <td><strong>Can one policy learn many precise tasks from a few demos?</strong></td>
+            <td>Tabletop, Franka arm, CoppeliaSim (PyRep)</td>
+            <td class="num">Unlimited motion-planned demos (100 per task is standard)</td>
+            <td class="num">100 (the standard 18-task subset has 249 variations)</td>
+            <td class="num">8 numbers (xyz + quaternion + gripper), absolute, planned</td>
+            <td class="num"><strong>93.7%</strong> on the 18-task set (BridgeVLA++)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
+            <td><strong>Can one policy do hundreds of household tasks?</strong></td>
+            <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
+            <td class="num">600+ h human demos + 1,600+ h synthetic</td>
+            <td class="num">365 (65 atomic, rest composite)</td>
+            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
+            <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--robotwin)"></span>RoboTwin</th>
+            <td><strong>Can two arms work together, and survive a messy scene?</strong></td>
+            <td>Tabletop, dual-arm robot (5 embodiments), SAPIEN</td>
+            <td class="num">100,000+ scripted expert trajectories</td>
+            <td class="num">50 dual-arm tasks</td>
+            <td class="num">14 numbers (2 × (6 joints + gripper)), absolute</td>
+            <td class="num"><strong>89.6%</strong> clean / <strong>68.1%</strong> randomized (ME-Dex-1.0)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--vlabench)"></span>VLABench</th>
+            <td><strong>Does the policy understand the instruction, not just the scene?</strong></td>
+            <td>Tabletop and home scenes, Franka arm, MuJoCo (dm_control)</td>
+            <td class="num">Scripted-expert demos: 500 per task for 10 primitive tasks (5,000)</td>
+            <td class="num">100 task categories; 6 evaluation tracks of 10 tasks</td>
+            <td class="num">7 numbers (xyz + Euler + gripper), absolute</td>
+            <td class="num"><strong>51.2%</strong> on Track 1 (π₀-FAST, delta chunks)</td>
           </tr>
         </tbody>
       </table>
     </div>
-    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -809,7 +960,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">High scores don't mean the problem is solved. LIBERO-Plus and LIBERO-PRO show these same models dropping from ~95% to under 30% when the camera, lighting or object positions change slightly, a sign they memorise the training scenes. Sources: <a href="https://arxiv.org/abs/2604.28192" target="_blank" rel="noopener">LaST-R1</a>, <a href="https://arxiv.org/abs/2502.19645" target="_blank" rel="noopener">OpenVLA-OFT</a>, <a href="https://github.com/Physical-Intelligence/openpi/tree/main/examples/libero" target="_blank" rel="noopener">openpi</a>, <a href="https://arxiv.org/abs/2510.13626" target="_blank" rel="noopener">LIBERO-Plus</a>.</p>
+    <p class="src">High scores don't mean the problem is solved. LIBERO-Plus and LIBERO-PRO show these same models dropping from ~95% to under 30% when the camera, lighting or object positions change slightly, a sign they memorise the training scenes. The <a href="#liberoplus">LIBERO-Plus tab</a> covers this in detail. Sources: <a href="https://arxiv.org/abs/2604.28192" target="_blank" rel="noopener">LaST-R1</a>, <a href="https://arxiv.org/abs/2502.19645" target="_blank" rel="noopener">OpenVLA-OFT</a>, <a href="https://github.com/Physical-Intelligence/openpi/tree/main/examples/libero" target="_blank" rel="noopener">openpi</a>, <a href="https://arxiv.org/abs/2510.13626" target="_blank" rel="noopener">LIBERO-Plus</a>.</p>
   </div>
 
   <div>
@@ -943,8 +1094,659 @@
   </div>
 </section>
 
+<!-- ============================ ROBOTWIN ============================ -->
+<section class="panel" id="robotwin" role="tabpanel" aria-labelledby="tab-robotwin" style="--c: var(--robotwin)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/robotwin_handover.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Bimanual manipulation · domain randomization · data generator</span>
+      <h1>RoboTwin 2.0</h1>
+      <p class="oneliner">A robot with <em>two arms</em> learns 50 tabletop tasks in clean scenes, then must do them in <em>cluttered, re-lit, re-textured</em> ones it has never seen.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="bimanual">Bimanual</span> benchmark + automatic data generator, for <span class="term" data-t="imitation">imitation</span> policies and <span class="term" data-t="vla">VLAs</span></div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A two-armed robot at a table, simulated in <span class="term" data-t="sapien">SAPIEN</span> (the engine under ManiSkill3), not MuJoCo</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">100,000+ <span class="term" data-t="demonstration">demonstrations</span> from scripted experts, not humans</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">50 tasks with 731 objects in 147 categories, 5 robot bodies</div></div>
+      </div>
+      <p class="timer">Video: a real <code>handover_block</code> demo from the RoboTwin dataset. Left: the fixed head camera the policy sees. Right: the left and right wrist cameras. Played at the dataset's 30 fps, about 1.8× real time.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Nobody teleoperates these demos. Each task has an expert program (first drafted by an LLM, then fixed using feedback from simulation), and a motion planner runs it to make as many successful episodes as you want. A policy then learns them by <span class="term" data-t="imitation">imitation</span>.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Three RGB images (320×240 by default): a <span class="term" data-t="thirdperson">fixed third-person camera</span> (<code>head_camera</code>, fixed in the world where the robot's head would be, above and behind the arms, looking down at the table) and two <span class="term" data-t="wrist">wrist cameras</span> (<code>left_camera</code>, <code>right_camera</code>)</li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: both arms' joint angles and gripper openings (<code>qpos</code>), plus each gripper's pose (<code>endpose</code>)</li>
+          <li>A language instruction, e.g. <i>"Pick up the red block using the left arm, give it to the right arm"</i>. Instructions are generated from templates in many phrasings, and the hard test uses phrasings kept out of training</li>
+          <li>Optional depth and point clouds (used by 3D policies like DP3)</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">π₀, π₀.₅, RDT, ACT, DP, DP3 baselines; world-action models</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 14 numbers (aloha-agilex, <code>qpos</code>)</h3>
+        <div class="vec" aria-label="14-number action">
+          <span>L j1</span><span>L j2</span><span>L j3</span><span>L j4</span><span>L j5</span><span>L j6</span><span class="g">L grip</span>
+          <span>R j1</span><span>R j2</span><span>R j3</span><span>R j4</span><span>R j5</span><span>R j6</span><span class="g">R grip</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–5, 7–12 · joints.</b> <b>Absolute</b> target angles (radians) for the six joints of each arm, left arm first. Not <span class="term" data-t="delta">deltas</span>, and not a gripper pose.</li>
+          <li><b>6, 13 · grippers.</b> Opening ratio in [0, 1]: <b>0 closed, 1 open</b>.</li>
+          <li><b>One action = one waypoint.</b> The simulator plans a smooth path to the target and runs physics at 250 Hz until it gets there, so a step is not a fixed slice of time. Recorded demos keep one frame every 15 physics steps (0.06 s).</li>
+        </ul>
+        <p class="note">The other mode, <code>ee</code>, sends <b>16 numbers</b>: per arm, the gripper position <b>x y z</b> plus a <b>quaternion (w, x, y, z)</b>, both absolute in the world <span class="term" data-t="frame">frame</span>, then the gripper. <code>qpos</code> length depends on the robot (a 7-joint Franka arm gives 8 per arm); <code>ee</code> is always 16.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">50</div><div class="l">dual-arm tasks</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">robot embodiments</div></div>
+    <div class="stat"><div class="n">731</div><div class="l">objects in 147 categories (RoboTwin-OD)</div></div>
+    <div class="stat"><div class="n">100k+</div><div class="l">pre-collected trajectories</div></div>
+    <div class="stat"><div class="n">100</div><div class="l">test episodes per task, per setting</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The tasks</h2>
+    <p class="sub">Tabletop jobs for two arms. Some need both arms at once (lifting a pot by both handles, handing an object over). Others use whichever arm is closer, so the policy also has to pick the arm. Episode limits range from 400 to 1,500 actions.</p>
+    <figure>
+      <video class="vid r21" src="media/robotwin_tasks_c.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption><b>Six tasks, clean setting</b>, from the fixed third-person camera. Top: stack three bowls, place two shoes in a box, open a laptop. Bottom: hang a mug on a rack, order blocks red-green-blue, hit a block with a hammer.</figcaption>
+    </figure>
+    <div class="tasks" style="margin-top: 18px">
+      <div class="task"><h3>Handovers</h3><p>Pass an object from one gripper to the other mid-air.</p><div class="ex">handover_block · handover_mic</div></div>
+      <div class="task"><h3>Two-handed lifts</h3><p>Both arms must grip and move together.</p><div class="ex">lift_pot · grab_roller · pick_dual_bottles</div></div>
+      <div class="task"><h3>Stacking and ordering</h3><p>Long sequences where the order matters.</p><div class="ex">stack_bowls_three · blocks_ranking_rgb</div></div>
+      <div class="task"><h3>Articulated objects</h3><p>Hinged and moving parts.</p><div class="ex">open_laptop · open_microwave · turn_switch</div></div>
+      <div class="task"><h3>Tool use</h3><p>Use one object on another.</p><div class="ex">beat_block_hammer · stamp_seal · press_stapler</div></div>
+      <div class="task"><h3>Placement</h3><p>Put objects in a named place, sometimes with a set orientation.</p><div class="ex">place_dual_shoes · place_phone_stand · put_object_cabinet</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Clean vs randomized</h2>
+    <p class="sub">This is the heart of the benchmark. The <code>demo_clean</code> setting is a plain white table. <code>demo_randomized</code> applies <span class="term" data-t="randomization">domain randomization</span> along five axes: distracting clutter on the table, random background and table textures, random lighting, table height (up to 3 cm) and unseen instruction phrasings.</p>
+    <div class="grid-2">
+      <figure><video class="vid r21" src="media/robotwin_clean_vs_rand.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 960 / 360"></video><figcaption><b>Same task, both settings.</b> <code>lift_pot</code>, left clean, right randomized.</figcaption></figure>
+      <figure><video class="vid r21" src="media/robotwin_tasks_r.mp4" muted loop playsinline preload="metadata"></video><figcaption><b>The six tasks above, randomized.</b> Same goals, but with clutter, textures and lighting the clean training data never shows.</figcaption></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Different robot bodies</h2>
+    <p class="sub">Five <span class="term" data-t="embodiment">embodiments</span>: the default <b>aloha-agilex</b> (two 6-joint arms on one platform), plus <b>ARX-X5</b>, <b>Piper</b>, <b>Franka Panda</b> and <b>UR5</b> with a WSG gripper. Single-arm robots are placed as a left and right pair, and the pair can be mixed, e.g. a Piper next to a Franka. The expert programs adapt to each body, so the same task can generate data for all five. The leaderboard uses aloha-agilex only.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> over 100 episodes per task, averaged across the 50 tasks. Policies train on <strong>50 clean demos per task</strong> (2,500 total), then are tested in two settings. <strong>Easy</strong> (clean → clean) tests in the same kind of plain scene. <strong>Hard</strong> (clean → randomized) tests in randomized scenes with unseen instructions. The leaderboard ranks by the average of the two, and separates "co-train" (one policy for all 50 tasks) from "single" (one checkpoint per task).</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">From the official RoboTwin 2.0 leaderboard (updated 24 Sep 2026), aloha-agilex, 100 trials per task.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Setting</th><th>Easy · clean</th><th>Hard · randomized</th><th>Average</th></tr></thead>
+        <tbody>
+          <tr><th>ME-Dex-1.0 (Li Auto) · #1</th><td>co-train</td><td class="num"><b>89.6%</b></td><td class="num">68.1%</td><td class="num"><b>78.9%</b></td></tr>
+          <tr><th>OLA-Sem (OLA-HKUSTGZ)</th><td>co-train</td><td class="num">75.1%</td><td class="num">67.6%</td><td class="num">71.3%</td></tr>
+          <tr><th>GigaBrain-0.7 (GigaAI)</th><td>co-train</td><td class="num">66.8%</td><td class="num"><b>67.9%</b></td><td class="num">67.4%</td></tr>
+          <tr><th>π₀.₅</th><td>co-train</td><td class="num">70.7%</td><td class="num">46.0%</td><td class="num">58.4%</td></tr>
+          <tr><th>π₀ (paper baseline)</th><td>single</td><td class="num">46.4%</td><td class="num">16.3%</td><td class="num">31.4%</td></tr>
+          <tr><th>DP3 (paper baseline)</th><td>single</td><td class="num">55.2%</td><td class="num">5.0%</td><td class="num">30.1%</td></tr>
+          <tr><th>Diffusion Policy (paper baseline)</th><td>single</td><td class="num">28.0%</td><td class="num">0.6%</td><td class="num">14.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The gap between Easy and Hard is the story. Most models lose half or more of their success when the scene gets messy (FastWAM drops from 77.8% to 1.9%). Only a few large pretrained models keep Hard close to Easy. Source: <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener">RoboTwin leaderboard</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="bimanual,sapien,thirdperson,wrist,jointpos,randomization,embodiment,frame,cotrain,imitation"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robotwin-platform.github.io/" target="_blank" rel="noopener">robotwin-platform.github.io ↗</a>
+    <a href="https://github.com/RoboTwin-Platform/RoboTwin" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://robotwin-platform.github.io/doc/" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://robotwin-platform.github.io/leaderboard" target="_blank" rel="noopener">Leaderboard ↗</a>
+    <a href="https://huggingface.co/datasets/TianxingChen/RoboTwin2.0" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2506.18088" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ RLBENCH ============================ -->
+<section class="panel" id="rlbench" role="tabpanel" aria-labelledby="tab-rlbench" style="--c: var(--rlbench)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/rlbench_views.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Multi-task · few-shot · vision-guided manipulation</span>
+      <h1>RLBench</h1>
+      <p class="oneliner">One Franka arm, <em>100 hand-built tasks</em>, and as many perfect demos as you ask for. The long-running test of <em>precise, multi-task</em> manipulation.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Benchmark + learning environment for <span class="term" data-t="imitation">imitation</span>, <span class="term" data-t="rl">RL</span>, <span class="term" data-t="multitask">multi-task</span> and few-shot learning</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm at a wooden table, simulated in <span class="term" data-t="coppeliasim">CoppeliaSim</span> through PyRep. Not MuJoCo or SAPIEN</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">Unlimited <span class="term" data-t="demonstration">demos</span>, made by a motion planner following hand-placed waypoints</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">100 tasks, each with language <span class="term" data-t="variation">variations</span>. Most papers use a standard 18-task subset</div></div>
+      </div>
+      <p class="timer">Video: a real <code>open_drawer</code> demo ("open the middle drawer") from the standard 18-task dataset at the real 20 Hz. Left: front camera. Right: left shoulder, right shoulder, overhead, wrist. Each view is 128×128, shown enlarged.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">RLBench gives you the whole robot state and five cameras, and lets you choose the action space. The widely used setup (from PerAct onward) doesn't predict every 50 ms step. It predicts the next <span class="term" data-t="keyframe">keyframe</span>, a gripper pose where something important happens, and lets a motion planner drive the arm there.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>RGB, depth and segmentation masks from five cameras at 128×128. Four are <span class="term" data-t="thirdperson">fixed third-person cameras</span> (<code>front</code>, facing the robot; <code>left_shoulder</code> and <code>right_shoulder</code>, behind and above the arm, looking down; <code>overhead</code>), plus a <span class="term" data-t="wrist">wrist camera</span>. The 18-task setup uses front, both shoulders and wrist as RGB-D, fused into a point cloud</li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: joint positions, velocities and forces, gripper pose and opening</li>
+          <li>An instruction, e.g. <i>"open the middle drawer"</i>, with several phrasings per variation</li>
+          <li>Optional <code>task_low_dim_state</code>: exact object poses, for state-based RL</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">PerAct, RVT-2, 3D Diffuser Actor, BridgeVLA …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 8 numbers (keyframe pose)</h3>
+        <div class="vec" aria-label="8-number action">
+          <span class="b">x</span><span class="b">y</span><span class="b">z</span><span>qx</span><span>qy</span><span>qz</span><span>qw</span><span class="g">grip</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–2 · position</b> of the gripper tip in metres, <b>absolute</b>, in the world <span class="term" data-t="frame">frame</span> (<code>EndEffectorPoseViaPlanning</code>).</li>
+          <li><b>3–6 · orientation</b> as a unit <span class="term" data-t="quaternion">quaternion</span> in <b>(x, y, z, w)</b> order, PyRep's convention. RoboTwin uses (w, x, y, z), so check before converting.</li>
+          <li><b>7 · gripper</b>: <code>Discrete</code>, &gt; 0.5 open, &lt; 0.5 closed.</li>
+          <li><b>One action = one whole move.</b> The planner finds a collision-free path and runs it before <code>step()</code> returns. PerAct-style agents add a 9th number, "ignore collisions", so the planner can touch objects when it has to.</li>
+        </ul>
+        <p class="note">Other modes: <code>JointVelocity</code> (7 joint velocities + gripper = 8, used in the README examples), <code>JointPosition</code>, <code>JointTorque</code>, and <code>EndEffectorPoseViaIK</code>. Pose modes can also be delta or relative to the gripper's frame.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">100</div><div class="l">tasks (106 task files in the repo)</div></div>
+    <div class="stat"><div class="n">18</div><div class="l">tasks in the standard multi-task subset</div></div>
+    <div class="stat"><div class="n">249</div><div class="l">variations across those 18</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">cameras, RGB-D + masks</div></div>
+    <div class="stat"><div class="n">20 Hz</div><div class="l">sim step (50 ms)</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The tasks</h2>
+    <p class="sub">Every task comes with <span class="term" data-t="variation">variations</span> (a different colour, target or count, with its own instruction) and endless <span class="term" data-t="episode">episodes</span> (new random object placements). The 18-task subset mixes pushing, pick-and-place and high-precision insertion.</p>
+    <figure>
+      <video class="vid" src="media/rlbench_tasks.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 3 / 2"></video>
+      <figcaption><b>Six of the 18 standard tasks</b>, real demos from the front camera. Top: <i>"stack the other cups on top of the navy cup"</i>, <i>"put the mustard in the cupboard"</i>, <i>"stack the wine bottle to the left of the rack"</i>. Bottom: <i>"sweep dirt to the short dustpan"</i>, <i>"push the maroon button"</i>, <i>"put the ring on the magenta spoke"</i>.</figcaption>
+    </figure>
+    <div class="tasks" style="margin-top: 18px">
+      <div class="task"><h3>Non-prehensile</h3><p>Push, slide or press without grasping.</p><div class="ex">slide_block_to_color_target · push_buttons · sweep_to_dustpan_of_size</div></div>
+      <div class="task"><h3>Pick and place</h3><p>Grasp and put somewhere, often with a named target.</p><div class="ex">put_groceries_in_cupboard · meat_off_grill · stack_cups</div></div>
+      <div class="task"><h3>Articulated</h3><p>Drawers, jars, taps and safes.</p><div class="ex">open_drawer · close_jar · turn_tap · put_money_in_safe</div></div>
+      <div class="task"><h3>High precision</h3><p>Millimetre-level alignment. The hardest group.</p><div class="ex">insert_onto_square_peg · place_shape_in_shape_sorter · light_bulb_in</div></div>
+      <div class="task"><h3>Long sequences</h3><p>Several objects in a set order.</p><div class="ex">stack_blocks · place_cups</div></div>
+      <div class="task"><h3>Task sets</h3><p>Official splits for multi-task (MT15 / 30 / 55 / 100) and few-shot (FS10 / 25 / 50 / 95 train + 5 test).</p><div class="ex">from rlbench.tasks import MT15_V1</div></div>
+    </div>
+    <figure style="margin-top: 18px">
+      <img class="vid" src="media/rlbench_task_grid.jpg" alt="Grid of 24 RLBench task scenes" style="aspect-ratio: 8 / 3; object-fit: cover" loading="lazy" />
+      <figcaption><b>A sample of the 100 tasks</b>, from the RLBench README.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How the demos are made</h2>
+    <p class="sub">Each task is a CoppeliaSim scene plus a short Python file. The author places <b>waypoints</b> (where the gripper should go, in order) and a <b>success sensor</b>, and codes how objects are randomised for each variation. The motion planner then turns waypoints into as many demos as you want, so there's no human teleoperation and no limit on data. The official tutorial below builds <code>slide_block_to_target</code> this way.</p>
+    <figure>
+      <video class="vid" src="media/rlbench_task_builder.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1622 / 760"></video>
+      <figcaption><b>The task builder</b> (CoppeliaSim editor) running the finished tutorial task. Top right: the two shoulder cameras and the wrist camera. The green square is the target with its success sensor. From <a href="https://github.com/stepjam/RLBench/blob/master/tutorials/simple_task.md" target="_blank" rel="noopener">tutorials/simple_task.md</a>.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>: every success condition the task registers (usually a proximity sensor detecting the right object in the right place) must hold before the step budget runs out. The standard multi-task protocol (introduced by PerAct): train one policy on <strong>100 demos per task</strong> across the <strong>18 tasks</strong>, then test <strong>25 episodes per task</strong> with a budget of 25 keyframe steps (35 for <i>place cups</i> and <i>stack blocks</i>). Report the mean over the 18 tasks, usually averaged across five evaluation seeds. Only the Franka arm counts for benchmarking, even though Mico, Jaco, Sawyer and UR5 can be swapped in.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Average success on the standard 18-task, 249-variation setup (100 demos per task, 25 test episodes per task). Numbers are as reported in each paper.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Year</th><th>Avg. success</th></tr></thead>
+        <tbody>
+          <tr><th>BridgeVLA++</th><td class="num">Aug 2026</td><td class="num"><b>93.7%</b></td></tr>
+          <tr><th>TGM-VLA</th><td class="num">Mar 2026</td><td class="num">90.5%</td></tr>
+          <tr><th>BridgeVLA</th><td class="num">2025</td><td class="num">88.2%</td></tr>
+          <tr><th>SAM2Act</th><td class="num">2025</td><td class="num">86.8%</td></tr>
+          <tr><th>RVT-2</th><td class="num">2024</td><td class="num">81.4%</td></tr>
+          <tr><th>PerAct</th><td class="num">2022</td><td class="num">≈43%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Close to saturated, and the leftover errors are concentrated in the high-precision tasks (<i>place cups</i>, <i>shape sorter</i>, <i>square peg</i>). For robustness, the COLOSSEUM benchmark re-runs the same tasks with perturbed colours, textures, lighting and camera poses, and scores there are much lower (TGM-VLA: 68.8%). Sources: <a href="https://arxiv.org/abs/2608.05042" target="_blank" rel="noopener">BridgeVLA++</a>, <a href="https://arxiv.org/abs/2603.00615" target="_blank" rel="noopener">TGM-VLA</a>, <a href="https://arxiv.org/abs/2506.07961" target="_blank" rel="noopener">BridgeVLA</a>, <a href="https://arxiv.org/abs/2501.18564" target="_blank" rel="noopener">SAM2Act</a>, <a href="https://arxiv.org/abs/2406.08545" target="_blank" rel="noopener">RVT-2</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="coppeliasim,keyframe,variation,episode,quaternion,thirdperson,wrist,frame,multitask,imitation"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/stepjam/RLBench" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://github.com/stepjam/RLBench/blob/master/tutorials/simple_task.md" target="_blank" rel="noopener">Task tutorial ↗</a>
+    <a href="https://sites.google.com/view/rlbench" target="_blank" rel="noopener">Website ↗</a>
+    <a href="https://huggingface.co/datasets/hqfang/rlbench-18-tasks" target="_blank" rel="noopener">18-task data (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/1909.12271" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ VLABENCH ============================ -->
+<section class="panel" id="vlabench" role="tabpanel" aria-labelledby="tab-vlabench" style="--c: var(--vlabench)" hidden>
+  <div class="top">
+    <video class="vid r32 contain" src="media/vlabench_views.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Language-conditioned · reasoning · generalisation</span>
+      <h1>VLABench</h1>
+      <p class="oneliner">Tasks where <em>the words carry the difficulty</em>: which painting is ukiyo-e, which tube holds CuSO₄, which card is the 2 of hearts. The robot has to understand before it can move.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="vla">VLA</span> and VLM benchmark for language-conditioned manipulation and long-horizon reasoning (ICCV 2025)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm in tabletop and home scenes, simulated in <span class="term" data-t="mujoco">MuJoCo</span> via dm_control. Not robosuite</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v"><span class="term" data-t="demonstration">Demos</span> generated by scripted expert skills with motion planning, not teleoperation</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">100 task categories, 2,000+ objects: <span class="term" data-t="atomic">primitive</span> tasks and long-horizon <span class="term" data-t="composite">composite</span> ones</div></div>
+      </div>
+      <p class="timer">Video: a real demo from the official fine-tuning dataset, <i>"Put the orange into the plate"</i>, recorded at 10 Hz and shown in real time. Left: front camera. Right: a second third-person view and the wrist camera. Each is 480×480 in the dataset.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The policy predicts where the gripper should be, and the evaluator turns that into joint targets with inverse kinematics. Each task also has a scripted expert (a sequence of skills like "pick", "place", "open door") that generates the training demos.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Four cameras natively: three <span class="term" data-t="thirdperson">fixed third-person cameras</span> (<code>front</code>, <code>left</code>, <code>right</code>; the front one is placed per task so the relevant objects are in view) and a <span class="term" data-t="wrist">wrist camera</span>. Each gives RGB, depth and segmentation, and they can be fused into a point cloud</li>
+          <li>The released datasets and LeRobot keep three: <code>image</code> (front), <code>second_image</code> and <code>wrist_image</code> (480×480 for primitives, 224×224 for composites)</li>
+          <li>State: gripper position, orientation and opening (<code>ee_state</code>), plus joint positions and velocities</li>
+          <li>An instruction, from plain (<i>"Put the orange into the plate"</i>) to puzzles, e.g. show your largest Texas hold'em cards on the placemat</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">π₀, π₀-FAST, π₀.₅, OpenVLA, RDT, GR00T, SmolVLA</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers (<code>ee</code> mode)</h3>
+        <div class="vec" aria-label="7-number action">
+          <span class="b">x</span><span class="b">y</span><span class="b">z</span><span>roll</span><span>pitch</span><span>yaw</span><span class="g">grip</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–2 · position</b> of the gripper in metres, <b>absolute</b>. The bundled policies measure it from the robot base, i.e. world axes with the base position (0, −0.4, 0.78) subtracted.</li>
+          <li><b>3–5 · orientation</b> as <b>Euler angles, xyz order</b>, in radians. The state uses a (w, x, y, z) quaternion, and the adapters convert between the two.</li>
+          <li><b>6 · gripper</b>: ≥ 0.1 → open (fingers at 4 cm), otherwise closed.</li>
+          <li><b>One action = one control step.</b> The evaluator solves IK for 7 joint angles and applies them for one environment step (100 physics substeps). Policies usually predict a chunk of such poses and replay them.</li>
+        </ul>
+        <p class="note">Under the hood <code>env.step</code> takes <b>9 numbers</b>: 7 absolute joint angles + 2 finger positions. A <code>joint</code> control mode lets a policy output those directly. LeRobot's wrapper exposes the 7-number pose action, scaled to [−1, 1].</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">100</div><div class="l">task categories</div></div>
+    <div class="stat"><div class="n">2,000+</div><div class="l">objects</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">evaluation tracks</div></div>
+    <div class="stat"><div class="n">5,000</div><div class="l">primitive fine-tuning demos (10 tasks × 500)</div></div>
+    <div class="stat"><div class="n">10 Hz</div><div class="l">recorded demo rate</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Primitive tasks</h2>
+    <p class="sub">Short tasks, often one pick and place. What makes them hard is <b>which</b> object: the target is named by category, style, chemistry, card value or a mahjong tile, among look-alike <span class="term" data-t="distractor">distractors</span>.</p>
+    <figure>
+      <video class="vid" src="media/vlabench_primitive.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 3 / 2"></video>
+      <figcaption><b>Six primitive tasks, real demos, front camera.</b> Top: <i>"Put the orange into the plate"</i>, <i>"Put the ironman into the giftbox"</i>, <i>"Take out the cola from the fridge"</i>. Bottom: <i>"Insert the chrysanthemum into the vase"</i>, <i>"Add bbq_sauce to the dish"</i>, <i>"Please pick the poker 10 of clubs"</i>.</figcaption>
+    </figure>
+    <div class="tasks" style="margin-top: 18px">
+      <div class="task"><h3>Select by category</h3><p>Find the named object among similar ones.</p><div class="ex">select_fruit · select_toy · select_drink</div></div>
+      <div class="task"><h3>Select by knowledge</h3><p>Needs facts: painting styles, chemical formulas, book titles.</p><div class="ex">select_painting · select_chemistry_tube · select_book</div></div>
+      <div class="task"><h3>Games</h3><p>Read cards and tiles.</p><div class="ex">select_poker · select_mahjong · select_billiards</div></div>
+      <div class="task"><h3>Physical reasoning</h3><p>Answer a physics question by acting, e.g. pick the denser or heavier object.</p><div class="ex">density_qa · friction_qa · magnetism_qa · weight_qa</div></div>
+      <div class="task"><h3>Tool and precise use</h3><p>Insert, pour or lever things.</p><div class="ex">insert_flower · add_condiment · simple_seesaw_usage</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Composite tasks</h2>
+    <p class="sub">Long-horizon chores (<span class="term" data-t="longhorizon">long-horizon</span>) that chain several skills and often need a plan first: sort objects into groups, make coffee, set a study table for a given subject, or answer a word problem by arranging number cubes.</p>
+    <figure>
+      <video class="vid" src="media/vlabench_composite.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 3 / 2"></video>
+      <figcaption><b>Six composite tasks, real demos, front camera, 2× speed.</b> Top: <i>"Get me a cup of coffee"</i>, hang a named painting on the wall, show the largest Texas hold'em cards. Bottom: set the study table for a subject, answer a maths question with number cubes, <i>"rearrange the tubes by the nametag"</i>.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">Evaluation uses fixed episode files grouped into <strong>tracks</strong>. Each track has <strong>10 primitive tasks × 50 episodes</strong> and changes one thing. <strong>Track 1</strong> is in-distribution. <strong>Track 2</strong> uses unseen object categories and instances. <strong>Track 3</strong> uses common-sense descriptions of the target. <strong>Track 4</strong> uses semantically rich instructions. <strong>Track 5</strong> is open cross-task transfer. <strong>Track 6</strong> uses unseen textures. Three metrics: <strong>success rate</strong>; <strong>progress score</strong>, the fraction of sub-conditions met (a correct grasp counts); and <strong>intention score</strong>, whether the gripper got within 10 cm of the <i>right</i> object even if it failed. A separate VLM track asks language models to plan skill sequences. Episodes are capped at 200 policy steps by default.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">There's no public leaderboard yet (it's on the authors' to-do list). These are the official fine-tuned baselines on <b>Track 1</b> (10 primitive tasks, in-distribution), and one independent paper on a 5-task subset.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Tasks</th><th>Avg. success</th></tr></thead>
+        <tbody>
+          <tr><th>π₀-FAST, delta action chunks</th><td>Track 1, 10 tasks</td><td class="num"><b>51.2%</b></td></tr>
+          <tr><th>π₀</th><td>Track 1, 10 tasks</td><td class="num">47.0%</td></tr>
+          <tr><th>π₀.₅</th><td>Track 1, 10 tasks</td><td class="num">40.6%</td></tr>
+          <tr><th>π₀-FAST, official relative chunks</th><td>Track 1, 10 tasks</td><td class="num">29.1%</td></tr>
+          <tr><th>E0 (Nov 2025)</th><td>5 tasks: toy, fruit, painting, poker, mahjong</td><td class="num"><b>38.2%</b> (π₀ 26.2%, π₀.₅ 20.9%)</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Even the in-distribution primitives are only about half solved, and changing only the action encoding moves π₀-FAST from 29% to 51% ("action representation matters", say the authors). The generalisation tracks are harder still. Sources: <a href="https://github.com/OpenMOSS/VLABench" target="_blank" rel="noopener">VLABench README (2025-11-10 checkpoints)</a>, <a href="https://arxiv.org/abs/2511.21542" target="_blank" rel="noopener">E0</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="vla,mujoco,thirdperson,wrist,distractor,longhorizon,frame,quaternion,atomic,composite"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://vlabench.github.io/" target="_blank" rel="noopener">vlabench.github.io ↗</a>
+    <a href="https://github.com/OpenMOSS/VLABench" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/docs/lerobot/vlabench" target="_blank" rel="noopener">LeRobot docs ↗</a>
+    <a href="https://huggingface.co/VLABench" target="_blank" rel="noopener">Datasets &amp; checkpoints (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2412.18194" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ LIBERO-PLUS ============================ -->
+<section class="panel" id="liberoplus" role="tabpanel" aria-labelledby="tab-liberoplus" style="--c: var(--liberoplus)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/liberoplus_grid.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Robustness · controlled perturbations · built on LIBERO</span>
+      <h1>LIBERO-Plus</h1>
+      <p class="oneliner">The same 40 tasks as <a href="#libero">LIBERO</a>, but each one is <em>nudged</em>: the camera moves, the arm starts elsewhere, the lights change, the words are reworded. Models scoring 95% on LIBERO <em>fall apart</em>.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Robustness stress test for <span class="term" data-t="vla">VLA</span> models (CVPR 2026). It's a drop-in replacement for the <code>libero</code> package</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Identical to LIBERO: a Franka arm in <span class="term" data-t="robosuite">robosuite</span> 1.4 on <span class="term" data-t="mujoco">MuJoCo</span>, plus new objects, textures and camera poses</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">Train on ordinary LIBERO demos, or on the optional 14,347-episode set that already contains perturbed scenes</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">10,030 variants of LIBERO-Spatial / Object / Goal / Long across 7 <span class="term" data-t="perturbation">perturbation</span> types and 5 difficulty levels</div></div>
+      </div>
+      <p class="timer">Video: top-left is an unperturbed LIBERO-Spatial demo. The other seven are real OpenVLA-OFT rollouts from the benchmark, one per perturbation type, all failures, as published by the authors. Everything is the 256×256 fixed third-person camera.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Nothing about the interface changes: same cameras, same state, same 7-number action as <a href="#libero">LIBERO</a>. A LIBERO policy runs unmodified. That's the point. Only the scene it sees is different.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Two RGB images: the <span class="term" data-t="thirdperson">fixed third-person camera</span> (<code>agentview</code>) and the <span class="term" data-t="wrist">wrist camera</span> (<code>robot0_eye_in_hand</code>). "Fixed" now means fixed <i>within</i> an episode: camera-perturbation tasks move it to a new position, angle or field of view</li>
+          <li>State (8 numbers in LeRobot): gripper position, orientation as axis-angle, and the two finger positions</li>
+          <li>The instruction, which language-perturbation tasks rewrite with an LLM, e.g. <i>"pick up the dark-colored vessel resting on the…"</i> for "the black bowl"</li>
+          <li>Images come out of robosuite upside-down. LeRobot and the socket server both rotate them 180° before the policy sees them</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">OpenVLA-OFT, π₀, π₀-FAST, UniVLA, NORA, SmolVLA …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">Exactly LIBERO's robosuite <span class="term" data-t="osc">OSC_POSE</span> <span class="term" data-t="delta">delta</span> action: [−1, 1] → ±5 cm and ±0.5 rad axis-angle per step, gripper <b>−1 open, +1 close</b>. The conventions table in the LIBERO tab applies here unchanged. LeRobot also offers <code>--env.control_mode=absolute</code> for policies trained on absolute poses.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">10,030</div><div class="l">perturbed task variants</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">perturbation dimensions</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">difficulty levels</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">trial per variant (each variant is its own task)</div></div>
+    <div class="stat"><div class="n">14,347</div><div class="l">optional perturbed training demos</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The seven perturbations</h2>
+    <p class="sub">Each variant changes one factor from an original LIBERO task and is tagged with a dimension and a difficulty level from 1 to 5. The counts come from the benchmark's <code>task_classification.json</code>. Every clip below is a real failed rollout of OpenVLA-OFT, a model that scores about 97% on plain LIBERO.</p>
+    <div class="grid-4" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr))">
+      <figure><video class="vid" src="media/liberoplus_cam.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Camera viewpoints · 1,599.</b> The third-person camera's position, angle and field of view change. The hardest dimension for most models.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_init.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Robot initial state · 1,550.</b> The arm starts from a different joint configuration.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_language.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Language · 1,537.</b> An LLM rewrites the instruction with synonyms or descriptions.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_light.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Light · 1,142.</b> Intensity, direction, colour and shadows.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_env.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Background · 1,076.</b> New table, wall and floor textures.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_noise.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Sensor noise · 1,601.</b> Blur, fog-like distortion and other image corruption.</figcaption></figure>
+      <figure><video class="vid" src="media/liberoplus_obj.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Objects layout · 1,525.</b> Extra <span class="term" data-t="distractor">distractors</span> and a displaced target object.</figcaption></figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Two ways to run it</h2>
+    <div class="tasks">
+      <div class="task"><h3>LeRobot: <code>--env.type=libero_plus</code></h3><p>Built into <code>lerobot-eval</code>. Install the LIBERO-Plus fork, which replaces vanilla <code>libero</code> in the same environment, then evaluate any LeRobot policy on <code>libero_spatial</code>, <code>libero_object</code>, <code>libero_goal</code> or <code>libero_10</code>. Training data: <code>lerobot/libero_plus</code> (20 fps, 256 px front + wrist).</p><div class="ex">lerobot-eval --env.type=libero_plus --env.task=libero_spatial,libero_object,libero_goal,libero_10</div></div>
+      <div class="task"><h3>Socket server: <code>simulation_libero_plus</code></h3><p>A fork that runs the simulator as a <span class="term" data-t="zmq">ZMQ</span> server, so the policy can live on a separate GPU machine. It sends both images (256 px, upright), the gripper pose, the instruction and a timestep. It gets back a 7-number action, runs environments in parallel batches, and writes success broken down by suite, dimension and difficulty.</p><div class="ex">python -m versatil_inference.run_evaluation --task_suite_name libero_plus_spatial</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>, with the same success check as LIBERO. The full protocol runs <strong>one trial per variant</strong>, since each of the 10,030 variants is already its own task, and reports the total plus a score per perturbation dimension (and per difficulty level). The socket server caps episodes at 600 steps. LeRobot's quick protocol instead runs 10 episodes per task over the four suites, with LIBERO's per-suite step limits. Compare numbers only within one protocol.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">From the LIBERO-Plus leaderboard and the papers listed on it. "Total" is the mean over all 10,030 variants.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Camera</th><th>Robot</th><th>Language</th><th>Light</th><th>Backgr.</th><th>Noise</th><th>Layout</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><th>SRPO (RL post-training, Nov 2025)</th><td colspan="7">per-dimension scores not listed</td><td class="num"><b>82.1%</b></td></tr>
+          <tr><th>OpenVLA-OFT+ (trained on perturbed data)</th><td class="num"><b>92.8</b></td><td class="num">30.3</td><td class="num"><b>85.8</b></td><td class="num"><b>94.9</b></td><td class="num"><b>93.9</b></td><td class="num"><b>89.3</b></td><td class="num"><b>77.6</b></td><td class="num">79.6%</td></tr>
+          <tr><th>OpenVLA-OFT</th><td class="num">56.4</td><td class="num">31.9</td><td class="num">79.5</td><td class="num">88.7</td><td class="num">93.3</td><td class="num">75.8</td><td class="num">74.2</td><td class="num">69.6%</td></tr>
+          <tr><th>π₀-FAST</th><td class="num">65.1</td><td class="num">21.6</td><td class="num">61.0</td><td class="num">73.2</td><td class="num">73.2</td><td class="num">74.4</td><td class="num">68.8</td><td class="num">61.6%</td></tr>
+          <tr><th>π₀</th><td class="num">13.8</td><td class="num">6.0</td><td class="num">58.8</td><td class="num">85.0</td><td class="num">81.4</td><td class="num">79.0</td><td class="num">68.9</td><td class="num">53.6%</td></tr>
+          <tr><th>UniVLA</th><td class="num">1.8</td><td class="num"><b>46.2</b></td><td class="num">69.6</td><td class="num">69.0</td><td class="num">81.0</td><td class="num">21.2</td><td class="num">31.9</td><td class="num">43.9%</td></tr>
+          <tr><th>OpenVLA</th><td class="num">0.8</td><td class="num">3.5</td><td class="num">23.0</td><td class="num">8.1</td><td class="num">34.8</td><td class="num">15.2</td><td class="num">28.5</td><td class="num">15.6%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Three lessons. <b>Camera and robot start pose</b> are the weak spots: π₀ keeps 85% under new lighting but only 14% with a moved camera. No model gets above about 46% when the robot starts elsewhere. <b>Models largely ignore language</b>: the authors find most policies act like vision-action models, barely affected by what the instruction says. Training on perturbed data (OFT+) fixes the camera problem (56 → 93) but not the robot start pose. PearlVLA (2026) reports 76.3%. Sources: <a href="https://github.com/sylvestf/LIBERO-plus" target="_blank" rel="noopener">LIBERO-Plus leaderboard</a>, <a href="https://arxiv.org/abs/2511.15605" target="_blank" rel="noopener">SRPO</a>, <a href="https://arxiv.org/abs/2606.17924" target="_blank" rel="noopener">PearlVLA</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="perturbation,randomization,thirdperson,wrist,osc,delta,distractor,zmq,robosuite,vla"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/nct-tso-robotics/simulation_libero_plus" target="_blank" rel="noopener">Socket-server fork ↗</a>
+    <a href="https://github.com/sylvestf/LIBERO-plus" target="_blank" rel="noopener">LIBERO-Plus GitHub ↗</a>
+    <a href="https://sylvestf.github.io/LIBERO-plus" target="_blank" rel="noopener">Website ↗</a>
+    <a href="https://huggingface.co/docs/lerobot/libero_plus" target="_blank" rel="noopener">LeRobot docs ↗</a>
+    <a href="https://huggingface.co/datasets/lerobot/libero_plus" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2510.13626" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ META-WORLD ============================ -->
+<section class="panel" id="metaworld" role="tabpanel" aria-labelledby="tab-metaworld" style="--c: var(--metaworld)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/metaworld_views.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Multi-task RL · meta-RL · tabletop</span>
+      <h1>Meta-World</h1>
+      <p class="oneliner">One Sawyer arm, <em>50 different skills</em> on the same table. Can a single policy learn them all, and can it <em>learn a new one from a few tries</em>?</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="multitask">Multi-task</span> and <span class="term" data-t="metarl">meta-reinforcement learning</span> benchmark (CoRL 2019). Now also a common <span class="term" data-t="vla">VLA</span> scorecard</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A <span class="term" data-t="sawyer">Sawyer</span> arm at a table, simulated in <span class="term" data-t="mujoco">MuJoCo</span> directly. Not robosuite</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">None needed for <span class="term" data-t="rl">RL</span>. Every task ships a scripted expert, and LeRobot's dataset has 50 of its <span class="term" data-t="demonstration">demos</span> per task</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">50 tasks, each with 50 <span class="term" data-t="goalvar">goal variations</span>, grouped into six official splits (MT1/10/50, ML1/10/45)</div></div>
+      </div>
+      <p class="timer">Video: three rollouts of <code>pick-place-v3</code> with three different goal positions (the blue dot), rendered from the simulator with Meta-World's built-in expert policy. Left: the <code>corner2</code> camera as LeRobot sets it up, the one image a VLA policy sees. Right: the <code>corner</code> camera. Shown at half speed; the simulator runs at 80 Hz.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Meta-World was built for <span class="term" data-t="rl">RL</span> from a state vector, with a <span class="term" data-t="shaped">shaped reward</span> after every step. VLA papers use the same simulator but feed the policy a camera image and a sentence instead. Both share the smallest action in this atlas.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>RL (native):</b> 39 numbers of state and no image: the gripper's position and opening, the pose of up to two objects, the same again from the previous step, and the goal position (below). MT10 / MT50 can append a <span class="term" data-t="onehot">one-hot task ID</span></li>
+          <li><b>VLA (LeRobot):</b> one RGB image from the <code>corner2</code> camera, 480×480, flipped upright (the raw render is upside-down and mirrored). There's no <span class="term" data-t="wrist">wrist camera</span></li>
+          <li>A 4-number state for VLAs: gripper x, y, z and how open it is</li>
+          <li>A one-line task description, e.g. <i>"Pick up a nut and place it onto a peg"</i>. The native env has no text at all</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">RL: MT-SAC, MOORE, MAML …<br />VLA: π₀, SmolVLA, Evo-1 …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 4 numbers</h3>
+        <div class="vec" aria-label="4-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span class="g">grip</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–2 · position change</b> of the gripper, [−1, 1] → <b>±1 cm</b> per step, in the world <span class="term" data-t="frame">frame</span>. The target is clipped to a box above the table.</li>
+          <li><b>3 · gripper</b>: <b>+1 close</b>, −1 open (the same sign as LIBERO).</li>
+          <li><b>No rotation.</b> The gripper always points straight down: it's dragged by <span class="term" data-t="mocap">mocap control</span> with a fixed orientation, and the arm's joints just follow.</li>
+          <li><b>One action = one control step</b> of 12.5 ms (5 MuJoCo substeps), i.e. 80 Hz. Episodes are capped at 500 steps, about 6 seconds.</li>
+        </ul>
+        <p class="note">Every task shares this 4-number action and 39-number state, which is what lets one network be trained on all 50. Tasks that don't need the gripper just ignore dimension 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">What's in the 39 numbers</h2>
+    <p class="sub">The state has the same slots for every task, so some are padding. A task with one object leaves the second object's slots at zero. The goal slots are filled in the multi-task splits but <b>zeroed in the meta-learning splits</b>: there, the policy has to work out the goal from the rewards it gets while trying.</p>
+    <div class="vec" aria-label="39-number state layout" style="max-width: 760px">
+      <span class="b">hx</span><span class="b">hy</span><span class="b">hz</span><span class="g">grip</span>
+      <span>o1x</span><span>o1y</span><span>o1z</span><span>q</span><span>q</span><span>q</span><span>q</span>
+      <span>o2x</span><span>o2y</span><span>o2z</span><span>q</span><span>q</span><span>q</span><span>q</span>
+      <span class="sep"></span>
+      <span class="k" style="flex: 1">the same 18 numbers from the previous step</span>
+      <span class="sep"></span>
+      <span class="b">gx</span><span class="b">gy</span><span class="b">gz</span>
+    </div>
+    <ul class="legend" style="margin-top: 12px">
+      <li><b>0–3</b> · gripper (hand) position and finger opening · <b>4–10</b> · first object's position and <span class="term" data-t="quaternion">quaternion</span> · <b>11–17</b> · second object, or zeros</li>
+      <li><b>18–35</b> · the previous step's copy of 0–17, so velocity can be inferred · <b>36–38</b> · goal position (zeros in ML1 / ML10 / ML45)</li>
+    </ul>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">50</div><div class="l">tasks, one shared action and state layout</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">goal variations per task</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">action numbers (xyz + gripper)</div></div>
+    <div class="stat"><div class="n">80 Hz</div><div class="l">control rate, 500-step cap</div></div>
+    <div class="stat"><div class="n">2,500</div><div class="l">expert demos in <code>lerobot/metaworld_mt50</code></div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Six splits from one pool of tasks</h2>
+    <p class="sub"><b>Multi-task (MT)</b> splits train and test on the same tasks and the same goal positions: can one policy hold many skills at once? <b>Meta-learning (ML)</b> splits test on things never seen in training (new goal positions in ML1, whole new tasks in ML10 and ML45), after a few trial episodes to adapt. Meta-World+ (2025) adds an in-between MT25 / ML25.</p>
+    <div class="tasks" style="margin-bottom: 18px; grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr))">
+      <div class="task"><h3>MT1 · 1 task</h3><p>Learn one task across all 50 goal positions. The easy warm-up.</p><div class="ex">gym.make("Meta-World/MT1", env_name="reach-v3")</div></div>
+      <div class="task"><h3>MT10 · 10 tasks</h3><p>Ten tasks at once, shown below. The most-used RL setting.</p><div class="ex">reach · push · pick-place · door-open · drawer-open · …</div></div>
+      <div class="task"><h3>MT50 · 50 tasks</h3><p>Everything at once. The split VLA papers and LeRobot report.</p><div class="ex">gym.make_vec("Meta-World/MT50", vector_strategy="sync")</div></div>
+      <div class="task"><h3>ML1 · 1 task, new goals</h3><p>Adapt to goal positions held out from training.</p><div class="ex">Meta-World/ML1-train · Meta-World/ML1-test</div></div>
+      <div class="task"><h3>ML10 · 10 train, 5 test</h3><p>Adapt to 5 unseen tasks, shown below.</p><div class="ex">test: drawer-open · door-close · shelf-place · sweep-into · lever-pull</div></div>
+      <div class="task"><h3>ML45 · 45 train, 5 test</h3><p>More training variety, 5 different unseen tasks.</p><div class="ex">test: bin-picking · box-close · hand-insert · door-lock · door-unlock</div></div>
+    </div>
+    <figure>
+      <video class="vid" src="media/metaworld_mt10.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 5 / 2"></video>
+      <figcaption><b>MT10</b>, one expert episode per task from the <code>corner2</code> camera, half speed. Top: <code>reach</code>, <code>push</code>, <code>pick-place</code>, <code>door-open</code>, <code>drawer-open</code>. Bottom: <code>drawer-close</code>, <code>button-press-topdown</code>, <code>peg-insert-side</code>, <code>window-open</code>, <code>window-close</code>. Each tile freezes on success.</figcaption>
+    </figure>
+    <figure style="margin-top: 18px">
+      <video class="vid" src="media/metaworld_ml10_test.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 5 / 1"></video>
+      <figcaption><b>ML10's five held-out test tasks</b>: <code>drawer-open</code>, <code>door-close</code>, <code>shelf-place</code>, <code>sweep-into</code>, <code>lever-pull</code>. A meta-learner never trains on these; it gets 10 trial episodes per goal to adapt before it's scored.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">The four difficulty groups</h2>
+    <p class="sub">VLA papers and LeRobot split MT50 into four groups, a grouping taken from earlier visual-RL work. The counts are lopsided (28 / 11 / 6 / 5), so the average over groups and the average over all 50 tasks can differ a lot. LeRobot accepts a group name directly: <code>--env.task=medium</code>.</p>
+    <div class="grid-4" style="grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr))">
+      <figure><video class="vid" src="media/metaworld_easy.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Easy · 28 tasks.</b> Single-step goals: buttons, doors, drawers, faucets, windows, reaching. Shown: <code>faucet-open</code>, <code>drawer-open</code>, <code>window-close</code>, <code>dial-turn</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_medium.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Medium · 11 tasks.</b> Grasp then move, or use a tool. Shown: <code>basketball</code>, <code>hammer</code>, <code>sweep-into</code>, <code>coffee-push</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_hard.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Hard · 6 tasks.</b> Precise contact and placing. Shown: <code>assembly</code>, <code>hand-insert</code>, <code>pick-out-of-hole</code>, <code>push-back</code>.</figcaption></figure>
+      <figure><video class="vid" src="media/metaworld_veryhard.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 1"></video><figcaption><b>Very hard · 5 tasks.</b> Several stages or obstacles. Shown: <code>shelf-place</code>, <code>disassemble</code>, <code>stick-pull</code>, <code>pick-place-wall</code>.</figcaption></figure>
+    </div>
+    <p class="src">All clips here are rendered from Meta-World 3.1.1 with its scripted expert policies and LeRobot's camera setup, the same source as the demos in <code>lerobot/metaworld_mt50</code>. Each tile freezes on the frame after success.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>, never reward. Each task sets a <code>success</code> flag (e.g. object within a few cm of the goal), and an episode counts as a success if the flag is ever 1 within <strong>500 steps</strong>. <strong>MT splits</strong>: one episode per training goal position (50) per task, averaged over tasks. <strong>ML splits</strong>: for each held-out goal and task, the agent first collects adaptation episodes (10 by default), then is scored on 3 episodes. <strong>LeRobot / VLA protocol</strong>: 10 episodes per task with random object positions, 500 in total for MT50, reported per difficulty group. RL results also depend on the reward version (v1 or v2), so compare numbers only within one version and one protocol.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub"><b>From images (VLAs).</b> MT50 success (%) by difficulty group, trained on 50 expert demos per task and usually evaluated on 10 episodes per task. "Tier avg." is the mean of the four group scores, not of all 50 tasks. Numbers as collected in the FabriVLA paper.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Easy</th><th>Medium</th><th>Hard</th><th>Very hard</th><th>Tier avg.</th></tr></thead>
+        <tbody>
+          <tr><th>FabriVLA (0.9B, Jul 2026)</th><td class="num"><b>95.0</b></td><td class="num">88.2</td><td class="num">86.7</td><td class="num">90.0</td><td class="num"><b>90.0%</b></td></tr>
+          <tr><th>LA4VLA (1B)</th><td class="num">88.9</td><td class="num"><b>94.5</b></td><td class="num">66.7</td><td class="num"><b>100.0</b></td><td class="num">87.5%</td></tr>
+          <tr><th>Evo-Depth (0.9B)</th><td class="num">83.1</td><td class="num">84.7</td><td class="num"><b>87.3</b></td><td class="num">82.4</td><td class="num">84.4%</td></tr>
+          <tr><th>Evo-1 (0.8B)</th><td class="num">89.2</td><td class="num">76.8</td><td class="num">77.2</td><td class="num">79.2</td><td class="num">80.6%</td></tr>
+          <tr><th>SmolVLA (2.25B)</th><td class="num">87.1</td><td class="num">51.8</td><td class="num">70.0</td><td class="num">64.0</td><td class="num">68.2%</td></tr>
+          <tr><th>π₀ (3.3B)</th><td class="num">71.8</td><td class="num">48.2</td><td class="num">41.7</td><td class="num">30.0</td><td class="num">47.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top: 26px"><b>From state (RL).</b> Mean success (%) after training from scratch, re-run by the Meta-World+ authors under one protocol. The reward version alone moves results by up to 40 points.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>MT10 (v2 reward)</th><th>MT50 (v2 reward)</th><th>MT50 (v1 reward)</th></tr></thead>
+        <tbody>
+          <tr><th>MOORE</th><td class="num">83.4</td><td class="num"><b>72.0%</b></td><td class="num"><b>61.8%</b></td></tr>
+          <tr><th>PCGrad</th><td class="num"><b>85.5</b></td><td class="num">69.5%</td><td class="num">45.8%</td></tr>
+          <tr><th>Soft Modularization</th><td class="num">84.9</td><td class="num">65.8%</td><td class="num">60.6%</td></tr>
+          <tr><th>PaCo</th><td class="num">72.3</td><td class="num">58.9%</td><td class="num">18.6%</td></tr>
+          <tr><th>Multi-task multi-head SAC</th><td class="num">77.3</td><td class="num">54.9%</td><td class="num">31.9%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Meta-learning is far from solved: on ML45's unseen tasks, RL² reaches 36.8% and MAML 32.4% (v2 reward). VLA numbers also move with the protocol. A September 2026 study running 30 episodes per task measures SmolVLA at 60.7%, and 74.9% with tuned compute; another reproduction puts π₀ at 38–47% depending on chunk length. Sources: <a href="https://arxiv.org/abs/2607.08575" target="_blank" rel="noopener">FabriVLA</a>, <a href="https://arxiv.org/abs/2506.01844" target="_blank" rel="noopener">SmolVLA</a>, <a href="https://arxiv.org/abs/2505.11289" target="_blank" rel="noopener">Meta-World+</a>, <a href="https://arxiv.org/abs/2609.29382" target="_blank" rel="noopener">Decoupled Early Exits</a>, <a href="https://arxiv.org/abs/2605.07931" target="_blank" rel="noopener">OneWM-VLA</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="multitask,metarl,goalvar,onehot,mocap,shaped,sawyer,mujoco,rl,frame"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://meta-world.github.io/" target="_blank" rel="noopener">meta-world.github.io ↗</a>
+    <a href="https://github.com/Farama-Foundation/Metaworld" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://metaworld.farama.org/" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://huggingface.co/docs/lerobot/en/metaworld" target="_blank" rel="noopener">LeRobot docs ↗</a>
+    <a href="https://huggingface.co/datasets/lerobot/metaworld_mt50" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/1910.10897" target="_blank" rel="noopener">Paper ↗</a>
+    <a href="https://arxiv.org/abs/2505.11289" target="_blank" rel="noopener">Meta-World+ paper ↗</a>
+  </div>
+</section>
+
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README and cap-policy.github.io. LIBERO simulator clips are built from the <code>lerobot/libero_*_image</code> demo frames on Hugging Face. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 24 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench and LIBERO-Plus (whose failure rollouts are from its repository). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench and VLABench simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 25 September 2026.
 </footer>
 </main>
 
@@ -977,6 +1779,16 @@
     embodiment: ["Embodiment", "The robot's physical body: arm, gripper, wheels, legs. Cross-embodiment means one method works on different bodies."],
     proprio: ["Proprioception", "The robot's sense of its own body: joint angles, gripper opening, base position."],
     wrist: ["Wrist camera", "A camera mounted on the robot's hand. It gives a close-up view for fine grasping."],
+    coppeliasim: ["CoppeliaSim", "A robot simulator (formerly V-REP) with a scene editor. RLBench drives it from Python through PyRep."],
+    keyframe: ["Keyframe", "An important moment in a demo, such as when the gripper opens or closes or the arm stops. Keyframe policies predict only these poses and let a motion planner fill in the motion between them."],
+    variation: ["Variation", "A version of a task with a different meaning, like which colour cup to stack on, each with its own instructions. Episodes then randomise object placement within a variation."],
+    quaternion: ["Quaternion", "Four numbers encoding a 3D rotation. Libraries disagree on the order: (x, y, z, w) or (w, x, y, z)."],
+    perturbation: ["Perturbation", "A small, controlled change to one factor of a task, such as camera pose, lighting or wording, used to test whether a policy still works."],
+    zmq: ["ZMQ socket server", "A lightweight messaging link (ZeroMQ) that lets the simulator and the policy run as separate programs, even on different machines. The server sends observations and receives actions."],
+    bimanual: ["Bimanual", "Using two arms together, like a person using both hands. Harder than one arm because the arms must coordinate and not collide."],
+    sapien: ["SAPIEN", "A GPU-friendly physics and rendering engine for robot simulation. ManiSkill3 and RoboTwin are both built on it."],
+    jointpos: ["Joint-position action", "The action is a target angle for every joint of the arm, rather than a target pose for the gripper. The robot moves its joints to those angles."],
+    cotrain: ["Co-training", "One policy trained on the data from all tasks together, as opposed to a separate policy per task."],
     thirdperson: ["Third-person camera", "A camera that watches the robot from outside, not from its hand. In LIBERO and MIKASA-Robo it is fixed in the world. In RoboCasa it is mounted on the robot's mobile base, so it moves with the robot."],
     frame: ["Coordinate frame", "The origin and x/y/z axes a position or rotation is measured from, e.g. the world, the robot's base, or a camera. The same numbers mean different motions in different frames."],
     homogeneous: ["Homogeneous transform", "A 4×4 matrix [R t; 0 0 0 1] holding a rotation R and a translation t. The constant bottom row lets you combine poses by matrix multiplication."],
@@ -994,6 +1806,12 @@
     maniskill: ["ManiSkill3", "A GPU-accelerated robot simulator that can run thousands of environments in parallel."],
     mujoco: ["MuJoCo", "A widely used, fast physics engine for robotics simulation."],
     robosuite: ["robosuite", "A robot-learning simulation toolkit built on MuJoCo. LIBERO and RoboCasa are built on it."],
+    metarl: ["Meta-reinforcement learning", "Learning how to learn: train on many tasks so that a brand-new task can be solved after only a few trial episodes."],
+    mocap: ["Mocap control", "The simulator drags the gripper towards a target point with a virtual weld (a \"mocap\" body) and lets the arm's joints follow. The policy never commands joints or rotation directly."],
+    onehot: ["One-hot task ID", "A list of zeros with a single 1 marking which task is running, e.g. 50 numbers for MT50. It tells a state-based policy which task it's doing, since there is no text instruction."],
+    goalvar: ["Goal variation", "The same task with the object and target in different places. Meta-World gives each task 50 for training, and the meta-learning splits keep separate ones for testing."],
+    shaped: ["Shaped reward", "A reward that gives partial credit along the way (getting closer, grasping) rather than only at success. It helps RL learn; Meta-World still scores only success."],
+    sawyer: ["Sawyer", "A 7-joint robot arm made by Rethink Robotics, with a two-finger gripper. Meta-World uses it for every task."],
     pddl: ["PDDL", "A formal language for describing objects, their relations and goals. LIBERO uses it to define scenes and generate tasks."],
   };
 
@@ -1090,6 +1908,28 @@
   // the tab ids double as anchors; keep the page at the top instead of jumping to the panel
   if (location.hash) addEventListener("load", () => scrollTo(0, 0));
   if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+  /* horizontal scrollers: arrow buttons, edge fades, wheel → sideways for the tab bar */
+  document.querySelectorAll(".scroller").forEach((sc) => {
+    const track = sc.querySelector(".track");
+    const update = () => {
+      const max = track.scrollWidth - track.clientWidth;
+      sc.toggleAttribute("data-overflow", max > 1);
+      sc.toggleAttribute("data-start", track.scrollLeft <= 1);
+      sc.toggleAttribute("data-end", track.scrollLeft >= max - 1);
+    };
+    const step = (d) => track.scrollBy({ left: d * track.clientWidth * 0.8 });
+    sc.querySelector(".prev").addEventListener("click", () => step(-1));
+    sc.querySelector(".next").addEventListener("click", () => step(1));
+    track.addEventListener("scroll", update, { passive: true });
+    new ResizeObserver(update).observe(track);
+    if (sc.hasAttribute("data-wheel")) track.addEventListener("wheel", (e) => {
+      if (Math.abs(e.deltaY) <= Math.abs(e.deltaX) || !sc.hasAttribute("data-overflow")) return;
+      e.preventDefault();
+      track.scrollLeft += e.deltaY;
+    }, { passive: false });
+    update();
+  });
 
   /* theme toggle */
   const root = document.documentElement, btn = document.getElementById("theme-btn");
