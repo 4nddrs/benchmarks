@@ -269,6 +269,11 @@
   thead th { font: 600 11.5px/1.2 var(--mono); letter-spacing: 0.08em; text-transform: uppercase; color: var(--faint); background: var(--sunk); }
   tbody th { font-family: var(--serif); font-size: 18px; white-space: nowrap; }
   tbody th span { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: 8px; vertical-align: middle; }
+  .benchmark-link {
+    appearance: none; border: 0; padding: 0; background: none; color: inherit;
+    font: inherit; text-align: left; cursor: pointer;
+  }
+  .benchmark-link:hover, .benchmark-link:focus-visible { color: var(--c, var(--accent)); text-decoration: underline; }
   td { color: var(--muted); }
   td strong { color: var(--ink); font-weight: 600; }
   .num { font-variant-numeric: tabular-nums; }
@@ -566,7 +571,7 @@
         </thead>
         <tbody>
           <tr>
-            <th><span style="background: var(--egogym)"></span>EgoGym</th>
+            <th><button class="benchmark-link" data-go="egogym"><span style="background: var(--egogym)"></span>EgoGym</button></th>
             <td><strong>Does a pre-trained policy work out of the box?</strong></td>
             <td>Simple table / cabinet scenes, MuJoCo (no robosuite)</td>
             <td>None. Evaluation only</td>
@@ -575,7 +580,7 @@
             <td class="num"><strong>79.9%</strong> on Pick (CAP)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--libero)"></span>LIBERO</th>
+            <th><button class="benchmark-link" data-go="libero"><span style="background: var(--libero)"></span>LIBERO</button></th>
             <td><strong>Can it keep learning without forgetting?</strong></td>
             <td>Tabletop & kitchen, Franka arm, robosuite (MuJoCo)</td>
             <td class="num">50 human demos per task</td>
@@ -584,7 +589,7 @@
             <td class="num"><strong>97–99.9%</strong> average over 4 suites (saturated)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--liberoplus)"></span>LIBERO-Plus</th>
+            <th><button class="benchmark-link" data-go="liberoplus"><span style="background: var(--liberoplus)"></span>LIBERO-Plus</button></th>
             <td><strong>Does a LIBERO policy survive small changes to the scene?</strong></td>
             <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with perturbations</td>
             <td class="num">LIBERO demos; optional 14,347 perturbed demos</td>
@@ -593,7 +598,7 @@
             <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
           <tr>
-            <th><span style="background: var(--lwrobocasa)"></span>LW-RoboCasa-Tasks</th>
+            <th><button class="benchmark-link" data-go="lwrobocasa"><span style="background: var(--lwrobocasa)"></span>LW-RoboCasa-Tasks</button></th>
             <td><strong>Can one kitchen benchmark run on many different robots?</strong></td>
             <td>RoboCasa kitchens rebuilt in Isaac Lab-Arena (Isaac Sim), 7 robot types</td>
             <td class="num">50 teleoperated demos per task per robot; 21,500 episodes released</td>
@@ -602,7 +607,7 @@
             <td class="num">No published results yet</td>
           </tr>
           <tr>
-            <th><span style="background: var(--metaworld)"></span>Meta-World</th>
+            <th><button class="benchmark-link" data-go="metaworld"><span style="background: var(--metaworld)"></span>Meta-World</button></th>
             <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
             <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
             <td class="num">A scripted expert for every task; LeRobot set of 2,500 demos (50 per task)</td>
@@ -611,7 +616,7 @@
             <td class="num"><strong>90.0%</strong> MT50 tier average from images (FabriVLA); ≈72% from state with RL (MOORE)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--mikasa)"></span>MIKASA-Robo</th>
+            <th><button class="benchmark-link" data-go="mikasa"><span style="background: var(--mikasa)"></span>MIKASA-Robo</button></th>
             <td><strong>Can the robot remember what it no longer sees?</strong></td>
             <td>Tabletop, Franka arm, ManiSkill3 (SAPIEN)</td>
             <td class="num">22,500 expert trajectories (6M+ steps)</td>
@@ -620,7 +625,7 @@
             <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
           </tr>
           <tr>
-            <th><span style="background: var(--mimicdroid)"></span>MimicDroid</th>
+            <th><button class="benchmark-link" data-go="mimicdroid"><span style="background: var(--mimicdroid)"></span>MimicDroid</button></th>
             <td><strong>Can a humanoid learn a new task from a few example videos, with no extra training?</strong></td>
             <td>RoboCasa kitchens, GR1 humanoid or a floating hand, robosuite (MuJoCo)</td>
             <td class="num">8 h of unlabeled play (no task labels)</td>
@@ -629,7 +634,7 @@
             <td class="num"><strong>59 / 44 / 26%</strong> on GR1, levels 1–3 (MimicDroid)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--rlbench)"></span>RLBench</th>
+            <th><button class="benchmark-link" data-go="rlbench"><span style="background: var(--rlbench)"></span>RLBench</button></th>
             <td><strong>Can one policy learn many precise tasks from a few demos?</strong></td>
             <td>Tabletop, Franka arm, CoppeliaSim (PyRep)</td>
             <td class="num">Unlimited motion-planned demos (100 per task is standard)</td>
@@ -638,7 +643,7 @@
             <td class="num"><strong>93.7%</strong> on the 18-task set (BridgeVLA++)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
+            <th><button class="benchmark-link" data-go="robocasa"><span style="background: var(--robocasa)"></span>RoboCasa</button></th>
             <td><strong>Can simulated kitchens produce enough data to train robots?</strong></td>
             <td>120 kitchens, mobile robot, robosuite (MuJoCo)</td>
             <td class="num">1,250 human demos + 100,000+ generated</td>
@@ -647,7 +652,7 @@
             <td class="num"><strong>47.6%</strong> on atomic tasks (BC-Transformer, 2024 paper)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--gr1)"></span>RoboCasa GR-1 Tabletop</th>
+            <th><button class="benchmark-link" data-go="gr1"><span style="background: var(--gr1)"></span>RoboCasa GR-1 Tabletop</button></th>
             <td><strong>Can a humanoid with five-fingered hands learn tabletop tasks?</strong></td>
             <td>GR-1 humanoid at a counter, robosuite (MuJoCo)</td>
             <td class="num">1,000 generated demos per task (24,000)</td>
@@ -656,7 +661,7 @@
             <td class="num"><strong>72.8%</strong> (ACE-Ego-0)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--rckitchen)"></span>RoboCasa Kitchen</th>
+            <th><button class="benchmark-link" data-go="rckitchen"><span style="background: var(--rckitchen)"></span>RoboCasa Kitchen</button></th>
             <td><strong>How well does a policy learn short kitchen skills from few demos?</strong></td>
             <td>Mobile Franka arm in RoboCasa kitchens, robosuite (MuJoCo)</td>
             <td class="num">50 human demos per task, or 100–3,000 generated</td>
@@ -665,7 +670,7 @@
             <td class="num"><strong>67.1%</strong> from 50 demos (Cosmos Policy); 80.6% with RL (Z-1)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--robocasa365)"></span>RoboCasa365</th>
+            <th><button class="benchmark-link" data-go="robocasa365"><span style="background: var(--robocasa365)"></span>RoboCasa365</button></th>
             <td><strong>Can one policy do hundreds of household tasks?</strong></td>
             <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
             <td class="num">600+ h human demos + 1,600+ h synthetic</td>
@@ -674,7 +679,7 @@
             <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--robotwin)"></span>RoboTwin</th>
+            <th><button class="benchmark-link" data-go="robotwin"><span style="background: var(--robotwin)"></span>RoboTwin</button></th>
             <td><strong>Can two arms work together, and survive a messy scene?</strong></td>
             <td>Tabletop, dual-arm robot (5 embodiments), SAPIEN</td>
             <td class="num">100,000+ scripted expert trajectories</td>
@@ -683,7 +688,7 @@
             <td class="num"><strong>89.6%</strong> clean / <strong>68.1%</strong> randomized (ME-Dex-1.0)</td>
           </tr>
           <tr>
-            <th><span style="background: var(--vlabench)"></span>VLABench</th>
+            <th><button class="benchmark-link" data-go="vlabench"><span style="background: var(--vlabench)"></span>VLABench</button></th>
             <td><strong>Does the policy understand the instruction, not just the scene?</strong></td>
             <td>Tabletop and home scenes, Franka arm, MuJoCo (dm_control)</td>
             <td class="num">Scripted-expert demos: 500 per task for 10 primitive tasks (5,000)</td>
