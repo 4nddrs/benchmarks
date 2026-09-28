@@ -23,7 +23,12 @@
     --tip-bg: #151920;
     --tip-ink: #f3f4f7;
     /* one identity colour per benchmark */
-    --robocasa: #c26a12;
+    --robocasa: #a0522d;
+    --rckitchen: #b0369e;
+    --robocasa365: #c26a12;
+    --gr1: #56688f;
+    --lwrobocasa: #7a6450;
+    --mimicdroid: #8e44ad;
     --mikasa: #6a44d8;
     --libero: #0b8574;
     --egogym: #c42a62;
@@ -50,7 +55,12 @@
       --stage: #000;
       --tip-bg: #eef0f4;
       --tip-ink: #111419;
-      --robocasa: #f0a049;
+      --robocasa: #e89a6d;
+      --rckitchen: #ec7fd6;
+      --robocasa365: #f0a049;
+      --gr1: #a9b8dc;
+      --lwrobocasa: #c9b39c;
+      --mimicdroid: #c792ea;
       --mikasa: #a58bff;
       --libero: #3fcfb6;
       --egogym: #ff6f9f;
@@ -58,7 +68,7 @@
       --rlbench: #4cc9f0;
       --vlabench: #f2c94c;
       --liberoplus: #ff7f7f;
-    --metaworld: #6fd384;
+      --metaworld: #6fd384;
       color-scheme: dark;
     }
   }
@@ -74,7 +84,12 @@
     --stage: #000;
     --tip-bg: #eef0f4;
     --tip-ink: #111419;
-    --robocasa: #f0a049;
+    --robocasa: #e89a6d;
+    --rckitchen: #ec7fd6;
+    --robocasa365: #f0a049;
+    --gr1: #a9b8dc;
+    --lwrobocasa: #c9b39c;
+    --mimicdroid: #c792ea;
     --mikasa: #a58bff;
     --libero: #3fcfb6;
     --egogym: #ff6f9f;
@@ -364,10 +379,15 @@
       <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
       <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
       <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
+      <button class="tab" role="tab" id="tab-lwrobocasa" aria-controls="lwrobocasa" data-target="lwrobocasa" style="--c: var(--lwrobocasa)"><span class="dot"></span>LW-RoboCasa-Tasks</button>
       <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
       <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
+      <button class="tab" role="tab" id="tab-mimicdroid" aria-controls="mimicdroid" data-target="mimicdroid" style="--c: var(--mimicdroid)"><span class="dot"></span>MimicDroid</button>
       <button class="tab" role="tab" id="tab-rlbench" aria-controls="rlbench" data-target="rlbench" style="--c: var(--rlbench)"><span class="dot"></span>RLBench</button>
       <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
+      <button class="tab" role="tab" id="tab-gr1" aria-controls="gr1" data-target="gr1" style="--c: var(--gr1)"><span class="dot"></span>RoboCasa GR-1 Tabletop</button>
+      <button class="tab" role="tab" id="tab-rckitchen" aria-controls="rckitchen" data-target="rckitchen" style="--c: var(--rckitchen)"><span class="dot"></span>RoboCasa Kitchen</button>
+      <button class="tab" role="tab" id="tab-robocasa365" aria-controls="robocasa365" data-target="robocasa365" style="--c: var(--robocasa365)"><span class="dot"></span>RoboCasa365</button>
       <button class="tab" role="tab" id="tab-robotwin" aria-controls="robotwin" data-target="robotwin" style="--c: var(--robotwin)"><span class="dot"></span>RoboTwin</button>
       <button class="tab" role="tab" id="tab-vlabench" aria-controls="vlabench" data-target="vlabench" style="--c: var(--vlabench)"><span class="dot"></span>VLABench</button>
     </nav>
@@ -382,12 +402,12 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · nine benchmarks</span>
+    <span class="eyebrow">Robot learning · fourteen benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These nine test very different things. Pick a tab; each one is built to be
+      compared fairly. These fourteen test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
   </div>
@@ -422,6 +442,15 @@
         <span class="go">Tests: robustness to small changes →</span>
       </div>
     </button>
+    <button class="card" data-go="lwrobocasa" style="--c: var(--lwrobocasa)">
+      <video class="vid contain" src="media/lw_tasks.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Isaac Sim · multi-robot</span>
+        <h3>LW-RoboCasa-Tasks</h3>
+        <p>138 RoboCasa kitchen tasks rebuilt by Lightwheel in NVIDIA Isaac Lab-Arena, runnable on seven robot types, from a humanoid to a two-armed mobile robot.</p>
+        <span class="go">Tests: the same chores on many bodies →</span>
+      </div>
+    </button>
     <button class="card" data-go="metaworld" style="--c: var(--metaworld)">
       <video class="vid contain" src="media/metaworld_mt10.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -440,6 +469,15 @@
         <span class="go">Tests: memory →</span>
       </div>
     </button>
+    <button class="card" data-go="mimicdroid" style="--c: var(--mimicdroid)">
+      <video class="vid contain" src="media/mimicdroid_levels.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">In-context learning · humanoid</span>
+        <h3>MimicDroid</h3>
+        <p>Show a humanoid a few clips of a task it has never trained on, and it should do the task right away, with no extra training. 12 tasks in 3 levels.</p>
+        <span class="go">Tests: learning from examples at test time →</span>
+      </div>
+    </button>
     <button class="card" data-go="rlbench" style="--c: var(--rlbench)">
       <video class="vid contain" src="media/rlbench_views.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -450,10 +488,37 @@
       </div>
     </button>
     <button class="card" data-go="robocasa" style="--c: var(--robocasa)">
+      <video class="vid" src="media/robocasa_ai_textures.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Simulation framework · the original</span>
+        <h3>RoboCasa</h3>
+        <p>The 2024 original: a mobile robot in 120 simulated kitchens with 100 tasks. Five other tabs here are built on it.</p>
+        <span class="go">Tests: whether sim data scales up robot learning →</span>
+      </div>
+    </button>
+    <button class="card" data-go="gr1" style="--c: var(--gr1)">
+      <video class="vid contain" src="media/gr1_articulated.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Humanoid · dexterous hands</span>
+        <h3>RoboCasa GR-1 Tabletop</h3>
+        <p>A GR-1 humanoid with two five-fingered hands does 24 tabletop tasks, seen from one head camera. Released with NVIDIA's GR00T N1.</p>
+        <span class="go">Tests: humanoid manipulation →</span>
+      </div>
+    </button>
+    <button class="card" data-go="rckitchen" style="--c: var(--rckitchen)">
+      <video class="vid contain" src="media/rkitchen_tasks.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Atomic skills · VLA scorecard</span>
+        <h3>RoboCasa Kitchen</h3>
+        <p>RoboCasa's 24 short kitchen skills (open a drawer, turn on the stove, press a button), learned from as few as 50 demos per task.</p>
+        <span class="go">Tests: learning skills from little data →</span>
+      </div>
+    </button>
+    <button class="card" data-go="robocasa365" style="--c: var(--robocasa365)">
       <video class="vid" src="media/robocasa_steaming_veg.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
         <span class="chip">Large-scale sim · multi-task</span>
-        <h3>RoboCasa</h3>
+        <h3>RoboCasa365</h3>
         <p>A mobile robot doing chores in 2,500 simulated kitchens. 365 tasks and 2,200+ hours of demonstrations for training generalist robots.</p>
         <span class="go">Tests: breadth and generalisation →</span>
       </div>
@@ -528,6 +593,15 @@
             <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
           <tr>
+            <th><span style="background: var(--lwrobocasa)"></span>LW-RoboCasa-Tasks</th>
+            <td><strong>Can one kitchen benchmark run on many different robots?</strong></td>
+            <td>RoboCasa kitchens rebuilt in Isaac Lab-Arena (Isaac Sim), 7 robot types</td>
+            <td class="num">50 teleoperated demos per task per robot; 21,500 episodes released</td>
+            <td class="num">138 (single-stage and multi-stage)</td>
+            <td class="num">Depends on the robot, e.g. 23 numbers for the G1 humanoid (2 wrist poses + grippers + base + torso)</td>
+            <td class="num">No published results yet</td>
+          </tr>
+          <tr>
             <th><span style="background: var(--metaworld)"></span>Meta-World</th>
             <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
             <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
@@ -546,6 +620,15 @@
             <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
           </tr>
           <tr>
+            <th><span style="background: var(--mimicdroid)"></span>MimicDroid</th>
+            <td><strong>Can a humanoid learn a new task from a few example videos, with no extra training?</strong></td>
+            <td>RoboCasa kitchens, GR1 humanoid or a floating hand, robosuite (MuJoCo)</td>
+            <td class="num">8 h of unlabeled play (no task labels)</td>
+            <td class="num">12 test tasks in 3 levels</td>
+            <td class="num">7 numbers per hand (wrist pose + grasp), turned into GR1 joint angles</td>
+            <td class="num"><strong>59 / 44 / 26%</strong> on GR1, levels 1–3 (MimicDroid)</td>
+          </tr>
+          <tr>
             <th><span style="background: var(--rlbench)"></span>RLBench</th>
             <td><strong>Can one policy learn many precise tasks from a few demos?</strong></td>
             <td>Tabletop, Franka arm, CoppeliaSim (PyRep)</td>
@@ -556,6 +639,33 @@
           </tr>
           <tr>
             <th><span style="background: var(--robocasa)"></span>RoboCasa</th>
+            <td><strong>Can simulated kitchens produce enough data to train robots?</strong></td>
+            <td>120 kitchens, mobile robot, robosuite (MuJoCo)</td>
+            <td class="num">1,250 human demos + 100,000+ generated</td>
+            <td class="num">100 (25 atomic, 75 composite)</td>
+            <td class="num">12 numbers (arm + gripper + base + torso + mode)</td>
+            <td class="num"><strong>47.6%</strong> on atomic tasks (BC-Transformer, 2024 paper)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--gr1)"></span>RoboCasa GR-1 Tabletop</th>
+            <td><strong>Can a humanoid with five-fingered hands learn tabletop tasks?</strong></td>
+            <td>GR-1 humanoid at a counter, robosuite (MuJoCo)</td>
+            <td class="num">1,000 generated demos per task (24,000)</td>
+            <td class="num">24 (18 rearrangement, 6 put-away-and-close)</td>
+            <td class="num">29 joint angles (2 arms, 2 hands, waist), absolute</td>
+            <td class="num"><strong>72.8%</strong> (ACE-Ego-0)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--rckitchen)"></span>RoboCasa Kitchen</th>
+            <td><strong>How well does a policy learn short kitchen skills from few demos?</strong></td>
+            <td>Mobile Franka arm in RoboCasa kitchens, robosuite (MuJoCo)</td>
+            <td class="num">50 human demos per task, or 100–3,000 generated</td>
+            <td class="num">24 atomic skills</td>
+            <td class="num">12 numbers, same as RoboCasa</td>
+            <td class="num"><strong>67.1%</strong> from 50 demos (Cosmos Policy); 80.6% with RL (Z-1)</td>
+          </tr>
+          <tr>
+            <th><span style="background: var(--robocasa365)"></span>RoboCasa365</th>
             <td><strong>Can one policy do hundreds of household tasks?</strong></td>
             <td>Full kitchens, mobile robot, robosuite (MuJoCo)</td>
             <td class="num">600+ h human demos + 1,600+ h synthetic</td>
@@ -584,7 +694,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -593,14 +703,14 @@
   </div>
 </section>
 
-<!-- ============================ ROBOCASA ============================ -->
-<section class="panel" id="robocasa" role="tabpanel" aria-labelledby="tab-robocasa" style="--c: var(--robocasa)" hidden>
+<!-- ============================ ROBOCASA365 ============================ -->
+<section class="panel" id="robocasa365" role="tabpanel" aria-labelledby="tab-robocasa365" style="--c: var(--robocasa365)" hidden>
   <div class="top">
     <video class="vid" src="media/robocasa_release.mp4" muted loop playsinline preload="metadata" controls></video>
     <div>
       <span class="eyebrow">Large-scale simulation · multi-task · generalist robots</span>
-      <h1>RoboCasa</h1>
-      <p class="oneliner">A robot in <em>2,500 virtual kitchens</em> learning <em>365 everyday chores</em>, from pressing a button to brewing coffee.</p>
+      <h1>RoboCasa365</h1>
+      <p class="oneliner">A robot in <em>2,500 virtual kitchens</em> learning <em>365 everyday chores</em>, from pressing a button to brewing coffee. The 2026 successor to the <a href="#robocasa">original RoboCasa</a>.</p>
       <div class="facts">
         <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="simulation">Simulation</span> framework + dataset for <span class="term" data-t="multitask">multi-task</span> and <span class="term" data-t="foundation">foundation-model</span> training</div></div>
         <div class="fact"><div class="k">The world</div><div class="v">Photo-real kitchens with working fridges, stoves and sinks, simulated in <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>). Not ManiSkill3.</div></div>
@@ -723,6 +833,627 @@
     <a href="https://robocasa.ai/" target="_blank" rel="noopener">robocasa.ai ↗</a>
     <a href="https://github.com/robocasa/robocasa" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="https://robocasa.ai/docs/build/html/introduction/overview.html" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://robocasa.ai/leaderboard.html" target="_blank" rel="noopener">Leaderboard ↗</a>
+    <a href="https://arxiv.org/abs/2603.04356" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ ROBOCASA (original) ============================ -->
+<section class="panel" id="robocasa" role="tabpanel" aria-labelledby="tab-robocasa" style="--c: var(--robocasa)" hidden>
+  <div class="top">
+    <video class="vid" src="media/robocasa_ai_textures.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Simulation framework · household robots · the original</span>
+      <h1>RoboCasa</h1>
+      <p class="oneliner">A mobile robot in <em>120 simulated kitchens</em> with <em>100 tasks</em>. This 2024 release is the base for five other tabs here.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="simulation">Simulation</span> framework, task suite and dataset (RSS 2024) for training generalist household robots</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Kitchens with working appliances, simulated in <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>): 10 floor plans × 12 styles</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">50 human <span class="term" data-t="demonstration">demos</span> per atomic task (1,250 in all), plus 100,000+ generated with <span class="term" data-t="mimicgen">MimicGen</span></div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">25 <span class="term" data-t="atomic">atomic</span> + 75 <span class="term" data-t="composite">composite</span> = 100</div></div>
+      </div>
+      <p class="timer">Video: one RoboCasa kitchen, re-skinned again and again with AI-generated textures (from robocasa.ai)</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The 2024 release set the data format that RoboCasa Kitchen and RoboCasa365 still use. The paper's policies see the last 10 timesteps and act 20 times a second.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Two <span class="term" data-t="thirdperson">third-person cameras</span>, <code>robot0_agentview_left</code> and <code>_right</code>, mounted on the robot's mobile base so they move with it</li>
+          <li>A <span class="term" data-t="wrist">wrist camera</span> (<code>robot0_eye_in_hand</code>)</li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: arm joint angles, gripper opening, base position</li>
+          <li>A language instruction, e.g. <i>"open the right drawer"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">paper: BC-Transformer<br />later: Diffusion Policy, GR00T, π₀ …</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 12 numbers</h3>
+        <div class="vec" aria-label="12-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span><span class="b">fwd</span><span class="b">side</span><span class="b">yaw</span><span class="b">torso</span><span class="k">mode</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–5 · arm.</b> robosuite <span class="term" data-t="osc">OSC</span> <span class="term" data-t="delta">delta</span> pose in the mobile base's <span class="term" data-t="frame">frame</span>.</li>
+          <li><b>6 · gripper.</b> −1 open, +1 close.</li>
+          <li><b>7–10 · base and torso.</b> Wheel velocities (forward, sideways, turn) and the lift.</li>
+          <li><b>11 · mode.</b> Switches between driving the base and moving the arm.</li>
+        </ul>
+        <p class="note">The same layout as RoboCasa365, for the default <b>PandaOmron</b> robot (a Franka arm on a wheeled Omron base). The RoboCasa365 tab explains each slot in detail.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">100</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">120</div><div class="l">kitchen scenes</div></div>
+    <div class="stat"><div class="n">2,509</div><div class="l">objects in 153 categories</div></div>
+    <div class="stat"><div class="n">1,250</div><div class="l">human demos</div></div>
+    <div class="stat"><div class="n">100K+</div><div class="l">generated demos</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">One framework, six benchmarks</h2>
+    <p class="sub">RoboCasa is a toolkit as much as a benchmark: kitchens, objects, robots and task code. Other groups have built their own benchmarks on it, each with its own tasks, robot and scoring. A score on one says little about the others.</p>
+    <div class="tasks">
+      <div class="task"><h3>RoboCasa · 2024</h3><p>This tab. The original 100 tasks, mostly used to train and test one mobile arm.</p><div class="ex">robocasa v0.1–0.2 · UT Austin + NVIDIA</div></div>
+      <div class="task"><h3><a href="#rckitchen">RoboCasa Kitchen</a></h3><p>24 of the atomic tasks: the usual score VLA papers report "on RoboCasa".</p><div class="ex">24 tasks · 50–300 demos each</div></div>
+      <div class="task"><h3><a href="#gr1">RoboCasa GR-1 Tabletop</a></h3><p>A separate set of tabletop tasks for a GR-1 humanoid with hands, released with GR00T N1.</p><div class="ex">24 tasks · 1,000 demos each</div></div>
+      <div class="task"><h3><a href="#robocasa365">RoboCasa365</a></h3><p>The 2026 successor: 365 tasks, 2,500 kitchens, 2,200+ h of data and a public leaderboard.</p><div class="ex">50 target tasks on the leaderboard</div></div>
+      <div class="task"><h3><a href="#lwrobocasa">LW-RoboCasa-Tasks</a></h3><p>Lightwheel's port of RoboCasa's tasks to NVIDIA Isaac Sim, for seven robot types.</p><div class="ex">138 tasks · Isaac Lab-Arena</div></div>
+      <div class="task"><h3><a href="#mimicdroid">MimicDroid</a></h3><p>A few-shot test in RoboCasa kitchens: a humanoid learns new tasks from example clips.</p><div class="ex">12 tasks · 3 levels</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Atomic tasks: eight skills</h2>
+    <p class="sub">The 25 <span class="term" data-t="atomic">atomic tasks</span> each test one short skill. All but navigation start with the robot already in front of the fixture it needs.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Pick and place · 8</h3><p>Move an object between counter, cabinet, sink, microwave and stove.</p><div class="ex">PnPCounterToCab · PnPSinkToCounter · PnPCounterToMicrowave …</div></div>
+      <div class="task"><h3>Doors · 4</h3><p>Open or close single and double hinged doors.</p><div class="ex">OpenSingleDoor · CloseDoubleDoor</div></div>
+      <div class="task"><h3>Drawers · 2</h3><p>Pull a drawer out or push it shut.</p><div class="ex">OpenDrawer · CloseDrawer</div></div>
+      <div class="task"><h3>Knobs · 2</h3><p>Twist a stove knob; the burner really lights.</p><div class="ex">TurnOnStove · TurnOffStove</div></div>
+      <div class="task"><h3>Levers · 3</h3><p>Turn the tap on or off, or swing the spout.</p><div class="ex">TurnOnSinkFaucet · TurnOffSinkFaucet · TurnSinkSpout</div></div>
+      <div class="task"><h3>Buttons · 3</h3><p>Press appliance buttons.</p><div class="ex">CoffeePressButton · TurnOnMicrowave · TurnOffMicrowave</div></div>
+      <div class="task"><h3>Insertion · 2</h3><p>Fit a mug under the coffee dispenser, or take it out and serve it.</p><div class="ex">CoffeeSetupMug · CoffeeServeMug</div></div>
+      <div class="task"><h3>Navigation · 1</h3><p>Drive the base to a named fixture.</p><div class="ex">NavigateKitchen</div></div>
+    </div>
+    <figure>
+      <video class="vid contain" src="media/robocasa_turn_on_microwave.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 9 / 2"></video>
+      <figcaption><b>TurnOnMicrowave</b>, an atomic task, from the policy's three cameras: left and right base cameras, then the wrist camera.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">Composite tasks: chains of skills</h2>
+    <p class="sub">The 75 <span class="term" data-t="composite">composite tasks</span> chain atomic skills into chores people actually do, with the task list drafted with help from an LLM. They come without large datasets; the paper fine-tuned on 5 of them to show how hard they are.</p>
+    <figure>
+      <video class="vid contain" src="media/robocasa_prepare_coffee.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 9 / 2"></video>
+      <figcaption><b>PrepareCoffee</b>: take the mug from the cabinet, put it under the dispenser, press start. Same three cameras.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> over <strong>50 trials per task</strong>, spread over <strong>5 fixed test kitchens</strong>. Test objects are instances the policy never saw in training, and 2 of the 5 kitchens use styles that were not in the training data. Results are averaged over the atomic tasks.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">The 2024 paper's own baseline: a BC-Transformer (robomimic) trained on all 24 atomic manipulation tasks at once. With enough of it, generated data beats human data.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Training data</th><th>Demos per task</th><th>Avg. success, atomic tasks</th></tr></thead>
+        <tbody>
+          <tr><th>Generated (MimicGen)</th><td class="num">3,000</td><td class="num"><b>47.6%</b></td></tr>
+          <tr><th>Generated (MimicGen)</th><td class="num">300</td><td class="num">35.0%</td></tr>
+          <tr><th>Human (Human-50)</th><td class="num">50</td><td class="num">28.8%</td></tr>
+          <tr><th>Generated (MimicGen)</th><td class="num">100</td><td class="num">26.3%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Composite tasks were much harder: starting from the atomic model, 5 composite tasks reached 0–12% (0–2% from scratch). On a real robot, co-training with sim data raised success from 13.6% to 24.4%. Newer models on the same 24 tasks are on the <a href="#rckitchen">RoboCasa Kitchen</a> tab. Source: <a href="https://arxiv.org/abs/2406.02523" target="_blank" rel="noopener">RoboCasa paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="simulation,demonstration,teleop,synthetic,mimicgen,atomic,composite,articulated,robosuite,embodiment,thirdperson,randomization"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robocasa.ai/" target="_blank" rel="noopener">robocasa.ai ↗</a>
+    <a href="https://github.com/robocasa/robocasa" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://robocasa.ai/docs/build/html/introduction/overview.html" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://arxiv.org/abs/2406.02523" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ ROBOCASA KITCHEN ============================ -->
+<section class="panel" id="rckitchen" role="tabpanel" aria-labelledby="tab-rckitchen" style="--c: var(--rckitchen)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/rkitchen_views.mp4" muted loop playsinline preload="metadata" controls style="aspect-ratio: 3 / 1"></video>
+    <div>
+      <span class="eyebrow">Atomic-skill benchmark · mobile arm · VLA scorecard</span>
+      <h1>RoboCasa Kitchen</h1>
+      <p class="oneliner">The original RoboCasa's <em>24 short kitchen skills</em>, now the standard test for robot foundation models. The question: how much can a policy learn from <em>50 demos per task</em>?</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="multitask">Multi-task</span> <span class="term" data-t="imitation">imitation</span> benchmark: a fixed subset of RoboCasa used by GR00T, Cosmos Policy, FLARE and others</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm on a wheeled Omron base (PandaOmron) in RoboCasa kitchens, <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>)</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">50 human demos per task, plus 3,000 <span class="term" data-t="mimicgen">MimicGen</span> demos per task (72,000) in NVIDIA's LeRobot copy</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">24 <span class="term" data-t="atomic">atomic</span> skills in 7 groups. Navigation is left out</div></div>
+      </div>
+      <p class="timer">Video: <code>PnPCounterToMicrowave</code>, one generated demo from NVIDIA's dataset. Left and middle: the two base-mounted cameras. Right: the wrist camera. 256×256 each, real time.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Each demo is short: 5 to 25 seconds at 20 steps a second. Most papers train one policy on all 24 tasks at once and tell it which task to do with the instruction.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Three 256×256 images: <code>left_view</code> and <code>right_view</code> from the <span class="term" data-t="thirdperson">base-mounted cameras</span>, and <code>wrist_view</code></li>
+          <li><span class="term" data-t="proprio">Proprioception</span>, 53 numbers in NVIDIA's copy: base position and rotation, gripper pose (in the world and relative to the base), finger positions, and the 7 joint angles with their sines, cosines and velocities</li>
+          <li>An instruction, e.g. <i>"open the right drawer"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">e.g. GR00T N1.5, π₀, Cosmos Policy</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 12 numbers</h3>
+        <div class="vec" aria-label="12-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span><span class="b">fwd</span><span class="b">side</span><span class="b">yaw</span><span class="b">torso</span><span class="k">mode</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–5 · arm.</b> <span class="term" data-t="osc">OSC</span> <span class="term" data-t="delta">delta</span> pose, [−1, 1] → ±5 cm and ±0.5 rad per step, in the mobile base's <span class="term" data-t="frame">frame</span>.</li>
+          <li><b>6 · gripper.</b> −1 open, +1 close.</li>
+          <li><b>7–11 · base, torso, mode.</b> In these tasks the robot starts in front of the fixture, so the base mostly stays put.</li>
+        </ul>
+        <p class="note">The controller is the same as RoboCasa365's. NVIDIA's LeRobot copy stores the same 12 numbers in a different order: <b>base motion</b> (4, including torso), <b>control mode</b>, <b>gripper position</b> (3), <b>rotation</b> (3), <b>gripper close</b>. Check the order before mixing datasets.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">24</div><div class="l">atomic tasks</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">skill groups</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">test kitchens</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">trials per task</div></div>
+    <div class="stat"><div class="n">3,000</div><div class="l">generated demos per task</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The 24 tasks</h2>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Pick and place · 8</h3><p>Counter to and from cabinet, sink, microwave and stove.</p><div class="ex">PnPCounterToCab · PnPCabToCounter · PnPCounterToSink · PnPSinkToCounter · PnPCounterToMicrowave · PnPMicrowaveToCounter · PnPCounterToStove · PnPStoveToCounter</div></div>
+      <div class="task"><h3>Doors · 4</h3><p>Hinged cabinet doors, single and double.</p><div class="ex">OpenSingleDoor · CloseSingleDoor · OpenDoubleDoor · CloseDoubleDoor</div></div>
+      <div class="task"><h3>Drawers · 2</h3><p>Slide a drawer open or closed.</p><div class="ex">OpenDrawer · CloseDrawer</div></div>
+      <div class="task"><h3>Knobs · 2</h3><p>Turn a burner on or off.</p><div class="ex">TurnOnStove · TurnOffStove</div></div>
+      <div class="task"><h3>Levers · 3</h3><p>Tap on, tap off, swing the spout.</p><div class="ex">TurnOnSinkFaucet · TurnOffSinkFaucet · TurnSinkSpout</div></div>
+      <div class="task"><h3>Buttons · 3</h3><p>Coffee machine and microwave.</p><div class="ex">CoffeePressButton · TurnOnMicrowave · TurnOffMicrowave</div></div>
+      <div class="task"><h3>Insertion · 2</h3><p>Precise placing under a dispenser.</p><div class="ex">CoffeeSetupMug · CoffeeServeMug</div></div>
+    </div>
+    <figure>
+      <video class="vid contain" src="media/rkitchen_tasks.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 2 / 1"></video>
+      <figcaption>Eight of the 24, left camera, the first generated demo of each. Top: <code>PnPCounterToSink</code>, <code>OpenSingleDoor</code>, <code>OpenDrawer</code>, <code>CloseDoubleDoor</code>. Bottom: <code>TurnOnStove</code>, <code>TurnOnSinkFaucet</code>, <code>CoffeePressButton</code>, <code>TurnOffMicrowave</code>. Sped up to fit; each tile freezes on its last frame.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">Three data budgets</h2>
+    <p class="sub">The main knob is how much training data a policy gets. Always check which budget a number uses before comparing.</p>
+    <div class="tasks">
+      <div class="task"><h3>50 human demos</h3><p>The original "Human-50" setting: one person's teleoperated demos per task.</p><div class="ex">Cosmos Policy, UVA</div></div>
+      <div class="task"><h3>100 generated demos</h3><p>Taken from the 3,000 MimicGen demos. GR00T N1's headline setting.</p><div class="ex">GR00T N1, Diffusion Policy</div></div>
+      <div class="task"><h3>300 generated demos</h3><p>The largest common budget, used by most 2025–26 VLA papers.</p><div class="ex">GR00T N1.5, π₀, FLARE</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> per task, averaged over all 24. The standard protocol runs <strong>50 trials per task</strong>, 10 in each of <strong>5 fixed test kitchens</strong>. Cosmos Policy repeats that with 3 seeds (3,600 trials in all), and some papers use their own counts, so small gaps are noise.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Average success over the 24 tasks, as collected in the Cosmos Policy model card (50 trials per task, 5 kitchens), plus GR00T N1's own baselines. Fewer demos is harder.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Demos per task</th><th>Avg. success</th></tr></thead>
+        <tbody>
+          <tr><th>Cosmos Policy (NVIDIA, 2B)</th><td class="num">50</td><td class="num"><b>67.1%</b></td></tr>
+          <tr><th>FLARE</th><td class="num">300</td><td class="num">66.4%</td></tr>
+          <tr><th>Video Policy</th><td class="num">300</td><td class="num">66.0%</td></tr>
+          <tr><th>GR00T N1.5</th><td class="num">300</td><td class="num">64.1%</td></tr>
+          <tr><th>π₀</th><td class="num">300</td><td class="num">62.5%</td></tr>
+          <tr><th>UVA</th><td class="num">50</td><td class="num">50.0%</td></tr>
+          <tr><th>GR00T N1 (2B)</th><td class="num">100</td><td class="num">32.1%</td></tr>
+          <tr><th>Diffusion Policy</th><td class="num">100</td><td class="num">25.6%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">With <span class="term" data-t="rl">reinforcement learning</span> on top, Z-1 (Jun 2026) reports <b>80.6%</b> (67.4% before RL) from 1,199 public demos in total, and lists X-WAM at 79.2%. It runs 64 rollouts per task and measures GR00T N1.5 at 59.7%, so its numbers don't line up exactly with the table. Sources: <a href="https://huggingface.co/nvidia/Cosmos-Policy-RoboCasa-Predict2-2B" target="_blank" rel="noopener">Cosmos Policy</a>, <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1</a>, <a href="https://arxiv.org/abs/2606.31846" target="_blank" rel="noopener">Z-1</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="atomic,articulated,mimicgen,synthetic,imitation,multitask,osc,delta,frame,thirdperson,vla,foundation"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://github.com/robocasa/robocasa" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://arxiv.org/abs/2406.02523" target="_blank" rel="noopener">RoboCasa paper ↗</a>
+    <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1 paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ ROBOCASA GR-1 TABLETOP ============================ -->
+<section class="panel" id="gr1" role="tabpanel" aria-labelledby="tab-gr1" style="--c: var(--gr1)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/gr1_articulated.mp4" muted loop playsinline preload="metadata" controls style="aspect-ratio: 16 / 7"></video>
+    <div>
+      <span class="eyebrow">Humanoid · dexterous hands · tabletop</span>
+      <h1>RoboCasa GR-1 Tabletop</h1>
+      <p class="oneliner">A <em>GR-1 humanoid</em> with two five-fingered hands at a kitchen counter. It moves objects between containers, or <em>puts something away and shuts the door</em>.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="humanoid">Humanoid</span> post-training benchmark, released with NVIDIA's GR00T N1 (March 2025); now a standard <span class="term" data-t="vla">VLA</span> test</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Fourier GR-1 upper body with Fourier <span class="term" data-t="dexhand">dexterous hands</span>, in RoboCasa scenes on <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>). The legs don't move</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">1,000 demos per task (24,000 in all), generated with <span class="term" data-t="mimicgen">DexMimicGen</span>, in LeRobot format</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">24: 18 rearrangement tasks + 6 put-away-and-close tasks with <span class="term" data-t="articulated">articulated</span> objects</div></div>
+      </div>
+      <p class="timer">Video: the six put-away-and-close tasks, first demo of each, from the head camera (black bars trimmed). Top: cup and can into a drawer, milk into the microwave. Bottom: potato into the microwave, bottle and wine into a cabinet.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">One camera, many joints. The robot sees only from its head, and the policy sets every joint of both arms, both hands and the waist directly. There's no gripper open/close number: grasping means moving fingers.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>One <span class="term" data-t="ego">egocentric</span> head camera, <code>ego_view</code>, 256×256 at 20 fps. The dataset stores it letterboxed: a 256×168 picture between black bars</li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: 44 joint angles, laid out like the action</li>
+          <li>An instruction from a template, e.g. <i>"pick up the can, place it into the drawer and close the drawer"</i> or <i>"pick the {object} from the {source} and place it in the {target}"</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">e.g. GR00T N1.6, ABot-M0, ACE-Ego-0</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 29 of 44 numbers</h3>
+        <div class="vec" aria-label="44-slot action, 29 driven">
+          <span class="b" style="flex: 7">left arm · 7</span><span class="g" style="flex: 6">left hand · 6</span><span class="k" style="flex: 6">left leg · 6</span><span class="k" style="flex: 3">neck · 3</span>
+          <span class="sep"></span>
+          <span class="b" style="flex: 7">right arm · 7</span><span class="g" style="flex: 6">right hand · 6</span><span class="k" style="flex: 6">right leg · 6</span><span style="flex: 3">waist · 3</span>
+        </div>
+        <ul class="legend">
+          <li><b>Arms · 14.</b> <span class="term" data-t="absolute">Absolute</span> target angles for the 7 joints of each arm (<span class="term" data-t="jointpos">joint-position</span> control).</li>
+          <li><b>Hands · 12.</b> 6 actuated joints per Fourier hand.</li>
+          <li><b>Waist · 3.</b> Lets the torso lean and turn to reach.</li>
+          <li><b>Legs and neck · 15, dashed.</b> Stored in the 44-number vector but held fixed. Policies predict only the 29 others.</li>
+        </ul>
+        <p class="note">Shown in the dataset's order. Control runs at <b>20 Hz</b>; GR00T predicts 16 steps at a time and executes 8 before looking again.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">24</div><div class="l">tabletop tasks</div></div>
+    <div class="stat"><div class="n">1,000</div><div class="l">demos per task</div></div>
+    <div class="stat"><div class="n">29</div><div class="l">joints driven by the policy</div></div>
+    <div class="stat"><div class="n">1</div><div class="l">camera, on the head</div></div>
+    <div class="stat"><div class="n">20 Hz</div><div class="l">control rate</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Put away and close: 6 tasks</h2>
+    <p class="sub">Two steps each: put an object inside a drawer, microwave or cabinet, then close it. Success needs both: the object inside and the door fully shut. These are the six tasks in the video at the top.</p>
+    <div class="tasks">
+      <div class="task"><h3>Drawer</h3><p>Place it in the drawer, then push the drawer shut.</p><div class="ex">PnPCupToDrawerClose · PnPCanToDrawerClose</div></div>
+      <div class="task"><h3>Microwave</h3><p>Put it inside, then swing the door closed.</p><div class="ex">PnPMilkToMicrowaveClose · PnPPotatoToMicrowaveClose</div></div>
+      <div class="task"><h3>Cabinet</h3><p>Put a bottle on the shelf, then close the cabinet.</p><div class="ex">PnPBottleToCabinetClose · PnPWineToCabinetClose</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Rearrangement: 18 tasks</h2>
+    <p class="sub">Move an object from a source container to a target container. The names spell it out: <code>PosttrainPnPNovelFrom<b>Tray</b>To<b>Pot</b>SplitA</code>. The long prefix comes from the GR00T N1 release; the source and target are what change.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>From a cutting board · 5</h3><p>To a basket, cardboard box, pan, pot or tiered basket.</p><div class="ex">…FromCuttingboardToPotSplitA</div></div>
+      <div class="task"><h3>From a placemat · 4</h3><p>To a basket, bowl, plate or tiered shelf.</p><div class="ex">…FromPlacematToTieredshelfSplitA</div></div>
+      <div class="task"><h3>From a plate · 4</h3><p>To a bowl, cardboard box, pan or another plate.</p><div class="ex">…FromPlateToPanSplitA</div></div>
+      <div class="task"><h3>From a tray · 5</h3><p>To a cardboard box, plate, pot, tiered basket or tiered shelf.</p><div class="ex">…FromTrayToPotSplitA</div></div>
+    </div>
+    <figure>
+      <video class="vid contain" src="media/gr1_rearrange.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 16 / 7"></video>
+      <figcaption>Six rearrangement tasks, first demo of each, head camera. Top: cutting board → basket, placemat → bowl, plate → pan. Bottom: tray → pot, cutting board → pot, placemat → tiered shelf. Sped up to fit; each tile freezes on its last frame.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> per task, averaged over all 24. Most papers train <strong>one model on all 24 tasks</strong> and run <strong>50 rollouts per task</strong>. NVIDIA's own GR00T example runs 20 per task with a 720-step limit (36 s). A rollout counts only if the object ends up inside the target and, for the six put-away tasks, the door is closed.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Mean success over the 24 tasks, 50 rollouts per task, mostly as collected in the ACE-Ego-0 paper. Training data isn't always the same: GR00T N1's paper used 100 demos per task, and most later papers use more.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Avg. success</th></tr></thead>
+        <tbody>
+          <tr><th>ACE-Ego-0 (Jun 2026)</th><td class="num"><b>72.8%</b></td></tr>
+          <tr><th>DIAL</th><td class="num">70.2%</td></tr>
+          <tr><th>JoyAI-RA</th><td class="num">63.2%</td></tr>
+          <tr><th>DyPES-VLA (Aug 2026)</th><td class="num">59.3%</td></tr>
+          <tr><th>ABot-M0</th><td class="num">58.3%</td></tr>
+          <tr><th>FLARE</th><td class="num">55.0%</td></tr>
+          <tr><th>TwinBrainVLA</th><td class="num">54.6%</td></tr>
+          <tr><th>GR00T N1 (2B) · 100 demos per task</th><td class="num">50.0%</td></tr>
+          <tr><th>GR00T N1.6</th><td class="num">47.6%</td></tr>
+          <tr><th>Diffusion Policy · 100 demos per task</th><td class="num">32.7%</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The same model can score differently in different papers: GR00T N1.6 appears as 47.6% and as 48.2%, and NVIDIA's fine-tuned N1.7 example reports 44.5% under its 20-trial protocol. Sources: <a href="https://arxiv.org/abs/2606.17200" target="_blank" rel="noopener">ACE-Ego-0</a>, <a href="https://arxiv.org/abs/2608.06374" target="_blank" rel="noopener">DyPES-VLA</a>, <a href="https://arxiv.org/abs/2602.11236" target="_blank" rel="noopener">ABot-M0</a>, <a href="https://arxiv.org/abs/2601.14133" target="_blank" rel="noopener">TwinBrainVLA</a>, <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1</a>, <a href="https://github.com/NVIDIA/Isaac-GR00T/blob/main/examples/robocasa-gr1-tabletop-tasks/README.md" target="_blank" rel="noopener">GR00T example</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="humanoid,dexhand,jointpos,absolute,mimicgen,ego,proprio,articulated,vla"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/robocasa/robocasa-gr1-tabletop-tasks" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://github.com/NVIDIA/Isaac-GR00T/tree/main/examples/robocasa-gr1-tabletop-tasks" target="_blank" rel="noopener">GR00T example ↗</a>
+    <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1 paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ LW-ROBOCASA-TASKS ============================ -->
+<section class="panel" id="lwrobocasa" role="tabpanel" aria-labelledby="tab-lwrobocasa" style="--c: var(--lwrobocasa)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/lw_tasks.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Isaac Lab-Arena · multi-robot · kitchen tasks</span>
+      <h1>LW-RoboCasa-Tasks</h1>
+      <p class="oneliner">RoboCasa's kitchen chores <em>rebuilt in NVIDIA Isaac Sim</em> by Lightwheel, so the same task can run on a <em>humanoid, a two-armed robot or a single arm</em>.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Task suite in LW-BenchHub (Lightwheel, Sep 2025) for <span class="term" data-t="teleop">teleoperated</span> data collection, imitation and <span class="term" data-t="rl">RL</span> training, and evaluation</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">100 kitchens (10 layouts × 10 styles) with 2,500+ assets, in <span class="term" data-t="isaacarena">Isaac Lab-Arena</span> (Isaac Lab 5.0, ray-traced rendering). Not MuJoCo</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">50 teleoperated demos per task per robot. The released LeRobot sets cover 89 of these tasks (plus 130 LIBERO tasks): 21,500 episodes, 20.5M frames</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">138: single-stage skills (doors, drawers, appliances, navigation) and multi-stage chores in 20 activity groups</div></div>
+      </div>
+      <p class="timer">Video: six first-person demos by the Unitree G1 humanoid from <code>Lightwheel-Tasks-G1-WBC</code>. Top: cheese on bread, close the dishwasher, serve the coffee mug. Bottom: organise vegetables, navigate to the range hood, move the drinks. Sped up to fit; each tile freezes on its last frame.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Every robot has its own observation and action layout. This is the Unitree G1 driven by a <span class="term" data-t="wbc">whole-body controller</span>, from <code>Lightwheel-Tasks-G1-WBC</code>, recorded at 50 steps a second.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li>Three 640×480 RGB streams: <code>first_person</code>, <code>left_hand</code> and <code>right_hand</code></li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: 43 joint angles (legs, waist, arms, hands)</li>
+          <li>An instruction, e.g. <i>"Move the drinks to the dining counter."</i></li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">any LeRobot policy, e.g. SmolVLA, GR00T, π₀</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 23 numbers (G1, whole-body)</h3>
+        <div class="vec" aria-label="23-number action">
+          <span class="g">gripL</span><span class="g">gripR</span>
+          <span class="sep"></span>
+          <span>Lx</span><span>Ly</span><span>Lz</span><span>qw</span><span>qx</span><span>qy</span><span>qz</span>
+          <span class="sep"></span>
+          <span>Rx</span><span>Ry</span><span>Rz</span><span>qw</span><span>qx</span><span>qy</span><span>qz</span>
+          <span class="sep"></span>
+          <span class="b">vx</span><span class="b">vy</span><span class="b">ωz</span><span class="b">height</span><span class="b">roll</span><span class="b">pitch</span><span class="b">yaw</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–1 · grippers</b>, left and right hand.</li>
+          <li><b>2–8, 9–15 · wrist targets.</b> A position and a <span class="term" data-t="quaternion">quaternion</span> (w, x, y, z) for each hand.</li>
+          <li><b>16–18 · walking.</b> Base velocity in the robot's own <span class="term" data-t="frame">frame</span>: forward, sideways, turn.</li>
+          <li><b>19–22 · body.</b> Standing height, then torso roll, pitch and yaw.</li>
+        </ul>
+        <p class="note">The controller turns these 23 commands into 43 joint targets (stored as <code>processed_action</code>), keeping the legs balanced while the arms work. Other robots use other layouts, e.g. 21 joint-level numbers for the ARX X7s, and 12 for Double-Piper in LeRobot's example.</p>
+      </div>
+    </div>
+    <figure style="margin-top: 18px">
+      <video class="vid contain" src="media/lw_views.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 4 / 1"></video>
+      <figcaption>The three camera streams at the same moment, in dataset order <code>left_hand</code>, <code>first_person</code>, <code>right_hand</code>: <i>"Move the drinks to the dining counter."</i></figcaption>
+    </figure>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">138</div><div class="l">RoboCasa tasks</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">robot types, 27 variants</div></div>
+    <div class="stat"><div class="n">100</div><div class="l">kitchen scenes</div></div>
+    <div class="stat"><div class="n">2,500+</div><div class="l">assets</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">demos per task and robot</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">The tasks</h2>
+    <p class="sub">Lightwheel kept RoboCasa's task names and success logic (<code>CloseDrawer</code>, <code>CoffeeServeMug</code>, <code>NavigateKitchen</code>) and added more appliances. The code splits them into single-stage and multi-stage tasks.</p>
+    <div class="tasks">
+      <div class="task"><h3>Appliances</h3><p>Toaster, toaster oven, stand mixer, electric kettle, oven, stove, microwave, coffee machine, sink, dishwasher.</p><div class="ex">OpenToasterOvenDoor · TurnOnElectricKettle · OpenStandMixerHead</div></div>
+      <div class="task"><h3>Doors and drawers</h3><p>Open or close anything hinged or sliding.</p><div class="ex">CloseDrawer · CloseDishwasher · CloseOven</div></div>
+      <div class="task"><h3>Pick and place</h3><p>Move an object into or out of an appliance.</p><div class="ex">PnPCounterToOven · PnPToasterOvenToCounter · PnPCounterToStandMixer</div></div>
+      <div class="task"><h3>Navigation</h3><p>Walk or drive to a named fixture.</p><div class="ex">NavigateKitchen: "Navigate to the stove."</div></div>
+      <div class="task"><h3>Multi-stage chores</h3><p>20 activity groups: baking, boiling, brewing, chopping, frying, making toast, restocking, serving, setting the table, washing dishes and more.</p><div class="ex">BreadAndCheese · DessertAssembly · OrganizeVegetables · SizeSorting</div></div>
+      <div class="task"><h3>The sister suite</h3><p>Lightwheel-LIBERO-Tasks: 130 LIBERO tasks rebuilt the same way. Together with these, LW-BenchHub has 268 tasks.</p><div class="ex">L90K1PutTheBlackBowlOnThePlate</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Robots and datasets</h2>
+    <p class="sub">Seven robot types are supported: Unitree G1, PandaOmron, DoublePanda, Agilex Piper, ARX X7s, Franka and LeRobot SO-100/101 (27 variants in all). Four have public datasets, all with 50 episodes per task, 50 fps and three 640×480 cameras.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Dataset</th><th>Robot</th><th>Suites</th><th>Tasks</th><th>Frames</th></tr></thead>
+        <tbody>
+          <tr><th>Lightwheel-Tasks-X7S</th><td>ARX X7s: mobile base, lift, two arms</td><td>LIBERO + RoboCasa</td><td class="num">117</td><td class="num">~10.3M</td></tr>
+          <tr><th>Lightwheel-Tasks-Double-Piper</th><td>Two Agilex Piper arms</td><td>LIBERO</td><td class="num">130</td><td class="num">~6.0M</td></tr>
+          <tr><th>Lightwheel-Tasks-G1-Controller</th><td>Unitree G1</td><td>LIBERO</td><td class="num">62</td><td class="num">~2.7M</td></tr>
+          <tr><th>Lightwheel-Tasks-G1-WBC</th><td>Unitree G1, whole-body control</td><td>RoboCasa</td><td class="num">32</td><td class="num">~1.5M</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Two ways to run it</h2>
+    <div class="tasks" style="grid-template-columns: repeat(auto-fill, minmax(min(100%, 420px), 1fr))">
+      <div class="task"><h3>LeRobot: <code>--env.type=isaaclab_arena</code></h3><p>Built into <code>lerobot-eval</code>. The environment is pulled from the Hub, and many copies run in parallel on one GPU.</p><div class="ex">lerobot-eval --policy.path=… --env.type=isaaclab_arena --env.hub_path=LightwheelAI/lw_benchhub_env --env.action_dim=12 --eval.batch_size=10</div></div>
+      <div class="task"><h3>LW-BenchHub scripts</h3><p>Teleoperation (keyboard, VR headsets, leader arms), demo replay, RL training (skrl, PPO) and evaluation. A server–client policy API keeps the policy's dependencies out of the simulator.</p><div class="ex">python ./lw_benchhub/scripts/teleop/teleop_main.py --task_config pandaomron</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate.</strong> Each task defines its own success check in code, e.g. the object is inside the container and the door is closed. LeRobot's example runs <strong>100 episodes, 10 at a time, 20 s each</strong>. There's no fixed official protocol or seed list yet, so compare numbers only within one paper.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">We found no published results comparing methods on LW-RoboCasa-Tasks as of September 2026. Lightwheel ships one reference SmolVLA checkpoint (Double-Piper, one LIBERO task) without a reported score, and recent VLA papers still report on the MuJoCo RoboCasa benchmarks instead (see <a href="#rckitchen">RoboCasa Kitchen</a> and <a href="#robocasa365">RoboCasa365</a>).</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="isaacarena,teleop,wbc,humanoid,quaternion,embodiment,frame,rl"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/LightwheelAI/LW-BenchHub" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://docs.lightwheel.net/lw_benchhub" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://huggingface.co/LightwheelAI" target="_blank" rel="noopener">Datasets (Hugging Face) ↗</a>
+    <a href="https://github.com/huggingface/lerobot/blob/main/docs/source/envhub_isaaclab_arena.mdx" target="_blank" rel="noopener">LeRobot docs ↗</a>
+    <a href="https://lightwheel.ai/media/lightwheel-benchmark-anouncement" target="_blank" rel="noopener">Announcement ↗</a>
+  </div>
+</section>
+
+<!-- ============================ MIMICDROID ============================ -->
+<section class="panel" id="mimicdroid" role="tabpanel" aria-labelledby="tab-mimicdroid" style="--c: var(--mimicdroid)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/mimicdroid_hero.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">In-context learning · humanoid · learning from play</span>
+      <h1>MimicDroid</h1>
+      <p class="oneliner">Show a humanoid <em>a few clips of a new task</em> and it should do it right away. The clips go in as <span class="term" data-t="icl">context</span>, like examples in a prompt, <em>with no extra training</em>.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Few-shot <span class="term" data-t="icl">in-context</span> imitation benchmark from the MimicDroid paper (UT Austin, ICRA 2026)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">RoboCasa kitchens in <span class="term" data-t="robosuite">robosuite</span> (<span class="term" data-t="mujoco">MuJoCo</span>), with a GR1 <span class="term" data-t="humanoid">humanoid</span> or a free-floating "abstract" hand</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">8 h (320,000 steps) of unlabeled <span class="term" data-t="playdata">play</span> by a floating hand: 30 objects, 8 kitchens, no task labels</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">12 test tasks, 4 at each of 3 levels of novelty</div></div>
+      </div>
+      <p class="timer">Video: <code>PnPSinkToCabinetL2</code>, one MimicDroid rollout on the GR1 humanoid, from the project page. The view is wider than what the policy sees. About 3× speed.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Training uses no tasks at all. MimicDroid cuts the play data into short segments and finds, for each one, the 10 most similar segments elsewhere in the data. Some of those become the context and the original the target, so the model learns to copy whatever the context shows.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Context:</b> a few short example clips of the task, with their actions. At test time these are demos of the new task</li>
+          <li>Current RGB images (3 cameras in simulation). In training, random patches are masked out so the policy stops relying on what the hand looks like</li>
+          <li><span class="term" data-t="proprio">Proprioception</span>: wrist pose and a grasp signal</li>
+          <li>No instruction: only the examples say what the task is</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">an in-context policy: reads the examples, then acts</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers per hand</h3>
+        <div class="vec" aria-label="7-number action per hand">
+          <span>x</span><span>y</span><span>z</span><span>rx</span><span>ry</span><span>rz</span><span class="g">grasp</span>
+        </div>
+        <ul class="legend">
+          <li><b>0–5 · wrist pose.</b> Where the hand should be at the next timestep: position and orientation (6-DoF).</li>
+          <li><b>6 · grasp.</b> Open or closed, derived from the finger joint angles.</li>
+          <li><b>Two hands</b> make 14 numbers.</li>
+        </ul>
+        <p class="note">On GR1, inverse kinematics turns each wrist pose into arm joint angles (<span class="term" data-t="retarget">retargeting</span>), and the grasp bit opens or closes the fingers. Because the action is a hand pose rather than joints, a policy trained on the floating hand runs on the humanoid unchanged.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">12</div><div class="l">test tasks</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">levels of novelty</div></div>
+    <div class="stat"><div class="n">8 h</div><div class="l">of unlabeled play</div></div>
+    <div class="stat"><div class="n">30</div><div class="l">objects</div></div>
+    <div class="stat"><div class="n">8</div><div class="l">kitchens</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Teleoperating a humanoid for every new task is slow. <span class="term" data-t="playdata">Play</span>, where people freely handle whatever is around with no task in mind, is cheap to record in bulk, including from people's own hands on video. The question is whether a policy trained only on play can <strong>pick up a new task from a handful of examples at test time</strong>, without fine-tuning and without forgetting everything else.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Three levels of novelty</h2>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>L1 · seen objects, seen kitchen</h3><p>New object positions only.</p><div class="ex">PnPSinkToRightCounterPlate · PnPSinkToCabinet · TurnOnFaucet · CloseLeftCabinetDoor</div></div>
+      <div class="task"><h3>L2 · new objects, seen kitchen</h3><p>Things never in the play data, e.g. an onion, garlic or a new cabinet.</p><div class="ex">PnPSinkToRightCounterPlateL2 · PnPSinkToCabinetL2 · CloseRightCabinetDoorL2 · CloseLeftCabinetDoorL2</div></div>
+      <div class="task"><h3>L3 · new objects, new kitchen</h3><p>New background, furniture layout and objects. Often needs motions the play data never had.</p><div class="ex">CloseLeftCabinetDoorL3 · PnPSinkToRightCounterPlateL3 · PnPSinkToMicrowaveTopL3 · TurnOnFaucetL3</div></div>
+    </div>
+    <figure>
+      <video class="vid contain" src="media/mimicdroid_levels.mp4" muted loop playsinline preload="metadata" style="aspect-ratio: 8 / 3"></video>
+      <figcaption>All 12 test tasks, one MimicDroid rollout each on GR1, wide view. Rows are L1, L2 and L3, in the order listed above. Sped up to fit; each tile freezes on its last frame.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> per level, averaged over its 4 tasks, on <strong>both bodies</strong>: the floating hand the play data came from, and the GR1 humanoid. Each test gives the policy a few example clips of the task and nothing else. The real-robot version (Unitree G1, 45 minutes of real play) runs 10 rollouts per task at the same three levels.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Success (%) in simulation, from the MimicDroid paper. We found no other published results on this benchmark yet.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>Hand L1</th><th>Hand L2</th><th>Hand L3</th><th>GR1 L1</th><th>GR1 L2</th><th>GR1 L3</th></tr></thead>
+        <tbody>
+          <tr><th>MimicDroid</th><td class="num"><b>73</b></td><td class="num">39</td><td class="num"><b>27</b></td><td class="num"><b>59</b></td><td class="num"><b>44</b></td><td class="num"><b>26</b></td></tr>
+          <tr><th>Vid2Robot (task-conditioned)</th><td class="num">44</td><td class="num"><b>40</b></td><td class="num">12</td><td class="num">41</td><td class="num">23</td><td class="num">11</td></tr>
+          <tr><th>Test-time fine-tuning (PEFT)</th><td class="num">47</td><td class="num">35</td><td class="num">0</td><td class="num">29</td><td class="num">21</td><td class="num">1</td></tr>
+          <tr><th>H2R</th><td class="num">3</td><td class="num">5</td><td class="num">3</td><td class="num">3</td><td class="num">0</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Fine-tuning at test time breaks down on L3, and loses more when moving from hand to humanoid. On the real robot MimicDroid scores 53 / 23 / 8% on L1–L3 against Vid2Robot's 28 / 8 / 0%. The most common failure is doing the wrong task (26% of rollouts), then missed grasps (16%). Sources: <a href="https://arxiv.org/abs/2509.09769" target="_blank" rel="noopener">MimicDroid paper</a>, <a href="https://ut-austin-rpl.github.io/MimicDroid/" target="_blank" rel="noopener">project page</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="icl,playdata,retarget,humanoid,embodiment,proprio,demonstration,zeroshot"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://ut-austin-rpl.github.io/MimicDroid/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/UT-Austin-RPL/mimicdroid-robocasa" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/Rutav/MimicDroidDataset" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2509.09769" target="_blank" rel="noopener">Paper ↗</a>
   </div>
 </section>
 
@@ -1746,7 +2477,7 @@
 </section>
 
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench and LIBERO-Plus (whose failure rollouts are from its repository). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench and VLABench simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 25 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 28 September 2026.
 </footer>
 </main>
 
@@ -1813,6 +2544,15 @@
     shaped: ["Shaped reward", "A reward that gives partial credit along the way (getting closer, grasping) rather than only at success. It helps RL learn; Meta-World still scores only success."],
     sawyer: ["Sawyer", "A 7-joint robot arm made by Rethink Robotics, with a two-finger gripper. Meta-World uses it for every task."],
     pddl: ["PDDL", "A formal language for describing objects, their relations and goals. LIBERO uses it to define scenes and generate tasks."],
+    mimicgen: ["MimicGen / DexMimicGen", "Tools that turn a handful of human demos into thousands: they split each demo into object-centred pieces and replay them, moved to fit, in new scenes. DexMimicGen does the same for two-armed robots and humanoids with hands."],
+    humanoid: ["Humanoid", "A robot with a human-like body: torso, two arms, usually hands and a head, sometimes legs. Fourier GR-1 and Unitree G1 are examples."],
+    dexhand: ["Dexterous hand", "A robot hand with several moving fingers instead of a two-finger gripper. It can hold more shapes, but the policy has to control every finger joint."],
+    absolute: ["Absolute action", "The action says where to be (e.g. elbow at 40°), not how far to move from where you are. The opposite of a delta action."],
+    icl: ["In-context learning", "Picking up a new task from examples given as input at test time, with no change to the network's weights, like showing a language model examples in its prompt."],
+    playdata: ["Play data", "Recordings of someone freely handling objects with no set task. Cheap to collect in bulk, but nothing says which task is which."],
+    retarget: ["Retargeting", "Mapping motion from one body to another, e.g. using inverse kinematics to find the arm joint angles that put a humanoid's hand where a human hand was."],
+    isaacarena: ["Isaac Lab-Arena", "NVIDIA's framework on top of Isaac Lab (Isaac Sim) for assembling tasks from scenes, objects and robots, and evaluating policies in many environments at once on the GPU."],
+    wbc: ["Whole-body control (WBC)", "A controller that turns high-level commands (hand poses, walking speed, torso angle) into targets for every joint, keeping a legged robot balanced while it works."],
   };
 
   /* glossary lists */
