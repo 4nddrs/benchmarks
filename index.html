@@ -28,6 +28,8 @@
     --robocasa365: #c26a12;
     --gr1: #56688f;
     --lwrobocasa: #7a6450;
+    --m3bench: #1a5fb4;
+    --navqa: #35637a;
     --mimicdroid: #8e44ad;
     --mikasa: #6a44d8;
     --libero: #0b8574;
@@ -60,6 +62,8 @@
       --robocasa365: #f0a049;
       --gr1: #a9b8dc;
       --lwrobocasa: #c9b39c;
+      --m3bench: #78aeed;
+      --navqa: #8cc3dc;
       --mimicdroid: #c792ea;
       --mikasa: #a58bff;
       --libero: #3fcfb6;
@@ -89,6 +93,8 @@
     --robocasa365: #f0a049;
     --gr1: #a9b8dc;
     --lwrobocasa: #c9b39c;
+    --m3bench: #78aeed;
+    --navqa: #8cc3dc;
     --mimicdroid: #c792ea;
     --mikasa: #a58bff;
     --libero: #3fcfb6;
@@ -356,6 +362,12 @@
   .task p { font-size: 14.5px; color: var(--muted); margin-top: 4px; }
   .task .ex { font: 500 12px/1.4 var(--mono); color: var(--c); margin-top: 8px; overflow-wrap: anywhere; }
 
+  /* question timeline (M3-Bench-robot) */
+  .qline { position: relative; height: 26px; margin-top: 4px; }
+  .qline::before { content: ""; position: absolute; inset: 11px 0 auto; height: 4px; border-radius: 2px; background: var(--sunk); border: 1px solid var(--line); }
+  .qline span { position: absolute; top: 2px; width: 4px; height: 22px; border-radius: 2px; background: var(--c); translate: -2px 0; }
+  .qaxis { display: flex; justify-content: space-between; font: 500 12px/1 var(--mono); color: var(--faint); margin: 6px 0 16px; }
+
   .glossary { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 0 28px; }
   .glossary div { padding: 12px 0; border-top: 1px solid var(--line); }
   .glossary dt { font-weight: 700; }
@@ -385,9 +397,11 @@
       <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
       <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
       <button class="tab" role="tab" id="tab-lwrobocasa" aria-controls="lwrobocasa" data-target="lwrobocasa" style="--c: var(--lwrobocasa)"><span class="dot"></span>LW-RoboCasa-Tasks</button>
+      <button class="tab" role="tab" id="tab-m3bench" aria-controls="m3bench" data-target="m3bench" style="--c: var(--m3bench)"><span class="dot"></span>M3-Bench-robot</button>
       <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
       <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
       <button class="tab" role="tab" id="tab-mimicdroid" aria-controls="mimicdroid" data-target="mimicdroid" style="--c: var(--mimicdroid)"><span class="dot"></span>MimicDroid</button>
+      <button class="tab" role="tab" id="tab-navqa" aria-controls="navqa" data-target="navqa" style="--c: var(--navqa)"><span class="dot"></span>NaVQA</button>
       <button class="tab" role="tab" id="tab-rlbench" aria-controls="rlbench" data-target="rlbench" style="--c: var(--rlbench)"><span class="dot"></span>RLBench</button>
       <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
       <button class="tab" role="tab" id="tab-gr1" aria-controls="gr1" data-target="gr1" style="--c: var(--gr1)"><span class="dot"></span>RoboCasa GR-1 Tabletop</button>
@@ -407,12 +421,12 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · fourteen benchmarks</span>
+    <span class="eyebrow">Robot learning · sixteen benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These fourteen test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
+      compared fairly. These sixteen test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
   </div>
@@ -456,6 +470,15 @@
         <span class="go">Tests: the same chores on many bodies →</span>
       </div>
     </button>
+    <button class="card" data-go="m3bench" style="--c: var(--m3bench)">
+      <video class="vid" src="media/m3bench_scenes.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Long-term memory · video QA</span>
+        <h3>M3-Bench-robot</h3>
+        <p>Half an hour of home and office life seen and heard from a robot's point of view. Then: where does the spinach go, and does Lily like her job?</p>
+        <span class="go">Tests: remembering people and places →</span>
+      </div>
+    </button>
     <button class="card" data-go="metaworld" style="--c: var(--metaworld)">
       <video class="vid contain" src="media/metaworld_mt10.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -481,6 +504,15 @@
         <h3>MimicDroid</h3>
         <p>Show a humanoid a few clips of a task it has never trained on, and it should do the task right away, with no extra training. 12 tasks in 3 levels.</p>
         <span class="go">Tests: learning from examples at test time →</span>
+      </div>
+    </button>
+    <button class="card" data-go="navqa" style="--c: var(--navqa)">
+      <video class="vid contain" src="media/navqa_coda16.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Spatial memory · navigation QA</span>
+        <h3>NaVQA</h3>
+        <p>A robot drives around a campus for up to half an hour. Then: where did you see the recycling bin, when did you cross the street, was it raining?</p>
+        <span class="go">Tests: remembering where and when →</span>
       </div>
     </button>
     <button class="card" data-go="rlbench" style="--c: var(--rlbench)">
@@ -607,6 +639,15 @@
             <td class="num">No published results yet</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="m3bench"><span style="background: var(--m3bench)"></span>M3-Bench-robot</button></th>
+            <td><strong>Can an agent remember what it saw and heard over half an hour, and reason about it?</strong></td>
+            <td>Real homes and offices, filmed by a person playing the robot (head camera + microphones). No simulator</td>
+            <td>None. Evaluation only</td>
+            <td class="num">1,276 open-ended questions over 100 videos, 5 reasoning types</td>
+            <td class="num">A written answer; no robot control</td>
+            <td class="num"><strong>34.7%</strong> (NS-Mem); humans 90.7%</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="metaworld"><span style="background: var(--metaworld)"></span>Meta-World</button></th>
             <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
             <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
@@ -632,6 +673,15 @@
             <td class="num">12 test tasks in 3 levels</td>
             <td class="num">7 numbers per hand (wrist pose + grasp), turned into GR1 joint angles</td>
             <td class="num"><strong>59 / 44 / 26%</strong> on GR1, levels 1–3 (MimicDroid)</td>
+          </tr>
+          <tr>
+            <th><button class="benchmark-link" data-go="navqa"><span style="background: var(--navqa)"></span>NaVQA</button></th>
+            <td><strong>Can a robot remember where and when it saw things on a long drive?</strong></td>
+            <td>Real campus drives, indoors and out, by a Clearpath Husky (CODa dataset). No simulator</td>
+            <td>None. Evaluation only</td>
+            <td class="num">210 questions over 7 drives; short, medium and long memories</td>
+            <td class="num">An answer: a map position (x, y, z), a time, yes/no or text</td>
+            <td class="num"><strong>77–89%</strong> on position questions, by memory length (STaR)</td>
           </tr>
           <tr>
             <th><button class="benchmark-link" data-go="rlbench"><span style="background: var(--rlbench)"></span>RLBench</button></th>
@@ -699,7 +749,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. M3-Bench-robot and NaVQA have no action at all: nothing moves while they're scored, and the model only answers questions about a recorded video. A NaVQA answer can be a place on the map, though, which a real robot can then drive to. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -1459,6 +1509,307 @@
     <a href="https://github.com/UT-Austin-RPL/mimicdroid-robocasa" target="_blank" rel="noopener">GitHub ↗</a>
     <a href="https://huggingface.co/datasets/Rutav/MimicDroidDataset" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
     <a href="https://arxiv.org/abs/2509.09769" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ M3-BENCH-ROBOT ============================ -->
+<section class="panel" id="m3bench" role="tabpanel" aria-labelledby="tab-m3bench" style="--c: var(--m3bench)" hidden>
+  <div class="top">
+    <video class="vid" src="media/m3bench_hero.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Long-term memory · long-video QA · robot's-eye view</span>
+      <h1>M3-Bench-robot</h1>
+      <p class="oneliner">Watch and listen to <em>half an hour of a household</em> from a robot's point of view, then answer questions that need <em>long-term memory</em>: where things go, who said what, what people like.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="lvqa">Long-video question answering</span> from ByteDance Seed's M3-Agent paper (ICLR 2026). Nothing is controlled: it tests memory, not motion</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Real rooms, no simulator. A person plays the robot with a head-mounted camera, while 3 or 4 other actors talk to it and give it chores</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">100 videos with sound, 34 min each on average (57 h in total). Evaluation only: no training set</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">1,276 open-ended questions, asked at set moments in each video, each tagged with 1 or more of 5 reasoning types</div></div>
+      </div>
+      <p class="timer">Video: <code>kitchen_03</code>, 1:05–1:40, unpacking groceries. At 1:40 comes the first question: "Where should the spinach be placed in the silver fridge?" Real time; unmute for sound.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The loop is the same, but the "action" is a sentence. The agent takes in the video and audio as a stream, 30 seconds at a time, and has to decide what to keep. Questions only arrive later, when the moment they ask about has already gone by.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Video</b> from the "robot's" head camera, one 30-second clip after another</li>
+          <li><b>Audio</b>: people talking to the robot and to each other. Many answers are only ever said, never shown</li>
+          <li><b>A question</b> at a set timestamp, e.g. "What type of milk tea should the robot make, hot or iced?"</li>
+          <li>Only what came <em>before</em> that timestamp counts</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Agent</div><div class="d">writes memory while it watches, searches it when asked</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Output · a short answer in words</h3>
+        <div class="vec" aria-label="M3-Agent answering loop">
+          <span>search_node</span><span>search_clip</span><span class="k">… ≤ 5 rounds</span><span class="g">answer</span>
+        </div>
+        <ul class="legend">
+          <li><b>While watching.</b> For each clip, M3-Agent writes <span class="term" data-t="episodicmem">episodic</span> memory ("Alice throws a bottle in the green bin") and <span class="term" data-t="semanticmem">semantic</span> memory ("the green bin is for recycling") into an <span class="term" data-t="entitygraph">entity graph</span> keyed by faces and voices.</li>
+          <li><b>When asked.</b> It searches that memory by person or by event, up to 5 times, then answers.</li>
+          <li><b>Scored</b> by GPT-4o against the reference answer: right or wrong.</li>
+        </ul>
+        <p class="note">This is how M3-Agent works, not a rule of the benchmark. Any system that watches the video and replies in words can be tested. The baselines include plain <span class="term" data-t="socratic">caption-and-search</span> pipelines and streaming video models.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">100</div><div class="l">videos</div></div>
+    <div class="stat"><div class="n">34 min</div><div class="l">average length</div></div>
+    <div class="stat"><div class="n">1,276</div><div class="l">questions</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">kinds of room</div></div>
+    <div class="stat"><div class="n">67</div><div class="l">actors in 51 locations</div></div>
+    <div class="stat"><div class="n">90.7%</div><div class="l">human accuracy</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">A home robot shouldn't have to ask "coffee or tea?" every morning. It should have <strong>remembered from living with you</strong>. Most long-video benchmarks ask about what can be seen: actions, objects, order. Here the questions are the ones a household assistant would need answered: where a thing belongs, what someone asked for, who is in charge. The answers are spread over half an hour, often spoken rather than shown, and sometimes never stated at all. This is a different kind of <span class="term" data-t="memory">memory</span> from MIKASA-Robo's, which hides a cue for a few seconds and then needs an action.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Five kinds of question</h2>
+    <p class="sub">Each question is tagged with every type it needs, so the shares add up to more than 100%. All examples are real questions from the benchmark.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Multi-evidence · 66%</h3><p>Combine details from several moments. Counting is the most common way people get these wrong too. (The released data calls this type "Multi-Detail".)</p><div class="ex">How many times did the yellow pillow move? → 4</div></div>
+      <div class="task"><h3>Person understanding · 43%</h3><p>Work out someone's identity, mood, personality or relationships from how they act across the video.</p><div class="ex">Is Asher's memory good? → Not good</div></div>
+      <div class="task"><h3>Cross-modal · 37%</h3><p>Link what is heard to what is seen: a request, a name, a colour pointed at while speaking.</p><div class="ex">What type of milk tea should the robot make, hot or iced? → Hot</div></div>
+      <div class="task"><h3>General knowledge · 26%</h3><p>Turn specific events into a rule about this home: where things are kept, how things are done.</p><div class="ex">Where should the spinach be placed in the silver fridge? → In the fridge drawer</div></div>
+      <div class="task"><h3>Multi-hop · 7%</h3><p>Follow a chain: find one event, then use it to find the next.</p><div class="ex">What is included in Lily's afternoon tea? → Mocha coffee, strawberry cake, chips and ketchup</div></div>
+    </div>
+    <figure style="max-width: 720px">
+      <video class="vid" src="media/m3bench_scenes.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>The seven kinds of room, 3 s from each, all from the robot's head camera: living room, kitchen, bedroom, study, office, meeting room and gym. Real time.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">One video, fourteen questions</h2>
+    <p class="sub">Questions are pinned to the moment the robot would need the answer, usually right before a chore. Here is every question for <code>kitchen_03</code> (36 min 53 s), in order. The last three are asked at the very end and cover all of it.</p>
+    <div class="qline" aria-hidden="true">
+      <span style="left: 4.5%"></span><span style="left: 10.8%"></span><span style="left: 31.1%"></span><span style="left: 39.7%"></span><span style="left: 44.1%"></span><span style="left: 68.6%"></span><span style="left: 72.6%"></span><span style="left: 73.6%"></span><span style="left: 74.2%"></span><span style="left: 87.3%"></span><span style="left: 91.5%"></span><span style="left: 100%"></span>
+    </div>
+    <div class="qaxis"><span>0:00</span><span>36:53</span></div>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Asked at</th><th>Question</th><th>Reference answer</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1:40</td><td>Where should the spinach be placed in the silver fridge?</td><td>In the fridge drawer</td></tr>
+          <tr><td class="num">3:58</td><td>In which section of the silver fridge did the robot put the broccoli?</td><td>The fruit section</td></tr>
+          <tr><td class="num">11:29</td><td>What kind of seafood will be in the dinner?</td><td>Fish</td></tr>
+          <tr><td class="num">14:38</td><td>Where does the robot put the milk?</td><td>In the cooling section</td></tr>
+          <tr><td class="num">16:17</td><td>Where does the robot get the seasoning bottle from?</td><td>In the cabinet</td></tr>
+          <tr><td class="num">25:19</td><td>Where did the robot get the notebook for the shopping list from?</td><td>The table with the pen holder</td></tr>
+          <tr><td class="num">26:47</td><td>Besides onions, what other ingredients haven't been bought this week?</td><td>Potatoes, frozen tofu and fish balls</td></tr>
+          <tr><td class="num">27:08</td><td>How many items were newly added to the shopping list?</td><td>Nine</td></tr>
+          <tr><td class="num">27:23</td><td>Where does the robot put the pen back?</td><td>The pen holder on the desk</td></tr>
+          <tr><td class="num">32:12</td><td>What was wiped with the dishcloth?</td><td>The countertop, the fridge and the window</td></tr>
+          <tr><td class="num">33:46</td><td>Where did the robot throw the expired ingredients?</td><td>The dustbin</td></tr>
+          <tr><td class="num">36:53</td><td>What vegetables did Saxon and Tamera buy?</td><td>Chinese cabbage, spinach, carrot and broccoli</td></tr>
+          <tr><td class="num">36:53</td><td>What is in the cabinet?</td><td>Seasoning bottle, storage bag and ingredients</td></tr>
+          <tr><td class="num">36:53</td><td>Do Saxon and Tamera both care about tidiness?</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Lightly edited for spelling from <code>data/annotations/robot.json</code> in the M3-Agent repository.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Accuracy</strong>: the share of the 1,276 questions answered correctly, overall and per question type. Answers are free text, so <span class="term" data-t="llmjudge">GPT-4o acts as the judge</span>, comparing each answer with the reference; it agreed with human graders 96% of the time. Questions were written to have one checkable answer and to need the video, not common sense or the dialogue alone. Five people answered every question with unlimited rewatching and got <strong>90.7%</strong>, which is roughly the ceiling.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Accuracy (%) on M3-Bench-robot. ME multi-evidence, MH multi-hop, CM cross-modal, PU person understanding, GK general knowledge.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>ME</th><th>MH</th><th>CM</th><th>PU</th><th>GK</th><th>All</th></tr></thead>
+        <tbody>
+          <tr><th>NS-Mem</th><td class="num"><b>36.2</b></td><td class="num"><b>31.5</b></td><td class="num"><b>33.8</b></td><td class="num"><b>45.7</b></td><td class="num"><b>26.4</b></td><td class="num"><b>34.7</b></td></tr>
+          <tr><th>M3-Agent</th><td class="num">32.8</td><td class="num">29.4</td><td class="num">31.2</td><td class="num">43.3</td><td class="num">19.1</td><td class="num">30.7</td></tr>
+          <tr><th>MA-LMM (streaming)</th><td class="num">25.6</td><td class="num">23.4</td><td class="num">22.7</td><td class="num">39.1</td><td class="num">14.4</td><td class="num">24.4</td></tr>
+          <tr><th>Gemini-GPT4o-Hybrid (prompted agent)</th><td class="num">21.3</td><td class="num">25.5</td><td class="num">22.7</td><td class="num">28.8</td><td class="num">23.1</td><td class="num">24.0</td></tr>
+          <tr><th>Flash-VStream (streaming)</th><td class="num">21.6</td><td class="num">19.4</td><td class="num">19.3</td><td class="num">24.3</td><td class="num">14.1</td><td class="num">19.4</td></tr>
+          <tr><th>Gemini-Agent (prompted agent)</th><td class="num">15.8</td><td class="num">17.1</td><td class="num">15.3</td><td class="num">20.0</td><td class="num">15.5</td><td class="num">16.9</td></tr>
+          <tr><th>MovieChat (streaming)</th><td class="num">13.3</td><td class="num">9.8</td><td class="num">12.2</td><td class="num">15.7</td><td class="num">7.0</td><td class="num">11.2</td></tr>
+          <tr><th>GPT-4o captions + search</th><td class="num">9.3</td><td class="num">9.0</td><td class="num">8.4</td><td class="num">10.2</td><td class="num">7.3</td><td class="num">8.5</td></tr>
+          <tr><th>Gemini-1.5-Pro captions + search</th><td class="num">6.5</td><td class="num">7.5</td><td class="num">8.0</td><td class="num">9.7</td><td class="num">7.6</td><td class="num">8.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Even the best system gets about a third right, against 90.7% for people. Captioning each clip and searching the captions barely works (Qwen2.5-VL-7B 3.4%, Qwen2.5-Omni-7B 2.0%). In M3-Agent, removing semantic memory drops the score from 30.7 to 13.6, and <span class="term" data-t="rl">RL</span> training of the answering model adds 10 points over prompting it (20.7 → 30.7). The same agents do much better on web videos: M3-Agent gets 48.9% and NS-Mem 53.6% on M3-Bench-web. Sources: <a href="https://arxiv.org/abs/2508.09736" target="_blank" rel="noopener">M3-Agent paper</a>, <a href="https://arxiv.org/abs/2603.15280" target="_blank" rel="noopener">NS-Mem paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="lvqa,episodicmem,semanticmem,entitygraph,socratic,llmjudge,memory,rl"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://m3-agent.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/ByteDance-Seed/m3-agent" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/ByteDance-Seed/M3-Bench" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2508.09736" target="_blank" rel="noopener">Paper ↗</a>
+    <a href="https://www.emergentmind.com/topics/m3-bench-robot" target="_blank" rel="noopener">Emergent Mind topic ↗</a>
+  </div>
+</section>
+
+<!-- ============================ NAVQA ============================ -->
+<section class="panel" id="navqa" role="tabpanel" aria-labelledby="tab-navqa" style="--c: var(--navqa)" hidden>
+  <div class="top">
+    <video class="vid r32 contain" src="media/navqa_coda16.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Spatial-temporal memory · navigation QA · real campus</span>
+      <h1>NaVQA</h1>
+      <p class="oneliner">A robot drives around a campus for up to half an hour. Afterwards it must say <em>where</em> it saw something, <em>when</em> something happened, or <em>what</em> it looked like, so it can take you there.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="lvqa">Long-video question answering</span> for navigation, from the ReMEmbR paper (NVIDIA and UT Austin, 2024)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">7 real drives by a Clearpath Husky on the UT Austin campus, indoors and out, from the <span class="term" data-t="coda">CODa</span> dataset. Sun, cloud, rain and low light</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">Front camera video plus a <span class="term" data-t="gps">GPS</span> position and a timestamp for every moment. Evaluation only: no training set</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">210 questions, 30 per drive, over short (&lt; 2 min), medium (2–7 min) and long (&gt; 7 min) stretches of the drive</div></div>
+      </div>
+      <p class="timer">Video: CODa sequence 16, one of the seven NaVQA drives, on a rainy morning. The 3D boxes are CODa's own labels and are not part of NaVQA. Sped up by CODa.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The robot's history is a stream of camera frames, each stamped with where and when it was taken. A question comes at the end of a stretch of the drive, and the answer is one of five kinds. Position answers are coordinates, so a robot can use them directly as a navigation goal.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Front camera</b> frames from the whole stretch: up to 2 min, 2–7 min, or more than 7</li>
+          <li><b>Position</b> (x, y, z) from GPS for each frame</li>
+          <li><b>Time</b> of each frame</li>
+          <li><b>A question</b>, e.g. "Where is the recycling bin?" or "When did you cross the street?"</li>
+          <li>No LiDAR, no map, no other cameras, although CODa records them</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Agent</div><div class="d">builds a memory of the drive, then searches it to answer</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Answer · one of five kinds</h3>
+        <div class="vec" aria-label="Five answer kinds">
+          <span class="g">x</span><span class="g">y</span><span class="g">z</span><span class="sep"></span><span class="b">time</span><span class="b">duration</span><span class="sep"></span><span>yes / no</span><span>text</span>
+        </div>
+        <ul class="legend">
+          <li><b>Position.</b> A point on the map, e.g. where the recycling bin was seen. Right if within 15 m.</li>
+          <li><b>Time or duration.</b> "8 minutes ago", "0.75 minutes". Right if within 2 minutes.</li>
+          <li><b>Yes/no or text.</b> Checked against the reference; text answers are graded by an <span class="term" data-t="llmjudge">LLM judge</span>.</li>
+        </ul>
+        <p class="note">ReMEmbR, the method released with NaVQA, captions every 3 seconds of video with VILA, stores each caption with its position and time in a <span class="term" data-t="vectordb">vector database</span>, and lets an LLM search it by text, position or time up to 3 times before answering. Any method that answers in this format can be scored.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">210</div><div class="l">questions</div></div>
+    <div class="stat"><div class="n">7</div><div class="l">campus drives</div></div>
+    <div class="stat"><div class="n">15–30 min</div><div class="l">per drive</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">memory lengths, 70 questions each</div></div>
+    <div class="stat"><div class="n">15 m</div><div class="l">to count a position as right</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">A robot that works all day builds up hours of history. Ask it "where can I get some coffee?" and the answer is a place it drove past twenty minutes ago. A vision-language model can take a few minutes of video at once, not hours, and in the paper a GPT-4o given the raw frames couldn't process most medium or long stretches at all. NaVQA measures whether a robot can <strong>keep a searchable memory of where and when</strong> and answer in a form it can act on. Compared with M3-Bench-robot, which is about people and what they say, NaVQA is about places, objects and events along a route.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Five kinds of answer</h2>
+    <p class="sub">Five robotics experts wrote the questions, asking about spatial layout, objects, signs, moving things like cars and people, and context. The shares are over all 210 questions. Examples are real NaVQA questions.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Position · 34%</h3><p>Where something is or was. The answer is a map coordinate, which doubles as a navigation goal.</p><div class="ex">Where can I get some coffee? → (x, y, z)</div></div>
+      <div class="task"><h3>Yes / no · 32%</h3><p>Whether something happened or was seen, including the weather and the robot's own behaviour.</p><div class="ex">Did the robot stop near the stop sign? → Yes</div></div>
+      <div class="task"><h3>Text · 16%</h3><p>A short description: a colour, a name on a sign, a count.</p><div class="ex">What is the name of the street you crossed? → Inner Campus Dr.</div></div>
+      <div class="task"><h3>Point in time · 14%</h3><p>When something happened, answered as how long ago.</p><div class="ex">When did you leave the building? → [minutes] ago</div></div>
+      <div class="task"><h3>Duration · 4%</h3><p>How long something lasted.</p><div class="ex">How long were you waiting at the intersection? → 0.75 minutes</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One drive, thirty questions</h2>
+    <p class="sub">The 30 questions for CODa sequence 16, a rainy drive from about 10:35 to 11:03. Each mark shows when the answer can be seen; several questions share a moment. Each question goes with one short, medium or long stretch of the drive that contains its moment, 10 of each length.</p>
+    <div class="qline" aria-hidden="true">
+      <span style="left: 0.1%"></span><span style="left: 4.3%"></span><span style="left: 20.2%"></span><span style="left: 25.4%"></span><span style="left: 31.2%"></span><span style="left: 34.5%"></span><span style="left: 34.6%"></span><span style="left: 40.5%"></span><span style="left: 40.7%"></span><span style="left: 41.0%"></span><span style="left: 46.7%"></span><span style="left: 57.3%"></span><span style="left: 65.4%"></span><span style="left: 66.7%"></span><span style="left: 71.5%"></span><span style="left: 74.0%"></span><span style="left: 74.4%"></span><span style="left: 84.4%"></span><span style="left: 88.1%"></span><span style="left: 90.2%"></span><span style="left: 90.3%"></span><span style="left: 94.8%"></span><span style="left: 96.8%"></span><span style="left: 98.9%"></span>
+    </div>
+    <div class="qaxis"><span>10:35</span><span>11:03</span></div>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Seen at</th><th>Question</th><th>Answer kind</th><th>Reference answer</th></tr></thead>
+        <tbody>
+          <tr><td class="num">10:35:01</td><td>Where did you see that semi-truck?</td><td>Position</td><td>Where it was seen</td></tr>
+          <tr><td class="num">10:35:01</td><td>What color was the semi-truck?</td><td>Text</td><td>Red</td></tr>
+          <tr><td class="num">10:42:07</td><td>When did you cross the street?</td><td>Time</td><td>Minutes ago</td></tr>
+          <tr><td class="num">10:44:41</td><td>Where is the recycling bin?</td><td>Position</td><td>Where it was seen</td></tr>
+          <tr><td class="num">10:46:24</td><td>Can you take me to the bank?</td><td>Position</td><td>Where it was seen</td></tr>
+          <tr><td class="num">10:46:28</td><td>Is it wet outside?</td><td>Yes / no</td><td>Yes</td></tr>
+          <tr><td class="num">10:48:05</td><td>When did you see the pride flag?</td><td>Time</td><td>Minutes ago</td></tr>
+          <tr><td class="num">10:53:18</td><td>Is the weather sunny?</td><td>Yes / no</td><td>No</td></tr>
+          <tr><td class="num">10:55:50</td><td>What is the name of the street you crossed?</td><td>Text</td><td>Inner Campus Dr.</td></tr>
+          <tr><td class="num">10:58:38</td><td>Where can I find a place to sit closest to the stairs?</td><td>Position</td><td>Where it was seen</td></tr>
+          <tr><td class="num">10:59:40</td><td>Did the robot stop near the stop sign?</td><td>Yes / no</td><td>Yes</td></tr>
+          <tr><td class="num">11:00:16</td><td>What material is the large art installation made out of?</td><td>Text</td><td>Metal</td></tr>
+          <tr><td class="num">11:02:06</td><td>What is the white semi-truck carrying?</td><td>Text</td><td>Nothing; the trailer is empty</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">13 of the 30, from <code>remembr/data/navqa/data.csv</code> in the ReMEmbR repository. Position and time answers are filled in from CODa's GPS and timestamps when the benchmark is built.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">Each answer kind has its own error: distance in metres for positions, minutes for times and durations, right or wrong for yes/no and text. To combine them, positions within <strong>15 m</strong> and times within <strong>2 minutes</strong> count as correct, giving one <strong>overall correctness</strong> score. Results are reported separately for short, medium and long memories, because the point is how well a method holds up as the history grows.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Success rate by question type and memory length, from the STaR paper (February 2026), which re-ran ReMEmbR and an object-level baseline under the same rules.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>Position S</th><th>Position M</th><th>Position L</th><th>Time S</th><th>Time M</th><th>Time L</th><th>Text S</th><th>Text M</th><th>Text L</th></tr></thead>
+        <tbody>
+          <tr><th>STaR</th><td class="num"><b>0.89</b></td><td class="num"><b>0.84</b></td><td class="num"><b>0.77</b></td><td class="num"><b>1.00</b></td><td class="num"><b>0.83</b></td><td class="num"><b>0.88</b></td><td class="num"><b>0.82</b></td><td class="num"><b>0.84</b></td><td class="num"><b>0.80</b></td></tr>
+          <tr><th>ReMEmbR</th><td class="num">0.84</td><td class="num">0.63</td><td class="num">0.49</td><td class="num"><b>1.00</b></td><td class="num">0.67</td><td class="num"><b>0.88</b></td><td class="num">0.62</td><td class="num">0.65</td><td class="num">0.50</td></tr>
+          <tr><th>OpenGraph (object captions)</th><td class="num">0.68</td><td class="num">0.63</td><td class="num">0.26</td><td class="num">0.89</td><td class="num">0.67</td><td class="num">0.59</td><td class="num">0.33</td><td class="num">0.43</td><td class="num">0.36</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">S, M, L: short, medium, long. "Text" covers yes/no and descriptive answers. Position error is where methods differ most: on long memories STaR is off by 16.9 m on average against ReMEmbR's 53.9 m, partly because STaR returns the object's position rather than where the robot was when it saw it. In the original paper, ReMEmbR with GPT-4o reached overall correctness of 0.72 / 0.56 / 0.61 (short / medium / long); open LLMs (Codestral, Command-R, Llama 3.1 8B) did far worse, with position errors over 150 m; and GPT-4o reading all captions at once fell behind on long memories. Sources: <a href="https://arxiv.org/abs/2602.09255" target="_blank" rel="noopener">STaR paper</a>, <a href="https://arxiv.org/abs/2409.13682" target="_blank" rel="noopener">ReMEmbR paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">From answer to action</h2>
+    <p class="sub">Scoring is offline, but the answers are meant to drive a robot. ReMEmbR was run on an NVIDIA Nova Carter in an office building: it drove around for 25 minutes to build its memory, then took spoken requests. Position answers went to the Nav2 navigation stack as goals.</p>
+    <figure style="max-width: 720px">
+      <video class="vid" src="media/navqa_remembr_chips.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>"Take me somewhere to get a bag of chips": ReMEmbR on the Nova Carter, from the project page. Not part of NaVQA. The paper notes it sometimes confused soda machines with water fountains. Parts are sped up, as marked.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="lvqa,coda,gps,vectordb,llmjudge,memory"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://nvidia-ai-iot.github.io/remembr/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/NVIDIA-AI-IOT/remembr" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://github.com/NVIDIA-AI-IOT/remembr/blob/main/eval.md" target="_blank" rel="noopener">NaVQA eval guide ↗</a>
+    <a href="https://amrl.cs.utexas.edu/coda/" target="_blank" rel="noopener">CODa dataset ↗</a>
+    <a href="https://arxiv.org/abs/2409.13682" target="_blank" rel="noopener">Paper ↗</a>
+    <a href="https://arxiv.org/abs/2602.09255" target="_blank" rel="noopener">STaR paper ↗</a>
   </div>
 </section>
 
@@ -2482,7 +2833,7 @@
 </section>
 
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 28 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). M3-Bench-robot clips are cut from the benchmark's own videos (<code>ByteDance-Seed/M3-Bench</code>, CC BY-NC-SA 4.0). The NaVQA hero is CODa's own clip of sequence 16 (amrl.cs.utexas.edu/coda), and the Nova Carter clip is from the ReMEmbR project page. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 29 September 2026.
 </footer>
 </main>
 
@@ -2558,6 +2909,15 @@
     retarget: ["Retargeting", "Mapping motion from one body to another, e.g. using inverse kinematics to find the arm joint angles that put a humanoid's hand where a human hand was."],
     isaacarena: ["Isaac Lab-Arena", "NVIDIA's framework on top of Isaac Lab (Isaac Sim) for assembling tasks from scenes, objects and robots, and evaluating policies in many environments at once on the GPU."],
     wbc: ["Whole-body control (WBC)", "A controller that turns high-level commands (hand poses, walking speed, torso angle) into targets for every joint, keeping a legged robot balanced while it works."],
+    lvqa: ["Long-video question answering", "Questions about a video that runs for tens of minutes or hours. Too long to fit in a model's context at once, so the model has to summarise, remember or search."],
+    episodicmem: ["Episodic memory", "Memory of specific events: who did what, when. \"Alice took the coffee and said she can't go without it.\""],
+    semanticmem: ["Semantic memory", "General facts distilled from many events. \"Alice drinks coffee in the morning.\" It lets an agent answer questions that no single moment answers."],
+    entitygraph: ["Entity-centric memory", "Memory organised around people and things rather than time. Everything about one person (face, voice, what they said and like) is linked together, so it can be looked up by who, not just when."],
+    socratic: ["Socratic-model baseline", "One model writes a text description of each 30-second clip; later another model searches those descriptions to answer. Simple, but details that weren't written down are lost."],
+    coda: ["CODa", "The UT Campus Object Dataset: long drives by a Clearpath Husky around the University of Texas at Austin, recorded with cameras, 3D LiDAR and GPS, and labelled with 3D boxes."],
+    gps: ["GPS position", "Where the robot was on the map, as (x, y, z) coordinates. NaVQA pairs every camera frame with one, so memories can be looked up by place."],
+    vectordb: ["Vector database", "A store that turns each piece of text into a list of numbers (an embedding) and finds the stored items closest in meaning to a query. ReMEmbR can also search its memory by position and time."],
+    llmjudge: ["LLM judge", "A language model that grades free-text answers by comparing them with a reference answer. Faster than human grading, but it has to be checked against people."],
   };
 
   /* glossary lists */
