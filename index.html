@@ -30,6 +30,9 @@
     --lwrobocasa: #7a6450;
     --m3bench: #1a5fb4;
     --navqa: #35637a;
+    --ravenqa: #4f5b6e;
+    --robomme: #a33b6b;
+    --robovqa: #c4553b;
     --mimicdroid: #8e44ad;
     --mikasa: #6a44d8;
     --libero: #0b8574;
@@ -38,6 +41,7 @@
     --rlbench: #0a7ea4;
     --vlabench: #9a7400;
     --liberoplus: #c23b3b;
+    --liberopro: #6b5d8f;
     --metaworld: #2a8a3e;
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -64,6 +68,9 @@
       --lwrobocasa: #c9b39c;
       --m3bench: #78aeed;
       --navqa: #8cc3dc;
+      --ravenqa: #b6c0d0;
+      --robomme: #f08cb8;
+      --robovqa: #ff9a85;
       --mimicdroid: #c792ea;
       --mikasa: #a58bff;
       --libero: #3fcfb6;
@@ -72,6 +79,7 @@
       --rlbench: #4cc9f0;
       --vlabench: #f2c94c;
       --liberoplus: #ff7f7f;
+      --liberopro: #b9a8e0;
       --metaworld: #6fd384;
       color-scheme: dark;
     }
@@ -95,6 +103,9 @@
     --lwrobocasa: #c9b39c;
     --m3bench: #78aeed;
     --navqa: #8cc3dc;
+    --ravenqa: #b6c0d0;
+    --robomme: #f08cb8;
+    --robovqa: #ff9a85;
     --mimicdroid: #c792ea;
     --mikasa: #a58bff;
     --libero: #3fcfb6;
@@ -103,6 +114,7 @@
     --rlbench: #4cc9f0;
     --vlabench: #f2c94c;
     --liberoplus: #ff7f7f;
+    --liberopro: #b9a8e0;
     --metaworld: #6fd384;
     color-scheme: dark;
   }
@@ -396,18 +408,22 @@
       <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
       <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
       <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
+      <button class="tab" role="tab" id="tab-liberopro" aria-controls="liberopro" data-target="liberopro" style="--c: var(--liberopro)"><span class="dot"></span>LIBERO-PRO</button>
       <button class="tab" role="tab" id="tab-lwrobocasa" aria-controls="lwrobocasa" data-target="lwrobocasa" style="--c: var(--lwrobocasa)"><span class="dot"></span>LW-RoboCasa-Tasks</button>
       <button class="tab" role="tab" id="tab-m3bench" aria-controls="m3bench" data-target="m3bench" style="--c: var(--m3bench)"><span class="dot"></span>M3-Bench-robot</button>
       <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
       <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
       <button class="tab" role="tab" id="tab-mimicdroid" aria-controls="mimicdroid" data-target="mimicdroid" style="--c: var(--mimicdroid)"><span class="dot"></span>MimicDroid</button>
       <button class="tab" role="tab" id="tab-navqa" aria-controls="navqa" data-target="navqa" style="--c: var(--navqa)"><span class="dot"></span>NaVQA</button>
+      <button class="tab" role="tab" id="tab-ravenqa" aria-controls="ravenqa" data-target="ravenqa" style="--c: var(--ravenqa)"><span class="dot"></span>RAVEN-QA</button>
       <button class="tab" role="tab" id="tab-rlbench" aria-controls="rlbench" data-target="rlbench" style="--c: var(--rlbench)"><span class="dot"></span>RLBench</button>
       <button class="tab" role="tab" id="tab-robocasa" aria-controls="robocasa" data-target="robocasa" style="--c: var(--robocasa)"><span class="dot"></span>RoboCasa</button>
       <button class="tab" role="tab" id="tab-gr1" aria-controls="gr1" data-target="gr1" style="--c: var(--gr1)"><span class="dot"></span>RoboCasa GR-1 Tabletop</button>
       <button class="tab" role="tab" id="tab-rckitchen" aria-controls="rckitchen" data-target="rckitchen" style="--c: var(--rckitchen)"><span class="dot"></span>RoboCasa Kitchen</button>
       <button class="tab" role="tab" id="tab-robocasa365" aria-controls="robocasa365" data-target="robocasa365" style="--c: var(--robocasa365)"><span class="dot"></span>RoboCasa365</button>
+      <button class="tab" role="tab" id="tab-robomme" aria-controls="robomme" data-target="robomme" style="--c: var(--robomme)"><span class="dot"></span>RoboMME</button>
       <button class="tab" role="tab" id="tab-robotwin" aria-controls="robotwin" data-target="robotwin" style="--c: var(--robotwin)"><span class="dot"></span>RoboTwin</button>
+      <button class="tab" role="tab" id="tab-robovqa" aria-controls="robovqa" data-target="robovqa" style="--c: var(--robovqa)"><span class="dot"></span>RoboVQA</button>
       <button class="tab" role="tab" id="tab-vlabench" aria-controls="vlabench" data-target="vlabench" style="--c: var(--vlabench)"><span class="dot"></span>VLABench</button>
     </nav>
     <button class="scroll-btn next" type="button" aria-label="Scroll tabs right" tabindex="-1">›</button>
@@ -421,12 +437,12 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · sixteen benchmarks</span>
+    <span class="eyebrow">Robot learning · twenty benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These sixteen test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
+      compared fairly. These twenty test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
   </div>
@@ -459,6 +475,15 @@
         <h3>LIBERO-Plus</h3>
         <p>LIBERO's 40 tasks, perturbed 10,030 ways: move the camera, shift the robot's start pose, change the lighting or reword the instruction. Scores collapse.</p>
         <span class="go">Tests: robustness to small changes →</span>
+      </div>
+    </button>
+    <button class="card" data-go="liberopro" style="--c: var(--liberopro)">
+      <video class="vid contain" src="media/liberopro_hero.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Robustness audit · generalisation</span>
+        <h3>LIBERO-PRO</h3>
+        <p>LIBERO's tasks with the object moved, swapped or changed to a different one. Policies scoring 90%+ keep making the same memorised motion and drop to 0%.</p>
+        <span class="go">Tests: understanding, not memorising →</span>
       </div>
     </button>
     <button class="card" data-go="lwrobocasa" style="--c: var(--lwrobocasa)">
@@ -515,6 +540,15 @@
         <span class="go">Tests: remembering where and when →</span>
       </div>
     </button>
+    <button class="card" data-go="ravenqa" style="--c: var(--ravenqa)">
+      <video class="vid" src="media/raven_sources.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Visual memory · retrieval QA</span>
+        <h3>RAVEN-QA</h3>
+        <p>A robot looks around a building, then gets asked for the hammer, a sign with 'IT MKMX' on it, or somewhere to play sports. Point to the moment you saw it.</p>
+        <span class="go">Tests: remembering small details →</span>
+      </div>
+    </button>
     <button class="card" data-go="rlbench" style="--c: var(--rlbench)">
       <video class="vid contain" src="media/rlbench_views.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -560,6 +594,15 @@
         <span class="go">Tests: breadth and generalisation →</span>
       </div>
     </button>
+    <button class="card" data-go="robomme" style="--c: var(--robomme)">
+      <video class="vid contain" src="media/robomme_hero.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Memory benchmark · VLA</span>
+        <h3>RoboMME</h3>
+        <p>16 tabletop tasks a robot can't solve from what it sees now: count, track a hidden cube through a shuffle, recall which cube a video showed, repeat a shown motion.</p>
+        <span class="go">Tests: which kind of memory a VLA needs →</span>
+      </div>
+    </button>
     <button class="card" data-go="robotwin" style="--c: var(--robotwin)">
       <video class="vid contain" src="media/robotwin_handover.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -567,6 +610,15 @@
         <h3>RoboTwin 2.0</h3>
         <p>50 two-armed tasks, like handing a block from one gripper to the other. Train on clean scenes, then get tested in cluttered, re-lit ones.</p>
         <span class="go">Tests: two-arm coordination and robustness →</span>
+      </div>
+    </button>
+    <button class="card" data-go="robovqa" style="--c: var(--robovqa)">
+      <video class="vid" src="media/robovqa_hero.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Video QA · planning</span>
+        <h3>RoboVQA</h3>
+        <p>Short clips of robots and people doing real office chores. Did that step work? What's possible now? What are the next five steps?</p>
+        <span class="go">Tests: high-level reasoning from video →</span>
       </div>
     </button>
     <button class="card" data-go="vlabench" style="--c: var(--vlabench)">
@@ -630,6 +682,15 @@
             <td class="num"><strong>82.1%</strong> total (SRPO); plain OpenVLA-OFT 69.6%</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="liberopro"><span style="background: var(--liberopro)"></span>LIBERO-PRO</button></th>
+            <td><strong>Does a LIBERO policy understand the task, or just replay a memorised motion?</strong></td>
+            <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with changed task files and start states</td>
+            <td class="num">None new. Train on standard LIBERO</td>
+            <td class="num">LIBERO's 40 tasks × 5 perturbations (object, position, wording, task, environment)</td>
+            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
+            <td class="num"><strong>53%</strong> total (π0.5); 0–21% on position, ≤7% on task for every model</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="lwrobocasa"><span style="background: var(--lwrobocasa)"></span>LW-RoboCasa-Tasks</button></th>
             <td><strong>Can one kitchen benchmark run on many different robots?</strong></td>
             <td>RoboCasa kitchens rebuilt in Isaac Lab-Arena (Isaac Sim), 7 robot types</td>
@@ -684,6 +745,15 @@
             <td class="num"><strong>77–89%</strong> on position questions, by memory length (STaR)</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="ravenqa"><span style="background: var(--ravenqa)"></span>RAVEN-QA</button></th>
+            <td><strong>Can a robot find small, unnamed or written-on things in what it saw?</strong></td>
+            <td>Habitat houses, real Go1 runs in university buildings, and web and hand-held tour videos</td>
+            <td>None. Evaluation only</td>
+            <td class="num">273 questions over 32 videos, 5 types; 9–29 memory frames each</td>
+            <td class="num">One moment of memory: a time, or the (x, y, z) position it was seen from</td>
+            <td class="num"><strong>97.1%</strong> real-robot part (RAVEN + GPT-5.2); 88.8% sim (Gemini-3-Pro, all frames)</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="rlbench"><span style="background: var(--rlbench)"></span>RLBench</button></th>
             <td><strong>Can one policy learn many precise tasks from a few demos?</strong></td>
             <td>Tabletop, Franka arm, CoppeliaSim (PyRep)</td>
@@ -729,6 +799,15 @@
             <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="robomme"><span style="background: var(--robomme)"></span>RoboMME</button></th>
+            <td><strong>Which kind of memory does a VLA need: when, where, which object, or how?</strong></td>
+            <td>Tabletop, Franka arm, ManiSkill (SAPIEN)</td>
+            <td class="num">1,600 demos (100 per task), 770k steps, with subgoal labels</td>
+            <td class="num">16 in 4 suites: counting, permanence, reference, imitation</td>
+            <td class="num">8 numbers (7 absolute joint angles + gripper); gripper pose optional</td>
+            <td class="num"><strong>60.8%</strong> (PonderPounce-9B); humans 90.5%</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="robotwin"><span style="background: var(--robotwin)"></span>RoboTwin</button></th>
             <td><strong>Can two arms work together, and survive a messy scene?</strong></td>
             <td>Tabletop, dual-arm robot (5 embodiments), SAPIEN</td>
@@ -736,6 +815,15 @@
             <td class="num">50 dual-arm tasks</td>
             <td class="num">14 numbers (2 × (6 joints + gripper)), absolute</td>
             <td class="num"><strong>89.6%</strong> clean / <strong>68.1%</strong> randomized (ME-Dex-1.0)</td>
+          </tr>
+          <tr>
+            <th><button class="benchmark-link" data-go="robovqa"><span style="background: var(--robovqa)"></span>RoboVQA</button></th>
+            <td><strong>Can a model watch a real chore and plan what to do next?</strong></td>
+            <td>3 real office buildings; robot, human hand and human with grasping tool. No simulator</td>
+            <td class="num">829,502 (video, question, answer) triples from 238 h of video</td>
+            <td class="num">8 question types; ~1,000 human-graded test questions; live planning runs</td>
+            <td class="num">A written answer: yes/no, one step, or the next 5 steps</td>
+            <td class="num"><strong>44.0%</strong> intervention rate (paper's model); <strong>56.0</strong> BLEU-4 (Thinker-7B)</td>
           </tr>
           <tr>
             <th><button class="benchmark-link" data-go="vlabench"><span style="background: var(--vlabench)"></span>VLABench</button></th>
@@ -749,7 +837,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">Two rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. M3-Bench-robot and NaVQA have no action at all: nothing moves while they're scored, and the model only answers questions about a recorded video. A NaVQA answer can be a place on the map, though, which a real robot can then drive to. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Several rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. M3-Bench-robot, NaVQA, RAVEN-QA and RoboVQA have no action at all: nothing moves while they're scored, and the model only answers questions about a recorded video. A NaVQA or RAVEN-QA answer can be a place on the map, though, which a real robot can then drive to. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -1271,6 +1359,123 @@
     <a href="https://huggingface.co/datasets/nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
     <a href="https://github.com/NVIDIA/Isaac-GR00T/tree/main/examples/robocasa-gr1-tabletop-tasks" target="_blank" rel="noopener">GR00T example ↗</a>
     <a href="https://arxiv.org/abs/2503.14734" target="_blank" rel="noopener">GR00T N1 paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ LIBERO-PRO ============================ -->
+<section class="panel" id="liberopro" role="tabpanel" aria-labelledby="tab-liberopro" style="--c: var(--liberopro)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/liberopro_hero.mp4" style="aspect-ratio: 776 / 516" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Robustness audit · VLA · tabletop</span>
+      <h1>LIBERO-PRO</h1>
+      <p class="oneliner">The same 40 <a href="#libero">LIBERO</a> tasks, changed in ways that <em>should</em> matter: move the object, swap it, ask for a different one. Policies that score 90%+ on LIBERO keep making <em>the same memorised motion</em> and drop to 0%.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">An evaluation-only extension of LIBERO that tests generalisation, from HUST, Tsinghua and Lehigh (2025). Models are trained on the normal LIBERO demos</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">LIBERO's own scenes: a Franka arm in <span class="term" data-t="robosuite">robosuite</span> (MuJoCo). The changes are new <span class="term" data-t="bddl">BDDL</span> task files and start states</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">No new training data. The perturbed task and start-state files are on Hugging Face</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">LIBERO's 4 suites × 10 tasks, each re-run under 5 kinds of <span class="term" data-t="perturbation">perturbation</span>: object, position, wording, task and environment</div></div>
+      </div>
+      <p class="timer">Video: OpenVLA on the LIBERO-Object task "pick the alphabet soup and place it in the basket", in its original form and four LIBERO-PRO versions. Last tile: a different task, "pick up the salad dressing", with the dressing replaced by a soup can. The arm still grabs whatever is in its spot and puts it in the basket. From the LIBERO-PRO project page.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Nothing about the loop changes, which is the point: any policy that runs on LIBERO runs on LIBERO-PRO unmodified. Only the scene or the instruction it gets is different from what it saw in training.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Third-person camera</b> and <b>wrist camera</b>, as in LIBERO</li>
+          <li><b>Robot state</b> (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li><b>Instruction</b>, possibly reworded or asking for a different object</li>
+          <li><b>A scene</b> that may have recoloured objects, moved objects, or a different table</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">trained on standard LIBERO, never on the changes</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">Exactly LIBERO's action space: a small <span class="term" data-t="delta">delta</span> move of the <span class="term" data-t="eef">end-effector</span> plus open/close. See the LIBERO tab for units and sign conventions. Episode limits are LIBERO's too: 220 steps for Spatial, 280 for Object, 300 for Goal, 520 for LIBERO-10.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">40</div><div class="l">LIBERO tasks, reused</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">kinds of change</div></div>
+    <div class="stat"><div class="n">50</div><div class="l">episodes per task per change</div></div>
+    <div class="stat"><div class="n">&gt;90%</div><div class="l">on standard LIBERO</div></div>
+    <div class="stat"><div class="n">0%</div><div class="l">for most models once the object moves</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">LIBERO tests on the <strong>same tasks it trains on</strong>: same instruction, same objects, same room, with start positions jittered so little you can barely see it. So a policy can score 95% by <strong>remembering one arm motion per scene</strong> instead of looking at what's on the table or reading the instruction. The authors found that the policies they tested keep grasping when the target object is removed, carry out "pick up the salad dressing" when the instruction is replaced by "xxx", and reach for where an object usually is rather than where it is. LIBERO-PRO makes changes a policy that <em>understood</em> the task would handle, and checks whether it does. <a href="#liberoplus">LIBERO-Plus</a> is related but different: it mostly changes things that <em>shouldn't</em> matter (camera, lighting, noise) to test robustness. LIBERO-PRO also changes things that <em>should</em> change the behaviour (where the object is, which object to pick) to test understanding.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Five kinds of change</h2>
+    <p class="sub">One perturbation at a time, except that object, position, wording and environment can be combined. Examples from the paper and the project page.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Object</h3><p>Change an object's colour, texture or size, keeping what it is. The policy should still pick the same thing.</p><div class="ex">salad dressing → the same bottle, recoloured red</div></div>
+      <div class="task"><h3>Position</h3><p>Move or swap objects to new, physically valid spots. The policy has to go where the object is now.</p><div class="ex">swap the positions of the black bowl and the plate</div></div>
+      <div class="task"><h3>Semantic</h3><p>Reword the instruction without changing what it asks for.</p><div class="ex">"Grab salad dressing and set it in basket."</div></div>
+      <div class="task"><h3>Task</h3><p>Same scene, different goal: pick a different object or reach a different state, built from parts seen in training.</p><div class="ex">"Pick the tomato sauce and place it in the basket" instead of the salad dressing</div></div>
+      <div class="task"><h3>Environment</h3><p>Move the whole task to a different table or background.</p><div class="ex">main table → "living room table"</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Three things the policies don't notice</h2>
+    <p class="sub">Rollouts published on the project page, run under the LIBERO-PRO settings.</p>
+    <div class="grid-3">
+      <figure><video class="vid" src="media/liberopro_object.mp4" style="aspect-ratio: 776 / 256" muted loop playsinline preload="metadata"></video><figcaption><b>A different object.</b> "Pick up the salad dressing and place it in the basket". Recoloured, the policy still succeeds. Replaced by a soup can, it carries the can to the basket anyway: it follows a stored motion, not the object.</figcaption></figure>
+      <figure><video class="vid" src="media/liberopro_position.mp4" style="aspect-ratio: 776 / 516" muted loop playsinline preload="metadata"></video><figcaption><b>A moved object.</b> "Pick the alphabet soup and place it in the basket", with the can shifted along x by 0.1 to 0.5 units. It still works at +0.1; from +0.2 the arm reaches for where the can used to be.</figcaption></figure>
+      <figure><video class="vid" src="media/liberopro_compose.mp4" style="aspect-ratio: 776 / 256" muted loop playsinline preload="metadata"></video><figcaption><b>Two known steps, combined.</b> "Put the bowl on top of the cabinet" works. "Turn on the stove" works. "Put the bowl on the cabinet, then turn on the stove" doesn't: the policy replays a fragment of one training motion.</figcaption></figure>
+    </div>
+    <p class="src">In the paper's position test (its Figure 4), OpenVLA and π0 drop to zero once an object moves more than about 0.2 units; π0.5 holds on to about 0.4 before it too reaches zero.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong>, with LIBERO's own success checks and step limits, over <strong>50 episodes per task</strong> for each suite and each kind of perturbation. The leaderboard reports a 4 × 5 grid (suite × perturbation), plus a <strong>total</strong>: the mean of the 20 cells. Unperturbed LIBERO scores sit alongside for contrast. Models are used as released, trained on standard LIBERO. OpenVLA uses its four per-suite checkpoints, π0 and π0.5 a single checkpoint for all suites. Position and task are the two columns to look at: those are the ones a memorising policy can't pass.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Success rate (%) on the LIBERO-PRO leaderboard, averaged over the four suites for each kind of change. "Original" is the same model on unchanged LIBERO.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Original</th><th>Object</th><th>Position</th><th>Semantic</th><th>Task</th><th>Environment</th><th>Total</th></tr></thead>
+        <tbody>
+          <tr><th>π0.5</th><td class="num">96.5</td><td class="num"><b>96.0</b></td><td class="num"><b>20.8</b></td><td class="num">95.8</td><td class="num">0.8</td><td class="num">52.8</td><td class="num"><b>53</b></td></tr>
+          <tr><th>OpenVLA</th><td class="num">97.0</td><td class="num">93.0</td><td class="num">0.0</td><td class="num"><b>97.3</b></td><td class="num">0.0</td><td class="num"><b>68.0</b></td><td class="num">52</td></tr>
+          <tr><th>π0</th><td class="num">92.3</td><td class="num">90.5</td><td class="num">0.0</td><td class="num">90.5</td><td class="num">0.0</td><td class="num">38.8</td><td class="num">44</td></tr>
+          <tr><th>X-VLA</th><td class="num">–</td><td class="num">79.0</td><td class="num">0.8</td><td class="num">96.8</td><td class="num"><b>6.8</b></td><td class="num">–</td><td class="num">46*</td></tr>
+          <tr><th>MolmoAct</th><td class="num">–</td><td class="num">76.0</td><td class="num">1.5</td><td class="num">85.8</td><td class="num">1.5</td><td class="num">–</td><td class="num">41*</td></tr>
+          <tr><th>NORA</th><td class="num">–</td><td class="num">70.5</td><td class="num">0.0</td><td class="num">86.3</td><td class="num">0.0</td><td class="num">–</td><td class="num">40*</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">* No environment runs, so the total is over 16 cells, not 20, and is higher than it would be with them. Suite-by-suite, π0.5 is the only model with real position scores (38% on LIBERO-Goal, 20% Spatial, 17% Object, 8% LIBERO-10). Every model keeps its LIBERO score under object recolouring and rewording, but the authors warn that this can also come from memorisation: a policy that ignores the object's colour or the wording would pass these too. Newer methods trained on standard LIBERO have started to move the two hard columns. Averaged over four suites without environment runs, QuoVLA reports 36.0% on position and 25.5% on task. With extra training tasks (LIBERO-90 pick-and-place added) and a grounded 3D target point fed to the action head, π0.5 reaches 72.2% on position and 75.9% on task, on the Object and Spatial suites only. Neither is on the official leaderboard, and their protocols differ. Sources: <a href="https://github.com/Zxy-MLlab/LIBERO-PRO#-libero-pro-model-leaderboard" target="_blank" rel="noopener">LIBERO-PRO leaderboard</a>, <a href="https://zxy-mllab.github.io/LIBERO-PRO-Webpage/" target="_blank" rel="noopener">project page</a> (original-LIBERO scores), <a href="https://arxiv.org/abs/2609.25961" target="_blank" rel="noopener">PatchWAM</a> (QuoVLA summary), <a href="https://arxiv.org/abs/2606.27663" target="_blank" rel="noopener">3D point injection</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="perturbation,memorise,bddl,vla,robosuite,delta,eef,zeroshot"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://zxy-mllab.github.io/LIBERO-PRO-Webpage/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/Zxy-MLlab/LIBERO-PRO" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/zhouxueyang/LIBERO-Pro" target="_blank" rel="noopener">Task files (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2510.03827" target="_blank" rel="noopener">Paper ↗</a>
   </div>
 </section>
 
@@ -1813,6 +2018,156 @@
   </div>
 </section>
 
+<!-- ============================ RAVEN-QA ============================ -->
+<section class="panel" id="ravenqa" role="tabpanel" aria-labelledby="tab-ravenqa" style="--c: var(--ravenqa)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/raven_hero.mp4" style="aspect-ratio: 960 / 388" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Visual memory · retrieval QA · sim, real robot and web video</span>
+      <h1>RAVEN-QA</h1>
+      <p class="oneliner">A robot looks around a building. Later someone asks for <em>the hammer</em>, <em>the sign with 'IT MKMX' on it</em>, or <em>somewhere to play sports</em>. It has to pick the moment in its memory that shows the answer, and <em>that spot</em> is where it drives.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Memory retrieval for navigation, from the RAVEN paper (Princeton and UPenn, June 2026). Nothing is controlled while it's scored</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">4 sources: <span class="term" data-t="habitat">Habitat</span> house scenes, real Unitree Go1 runs in university buildings, YouTube house and city tours, and hand-held tours filmed by the authors</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">Each video is cut down to 9–29 <span class="term" data-t="memframe">memory frames</span>, each with a timestamp; robot videos also give a position. Evaluation only: no training set</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">273 questions over 32 videos, each tagged with 1 of 5 types, from "where is the bed?" to riddles that never name the object</div></div>
+      </div>
+      <p class="timer">Video: the Go1 exploring the lab the paper calls "Office", with a third-person view, its obstacle map and its own camera. The 5 questions asked about this run are below. 3× speed, from the RAVEN project page.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">First the robot explores and stores what it sees. Then questions arrive, and the agent can only look back through that memory. The answer is always one moment of the memory: given as a time, or as the robot's position at that moment, which it can drive back to.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Memory frames</b>: about 15–30 camera images from across the video</li>
+          <li><b>Time</b> of each frame</li>
+          <li><b>Position</b> (x, y, z) of each frame, on the robot videos only</li>
+          <li><b>A question</b> in words, e.g. "Where is the floor fan?" (the simplest web split also has picture queries)</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Agent</div><div class="d">searches the memory, then points at one moment</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Answer · one moment of memory</h3>
+        <div class="vec" aria-label="Answer: a time, or an x y z position">
+          <span class="b">time</span><span class="sep"></span><span class="g">x</span><span class="g">y</span><span class="g">z</span>
+        </div>
+        <ul class="legend">
+          <li><b>Time</b> on the web and hand-held videos: right if it's a frame that shows the target.</li>
+          <li><b>Position</b> on the sim and Go1 videos: right if it lands on one of those frames' positions. On the real robot it then becomes the goal for an <span class="term" data-t="astar">A*</span> path.</li>
+          <li>Most questions accept several frames, since the target is often in view more than once.</li>
+        </ul>
+        <p class="note">RAVEN, the method released with the benchmark, doesn't caption anything. It stores each frame's <span class="term" data-t="visualembed">visual embedding</span> with its time and position in a <span class="term" data-t="vectordb">vector database</span>. A VLM then searches by text, time, position or image, 5 results a call and up to 3 calls, looking at the returned frames before it answers. Any method that answers in this format can be scored.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">273</div><div class="l">questions</div></div>
+    <div class="stat"><div class="n">32</div><div class="l">videos from 4 sources</div></div>
+    <div class="stat"><div class="n">9–29</div><div class="l">memory frames per video</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">question types</div></div>
+    <div class="stat"><div class="n">~11%</div><div class="l">by picking a frame at random (sim)</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">NaVQA's method, ReMEmbR, remembers by writing a caption for each stretch of video and searching the captions. That works for what a captioner thinks is worth mentioning, and fails for everything else: a shelf of chicken thighs becomes "packaged meat in a refrigerator", and a small helmet on a seat isn't mentioned at all. RAVEN-QA is built from exactly the questions that break captions: <strong>small objects, text on labels and signs, and requests that never name the object</strong>. Compared with NaVQA, the memory is short (15–30 frames instead of half an hour of video), so it tests <em>fine detail</em> more than <em>scale</em>. The same paper uses FindingDory, with about 3,000 frames per episode, for scale.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Five kinds of question</h2>
+    <p class="sub">Shares are over the 273 questions in the paper. Examples are real questions from the released data, with the moment that answers them.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Reasoning · 33%</h3><p>The target isn't named. Work out what would satisfy the request, then find it.</p><div class="ex">I just finished my experiments and homework. Where can I play some sports with my friends? → the netted corner full of balls</div></div>
+      <div class="task"><h3>Dominant object · 30%</h3><p>Something large and obvious. Easy to spot, but it may be seen from many angles and be hard to pin to one place.</p><div class="ex">Where is the tripod? → any of 6 frames, from 1:20 to 5:03</div></div>
+      <div class="task"><h3>Secondary object · 30%</h3><p>Something small or off to the side, the kind of detail a caption leaves out.</p><div class="ex">Where did I put my safety helmet? → on the grey seating, not the blue chair</div></div>
+      <div class="task"><h3>Information recall · 7%</h3><p>Read or remember small text, numbers or details.</p><div class="ex">The fruit that is grown by passionate people → the "Temptation tomatoes, grown by passionate people" sign, 0:27</div></div>
+      <div class="task"><h3>Spatial understanding · 1%</h3><p>Nearest things and relative positions. Only 3 questions, all on one hand-held video.</p><div class="ex">One blue and one grey trash bin in the nearest distance → 1:51</div></div>
+    </div>
+    <figure style="max-width: 720px">
+      <video class="vid" src="media/raven_sources.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>Memory frames from each source, played in order: a Habitat house (<code>scene1</code>), a YouTube house tour, a hand-held walk through a university building and a Go1 run through a public area. About 0.75 s per frame.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">One exploration, five questions</h2>
+    <p class="sub">All 20 memory frames from the Go1's 7½-minute run in the scene shown above, with the time of each. The numbers mark which frames count as a right answer to which question. The tripod question accepts 6 frames; the calibration board only 2.</p>
+    <img class="vid" src="media/raven_memory_grid.jpg" alt="Twenty camera frames from the Go1 lab run, 0:30 to 7:30, with circled numbers marking the frames that answer each of the five questions" style="aspect-ratio: 1624 / 738; object-fit: contain" loading="lazy" />
+    <div class="tablebox compact" style="margin-top: 16px">
+      <table>
+        <thead><tr><th>#</th><th>Question</th><th>Type</th><th>Right answers</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Adam is just heading to his daily sports training. He went out with only his backpack. Now he comes back and looks for his clothes. Where are they?</td><td>Reasoning</td><td class="num">3:16, 4:00, 4:02</td></tr>
+          <tr><td class="num">2</td><td>Jim likes taking photos. […] Where is the tripod?</td><td>Dominant</td><td class="num">1:20, 1:30, 4:02, 4:30, 5:00, 5:03</td></tr>
+          <tr><td class="num">3</td><td>We just came back from a very happy sports game. […] Where is the Checkerboard calibration board?</td><td>Secondary</td><td class="num">5:00, 5:03</td></tr>
+          <tr><td class="num">4</td><td>Sam just came back from a happy football game […]. He feels hot now. Where is the floor fan?</td><td>Secondary</td><td class="num">7:00, 7:26, 7:30</td></tr>
+          <tr><td class="num">5</td><td>Kelly […] told me she cannot find an important item. Where is the first fire extinguisher?</td><td>Secondary</td><td class="num">2:30, 3:00, 3:16, 6:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">From <code>real_world/go1/go1_real_IRoM_v2/questions.json</code> in the RAVEN-QA dataset on Hugging Face. On this split the answer is scored as a position, so the times stand for the robot's position at that frame. Most real-robot questions start with a story that has nothing to do with the answer, so the agent has to find the actual request.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Accuracy</strong>: the share of questions where the chosen moment is one that shows the target. A time must be within 2 seconds of a correct frame; a position must be within 10 cm (on the floor plan) of a correct frame's position. Frames are seconds or minutes apart, so in practice both mean picking a correct frame. It's reported for each part separately: the <strong>real-robot</strong> questions (averaged over 10 runs) and <strong>sim</strong> questions (3 runs), and the human-view videos as a <strong>simple</strong> set (web tours) and a <strong>hard</strong> set (hand-held and supermarket). Per-type accuracy is reported for the sim split. On the real robot, the paper also drove the Go1 to each answer and counted a success when it arrived near the target.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Accuracy (%) on the two robot-view parts, from the RAVEN paper. Each row is a memory method; each column is the VLM doing the answering. "RAVEN (X)" means RAVEN with embedder X. "All frames" hands every memory frame straight to the VLM.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>Gemini-2.5-Flash</th><th>GPT-5.2</th><th>Gemini-3-Pro</th><th>Gemma3-27B</th><th>Qwen3-VL-32B</th><th>No VLM (embedder only)</th></tr></thead>
+        <tbody>
+          <tr><th colspan="7">Real robot · 4 scenes, 21 questions, 10 runs</th></tr>
+          <tr><th>RAVEN (QQMM-v2)</th><td class="num"><b>92.4</b></td><td class="num">93.3</td><td class="num">90.0</td><td class="num"><b>67.6</b></td><td class="num">30.0</td><td class="num"><b>66.7</b></td></tr>
+          <tr><th>RAVEN (Seed1.6-Embed)</th><td class="num">85.7</td><td class="num">93.3</td><td class="num"><b>90.5</b></td><td class="num">45.7</td><td class="num">31.9</td><td class="num"><b>66.7</b></td></tr>
+          <tr><th>RAVEN (SigLIP)</th><td class="num">84.8</td><td class="num"><b>97.1</b></td><td class="num">90.0</td><td class="num">47.6</td><td class="num"><b>35.2</b></td><td class="num">42.9</td></tr>
+          <tr><th>All frames (VLM only)</th><td class="num">85.2</td><td class="num">92.9</td><td class="num">86.2</td><td class="num">14.3</td><td class="num">4.8</td><td class="num">–</td></tr>
+          <tr><th>ReMEmbR (captions, QQMM-v2)</th><td class="num">76.7</td><td class="num">74.8</td><td class="num">80.5</td><td class="num">14.8</td><td class="num">28.6</td><td class="num">–</td></tr>
+          <tr><th colspan="7">Habitat sim · 19 scenes, 157 questions, 3 runs</th></tr>
+          <tr><th>RAVEN (QQMM-v2)</th><td class="num">80.5</td><td class="num">75.6</td><td class="num">86.6</td><td class="num">55.0</td><td class="num">26.1</td><td class="num">61.8</td></tr>
+          <tr><th>RAVEN (Seed1.6-Embed)</th><td class="num"><b>81.7</b></td><td class="num">76.2</td><td class="num">86.8</td><td class="num"><b>60.3</b></td><td class="num"><b>27.4</b></td><td class="num"><b>62.4</b></td></tr>
+          <tr><th>RAVEN (SigLIP)</th><td class="num">81.1</td><td class="num">72.0</td><td class="num">86.2</td><td class="num">56.1</td><td class="num">22.5</td><td class="num">61.8</td></tr>
+          <tr><th>All frames (VLM only)</th><td class="num">76.7</td><td class="num"><b>80.5</b></td><td class="num"><b>88.8</b></td><td class="num">11.0</td><td class="num">9.8</td><td class="num">–</td></tr>
+          <tr><th>ReMEmbR (captions, QQMM-v2)</th><td class="num">55.0</td><td class="num">57.3</td><td class="num">61.4</td><td class="num">15.7</td><td class="num">20.4</td><td class="num">–</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Picking a frame at random scores 10.9% on the sim part. Captions are the weak link: with the closed VLMs, ReMEmbR trails the best RAVEN setup by 10–27 points. With only 15–30 frames, a strong closed VLM given all of them comes within a few points of RAVEN, and beats it on the sim part with GPT-5.2 and Gemini-3-Pro. RAVEN's advantage is cost: on FindingDory's 3,000-frame episodes it looks at about a tenth of the memory. Smaller open VLMs struggle with every method, and there a plain embedding search with no VLM is often as good or better. On the human-view videos, the best simple-set score is 100% (Seed1.6-Embed + Gemini-3-Pro, and all frames + Gemini-3-Pro). On the hard set RAVEN reaches 95.1% (Seed1.6-Embed + Gemini-3-Pro), against 96.8% for all frames and 68.3% for captions. On the sim part, reasoning questions are the hardest: 84.4% at best, against 93–94% for named objects. The paper counts 273 questions; the released files hold 277 (161 in sim, not 157). Source: <a href="https://arxiv.org/abs/2606.25206" target="_blank" rel="noopener">RAVEN paper</a>, Tables 1, 6 and 8.</p>
+  </div>
+
+  <div>
+    <h2 class="section">From answer to action</h2>
+    <p class="sub">In the real-robot tests the answer is a place to go. The Go1 carries a ZED 2i depth camera and a Jetson Orin NX. It explores with <span class="term" data-t="frontier">frontier exploration</span>, building a map with <span class="term" data-t="slam">SLAM</span>, and stores frames as it goes. Afterwards, each answer's position is sent to an A* planner on that map.</p>
+    <figure style="max-width: 720px">
+      <video class="vid contain" src="media/raven_retrieval.mp4" style="aspect-ratio: 24 / 11" muted loop playsinline preload="metadata"></video>
+      <figcaption>Questions 1 and 2 from the table above, answered by RAVEN and driven to. Top right: the memory frame RAVEN picked; middle right: the planned path. 3× speed, from the RAVEN project page.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memframe,visualembed,vectordb,habitat,frontier,slam,astar,memory"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://ravenmem.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/princeton-prism/RAVEN" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://github.com/princeton-prism/RAVEN/blob/main/docs/README_RAVEN_QA.md" target="_blank" rel="noopener">RAVEN-QA eval guide ↗</a>
+    <a href="https://huggingface.co/datasets/zzcnewly/RAVEN_QA" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2606.25206" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
 <!-- ============================ MIKASA ============================ -->
 <section class="panel" id="mikasa" role="tabpanel" aria-labelledby="tab-mikasa" style="--c: var(--mikasa)" hidden>
   <div class="top">
@@ -2181,6 +2536,163 @@
   </div>
 </section>
 
+<!-- ============================ ROBOMME ============================ -->
+<section class="panel" id="robomme" role="tabpanel" aria-labelledby="tab-robomme" style="--c: var(--robomme)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/robomme_hero.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · VLA imitation learning · tabletop</span>
+      <h1>RoboMME</h1>
+      <p class="oneliner">16 tabletop tasks that <em>can't be solved from the current frame</em>: count what you've already done, remember which cup hides the cube, recall which cube a video showed, or <em>repeat a motion</em> you were shown once.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> policies trained by <span class="term" data-t="imitation">imitation</span>, from U. Michigan, Stanford and Figure AI (ICML 2026 oral). Every task is <span class="term" data-t="markov">non-Markovian</span></div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka Panda arm at a table, simulated in <span class="term" data-t="maniskill">ManiSkill</span>: cubes, cups that hide them, buttons, targets, pegs and sticks</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">1,600 demos (100 per task), 770k timesteps, with a language <span class="term" data-t="subgoal">subgoal</span> label at every step</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">16 tasks in 4 suites of 4, one per kind of memory; easy, medium and hard variants; 50 fixed test episodes each</div></div>
+      </div>
+      <p class="timer">Video: VideoUnmaskSwap. The red-bordered part is the clip the robot is shown before it starts: the cubes are covered by identical containers, then the containers swap places. Then it must lift the containers hiding the cubes it's asked for. Left: front camera; right: wrist camera. From the RoboMME project page.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Each step looks like any other manipulation benchmark. The difference is that the current frame isn't enough: the same picture can call for different actions depending on what happened before. Tasks whose names start with "Video", and all Imitation tasks, also begin with a short video instead of a single frame.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Front camera</b>, 256×256 RGB (depth optional)</li>
+          <li><b><span class="term" data-t="wrist">Wrist camera</span></b>, 256×256 RGB</li>
+          <li><b>Robot state</b>: 7 joint angles, gripper pose and opening (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li><b>Instruction</b>, e.g. "Press the button to stop the cube exactly at the target on its third visit."</li>
+          <li><b>At step 0 only</b>, on video tasks: the demonstration clip, frame by frame</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">has to carry the episode's history: subgoals, past frames or a recurrent state</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 8 numbers</h3>
+        <div class="vec" aria-label="8-number joint action">
+          <span>q1</span><span>q2</span><span>q3</span><span>q4</span><span>q5</span><span>q6</span><span>q7</span><span class="g">grip</span>
+        </div>
+        <p class="note"><span class="term" data-t="absolute">Absolute</span> <span class="term" data-t="jointpos">joint angles</span> for the 7 arm joints, plus the gripper: <b>+1 open, −1 closed</b>. This is the action space the paper's models and the current leader use; they predict <span class="term" data-t="actionchunk">chunks</span> of 20 steps and run the first 16. RoboMME also accepts a 7-number absolute gripper pose (x, y, z, roll, pitch, yaw in the world frame, with the origin at the centre of the table), discrete waypoints, or a multiple-choice mode (pick an option and a pixel) for video-QA research.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">16</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">kinds of memory</div></div>
+    <div class="stat"><div class="n">1,600</div><div class="l">demonstrations</div></div>
+    <div class="stat"><div class="n">770k</div><div class="l">timesteps</div></div>
+    <div class="stat"><div class="n">481</div><div class="l">steps per episode on average</div></div>
+    <div class="stat"><div class="n">90.5%</div><div class="l">human success</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Most manipulation benchmarks are long but <span class="term" data-t="markov">Markovian</span>: what's on the table already tells the policy what to do next, so a policy that sees only the present frame does well. Memory benchmarks existed, but MemoryBench has 3 nearly solved tasks, and MIKASA-Robo's VLA tasks average 72 steps, with too few demos to fine-tune a large VLA. RoboMME's episodes run 200 to over 1,000 steps, there are 100 demos per task, and the tasks are split by <strong>what has to be remembered: when, where, which object, and how</strong>. The paper then trains 14 memory variants of the same π0.5 model on it, to compare kinds of memory rather than whole systems.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Four suites, four kinds of memory</h2>
+    <p class="sub">Each suite has 4 tasks. Instructions are real ones from the benchmark.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Counting · temporal memory</h3><p>Keep count of what's been done, then stop at exactly the right moment. BinFill, PickXtimes, SwingXtimes, StopCube.</p><div class="ex">Put two green cubes into the bin and press the button to stop.</div></div>
+      <div class="task"><h3>Permanence · spatial memory</h3><p>Cubes are covered by identical containers, sometimes shuffled. Remember where each one went. VideoUnmask, VideoUnmaskSwap, ButtonUnmask, ButtonUnmaskSwap.</p><div class="ex">First press both buttons on the table, then pick up the container hiding the red cube.</div></div>
+      <div class="task"><h3>Reference · object memory</h3><p>Find an object again from a brief highlight, from what was done to it, or from a phrase like "where it was last placed". PickHighlight, VideoRepick, VideoPlaceButton, VideoPlaceOrder.</p><div class="ex">Watch the video carefully and place the green cube on the third target where it was placed.</div></div>
+      <div class="task"><h3>Imitation · procedural memory</h3><p>Watch a demonstration once, then repeat the same motion: the same grasp, direction or path. MoveCube, InsertPeg, PatternLock, RouteStick.</p><div class="ex">Watch the video carefully, then grasp the same peg at the same end and insert it into the same side of the box as in the video.</div></div>
+    </div>
+    <figure style="max-width: 620px">
+      <video class="vid" src="media/robomme_tasks.mp4" style="aspect-ratio: 1" muted loop playsinline preload="metadata"></video>
+      <figcaption>All 16 tasks from the front camera, one suite per row: Counting, Permanence, Reference, Imitation. Long clips are sped up to fit 16 s, and each tile freezes on its last frame. Red borders mark the demonstration video shown before the robot starts.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">The 16 tasks</h2>
+    <p class="sub">Memory types: T temporal, S spatial, O object, P procedural. Steps is the average episode length in the demos.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Task</th><th>Memory</th><th>Steps</th><th>What the robot has to do</th></tr></thead>
+        <tbody>
+          <tr><th>BinFill</th><td>T</td><td class="num">604</td><td>Drop a given number of cubes of each colour into an opaque bin (you can't see in to count), as cubes appear over time, then press the button</td></tr>
+          <tr><th>PickXtimes</th><td>T</td><td class="num">538</td><td>Pick and place one cube on a target a given number of times, then press the button</td></tr>
+          <tr><th>SwingXtimes</th><td>T</td><td class="num">435</td><td>Swing a cube between a right and a left target a given number of times</td></tr>
+          <tr><th>StopCube</th><td>T</td><td class="num">317</td><td>A cube slides back and forth. Press the button just as it reaches the target for the k-th time</td></tr>
+          <tr><th>VideoUnmask</th><td>S</td><td class="num">217</td><td>A video shows cubes being covered. Lift the container over the named colour</td></tr>
+          <tr><th>ButtonUnmask</th><td>S</td><td class="num">267</td><td>Cubes get covered while the robot is busy pressing a button. Then lift the right containers</td></tr>
+          <tr><th>VideoUnmaskSwap</th><td>S</td><td class="num">348</td><td>As VideoUnmask, but the containers swap places in the video</td></tr>
+          <tr><th>ButtonUnmaskSwap</th><td>S</td><td class="num">400</td><td>As ButtonUnmask, but the containers swap while the robot presses two buttons</td></tr>
+          <tr><th>PickHighlight</th><td>O</td><td class="num">346</td><td>Some cubes light up briefly while the robot presses a button. Pick up all of them</td></tr>
+          <tr><th>VideoRepick</th><td>O+T</td><td class="num">687</td><td>A video shows one cube being picked and moved. Find that cube and pick it up again, a given number of times</td></tr>
+          <tr><th>VideoPlaceButton</th><td>O+T</td><td class="num">974</td><td>A video interleaves cube placements and button presses. Place the cube on "the target where it was last placed before the button was pressed"</td></tr>
+          <tr><th>VideoPlaceOrder</th><td>O+T</td><td class="num">1,134</td><td>A video places a cube on several targets in turn. Place it on, say, "the third target"</td></tr>
+          <tr><th>MoveCube</th><td>P</td><td class="num">394</td><td>Move a cube to the target the same way as in the video: pick and place, push with the gripper, or hook it with a stick</td></tr>
+          <tr><th>InsertPeg</th><td>P+O</td><td class="num">479</td><td>Grasp the same peg at the same end as in the video, and insert it into the same side of a box</td></tr>
+          <tr><th>PatternLock</th><td>P</td><td class="num">208</td><td>Retrace a straight-line pattern across a grid of targets with a stick</td></tr>
+          <tr><th>RouteStick</th><td>P</td><td class="num">370</td><td>Retrace a path that curves around upright sticks</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">From Table 1 and Appendix E of the RoboMME paper. Difficulty levels change the number of cubes and distractors, repetitions, swaps or passes, e.g. BinFill goes from 1 colour and 4–6 cubes (easy) to 3 colours and 10–12 cubes (hard).</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> on 50 fixed test episodes per task (800 in all), each capped at 1,300 steps, averaged over the 16 tasks. Success rules are strict and many failures end the episode at once: dropping one cube too many into the bin, lifting the wrong container, picking the wrong cube, or pressing the stop button too early or too late. The paper averages 9 runs per model (last 3 checkpoints × 3 seeds); leaderboard entries report several runs. For the human baseline, each task was turned into an online video quiz: people watched the episode unfold and chose the next high-level step, with a planner doing the motion. They scored <strong>90.5%</strong>, and still slipped on StopCube timing and long PatternLock patterns.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Memory vs no memory</h2>
+    <p class="sub">The same StopCube episode run by two policies. The goal: stop the cube just as it reaches the target for the second time. Both see the same frames; only the bottom one keeps a sample of past frames.</p>
+    <figure style="max-width: 560px">
+      <video class="vid contain" src="media/robomme_stopcube.mp4" style="aspect-ratio: 512 / 520" muted loop playsinline preload="metadata"></video>
+      <figcaption>Top: π0.5 with no memory presses the button while the cube is off the target. Bottom: FrameSamp+Modul (π0.5 plus uniformly sampled past frames) stops it on the target. Over all 50 StopCube test episodes they score 6.7% and 42.0%. Each half: front camera, then wrist camera. Rollouts from the RoboMME project page; the last frame is held for 3 s.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Success rate (%) per suite and overall, from the RoboMME leaderboard (updated 29 September 2026). Grey rows are reference points, not policies you could deploy.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>Memory</th><th>Counting</th><th>Permanence</th><th>Reference</th><th>Imitation</th><th>All 16</th></tr></thead>
+        <tbody>
+          <tr style="color: var(--faint)"><th>Humans (planner does the motion)</th><td>–</td><td class="num">88.5</td><td class="num">91.0</td><td class="num">93.0</td><td class="num">89.5</td><td class="num">90.5</td></tr>
+          <tr style="color: var(--faint)"><th>GroundSG + Oracle (true subgoals)</th><td>Symbolic</td><td class="num">83.9</td><td class="num">93.3</td><td class="num">95.2</td><td class="num">64.0</td><td class="num">84.1</td></tr>
+          <tr><th>PonderPounce-9B (Aug 2026)</th><td>MLLM context</td><td class="num"><b>74.7</b></td><td class="num"><b>62.8</b></td><td class="num"><b>72.2</b></td><td class="num">33.7</td><td class="num"><b>60.8</b></td></tr>
+          <tr><th>FrameSamp + Modul (paper's best)</th><td>Perceptual</td><td class="num">65.2</td><td class="num">25.1</td><td class="num">36.3</td><td class="num"><b>51.4</b></td><td class="num">44.5</td></tr>
+          <tr><th>MemER</th><td>Perceptual + symbolic</td><td class="num">48.8</td><td class="num">53.2</td><td class="num">38.0</td><td class="num">29.5</td><td class="num">42.4</td></tr>
+          <tr><th>TokenDrop + Modul</th><td>Perceptual</td><td class="num">52.3</td><td class="num">26.8</td><td class="num">34.7</td><td class="num">38.3</td><td class="num">38.0</td></tr>
+          <tr><th>GroundSG + QwenVL</th><td>Symbolic</td><td class="num">38.0</td><td class="num">39.3</td><td class="num">31.6</td><td class="num">21.9</td><td class="num">32.7</td></tr>
+          <tr><th>TTT + Expert (best recurrent)</th><td>Recurrent</td><td class="num">36.0</td><td class="num">22.9</td><td class="num">19.7</td><td class="num">10.8</td><td class="num">22.4</td></tr>
+          <tr><th>SAM2Act+</th><td>Perceptual</td><td class="num">35.3</td><td class="num">26.0</td><td class="num">16.8</td><td class="num">7.3</td><td class="num">21.4</td></tr>
+          <tr><th>π0.5 + past actions</th><td>Symbolic</td><td class="num">29.1</td><td class="num">22.8</td><td class="num">14.6</td><td class="num">11.2</td><td class="num">19.4</td></tr>
+          <tr><th>π0.5 (no memory)</th><td>–</td><td class="num">28.8</td><td class="num">17.0</td><td class="num">17.2</td><td class="num">8.8</td><td class="num">17.9</td></tr>
+          <tr><th>Diffusion Policy (U-Net)</th><td>–</td><td class="num">10.7</td><td class="num">5.5</td><td class="num">6.6</td><td class="num">5.3</td><td class="num">7.0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Suite columns are the mean of that suite's 4 tasks. <b>PonderPounce</b> keeps the whole episode in the context of a 9B multimodal LLM (Qwen3.5) and passes a continuous "cognition" token to a fast π0.5 controller. Trained on 9× more data it reports 75.5%, which isn't on the leaderboard. No single kind of memory wins everywhere. Subgoals in words are strong on counting and are nearly perfect when they're correct (the Oracle row), but a real VLM gets them wrong often. Stored frames win on motion: FrameSamp+Modul scores 53.6% on PatternLock and 66.7% on RouteStick, against 12.7% and 34.7% for PonderPounce. Recurrent memory barely beats no memory. InsertPeg stays below 16% for every method, and without oracle subgoals the two Swap tasks stay below 40%. In 4 real-robot tasks built to mirror BinFill, VideoUnmask(Swap), VideoRepick and PatternLock, the paper got the same pattern: FrameSamp+Modul 25/40, GroundSG+QwenVL 19/40, π0.5 4/40. Sources: <a href="https://robomme.github.io/leaderboard.html" target="_blank" rel="noopener">leaderboard</a>, <a href="https://arxiv.org/abs/2603.04639" target="_blank" rel="noopener">RoboMME paper</a> (Tables 3 and 4), <a href="https://arxiv.org/abs/2608.24115" target="_blank" rel="noopener">PonderPounce paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,subgoal,symmem,percmem,recmem,vla,maniskill,jointpos,actionchunk"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robomme.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/RoboMME/robomme_benchmark" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://github.com/RoboMME/robomme_policy_learning" target="_blank" rel="noopener">MME-VLA policies ↗</a>
+    <a href="https://huggingface.co/datasets/Yinpei/robomme_data_h5" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://robomme.github.io/leaderboard.html" target="_blank" rel="noopener">Leaderboard ↗</a>
+    <a href="https://arxiv.org/abs/2603.04639" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
 <!-- ============================ ROBOTWIN ============================ -->
 <section class="panel" id="robotwin" role="tabpanel" aria-labelledby="tab-robotwin" style="--c: var(--robotwin)" hidden>
   <div class="top">
@@ -2433,6 +2945,167 @@
     <a href="https://sites.google.com/view/rlbench" target="_blank" rel="noopener">Website ↗</a>
     <a href="https://huggingface.co/datasets/hqfang/rlbench-18-tasks" target="_blank" rel="noopener">18-task data (Hugging Face) ↗</a>
     <a href="https://arxiv.org/abs/1909.12271" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ ROBOVQA ============================ -->
+<section class="panel" id="robovqa" role="tabpanel" aria-labelledby="tab-robovqa" style="--c: var(--robovqa)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/robovqa_hero.mp4" style="aspect-ratio: 1208 / 452" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Video QA · long-horizon planning · real offices</span>
+      <h1>RoboVQA</h1>
+      <p class="oneliner">Watch a few seconds of someone, or some robot, doing a chore in a real office. Then say <em>what just happened</em>, <em>whether it worked</em>, <em>what's possible now</em>, and <em>what to do next</em> to finish the request.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v">Video question answering for high-level robot reasoning, from Google DeepMind (ICRA 2024). The answers are plans in words, not motor commands</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">3 real office buildings, recorded with 3 <span class="term" data-t="embodiment">embodiments</span>: a robot, a person's bare hand, and a person using a grasping tool. No simulator</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">829,502 (video clip, question, answer) triples from 238 hours of video, all generated from step labels added in <span class="term" data-t="hindsight">hindsight</span></div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">8 question types, from "satisfied?" to "next 5 steps?", plus a live planning test scored by how often a human has to <span class="term" data-t="intervention">step in</span></div></div>
+      </div>
+      <p class="timer">Video: six clips from the RoboVQA validation set as the model sees them, two per embodiment. Each clip is a few seconds long and is looped here.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">Each example is one short clip with one question. The robot doesn't move while it's scored: the model reads the video and writes an answer, the way a "brain" would advise a separate low-level policy or a human operator.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>A video clip</b> from a head-mounted or robot camera, up to 16 frames</li>
+          <li><b>The long-horizon request</b>, e.g. "please remove the chips from the bowl and place them in the top draw"</li>
+          <li><b>Steps done so far</b>, for the questions that come with context</li>
+          <li><b>A question</b>, e.g. "Q: immediate next step?"</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">VLM</div><div class="d">a video-language model that answers in text</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Answer · text</h3>
+        <div class="vec" aria-label="Answer: yes or no, a step, or a list of steps">
+          <span class="g">yes / no</span><span class="sep"></span><span class="b">one step</span><span class="sep"></span><span>1- … 5- steps</span>
+        </div>
+        <ul class="legend">
+          <li><b>Yes/no</b> for "satisfied?" and "possible right now?"</li>
+          <li><b>One step</b> in plain words: "put the black bag in the drawer", or "done"</li>
+          <li><b>A numbered list</b> for "next 5 steps?"</li>
+        </ul>
+        <p class="note">The paper's model, RoboVQA-VideoCoCa, is a 383M-parameter video-language model (VideoCoCa) fine-tuned on the dataset and given 16 frames. On a robot, its step is handed to a language-conditioned policy or to a human teleoperator.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">829,502</div><div class="l">(video, text) pairs</div></div>
+    <div class="stat"><div class="n">238 h</div><div class="l">of video</div></div>
+    <div class="stat"><div class="n">5,246</div><div class="l">long-horizon episodes</div></div>
+    <div class="stat"><div class="n">92,948</div><div class="l">labelled steps, 14 s each</div></div>
+    <div class="stat"><div class="n">29,520</div><div class="l">unique instructions</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">embodiments, 3 buildings</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Robot datasets are usually built top-down: researchers pick a short list of tasks, then reset the scene between every demo. RoboVQA went the other way. People in the offices asked for anything they wanted ("I am done drinking the coffee, can you throw it in a trash can and get me some laffy taffy"), an operator did it in one go without resets, and the steps were labelled afterwards. That was <strong>2.2× faster with the robot and 13.8× faster with a human body</strong>, and the requests match what real users ask for. The point is to test whether a model understands a real, messy scene well enough to plan. Off-the-shelf VLMs didn't: zero-shot PaLM-E needed a human to correct 81% of its plans.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Eight kinds of question</h2>
+    <p class="sub">All generated for free from the labelled step sequence, by asking at a known point in time. Examples are real questions from the validation set.</p>
+    <div class="tasks">
+      <div class="task"><h3>Planning</h3><p>Given the request, what's the next step?</p><div class="ex">current goal is: Throw hint water bottle into the can &amp; bottle trash. Q: immediate next step? → place the bottle in the recycle bin</div></div>
+      <div class="task"><h3>Planning with context</h3><p>The same, but with the steps done so far listed.</p><div class="ex">… last 20 steps: 1- open the drawer of the table 2- put the white packet in the drawer. Q: immediate next step? → put the black bag in the drawer</div></div>
+      <div class="task"><h3>Remaining 5 steps</h3><p>Plan further ahead: the next five steps in order.</p><div class="ex">… Q: next 5 steps? → 1- put the white packet in the drawer 2- put the black bag in the drawer 3- …</div></div>
+      <div class="task"><h3>Success</h3><p>Did the step in this clip actually get done?</p><div class="ex">place the book on the table. Q: satisfied? → yes</div></div>
+      <div class="task"><h3>Discriminative affordance</h3><p>Is this step possible from here? Negatives are random steps from other episodes.</p><div class="ex">unstack the bowl. Q: possible right now? → no</div></div>
+      <div class="task"><h3>Generative affordance</h3><p>Name a step that's possible right now.</p><div class="ex">Q: what action is possible right now? → close the drawer</div></div>
+      <div class="task"><h3>Past description</h3><p>Describe what the clip just showed.</p><div class="ex">Q: what just happened? → Put the lid in the dustbin</div></div>
+      <div class="task"><h3>Future prediction</h3><p>Guess what's about to happen.</p><div class="ex">Q: what is likely to happen next? → clean the table with the tissue</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One episode, five clips</h2>
+    <p class="sub">A robot episode from the validation set: "please remove the chips from the bowl and place them in the top draw". Each clip below is a separate test example with its own question. The clips play in order.</p>
+    <figure style="max-width: 640px">
+      <video class="vid" src="media/robovqa_episode.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>Clips 1–5 back to back at their released frame rate: the drawer is open, the bags go in one by one, the bowl ends up empty.</figcaption>
+    </figure>
+    <div class="tablebox compact" style="margin-top: 16px">
+      <table>
+        <thead><tr><th>Clip</th><th>Question type</th><th>Question</th><th>Reference answer</th></tr></thead>
+        <tbody>
+          <tr><td class="num">1</td><td>Remaining 5 steps</td><td>Steps so far: open the drawer of the table. Next 5 steps?</td><td>Put the white packet, black bag, brown bag, orange bag, black bag in the drawer</td></tr>
+          <tr><td class="num">2</td><td>Planning with context</td><td>Steps so far: open the drawer; put the white packet in the drawer. Immediate next step?</td><td>put the black bag in the drawer</td></tr>
+          <tr><td class="num">3</td><td>Planning · generative affordance</td><td>Immediate next step? · What action is possible right now?</td><td>put the brown bag in the drawer (both)</td></tr>
+          <tr><td class="num">4</td><td>Planning with context · generative affordance</td><td>9 steps so far, ending "put the orange packet in the drawer". Immediate next step? · What's possible now?</td><td>close the drawer (both)</td></tr>
+          <tr><td class="num">5</td><td>Planning · discriminative affordance</td><td>Immediate next step? · "close the drawer of the table": possible right now?</td><td>close the drawer of the table · yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">From the validation JSON in the <code>gdm-robovqa</code> release, with each clip's video from the same bucket. Answers are free text, so "close the drawer" and "close the drawer of the table" are both right; that's why grading needs a person (or a text-overlap score).</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">Two ways. <strong>VQA error rate</strong>: the model answers about 1,000 held-out questions from 50 episodes it never saw. Answers that exactly match a previously graded answer are scored automatically; the rest go to <strong>human raters</strong>, who see the same clip and question, mark the answer right or wrong, and can supply a correct one, which is saved for next time. <strong>Planning with intervention</strong>: the model plans a whole long-horizon request step by step while an operator watches. When a plan step is wrong, the operator corrects it (a <em>cognitive</em> intervention); when the low-level policy can't do a step, the operator takes over the arm (a <em>physical</em> intervention). The score is the share of steps that needed a correction, so every task still gets finished. Later papers often skip the raters and report <span class="term" data-t="bleu">BLEU</span>, a word-overlap score against the reference answer.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Intervention in action</h2>
+    <p class="sub">A live run from the paper's second evaluation: a person teleoperates the robot's arm, while the model plans each step from what the camera sees.</p>
+    <figure style="max-width: 720px">
+      <video class="vid" src="media/robovqa_intervention.mp4" muted loop playsinline preload="metadata"></video>
+      <figcaption>"please clear all the black pens from the table and put them in the pen holder". The chat shows the user's request, the model ("Brain") proposing each step, and the operator approving it with a thumbs-up. The system reports 0% cognitive and 100% physical intervention (the arm was teleoperated), 50% overall, over 10 steps. Note "Instruction has 0 matches in training set". From the RoboVQA project page.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">The paper's planning benchmark (lower is better). Cognitive intervention rate: the share of planning steps a human had to correct.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Size</th><th>Frames</th><th>Offline: 100 recorded episodes, 854 steps</th><th>Live: 10 tasks, teleoperated robot</th></tr></thead>
+        <tbody>
+          <tr><th>RoboVQA-VideoCoCa (fine-tuned)</th><td class="num">383M</td><td class="num">16</td><td class="num"><b>44.0%</b></td><td class="num"><b>47.7%</b> ± 9.1</td></tr>
+          <tr><th>PaLM-E (zero-shot)</th><td class="num">12B</td><td class="num">1</td><td class="num">81.4%</td><td class="num">78.2% ± 7.6</td></tr>
+          <tr><th>Grounded Decoding (PaLM + RoboVQA affordances)</th><td class="num">540B</td><td class="num">1</td><td class="num">95.5%</td><td class="num">too slow to run live</td></tr>
+          <tr><th>SayCan (PaLM + RoboVQA affordances)</th><td class="num">540B</td><td class="num">1</td><td class="num">98.8%</td><td class="num">too slow to run live</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="sub" style="margin-top: 22px">Later models on the free-text VQA split, scored with BLEU-4 (higher is better). Numbers as reported in the Thinker and RoboBrain papers.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>BLEU-1</th><th>BLEU-4</th></tr></thead>
+        <tbody>
+          <tr><th>Thinker-7B (Jan 2026)</th><td class="num"><b>72.7</b></td><td class="num"><b>56.0</b></td></tr>
+          <tr><th>RoboBrain-7B (CVPR 2025)</th><td class="num">72.1</td><td class="num">55.1</td></tr>
+          <tr><th>ThinkAct-7B</th><td class="num">69.1</td><td class="num">52.4</td></tr>
+          <tr><th>Qwen2.5-VL-7B</th><td class="num">62.2</td><td class="num">45.0</td></tr>
+          <tr><th>RoboMamba</th><td class="num">54.9</td><td class="num">36.3</td></tr>
+          <tr><th>LLaVA-OneVision-7B</th><td class="num">38.1</td><td class="num">31.0</td></tr>
+          <tr><th>RoboBrain 2.0-7B</th><td class="num">37.4</td><td class="num">25.8</td></tr>
+          <tr><th>GPT-4V</th><td class="num">32.2</td><td class="num">23.9</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The paper's own model beats a 30× larger zero-shot PaLM-E by 46% on intervention rate. Video matters: 16 frames instead of 1 cuts the error rate by 19% on average. Training on human and robot data together beats robot data alone, even when tested only on robot clips. In a fully autonomous run on one easy task, with a learned policy doing the motion, RoboVQA-VideoCoCa needed 40% cognitive and 0% physical interventions. BLEU numbers follow the RoboMamba evaluation protocol and only reward word overlap with the reference answer, so they aren't comparable to the paper's human-graded error rates. In a separate test, NVIDIA's Cosmos-Reason1 benchmark uses 101 RoboVQA validation clips with yes/no success and affordance questions only: Cosmos-Reason1-7B with RL scores 86.8%, Qwen2.5-VL-7B 82.5%, OpenAI o1 80.0% and GPT-4o 71.8%. The project page lists slightly different planning numbers (e.g. 47.3% offline, with an 8B PaLM-E) than the arXiv PDF used here. Sources: <a href="https://arxiv.org/abs/2311.00899" target="_blank" rel="noopener">RoboVQA paper</a>, <a href="https://arxiv.org/abs/2601.21199" target="_blank" rel="noopener">Thinker</a>, <a href="https://arxiv.org/abs/2502.21257" target="_blank" rel="noopener">RoboBrain</a>, <a href="https://arxiv.org/abs/2503.15558" target="_blank" rel="noopener">Cosmos-Reason1</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="embodiment,hindsight,affordance,intervention,bleu,teleop,zeroshot,longhorizon"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robovqa.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/google-deepmind/robovqa" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://console.cloud.google.com/storage/browser/gdm-robovqa" target="_blank" rel="noopener">Dataset (Google Cloud) ↗</a>
+    <a href="https://huggingface.co/datasets/Tianli/robovqa" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2311.00899" target="_blank" rel="noopener">Paper ↗</a>
   </div>
 </section>
 
@@ -2833,7 +3506,7 @@
 </section>
 
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). M3-Bench-robot clips are cut from the benchmark's own videos (<code>ByteDance-Seed/M3-Bench</code>, CC BY-NC-SA 4.0). The NaVQA hero is CODa's own clip of sequence 16 (amrl.cs.utexas.edu/coda), and the Nova Carter clip is from the ReMEmbR project page. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 29 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). M3-Bench-robot clips are cut from the benchmark's own videos (<code>ByteDance-Seed/M3-Bench</code>, CC BY-NC-SA 4.0). The NaVQA hero is CODa's own clip of sequence 16 (amrl.cs.utexas.edu/coda), and the Nova Carter clip is from the ReMEmbR project page. RAVEN-QA's Go1 clips are from the RAVEN project page (ravenmem.github.io); its memory-frame grid and source montage are built from the RAVEN-QA dataset (<code>zzcnewly/RAVEN_QA</code>, Apache 2.0). RoboMME clips are the task videos and rollouts on its project page (robomme.github.io), re-encoded and tiled here. LIBERO-PRO clips are rollouts from its project page (zxy-mllab.github.io/LIBERO-PRO-Webpage), tiled here. RoboVQA clips are from its released dataset (<code>gdm-robovqa</code>, CC BY 4.0), and the intervention run is from robovqa.github.io. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 30 September 2026.
 </footer>
 </main>
 
@@ -2916,7 +3589,24 @@
     socratic: ["Socratic-model baseline", "One model writes a text description of each 30-second clip; later another model searches those descriptions to answer. Simple, but details that weren't written down are lost."],
     coda: ["CODa", "The UT Campus Object Dataset: long drives by a Clearpath Husky around the University of Texas at Austin, recorded with cameras, 3D LiDAR and GPS, and labelled with 3D boxes."],
     gps: ["GPS position", "Where the robot was on the map, as (x, y, z) coordinates. NaVQA pairs every camera frame with one, so memories can be looked up by place."],
-    vectordb: ["Vector database", "A store that turns each piece of text into a list of numbers (an embedding) and finds the stored items closest in meaning to a query. ReMEmbR can also search its memory by position and time."],
+    vectordb: ["Vector database", "A store that keeps each item (a caption, or an image) as a list of numbers (an embedding) and finds the stored items closest in meaning to a query. ReMEmbR and RAVEN can also search their memory by position and time."],
+    memframe: ["Memory frame", "One stored camera image, sampled every few seconds to minutes from a longer video. RAVEN-QA gives each video 9–29 of them; the answer to every question is one (or more) of these frames."],
+    subgoal: ["Language subgoal", "A short instruction for the next step, e.g. \"put the second red cube in the bin\". A string of past subgoals works as a written record of what has been done."],
+    symmem: ["Symbolic memory", "History kept as discrete symbols, here language subgoals written by a VLM at each step. Easy to read and good for counting, but it only remembers what was written down."],
+    percmem: ["Perceptual memory", "History kept as image features from past frames, e.g. a uniform sample of earlier frames. Keeps motion and layout that words miss, at the cost of more tokens."],
+    recmem: ["Recurrent memory", "History squeezed into a fixed-size state that is updated every step (e.g. test-time training or a recurrent memory transformer). Cheap to carry, but details can wash out."],
+    actionchunk: ["Action chunk", "Several future actions predicted in one go. The robot runs some of them before asking the policy again, which makes motion smoother and inference cheaper."],
+    hindsight: ["Hindsight labelling", "Recording a long task first and labelling its steps afterwards, instead of scripting each step in advance. Crowd workers mark where each step starts and ends."],
+    affordance: ["Affordance", "What can be done from where things are right now, e.g. \"close the drawer\" is only possible if the drawer is open."],
+    intervention: ["Intervention rate", "The share of steps where a human had to step in: to fix a wrong plan (cognitive) or to take over the robot's motion (physical). Lower is better, and every task still gets finished."],
+    bleu: ["BLEU", "A score for generated text: how many words and short word sequences it shares with a reference answer (BLEU-4 counts up to 4-word runs). Cheap, but a correct answer in different words scores low."],
+    memorise: ["Memorisation", "Doing well by recalling training examples instead of learning the rule behind them. For a robot policy: replaying the arm motion it saw for this scene, whatever the scene actually looks like now."],
+    bddl: ["BDDL", "Behavior Domain Definition Language: the text files LIBERO uses to describe a task's objects, where they start and what counts as success. LIBERO-PRO's variants are new BDDL files."],
+    visualembed: ["Visual embedding", "A list of numbers that a model like CLIP or SigLIP computes from an image, placed so that an image and a text describing it end up close together. Searching them avoids writing captions, so details no caption mentions can still be found."],
+    habitat: ["Habitat", "Meta's simulator for robots moving through scanned 3D homes and buildings. Fast to render, and widely used for navigation research."],
+    frontier: ["Frontier exploration", "A simple way to explore: keep driving to the nearest edge between mapped and unmapped space until nothing is left unmapped."],
+    slam: ["SLAM", "Simultaneous localisation and mapping: building a map from the robot's sensors while working out where the robot is on it."],
+    astar: ["A* planner", "A classic shortest-path search on a map. Given a goal position and the obstacle map, it returns a collision-free path for the robot to follow."],
     llmjudge: ["LLM judge", "A language model that grades free-text answers by comparing them with a reference answer. Faster than human grading, but it has to be checked against people."],
   };
 
