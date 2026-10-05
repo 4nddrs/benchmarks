@@ -43,6 +43,11 @@
     --liberoplus: #c23b3b;
     --liberopro: #6b5d8f;
     --metaworld: #2a8a3e;
+    --libmem: #8b6914;
+    --memmimic: #0f7c8c;
+    --memobench: #2f6f4f;
+    --mikasavla: #8a3ccf;
+    --robomemarena: #3557a8;
     --serif: "Newsreader", Georgia, "Times New Roman", serif;
     --sans: "Source Sans 3", system-ui, -apple-system, "Segoe UI", sans-serif;
     --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
@@ -81,6 +86,11 @@
       --liberoplus: #ff7f7f;
       --liberopro: #b9a8e0;
       --metaworld: #6fd384;
+      --libmem: #e3c26b;
+      --memmimic: #5fd0dc;
+      --memobench: #7fd1a6;
+      --mikasavla: #c9a0ff;
+      --robomemarena: #8fb0ff;
       color-scheme: dark;
     }
   }
@@ -116,6 +126,11 @@
     --liberoplus: #ff7f7f;
     --liberopro: #b9a8e0;
     --metaworld: #6fd384;
+    --libmem: #e3c26b;
+    --memmimic: #5fd0dc;
+    --memobench: #7fd1a6;
+    --mikasavla: #c9a0ff;
+    --robomemarena: #8fb0ff;
     color-scheme: dark;
   }
 
@@ -447,12 +462,16 @@
       <button class="tab" role="tab" id="tab-home" aria-controls="home" data-target="home">Benchmarks</button>
       <button class="tab" role="tab" id="tab-egogym" aria-controls="egogym" data-target="egogym" style="--c: var(--egogym)"><span class="dot"></span>EgoGym</button>
       <button class="tab" role="tab" id="tab-libero" aria-controls="libero" data-target="libero" style="--c: var(--libero)"><span class="dot"></span>LIBERO</button>
+      <button class="tab" role="tab" id="tab-libmem" aria-controls="libmem" data-target="libmem" style="--c: var(--libmem)"><span class="dot"></span>LIBERO-Mem</button>
       <button class="tab" role="tab" id="tab-liberoplus" aria-controls="liberoplus" data-target="liberoplus" style="--c: var(--liberoplus)"><span class="dot"></span>LIBERO-Plus</button>
       <button class="tab" role="tab" id="tab-liberopro" aria-controls="liberopro" data-target="liberopro" style="--c: var(--liberopro)"><span class="dot"></span>LIBERO-PRO</button>
       <button class="tab" role="tab" id="tab-lwrobocasa" aria-controls="lwrobocasa" data-target="lwrobocasa" style="--c: var(--lwrobocasa)"><span class="dot"></span>LW-RoboCasa-Tasks</button>
       <button class="tab" role="tab" id="tab-m3bench" aria-controls="m3bench" data-target="m3bench" style="--c: var(--m3bench)"><span class="dot"></span>M3-Bench-robot</button>
+      <button class="tab" role="tab" id="tab-memmimic" aria-controls="memmimic" data-target="memmimic" style="--c: var(--memmimic)"><span class="dot"></span>MemMimic</button>
+      <button class="tab" role="tab" id="tab-memobench" aria-controls="memobench" data-target="memobench" style="--c: var(--memobench)"><span class="dot"></span>MEMOBench</button>
       <button class="tab" role="tab" id="tab-metaworld" aria-controls="metaworld" data-target="metaworld" style="--c: var(--metaworld)"><span class="dot"></span>Meta-World</button>
       <button class="tab" role="tab" id="tab-mikasa" aria-controls="mikasa" data-target="mikasa" style="--c: var(--mikasa)"><span class="dot"></span>MIKASA-Robo</button>
+      <button class="tab" role="tab" id="tab-mikasavla" aria-controls="mikasavla" data-target="mikasavla" style="--c: var(--mikasavla)"><span class="dot"></span>MIKASA-Robo-VLA</button>
       <button class="tab" role="tab" id="tab-mimicdroid" aria-controls="mimicdroid" data-target="mimicdroid" style="--c: var(--mimicdroid)"><span class="dot"></span>MimicDroid</button>
       <button class="tab" role="tab" id="tab-navqa" aria-controls="navqa" data-target="navqa" style="--c: var(--navqa)"><span class="dot"></span>NaVQA</button>
       <button class="tab" role="tab" id="tab-ravenqa" aria-controls="ravenqa" data-target="ravenqa" style="--c: var(--ravenqa)"><span class="dot"></span>RAVEN-QA</button>
@@ -461,6 +480,7 @@
       <button class="tab" role="tab" id="tab-gr1" aria-controls="gr1" data-target="gr1" style="--c: var(--gr1)"><span class="dot"></span>RoboCasa GR-1 Tabletop</button>
       <button class="tab" role="tab" id="tab-rckitchen" aria-controls="rckitchen" data-target="rckitchen" style="--c: var(--rckitchen)"><span class="dot"></span>RoboCasa Kitchen</button>
       <button class="tab" role="tab" id="tab-robocasa365" aria-controls="robocasa365" data-target="robocasa365" style="--c: var(--robocasa365)"><span class="dot"></span>RoboCasa365</button>
+      <button class="tab" role="tab" id="tab-robomemarena" aria-controls="robomemarena" data-target="robomemarena" style="--c: var(--robomemarena)"><span class="dot"></span>RoboMemArena</button>
       <button class="tab" role="tab" id="tab-robomme" aria-controls="robomme" data-target="robomme" style="--c: var(--robomme)"><span class="dot"></span>RoboMME</button>
       <button class="tab" role="tab" id="tab-robotwin" aria-controls="robotwin" data-target="robotwin" style="--c: var(--robotwin)"><span class="dot"></span>RoboTwin</button>
       <button class="tab" role="tab" id="tab-robovqa" aria-controls="robovqa" data-target="robovqa" style="--c: var(--robovqa)"><span class="dot"></span>RoboVQA</button>
@@ -477,12 +497,12 @@
 <!-- ============================ LANDING ============================ -->
 <section class="panel" id="home" role="tabpanel" aria-labelledby="tab-home">
   <div class="hero-home">
-    <span class="eyebrow">Robot learning · twenty benchmarks</span>
+    <span class="eyebrow">Robot learning · twenty-five benchmarks</span>
     <h1>Benchmarks</h1>
     <p class="lede">
       A <span class="term" data-t="benchmark">benchmark</span> is a fixed set of tasks plus a
       fixed way of scoring, so two robot <span class="term" data-t="policy">policies</span> can be
-      compared fairly. These twenty test very different things; six of them are built on the RoboCasa kitchens. Pick a tab; each one is built to be
+      compared fairly. These twenty-five test very different things; six of them are built on the RoboCasa kitchens, and seven are manipulation benchmarks built around memory. Pick a tab; each one is built to be
       understood in about 30 seconds. Dotted words explain themselves when you hover or tap them.
     </p>
     <div class="search" role="search">
@@ -516,6 +536,15 @@
         <h3>LIBERO</h3>
         <p>130 tabletop tasks learned one after another. Can the robot pick up new skills without forgetting old ones?</p>
         <span class="go">Tests: knowledge transfer →</span>
+      </div>
+    </button>
+    <button class="card" data-go="libmem" style="--c: var(--libmem)">
+      <video class="vid contain" src="media/libmem_tasks.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Object memory · LIBERO</span>
+        <h3>LIBERO-Mem</h3>
+        <p>Identical bowls on identical plates. Lift one exactly 7 times, swap two using the spare plate, or move the basket the cheese went into.</p>
+        <span class="go">Tests: remembering what happened to which object →</span>
       </div>
     </button>
     <button class="card" data-go="liberoplus" style="--c: var(--liberoplus)">
@@ -554,6 +583,24 @@
         <span class="go">Tests: remembering people and places →</span>
       </div>
     </button>
+    <button class="card" data-go="memmimic" style="--c: var(--memmimic)">
+      <video class="vid" src="media/memmimic_hero.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">In-trial · cross-trial memory</span>
+        <h3>MemMimic</h3>
+        <p>Put a cube back in the bin it came from after the colours shuffle, or push a cube of unknown friction six times and get the speed right by the end.</p>
+        <span class="go">Tests: remembering, and learning from earlier tries →</span>
+      </div>
+    </button>
+    <button class="card" data-go="memobench" style="--c: var(--memobench)">
+      <img class="vid contain" src="media/memobench_overview.jpg" alt="" loading="lazy" style="background: #fff" />
+      <div class="body">
+        <span class="chip">Process-level memory · LIBERO</span>
+        <h3>MEMOBench</h3>
+        <p>30 LIBERO tasks with 4,200 checkpoints inside the episodes: did the policy store what it saw, update it when things changed, and boil it down?</p>
+        <span class="go">Tests: where memory breaks, not just whether →</span>
+      </div>
+    </button>
     <button class="card" data-go="metaworld" style="--c: var(--metaworld)">
       <video class="vid contain" src="media/metaworld_mt10.mp4" muted loop playsinline autoplay preload="metadata"></video>
       <div class="body">
@@ -570,6 +617,15 @@
         <h3>MIKASA-Robo</h3>
         <p>Tabletop puzzles where the answer disappears from view. The robot must remember a colour, a hidden ball, a count, or an order.</p>
         <span class="go">Tests: memory →</span>
+      </div>
+    </button>
+    <button class="card" data-go="mikasavla" style="--c: var(--mikasavla)">
+      <video class="vid contain" src="media/mikasavla_types.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Memory · VLA dataset</span>
+        <h3>MIKASA-Robo-VLA</h3>
+        <p>MIKASA-Robo's VLA release: 90 tasks with instructions, 10 kinds of memory and 22,500 demos. A π0.5 baseline succeeds 21% of the time.</p>
+        <span class="go">Tests: memory at VLA scale →</span>
       </div>
     </button>
     <button class="card" data-go="mimicdroid" style="--c: var(--mimicdroid)">
@@ -642,6 +698,15 @@
         <h3>RoboCasa365</h3>
         <p>A mobile robot doing chores in 2,500 simulated kitchens. 365 tasks and 2,200+ hours of demonstrations for training generalist robots.</p>
         <span class="go">Tests: breadth and generalisation →</span>
+      </div>
+    </button>
+    <button class="card" data-go="robomemarena" style="--c: var(--robomemarena)">
+      <video class="vid" src="media/robomemarena_hero.mp4" muted loop playsinline autoplay preload="metadata"></video>
+      <div class="body">
+        <span class="chip">Long-horizon memory · sim + real</span>
+        <h3>RoboMemArena</h3>
+        <p>26 kitchen tasks averaging over 1,000 steps: which drawer was empty, how many times has the sauce been poured, where did the cookies go?</p>
+        <span class="go">Tests: memory across long, multi-step chores →</span>
       </div>
     </button>
     <button class="card" data-go="robomme" style="--c: var(--robomme)">
@@ -723,6 +788,15 @@
             <td class="num"><strong>97–99.9%</strong> average over 4 suites (saturated)</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="libmem"><span style="background: var(--libmem)"></span>LIBERO-Mem</button></th>
+            <td><strong>Can a policy tell identical objects apart by what happened to them?</strong></td>
+            <td>LIBERO kitchen scene, Franka arm, robosuite (MuJoCo)</td>
+            <td class="num">120 teleoperated demos per task (100 train, 20 validation)</td>
+            <td class="num">10 in 4 object-memory types</td>
+            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
+            <td class="num"><strong>80.8%</strong> task success (ActMem-VLA); 14.8% of subgoals in the original paper</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="liberoplus"><span style="background: var(--liberoplus)"></span>LIBERO-Plus</button></th>
             <td><strong>Does a LIBERO policy survive small changes to the scene?</strong></td>
             <td>Same as LIBERO: Franka arm, robosuite (MuJoCo), with perturbations</td>
@@ -759,6 +833,24 @@
             <td class="num"><strong>34.7%</strong> (NS-Mem); humans 90.7%</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="memmimic"><span style="background: var(--memmimic)"></span>MemMimic</button></th>
+            <td><strong>Can a policy remember within one attempt, and learn from earlier attempts?</strong></td>
+            <td>Tabletop, UR5e arm, MuJoCo (no robosuite); plus 3 real-robot tasks</td>
+            <td class="num">300–500 scripted demos per sim task; 80–2,166 human demos per real task</td>
+            <td class="num">6: 3 in-trial, 3 cross-trial (3 sim, 3 real)</td>
+            <td class="num">8 numbers (absolute xyz + quaternion + gripper width)</td>
+            <td class="num"><strong>97%</strong> Pushing, 81% Flinging, 95% real Casting (Gated Memory Policy)</td>
+          </tr>
+          <tr>
+            <th><button class="benchmark-link" data-go="memobench"><span style="background: var(--memobench)"></span>MEMOBench</button></th>
+            <td><strong>Where does a policy's memory break: storing, updating or compressing?</strong></td>
+            <td>LIBERO scenes, Franka arm, robosuite (MuJoCo)</td>
+            <td class="num">50 demos per task (1,500)</td>
+            <td class="num">30 in 4 memory types; 4,200 checkpoints</td>
+            <td class="num">7 numbers (Δ pose + gripper), same as LIBERO</td>
+            <td class="num"><strong>34.7%</strong> success (π0.5 + memory module + alignment); 21% of updates</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="metaworld"><span style="background: var(--metaworld)"></span>Meta-World</button></th>
             <td><strong>Can one policy learn many different skills, or learn a new one fast?</strong></td>
             <td>Tabletop, Sawyer arm, MuJoCo (no robosuite)</td>
@@ -774,7 +866,16 @@
             <td class="num">22,500 expert trajectories (6M+ steps)</td>
             <td class="num">90 across 10 memory types</td>
             <td class="num">7 numbers (Δ pose + gripper)</td>
-            <td class="num"><strong>46.5%</strong> on a 4-task subset (FibVLA); no full 90-task results yet</td>
+            <td class="num"><strong>67.8%</strong> on the 5-task subset (Gated Memory Policy); no full 90-task results yet</td>
+          </tr>
+          <tr>
+            <th><button class="benchmark-link" data-go="mikasavla"><span style="background: var(--mikasavla)"></span>MIKASA-Robo-VLA</button></th>
+            <td><strong>How do VLAs do across 90 language-conditioned memory tasks?</strong></td>
+            <td>Same as MIKASA-Robo: Franka arm, ManiSkill3 (SAPIEN)</td>
+            <td class="num">22,500 oracle demos (250 per task), RLDS + LeRobot</td>
+            <td class="num">90 in 10 memory types; Short / Medium / Long splits</td>
+            <td class="num">7 numbers (Δ pose + gripper)</td>
+            <td class="num"><strong>21.1%</strong> on 14 tasks (π0.5 reference); 1 in 60 on Long tasks</td>
           </tr>
           <tr>
             <th><button class="benchmark-link" data-go="mimicdroid"><span style="background: var(--mimicdroid)"></span>MimicDroid</button></th>
@@ -849,6 +950,15 @@
             <td class="num"><strong>58.1%</strong> overall, 50-task leaderboard (Paimon-0)</td>
           </tr>
           <tr>
+            <th><button class="benchmark-link" data-go="robomemarena"><span style="background: var(--robomemarena)"></span>RoboMemArena</button></th>
+            <td><strong>Can a policy keep track through 1,000-step chores?</strong></td>
+            <td>LIBERO-based kitchen and dining scenes, Franka arm (MuJoCo); 5 real tasks on Mobile ALOHA</td>
+            <td class="num">2,600 generated demos (100 per task) with subtask and keyframe labels</td>
+            <td class="num">26 in 4 categories</td>
+            <td class="num">7 numbers (end-effector + gripper)</td>
+            <td class="num"><strong>53.5%</strong> TSR (RoboFoundry); 38.5% (PrediMem)</td>
+          </tr>
+          <tr>
             <th><button class="benchmark-link" data-go="robomme"><span style="background: var(--robomme)"></span>RoboMME</button></th>
             <td><strong>Which kind of memory does a VLA need: when, where, which object, or how?</strong></td>
             <td>Tabletop, Franka arm, ManiSkill (SAPIEN)</td>
@@ -887,7 +997,7 @@
         </tbody>
       </table>
     </div>
-    <p class="src">Several rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. M3-Bench-robot, NaVQA, RAVEN-QA and RoboVQA have no action at all: nothing moves while they're scored, and the model only answers questions about a recorded video. A NaVQA or RAVEN-QA answer can be a place on the map, though, which a real robot can then drive to. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
+    <p class="src">Several rows say "7 numbers (Δ pose + gripper)". That's the same layout, but the units, rotation format and gripper sign differ. The LIBERO tab has a side-by-side comparison. RoboTwin's default action is joint angles rather than a gripper pose. RLBench lets you choose, but its standard 18-task setup sends one absolute gripper pose per keyframe. Meta-World's is the smallest: the gripper can only move in x, y, z and open or close, never rotate. LIBERO-Mem, MEMOBench and RoboMemArena all run on LIBERO's simulator, so they share its 7 numbers. MemMimic's 8 numbers are an absolute target pose, not a step. M3-Bench-robot, NaVQA, RAVEN-QA and RoboVQA have no action at all: nothing moves while they're scored, and the model only answers questions about a recorded video. A NaVQA or RAVEN-QA answer can be a place on the map, though, which a real robot can then drive to. The six RoboCasa rows share kitchens and assets but not tasks, robots or scoring, so a score on one says little about the others. "Best reported" numbers aren't comparable across rows; each benchmark tab explains what its number means.</p>
   </div>
 
   <div>
@@ -2317,12 +2427,13 @@
       <table>
         <thead><tr><th>Model</th><th>Task set</th><th>Avg. success</th><th>π₀ on same set</th></tr></thead>
         <tbody>
+          <tr><th>Gated Memory Policy (CoRL 2026)</th><td>The standard 5-task VLA subset from the MIKASA-Robo paper</td><td class="num"><b>67.8%</b></td><td class="num">29.4%</td></tr>
           <tr><th>FibVLA (Jul 2026)</th><td>4 tasks: ShellGameTouch, InterceptMedium, TakeItBack, RememberShape5</td><td class="num"><b>46.5%</b></td><td class="num">33.0%</td></tr>
           <tr><th>MemoryVLA (ICLR 2026)</th><td>The standard 5-task VLA subset from the MIKASA-Robo paper</td><td class="num"><b>41.2%</b></td><td class="num">29.4%</td></tr>
         </tbody>
       </table>
     </div>
-    <p class="src">Models with explicit memory beat memoryless VLAs by 12–13 points, but none gets past 50%. Sources: <a href="https://arxiv.org/abs/2607.29596" target="_blank" rel="noopener">FibVLA</a>, <a href="https://arxiv.org/abs/2508.19236" target="_blank" rel="noopener">MemoryVLA</a>.</p>
+    <p class="src">VLAs with explicit memory beat memoryless ones by 12–13 points. Gated Memory Policy, a smaller Diffusion Policy that opens a memory gate only when it needs history (see the MemMimic tab), gets much further. The MIKASA-Robo-VLA tab covers the release paper, which adds a π0.5 baseline on 14 tasks (21.1%). Sources: <a href="https://arxiv.org/abs/2604.18933" target="_blank" rel="noopener">GMP</a>, <a href="https://arxiv.org/abs/2607.29596" target="_blank" rel="noopener">FibVLA</a>, <a href="https://arxiv.org/abs/2508.19236" target="_blank" rel="noopener">MemoryVLA</a>.</p>
   </div>
 
   <div>
@@ -2740,6 +2851,650 @@
     <a href="https://huggingface.co/datasets/Yinpei/robomme_data_h5" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
     <a href="https://robomme.github.io/leaderboard.html" target="_blank" rel="noopener">Leaderboard ↗</a>
     <a href="https://arxiv.org/abs/2603.04639" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ LIBERO-MEM ============================ -->
+<section class="panel" id="libmem" role="tabpanel" aria-labelledby="tab-libmem" style="--c: var(--libmem)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/libmem_hero.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · object-centric · built on LIBERO</span>
+      <h1>LIBERO-Mem</h1>
+      <p class="oneliner">10 LIBERO kitchen tasks where <em>identical-looking objects</em> can only be told apart by what has happened to them: lift a bowl exactly 7 times, swap two bowls using the spare plate, or move the basket the cheese went into.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> policies. Every task is <span class="term" data-t="markov">non-Markovian</span> and about objects. From FPT Software AI Center, U. Arkansas and partners (AAAI 2026)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">LIBERO's <code>KITCHEN_SCENE1</code>: a Franka arm at a kitchen table, simulated in <span class="term" data-t="robosuite">robosuite</span> (MuJoCo). Bowls, plates, a bottle, cream cheese, two baskets</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">1,200 demos (100 to train and 20 to validate per task), driven by keyboard <span class="term" data-t="teleop">teleoperation</span>, with object boxes, masks, depth and subgoal flags at every step</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">10 tasks of 200–700 steps, covering 4 kinds of object memory</div></div>
+      </div>
+      <p class="timer">Video: T7, "swap the 2 bowls on their plates using the empty plate". When it ends, the two bowls look exactly as they did at the start. Left: front camera (<code>agentview</code>); right: wrist camera. A demonstration from the LIBERO-Mem project page, first 40 s at real speed.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The robot, cameras and action are the same as in LIBERO. Each step also comes with object-level labels, which object-centric methods can use during training.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Front camera</b> (<code>agentview</code>), 256×256 RGB, plus depth and segmentation</li>
+          <li><b><span class="term" data-t="wrist">Wrist camera</span></b> (<code>eye_in_hand</code>), the same three images</li>
+          <li><b>Robot state</b>: 7 joint angles and 2 gripper finger positions (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li><b>Instruction</b>, e.g. "lift the bowl and place it back on the plate 5 times"</li>
+          <li><b>Labels</b> (training only): a box, mask and subgoal flag for every object</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">has to track each object's history: how often it's been moved, and where</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">The demo files store LIBERO's 7-number action for every step. LIBERO's controller is robosuite <span class="term" data-t="osc">OSC_POSE</span> <span class="term" data-t="delta">delta</span> control: [−1, 1] → <b>±5 cm</b> and <b>±0.5 rad</b> per step, axis-angle rotation, gripper <b>−1 open, +1 close</b>. The LIBERO tab has the details.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">10</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">kinds of object memory</div></div>
+    <div class="stat"><div class="n">1,200</div><div class="l">demonstrations</div></div>
+    <div class="stat"><div class="n">200–700</div><div class="l">steps per episode</div></div>
+    <div class="stat"><div class="n">×7</div><div class="l">most repetitions in one task</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">LIBERO is nearly solved, and every LIBERO task can be done from the current frame. LIBERO-Mem keeps the same scene and robot but makes objects <strong>look alike</strong>. Two bowls look the same before and after a swap, and a bowl lifted 3 times looks the same as one lifted 4 times. To know what to do next, the policy has to remember <strong>what happened to which object</strong>. The paper argues that memory should be kept per object, in <span class="term" data-t="objslot">slots</span>, rather than per frame, and proposes Embodied-SlotSSM, which uses 16 slot tokens where OpenVLA uses 256 image tokens.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Four kinds of object memory</h2>
+    <p class="sub">Each task tests one or more of them. The instructions are the benchmark's own.</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Object Motion · OM</h3><p>What was last done to this object? Every task needs this: is the bowl on its way up, or has it just been put back?</p><div class="ex">pick up the bowl and place it back on the plate</div></div>
+      <div class="task"><h3>Object Sequence · OS</h3><p>How many times so far? The same lift and place, 3, 5 or 7 times, with nothing in the scene to count on.</p><div class="ex">pick up the bowl and place it on the plate 7 times</div></div>
+      <div class="task"><h3>Object Relations · OR</h3><p>Which bowl went where, and in what order? Swap or rotate identical bowls, using one spare plate.</p><div class="ex">rotate the 3 bowls on their plates from left to right using the empty plate</div></div>
+      <div class="task"><h3>Object Occlusion · OO</h3><p>Which basket is the cheese in? Once it's inside, the two baskets look the same.</p><div class="ex">put the cream cheese in the nearest basket and place that basket in the center</div></div>
+    </div>
+    <figure>
+      <video class="vid contain" src="media/libmem_tasks.mp4" style="aspect-ratio: 5 / 2" muted loop playsinline preload="metadata"></video>
+      <figcaption>All 10 tasks from the front camera, T1–T5 on top and T6–T10 below. Long demos are sped up to fit 16 s, and each tile freezes on its last frame. From the LIBERO-Mem project page.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">The 10 tasks</h2>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Task</th><th>Memory</th><th>Instruction</th><th>Subgoals</th></tr></thead>
+        <tbody>
+          <tr><th>T1</th><td>OM</td><td>pick up the bowl and place it back on the plate</td><td>bowl lifted → bowl on plate</td></tr>
+          <tr><th>T2</th><td>OM</td><td>lift the bottle and put it down on the plate</td><td>bottle lifted → bottle on plate</td></tr>
+          <tr><th>T3</th><td>OM, OS</td><td>lift the bowl and place it back on the plate 3 times</td><td>(lifted → on plate) × 3</td></tr>
+          <tr><th>T4</th><td>OM, OS</td><td>pick up the bottle and put it down the plate 3 times</td><td>(lifted → on plate) × 3</td></tr>
+          <tr><th>T5</th><td>OM, OS</td><td>lift the bowl and place it back on the plate 5 times</td><td>(lifted → on plate) × 5</td></tr>
+          <tr><th>T6</th><td>OM, OS</td><td>pick up the bowl and place it on the plate 7 times</td><td>(lifted → on plate) × 7</td></tr>
+          <tr><th>T7</th><td>OM, OR</td><td>swap the 2 bowls on their plates using the empty plate</td><td>bowl 1 → plate 3, bowl 2 → plate 1, bowl 1 → plate 2</td></tr>
+          <tr><th>T8</th><td>OM, OR</td><td>rotate the 3 bowls on their plates from left to right using the empty plate</td><td>4 moves through the spare plate</td></tr>
+          <tr><th>T9</th><td>OM, OO</td><td>put the cream cheese in the nearest basket and place that basket in the center</td><td>cheese in basket 1 → basket 1 in centre</td></tr>
+          <tr><th>T10</th><td>OM, OO</td><td>put the cream cheese in the nearest basket and place the empty basket in the center</td><td>cheese in basket 1 → basket 2 in centre</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">From the LIBERO-Mem paper and the task names in its dataset. The scene layout is fixed, and object start positions are randomised.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">Each task is split into ordered <span class="term" data-t="subgoal">subgoals</span> (bowl lifted → bowl on plate → … three times), so a long task gets partial credit. The paper reports <strong>subgoal completion</strong>, the share of subgoals reached, over <strong>20 rollouts per task</strong>, as well as task success (all subgoals done). Later papers report task success with their own step limits, so check which number you're comparing.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Two sets of numbers that aren't comparable. In the original paper almost nothing works. A later paper with its own training and longer step limits gets much higher task success, π0.5 included.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>History</th><th>Metric</th><th>T4 · bottle ×3</th><th>T5 · bowl ×5</th><th>All 10</th></tr></thead>
+        <tbody>
+          <tr><th>ActMem-VLA (Sep 2026)</th><td>Past actions</td><td>Task success</td><td class="num"><b>85.6</b></td><td class="num"><b>95.0</b></td><td class="num"><b>80.8</b></td></tr>
+          <tr><th>π0.5 (same paper)</th><td>–</td><td>Task success</td><td class="num">40.0</td><td class="num">–</td><td class="num">65.2</td></tr>
+          <tr><th>MemoryVLA (same paper)</th><td>Memory bank</td><td>Task success</td><td class="num">20.0</td><td class="num">3.3</td><td class="num">49.5</td></tr>
+          <tr><th>Naive E-SlotSSM (paper's method)</th><td>Object slots</td><td>Subgoals</td><td class="num">0</td><td class="num">14.3</td><td class="num">14.8</td></tr>
+          <tr><th>SlotVLA, 8 frames</th><td>8 frames</td><td>Subgoals</td><td class="num">0</td><td class="num">0</td><td class="num">5.0</td></tr>
+          <tr><th>π0, 1 frame</th><td>–</td><td>Subgoals</td><td class="num">0</td><td class="num">0</td><td class="num">5.0</td></tr>
+          <tr><th>SlotVLA, 1 frame</th><td>–</td><td>Subgoals</td><td class="num">0</td><td class="num">0</td><td class="num">0</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Success rate (%). The bottom four rows are Table 4 of the LIBERO-Mem paper: subgoal completion over 20 rollouts. There, T1 reaches 50% for every method except 1-frame SlotVLA, only E-SlotSSM scores on T3, T5, T9 and T10, and the other five tasks are 0 for everyone. "Naive" E-SlotSSM is given the true subgoal as a text embedding instead of working it out itself. The paper's point is that memory, not the scene, is the problem: on plain LIBERO-Goal the same SlotVLA (8 frames) averages 75.5% and E-SlotSSM 83.0%. The top three rows are task success from ActMem-VLA (Harbin Institute of Technology and HKU), 20 trials × 3 seeds per task, with step limits set per task. It prints per-task numbers only for T4 and T5; π0.5's T5 is only shown in a chart. ActMem-VLA feeds the policy its own past actions, and gains most on the counting tasks, where a memory bank of past images doesn't help: MemoryVLA scores 3.3% on T5. Sources: <a href="https://arxiv.org/abs/2511.11478" target="_blank" rel="noopener">LIBERO-Mem paper</a>, <a href="https://arxiv.org/abs/2609.37307" target="_blank" rel="noopener">ActMem-VLA paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,objslot,subgoal,vla,robosuite,teleop,osc,delta"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://libero-mem.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://huggingface.co/datasets/libero-mem/LIBERO-Mem" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2511.11478" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ MEMMIMIC ============================ -->
+<section class="panel" id="memmimic" role="tabpanel" aria-labelledby="tab-memmimic" style="--c: var(--memmimic)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/memmimic_hero.mp4" style="aspect-ratio: 4 / 3" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · in-trial and cross-trial · visuomotor policies</span>
+      <h1>MemMimic</h1>
+      <p class="oneliner">Tasks where a robot has to remember something <em>within one attempt</em> (which bin the cube came from) or <em>learn across attempts</em> (this cube slides a long way, so push it gently next time). Three are simulated and three run on real arms.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="imitation">imitation-learned</span> visuomotor policies, released with Gated Memory Policy by Stanford (CoRL 2026)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">Sim: a UR5e arm with a WSG-50 gripper in <span class="term" data-t="mujoco">MuJoCo</span> (no robosuite), two arms for cloth flinging. Real: UR5 and ARX X5 arms</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">Scripted-expert demos in sim (300 per in-trial task, 500 per cross-trial task); 80 to 2,166 human demos per real task</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">3 <span class="term" data-t="intrial">in-trial</span> and 3 <span class="term" data-t="crosstrial">cross-trial</span> memory tasks, plus 3 Markovian RoboMimic tasks as a control</div></div>
+      </div>
+      <p class="timer">Video: Gated Memory Policy in the four simulated tasks. Top: Match Color, Discrete Place Back. Bottom: Iterative Pushing (the lowest-friction cube), Iterative Flinging (the heaviest cloth, 2 kg). Each is sped up to fit 16 s. Rollouts from the GMP project page.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">There's no language instruction: each task trains its own policy, and the images and gripper pose are all it gets. The simulated tasks run at 10 steps a second.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>One <span class="term" data-t="thirdperson">third-person camera</span></b>, 256×256 RGB: angled for the bin tasks, top-down for Pushing and Flinging</li>
+          <li><b>Gripper pose and width</b>: x, y, z plus a quaternion (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li><b>History</b>: the policy decides how much of it to use. Baselines get the last 16 or 120 steps; GMP gets its own past action chunks and a few past images</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">a <span class="term" data-t="diffusion">Diffusion Policy</span> that may or may not look back at history</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 8 numbers</h3>
+        <div class="vec" aria-label="8-number absolute pose action">
+          <span>x</span><span>y</span><span>z</span><span>qw</span><span>qx</span><span>qy</span><span>qz</span><span class="g">width</span>
+        </div>
+        <p class="note">An <span class="term" data-t="absolute">absolute</span> target pose for the gripper (position in metres plus a <span class="term" data-t="quaternion">quaternion</span>, w first) and the gripper width in metres, predicted in <span class="term" data-t="actionchunk">chunks</span> of 16 steps. Pushing only lets the gripper move along y and Flinging only in x and z. The real tasks use relative gripper poses instead.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">6</div><div class="l">memory tasks</div></div>
+    <div class="stat"><div class="n">2</div><div class="l">kinds of memory</div></div>
+    <div class="stat"><div class="n">3 + 3</div><div class="l">sim + real-robot tasks</div></div>
+    <div class="stat"><div class="n">300–500</div><div class="l">demos per sim task</div></div>
+    <div class="stat"><div class="n">6</div><div class="l">tries per Pushing episode</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Most memory benchmarks test <strong>in-trial memory</strong>: something was shown earlier in the episode and is needed later. MemMimic adds <strong>cross-trial memory</strong>. The robot does the same task several times in one episode and is expected to improve, by working out a hidden physical property (friction, cloth mass) from how its last attempt went, the way a person learns how slippery a table is after one push. It also checks the other side: long history often <em>hurts</em> on ordinary tasks, because the policy latches onto irrelevant details of the past. So the paper also runs 3 Markovian RoboMimic tasks, to make sure memory costs nothing when it isn't needed.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Six tasks, two kinds of memory</h2>
+    <div class="tasks">
+      <div class="task"><h3>Match Color · in-trial, sim</h3><p>Pick a cube from one of 4 coloured bins. Once it's lifted, the bin colours shuffle. Put it in the bin that now has the original colour.</p><div class="ex">Remembers: a colour</div></div>
+      <div class="task"><h3>Discrete Place Back · in-trial, sim</h3><p>Pick a cube from one of 4 bins, hold it in the air for 2 s, then put it back in the bin it came from.</p><div class="ex">Remembers: a place</div></div>
+      <div class="task"><h3>Place Back · in-trial, real</h3><p>Put a cup on a saucer, then return it to within 5 cm of where it started. An in-the-wild version adds a person tipping the cup over, which the robot must flip back first.</p><div class="ex">Remembers: a place, in the real world</div></div>
+      <div class="task"><h3>Iterative Pushing · cross-trial, sim</h3><p>Push a cube of unknown friction into a red box, 6 times per episode. Watch how far it slides and adjust the speed.</p><div class="ex">Infers: friction (0.005–0.015)</div></div>
+      <div class="task"><h3>Iterative Flinging · cross-trial, sim</h3><p>Two arms fling a cloth so its far edge lands on a black target, 5 times. Too slow and it doesn't spread out; too fast and it folds back.</p><div class="ex">Infers: cloth mass (0.1–2.0 kg)</div></div>
+      <div class="task"><h3>Iterative Casting · cross-trial, real</h3><p>Cast an object on a string so it stops between two lines, 3 times. On Teflon the best speed is 1.4 m/s; on electrical tape it's 2.2 m/s.</p><div class="ex">Infers: surface friction</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate.</strong> In sim, each checkpoint is run on 100 episodes and the best checkpoint is reported, for each of 3 training seeds. Cross-trial tasks only count the end of the episode, so early misses are allowed. Learning from them is the point. Pushing succeeds if the cube stops in the box on <strong>all of the last 3 of 6 tries</strong>, Flinging if at least 10 of the cloth's 13 far-edge points land on the target in the last 3 of 5 flings, and Casting if the last 2 of 3 casts stop between the lines. The real tasks are run 20 times (Casting: 10 per surface) or from 40 start positions (Place Back).</p>
+  </div>
+
+  <div>
+    <h2 class="section">Memory vs no memory</h2>
+    <div class="grid-2">
+      <figure>
+        <video class="vid contain" src="media/memmimic_matchcolor.mp4" style="aspect-ratio: 8 / 3" muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Match Color.</b> Left: Diffusion Policy with no history. The bin colours change while it holds the cube, it has nothing to go on, and it hovers until the 20 s time limit. Right: Gated Memory Policy puts the cube in the bin with its original colour. Over 100 episodes they score 16% and 100%.</figcaption>
+      </figure>
+      <figure>
+        <video class="vid contain" src="media/memmimic_casting.mp4" style="aspect-ratio: 8 / 3" muted loop playsinline preload="metadata"></video>
+        <figcaption><b>Iterative Casting, real UR5, low-friction surface.</b> Left: no history, so it casts at the same medium speed every time. Right: GMP sees how far the first cast slides and adjusts. Over 20 episodes they score 5% and 95%.</figcaption>
+      </figure>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Success rate (%) from the Gated Memory Policy paper, the only results published on MemMimic so far. All methods are Diffusion Policies trained on the same data; they differ only in how much history they see.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>History</th><th>Match Color</th><th>Place Back</th><th>Pushing</th><th>Flinging</th><th>Place Back (real)</th><th>Casting (real)</th></tr></thead>
+        <tbody>
+          <tr><th>Gated Memory Policy</th><td>Gated, cross-attention</td><td class="num"><b>100</b></td><td class="num">98</td><td class="num"><b>97</b></td><td class="num"><b>81</b></td><td class="num"><b>85</b></td><td class="num"><b>95</b></td></tr>
+          <tr><th>Long-history PTP</th><td>120 steps</td><td class="num"><b>100</b></td><td class="num"><b>100</b></td><td class="num">32</td><td class="num">69</td><td class="num">–</td><td class="num">–</td></tr>
+          <tr><th>Long-history DP</th><td>120 steps</td><td class="num"><b>100</b></td><td class="num"><b>100</b></td><td class="num">28</td><td class="num">65</td><td class="num">62.5</td><td class="num">20</td></tr>
+          <tr><th>Mid-history DP</th><td>16 steps</td><td class="num">35</td><td class="num">64</td><td class="num">3</td><td class="num">54</td><td class="num">–</td><td class="num">–</td></tr>
+          <tr><th>Mid-history PTP</th><td>16 steps</td><td class="num">35</td><td class="num">56</td><td class="num">2</td><td class="num">54</td><td class="num">–</td><td class="num">–</td></tr>
+          <tr><th>No-history DP</th><td>–</td><td class="num">16</td><td class="num">18</td><td class="num">1</td><td class="num">54</td><td class="num">10</td><td class="num">5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">DP is Diffusion Policy; PTP is Past-Token Prediction, a DP trained to also predict its past actions so it doesn't ignore history. Long history sees 120 steps of gripper pose and every 8th image. In-trial tasks are easy once a policy sees enough of the past. Cross-trial tasks aren't: a 120-step window doesn't hold two whole pushes, and the long-history policies change their speed inconsistently. GMP keeps a <span class="term" data-t="gate">memory gate</span> that is closed most of the time (73% of steps in Match Color, 58% in Pushing), so it behaves like a memoryless policy until history matters. It stays competitive on the Markovian RoboMimic tasks, where most long-history policies lose ground, and scores 67.8% on MIKASA-Robo's 5-task VLA subset against MemoryVLA's 41.2%. Numbers are from the charts on the GMP project page; the paper reports a 30.1-point average gain over long-history baselines. Sources: <a href="https://gated-memory-policy.github.io/" target="_blank" rel="noopener">project page</a>, <a href="https://arxiv.org/abs/2604.18933" target="_blank" rel="noopener">GMP paper</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,intrial,crosstrial,gate,diffusion,actionchunk,absolute,mujoco"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://gated-memory-policy.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/real-stanford/gated-memory-policy" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/yihuai-gao/gated-memory-policy" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2604.18933" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ MEMOBENCH ============================ -->
+<section class="panel" id="memobench" role="tabpanel" aria-labelledby="tab-memobench" style="--c: var(--memobench)" hidden>
+  <div class="top">
+    <img class="vid contain" src="media/memobench_overview.jpg" alt="The four MEMOBench memory types as film strips of one episode each, with checkpoints marked Store, Update and Compress and three instructions per checkpoint from coarse to fine" style="aspect-ratio: 1400 / 1112; background: #fff" loading="lazy" />
+    <div>
+      <span class="eyebrow">Memory benchmark · process-level · built on LIBERO</span>
+      <h1>MEMOBench</h1>
+      <p class="oneliner">30 LIBERO tasks that check <em>how</em> a policy remembers, not just whether it finishes. Did it store what it saw, update it when the world changed, and boil a long history down to what matters now?</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> policies with <span class="term" data-t="procpoint">checkpoints</span> inside each episode. From Zhejiang University (EMNLP 2026)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm in LIBERO's kitchen and tabletop scenes, <span class="term" data-t="robosuite">robosuite</span> (MuJoCo). Tasks are written as <span class="term" data-t="bddl">BDDL</span> files</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">1,500 demos (50 per task), 927k steps in all, 618 steps per demo on average</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">30 tasks in 4 memory types, with 4,200 checkpoints built from 84 templates</div></div>
+      </div>
+      <p class="timer">Figure: the four memory types, from the MEMOBench repo. Each film strip is one episode. The arrows mark checkpoints labelled Store, Update or Compress, and each checkpoint has three wordings, from coarse to fine. Object and Procedural tasks start with a prompt video.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The robot and action are LIBERO's. The policy runs as a server (the openpi websocket API): the evaluator sends observations and gets back a chunk of actions.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Third-person camera</b>, 256×256 RGB (policies see it at 224×224)</li>
+          <li><b><span class="term" data-t="wrist">Wrist camera</span></b>, 256×256 RGB</li>
+          <li><b>State</b> (<span class="term" data-t="proprio">proprioception</span>): 38 to 149 numbers, depending on the task</li>
+          <li><b>Instruction</b>, e.g. "put the brussels sprouts into the top drawer of the cabinet"</li>
+          <li><b>Object and Procedural tasks</b>: a prompt video, given as context</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">must store, update and compress what it has seen</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">LIBERO's end-effector <span class="term" data-t="delta">delta</span> action and gripper. Policies return <span class="term" data-t="actionchunk">chunks</span>; the evaluator runs the first <i>k</i> actions and then asks again (the <span class="term" data-t="replan">replan interval</span>, <i>k</i> = 5 by default). Each episode gets 10 do-nothing steps to let the scene settle, then up to 1,200 policy steps.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">30</div><div class="l">tasks</div></div>
+    <div class="stat"><div class="n">4</div><div class="l">memory types</div></div>
+    <div class="stat"><div class="n">4,200</div><div class="l">checkpoints</div></div>
+    <div class="stat"><div class="n">3</div><div class="l">memory operations</div></div>
+    <div class="stat"><div class="n">1,500</div><div class="l">demonstrations</div></div>
+    <div class="stat"><div class="n">2,012</div><div class="l">steps in the longest demo</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">A success rate tells you that a policy failed, not why. A memory failure can happen at three points: the policy never took in the fact (<strong>storage</strong>); it took it in but didn't revise it when the world changed (<strong>update</strong>); or it kept every detail but couldn't reduce a long history to the one thing that matters now, like "the stove was turned on and then off" (<strong>compression</strong>). MEMOBench puts checkpoints in each episode, each one a check in the simulator tagged with one of these operations, so you can see which one broke. The main finding: <strong>policies store well and update badly</strong>. π0.5 with a memory module passes 58% of storage checkpoints but only 17% of update checkpoints.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Four memory types</h2>
+    <p class="sub">The examples are the wordings from the benchmark's figure.</p>
+    <div class="tasks">
+      <div class="task"><h3>Temporal · 10 tasks</h3><p>Order of events and state changes over time: check drawers, track a microwave or stove going on and off, then act on that history. "Same scene, different actions?"</p><div class="ex">after turning on and off the stove, placed the frying pan on the stove</div></div>
+      <div class="task"><h3>Spatial · 10 tasks</h3><p>Where things are once a drawer has hidden them. Put one or two vegetables, a tomato or a charger into the top and middle drawers, then close them.</p><div class="ex">put the brussels sprouts into the top drawer of the cabinet</div></div>
+      <div class="task"><h3>Object · 5 tasks</h3><p>Which of two identical items was meant: the milk or butter picked in the prompt video, highlighted, or pointed at.</p><div class="ex">picked up the milk carton on the left and put it on the plate</div></div>
+      <div class="task"><h3>Procedural · 5 tasks</h3><p>Repeat a routine shown in a prompt video: assembly, clear and serve, discard then plate, stacking bowls, or a swap through a buffer spot.</p><div class="ex">checked one drawer → checked two drawers</div></div>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Three memory operations</h2>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Operation</th><th>What the checkpoint tests</th><th>Templates</th><th>Checkpoints</th><th>Example</th></tr></thead>
+        <tbody>
+          <tr><th>Storage</th><td>New, task-relevant information got encoded</td><td class="num">35</td><td class="num">1,750</td><td>"turn on stove", "opened top drawer"</td></tr>
+          <tr><th>Update</th><td>Memory was revised after the world changed, including dropping facts that are no longer true</td><td class="num">32</td><td class="num">1,600</td><td>"turn off stove", "put brussels sprouts in"</td></tr>
+          <tr><th>Compression</th><td>A long history was reduced to a compact summary of what matters</td><td class="num">17</td><td class="num">850</td><td>"placed pan on stove", after the on/off sequence</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Retrieval isn't labelled, since it can happen at any step. Every checkpoint is tagged with exactly one operation. Three annotators who relabelled the templates blind agreed with Fleiss' κ = 0.80; most disagreements were between Update and Compression.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate (SR)</strong>: all of the task's BDDL goal conditions are true when the episode ends. Next to it are three process scores, the <strong>Memory Storage, Update and Compression Rates (MSR, MUR, MCR)</strong>: the average share of that kind of checkpoint passed per episode. A checkpoint only counts if every checkpoint before it in the episode was also passed, in order. Each of the 30 tasks gets 50 episodes. Results are reported at replan intervals <i>k</i> = 5, 20, 35 and 50.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Averages over all 30 tasks (%), replanning every 5 steps, from the MEMOBench paper. It's new (September 2026), and we found no other published results. Grey rows are given privileged information.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>SR</th><th>MSR</th><th>MUR</th><th>MCR</th></tr></thead>
+        <tbody>
+          <tr style="color: var(--faint)"><th>MemER, trained with checkpoint labels</th><td class="num">56.4</td><td class="num">–</td><td class="num">–</td><td class="num">–</td></tr>
+          <tr style="color: var(--faint)"><th>π0.5 + true memory as text</th><td class="num">51.9</td><td class="num">64.0</td><td class="num">52.9</td><td class="num">–</td></tr>
+          <tr><th>π0.5 + memory module + contrastive alignment</th><td class="num"><b>34.7</b></td><td class="num">59.8</td><td class="num">21.4</td><td class="num"><b>11.1</b></td></tr>
+          <tr><th>π0.5 + RoboMME memory module</th><td class="num">31.9</td><td class="num">58.1</td><td class="num">16.5</td><td class="num">7.8</td></tr>
+          <tr><th>π0.5</th><td class="num">30.4</td><td class="num">54.9</td><td class="num">13.5</td><td class="num">4.2</td></tr>
+          <tr><th>HiF-VLA</th><td class="num">21.0</td><td class="num">23.0</td><td class="num">4.8</td><td class="num">0.1</td></tr>
+          <tr><th>MemoryVLA</th><td class="num">17.2</td><td class="num">43.1</td><td class="num"><b>35.9</b></td><td class="num"><b>11.1</b></td></tr>
+          <tr><th>π0</th><td class="num">11.2</td><td class="num">38.6</td><td class="num">8.3</td><td class="num">2.1</td></tr>
+          <tr><th>OpenVLA-OFT</th><td class="num">10.0</td><td class="num">12.2</td><td class="num">5.8</td><td class="num">0.6</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The <b>memory module</b> is RoboMME's perceptual memory: 32 past frames of 16 tokens each, about 80M extra parameters on the 3.2B π0.5. The paper's three <b>alignment</b> losses train those memory tokens to match text descriptions of what happened. The contrastive one is best overall; semantic alignment gets the top MSR (60.8%). The memory type matters more than the model. Object tasks are nearly solved (99.6% SR for π0.5 + memory), while Spatial tasks almost never succeed (2.0%) and Temporal ones rarely do (9.8%), even with a 92% storage rate. Giving π0.5 the true memory as text lifts Spatial from 0% to 45.8% and the update rate from 13.5% to 52.9%. It makes Procedural tasks <em>worse</em> (19.6% → 10.0%), since words don't capture a motion. Longer replan intervals hurt most models; MemoryVLA is the exception and does best at <i>k</i> = 20 (29.2% SR, 49.9% MUR). Source: <a href="https://arxiv.org/abs/2609.07047" target="_blank" rel="noopener">MEMOBench paper</a> (Tables 2–4).</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,procpoint,memop,bddl,replan,actionchunk,percmem,vla"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://github.com/Collab-Gen/MEMOBench" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/SunSeaLucky/MEMOBench" target="_blank" rel="noopener">Dataset (Hugging Face) ↗</a>
+    <a href="https://arxiv.org/abs/2609.07047" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ MIKASA-ROBO-VLA ============================ -->
+<section class="panel" id="mikasavla" role="tabpanel" aria-labelledby="tab-mikasavla" style="--c: var(--mikasavla)" hidden>
+  <div class="top">
+    <video class="vid r21 contain" src="media/mikasavla_hero.mp4" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · VLA release · ManiSkill3</span>
+      <h1>MIKASA-Robo-VLA</h1>
+      <p class="oneliner">The VLA edition of MIKASA-Robo: <em>90 tasks with language instructions</em>, 10 kinds of memory and 22,500 demos, plus the first baseline run over many of them. π0.5 succeeds 21% of the time, and almost never on long tasks.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark and dataset for <span class="term" data-t="vla">VLA</span> models. The October 2026 paper on MIKASA-Robo's VLA release (RoboPAD workshop)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">The same as MIKASA-Robo: a Franka arm at a table in <span class="term" data-t="maniskill">ManiSkill3</span> (SAPIEN physics)</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">22,500 <span class="term" data-t="oracle">oracle</span> demos (250 per task), 6.3M steps, 175 simulated hours. Both <span class="term" data-t="rlds">RLDS</span> (287 GiB) and LeRobot v3 (26 GiB)</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">90 tasks in 10 memory types, grouped into Short, Medium and Long splits</div></div>
+      </div>
+      <p class="timer">Video: BunchOfColors5, episode 0 of the LeRobot dataset, at real speed (10 steps a second). Left: top camera; right: wrist camera, both the 128×128 pixels the policy gets. Instruction: "Observe which colored cubes appear during the cue, wait, then touch all of them in any order and press the center button."</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">What's new compared with MIKASA-Robo</h2>
+    <p class="sub">The MIKASA-Robo tab covers the benchmark and its original paper. Its first release was built for reinforcement learning, with 32 tasks and 4 memory types. This paper describes the VLA release that replaced it.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th></th><th>MIKASA-Robo (RL release)</th><th>MIKASA-Robo-VLA</th></tr></thead>
+        <tbody>
+          <tr><th>Tasks</th><td class="num">32</td><td class="num">90</td></tr>
+          <tr><th>Memory types</th><td class="num">4</td><td class="num">10</td></tr>
+          <tr><th>Language</th><td>Only a small VLA subset</td><td>Every task (30 instruction templates)</td></tr>
+          <tr><th>Released demos</th><td>–</td><td>22,500, in RLDS and LeRobot formats</td></tr>
+          <tr><th>Horizon control</th><td>–</td><td>"-Long" variants that stretch the wait while keeping the task the same</td></tr>
+          <tr><th>Protocol</th><td>RL training curves</td><td>Fixed episode seeds, 50 test episodes per task, success at any step</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Top camera</b>, 128×128 RGB (the <span class="term" data-t="thirdperson">third-person</span> view; resized to 224×224 for the baseline)</li>
+          <li><b><span class="term" data-t="wrist">Wrist camera</span></b>, 128×128 RGB</li>
+          <li><b>State</b>, 7 numbers: gripper position, roll-pitch-yaw and opening</li>
+          <li><b>Instruction</b>, e.g. "Observe the object's shape and color, wait, then touch the object of the same shape and color."</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">has to keep the cue for as long as the <span class="term" data-t="infogap">information gap</span>: up to hundreds of steps</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">ManiSkill3 <code>pd_ee_delta_pose</code> at 10 Hz, the same as MIKASA-Robo: [−1, 1] → <b>±10 cm</b> and <b>±0.1 rad</b> per step, gripper <b>+1 open, −1 closed</b>. The π0.5 baseline pads it to 32 numbers and runs 8-step <span class="term" data-t="actionchunk">chunks</span> without looking in between.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">90</div><div class="l">tasks with instructions</div></div>
+    <div class="stat"><div class="n">10</div><div class="l">memory types</div></div>
+    <div class="stat"><div class="n">22,500</div><div class="l">demonstrations</div></div>
+    <div class="stat"><div class="n">6.3M</div><div class="l">steps</div></div>
+    <div class="stat"><div class="n">70 / 90</div><div class="l">tasks where the cue disappears</div></div>
+    <div class="stat"><div class="n">1 / 4,500</div><div class="l">random-action successes</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Most VLAs see only the current frame, or a handful of recent ones. The paper measures, for every task, the <span class="term" data-t="infogap">information gap</span>: how long the cue the action depends on is provably out of sight. <strong>70 of the 90 tasks have one, and 28 have a gap longer than 16 steps</strong>, the widest fixed history window among the VLAs the authors surveyed. Median gaps range from 15 to 805 steps depending on the memory type. A policy whose window is shorter than the gap can only guess. Random actions succeed once in 4,500 episodes, so a guessing policy has to actually do the motion right to score at all.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Ten kinds of memory</h2>
+    <figure style="margin-bottom: 18px">
+      <video class="vid contain" src="media/mikasavla_types.mp4" style="aspect-ratio: 5 / 2" muted loop playsinline preload="metadata"></video>
+      <figcaption>One task per memory type, from the top camera of the LeRobot dataset, in the table's order. Top row: RememberShapeAndColor3x3, InterceptGrabMedium, BunchOfColors5, TimedTransferMedium, FindImposterShapeAndColor3x3. Bottom row: SeqOfColors5, TraceShapeSeqEasy, GatherAndRecall3, ShellGameShuffleTouch, BatteriesCheckerEasy3. Short tasks play several whole episodes back to back. Long ones are sped up to fit 16 s (TraceShapeSeq, 1,258 steps, runs about 8× faster), and each tile freezes on its last frame.</figcaption>
+    </figure>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Memory type</th><th>What has to be remembered</th><th>Tasks</th><th>Mean steps</th><th>Longest</th></tr></thead>
+        <tbody>
+          <tr><th>Object</th><td>Which object it was, among distractors</td><td class="num">18</td><td class="num">178</td><td class="num">599</td></tr>
+          <tr><th>Spatial</th><td>A hidden location, or where a target was</td><td class="num">14</td><td class="num">30</td><td class="num">90</td></tr>
+          <tr><th>Capacity</th><td>A whole set of items, with set size as the difficulty</td><td class="num">12</td><td class="num">431</td><td class="num">1,199</td></tr>
+          <tr><th>Temporal</th><td>A count or a duration, to reproduce later</td><td class="num">12</td><td class="num">338</td><td class="num">1,004</td></tr>
+          <tr><th>Negative</th><td>A shown set, to spot the one item that wasn't in it</td><td class="num">9</td><td class="num">15</td><td class="num">28</td></tr>
+          <tr><th>Sequential</th><td>An order, to repeat</td><td class="num">6</td><td class="num">489</td><td class="num">1,199</td></tr>
+          <tr><th>Procedural</th><td>A path or shape, to trace again</td><td class="num">6</td><td class="num">460</td><td class="num">1,480</td></tr>
+          <tr><th>Prospective</th><td>Something to do later, while busy with something else</td><td class="num">5</td><td class="num">513</td><td class="num">940</td></tr>
+          <tr><th>Tracking</th><td>Where the hidden ball went after the cups were shuffled</td><td class="num">4</td><td class="num">188</td><td class="num">513</td></tr>
+          <tr><th>Checklist</th><td>Which items were already tested, and the results, without repeats</td><td class="num">4</td><td class="num">805</td><td class="num">1,523</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">Steps are those of the released demos, at 10 Hz. Each task has 250 demos. 34 tasks were demonstrated by PPO policies that could see hidden state and 56 by scripted motion planners; only successful episodes were kept.</p>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout"><strong>Success rate</strong> with <code>success_once</code>: an episode counts if the goal is met at any step. Seeds are fixed, with 50 test episodes per task by default, and results are reported per <span class="term" data-t="horizon">horizon</span> split. <strong>Short</strong>: 38 tasks, 25–200 steps. <strong>Medium</strong>: 30 tasks, 250–600 steps. <strong>Long</strong>: 22 tasks, 700–2,160 steps. A caveat if you use the data: the RLDS and LeRobot copies list episodes in different orders with no shared ID, and the LeRobot copy drops rewards and success flags. Join them through <code>source_rlds_metadata.json</code>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">Nobody has reported all 90 tasks yet. The paper's own baseline covers 14; other papers use small subsets, so the rows aren't comparable with each other.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Model</th><th>Task set</th><th>Success</th><th>Same model, no memory</th></tr></thead>
+        <tbody>
+          <tr><th>Gated Memory Policy (CoRL 2026)</th><td>The standard 5-task VLA subset: ShellGameTouch, InterceptMedium, RememberColor3/5/9</td><td class="num"><b>67.8%</b></td><td class="num">MemoryVLA 41.2%, π0 29.4%</td></tr>
+          <tr><th>μVLA (OpenVLA-OFT + 64-token recurrent memory)</th><td>5 tasks it trained on / 18 held-out tasks</td><td class="num"><b>84%</b> / 23%</td><td class="num">42% / 7%</td></tr>
+          <tr><th>π0.5, reference baseline (this paper)</th><td>14 tasks across 7 memory types, 20 episodes each</td><td class="num">21.1% ± 4.4</td><td class="num">–</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src">The π0.5 baseline was fine-tuned on the 14 tasks' 3,500 LeRobot episodes in one run. It scored best on TakeItBack (50%) and InterceptMedium and ShellGameShuffleColorLampTouch-Long (40% and 35%). It scored 0% on BunchOfColors3-Long and ChainOfColors3-Long, and succeeded in only 1 of 60 Long-split episodes, against 58 of 220 elsewhere. On tasks where it picks one of <i>k</i> items, it made 33 correct picks in 140 tries, about the 35 expected from guessing. The authors note that running 8-step chunks open-loop also hurts on long tasks. GMP and MemoryVLA used 250 demos per task at 128×128; the μVLA numbers are as reported in this paper's appendix. Sources: <a href="https://arxiv.org/abs/2610.00604" target="_blank" rel="noopener">MIKASA-Robo-VLA paper</a>, <a href="https://arxiv.org/abs/2604.18933" target="_blank" rel="noopener">GMP paper</a>, <a href="https://arxiv.org/abs/2508.19236" target="_blank" rel="noopener">MemoryVLA</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,infogap,vla,oracle,maniskill,delta,actionchunk,horizon,rlds"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://mikasarobo.github.io/" target="_blank" rel="noopener">Docs ↗</a>
+    <a href="https://github.com/CognitiveAISystems/MIKASA-Robo" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-lerobot" target="_blank" rel="noopener">LeRobot dataset ↗</a>
+    <a href="https://huggingface.co/datasets/mikasa-robo/mikasa-robo-vla-rlds" target="_blank" rel="noopener">RLDS dataset ↗</a>
+    <a href="https://arxiv.org/abs/2610.00604" target="_blank" rel="noopener">Paper ↗</a>
+  </div>
+</section>
+
+<!-- ============================ ROBOMEMARENA ============================ -->
+<section class="panel" id="robomemarena" role="tabpanel" aria-labelledby="tab-robomemarena" style="--c: var(--robomemarena)" hidden>
+  <div class="top">
+    <video class="vid contain" src="media/robomemarena_hero.mp4" style="aspect-ratio: 4 / 3" muted loop playsinline preload="metadata" controls></video>
+    <div>
+      <span class="eyebrow">Memory benchmark · long-horizon · sim + real robot</span>
+      <h1>RoboMemArena</h1>
+      <p class="oneliner">26 kitchen and dining-table tasks that average <em>over 1,000 steps</em>, where most steps depend on something earlier: which drawer was empty, how many times the sauce has been poured, what went into the microwave first.</p>
+      <div class="facts">
+        <div class="fact"><div class="k">Benchmark type</div><div class="v"><span class="term" data-t="memory">Memory</span> benchmark for <span class="term" data-t="vla">VLA</span> and <span class="term" data-t="dualsys">dual-system</span> policies, from HKUST (Guangzhou), Zhejiang U., Westlake U. and others (May 2026)</div></div>
+        <div class="fact"><div class="k">The world</div><div class="v">A Franka arm in LIBERO-style scenes (a fork of LIBERO, robosuite / MuJoCo). Plus 5 real tasks on an AgileX Cobot Mobile ALOHA</div></div>
+        <div class="fact"><div class="k">The data</div><div class="v">2,600 generated demos (100 per task), cut into 15,100 <span class="term" data-t="keyframe">keyframe</span>-aligned pieces with <span class="term" data-t="subgoal">subtask</span> instructions</div></div>
+        <div class="fact"><div class="k">The tasks</div><div class="v">26 tasks in 4 categories. 68.9% of subtasks depend on memory; 3–9 checked stages per task</div></div>
+      </div>
+      <p class="timer">Video: an Occlusion task. Open the drawers one by one, then put the butter into the one that was empty. Once the drawers are shut, only memory says which one that was. Front camera at 2× speed, from the RoboMemArena project page.</p>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">One timestep of data</h2>
+    <p class="sub">The demos weren't teleoperated. A vision-language model writes the task as a chain of subtasks, and scripted atomic skills (move, place, pour, open, close, with grasp poses from AnyGrasp) carry them out.</p>
+    <div class="step">
+      <div class="box">
+        <h3>Observation</h3>
+        <ul>
+          <li><b>Front camera</b> (<code>agentview</code>), 256×256 RGB</li>
+          <li><b><span class="term" data-t="wrist">Wrist camera</span></b> (<code>eye_in_hand</code>), 256×256 RGB</li>
+          <li><b>Robot state</b>: gripper pose, gripper opening and joint angles (<span class="term" data-t="proprio">proprioception</span>)</li>
+          <li><b>Instruction</b>, e.g. "place cookies into middle drawer and place chocolate into drawer where cookies have placed"</li>
+          <li><b>Training labels</b>: the current subtask in words, and which frames are keyframes</li>
+        </ul>
+      </div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box policy"><div><div class="big">Policy</div><div class="d">usually a slow planner that keeps memory over a fast VLA that acts</div></div></div>
+      <span class="arr" aria-hidden="true">→</span>
+      <div class="box">
+        <h3>Action · 7 numbers</h3>
+        <div class="vec" aria-label="7-number action">
+          <span>Δx</span><span>Δy</span><span>Δz</span><span>Δrx</span><span>Δry</span><span>Δrz</span><span class="g">grip</span>
+        </div>
+        <p class="note">The demos store 7 end-effector numbers per step in LIBERO's format, and evaluation runs in the bundled LIBERO fork. Policies connect through an adapter, or as an openpi server as in the reference VLM + VLA setup.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="n">26</div><div class="l">simulated tasks</div></div>
+    <div class="stat"><div class="n">1,076</div><div class="l">steps per task on average</div></div>
+    <div class="stat"><div class="n">68.9%</div><div class="l">of subtasks need memory</div></div>
+    <div class="stat"><div class="n">2,600</div><div class="l">demonstrations</div></div>
+    <div class="stat"><div class="n">15,100</div><div class="l">keyframe segments</div></div>
+    <div class="stat"><div class="n">5</div><div class="l">real-robot tasks</div></div>
+  </div>
+
+  <div>
+    <h2 class="section">Why it exists</h2>
+    <p class="callout">Earlier memory benchmarks either have short episodes, or long ones where only a few steps need memory. RoboMemArena's tasks run for 1,076 steps on average (1,832 for the longest), and <strong>68.9% of their subtasks depend on history</strong>, the highest share the authors found among robot benchmarks. Every demo is also labelled with its subtasks and its <span class="term" data-t="keyframe">keyframes</span>, the moments worth remembering (the gripper closes or opens, the arm stops or changes direction). Methods that decide what to keep can therefore be trained on those labels directly.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Four categories</h2>
+    <p class="sub">Instructions are the benchmark's own task names (grammar included).</p>
+    <div class="tasks" style="margin-bottom: 18px">
+      <div class="task"><h3>Transferring · 4 tasks</h3><p>Move several items from one cabinet or plate to another. Remember which ones are done.</p><div class="ex">pick tomato sauce and milk and orange juice from cabinet1 to cabinet2</div></div>
+      <div class="task"><h3>Occlusion · 11 tasks</h3><p>Items go into drawers or the microwave and disappear. Later, put something "where the cookies were placed", or into the drawer that was empty.</p><div class="ex">place cookies into middle drawer and place chocolate into drawer where cookies have placed</div></div>
+      <div class="task"><h3>Counting · 7 tasks</h3><p>Pour exactly twice, then do the next thing. A bottle mid-way through looks the same whether it has poured once or twice.</p><div class="ex">pour wine into white yellow mug twice</div></div>
+      <div class="task"><h3>Sequence · 4 tasks</h3><p>Do things in a set order, or put the second item where the first one went.</p><div class="ex">pick and place cookies in basket and place tomato sauce into where cookies was placed</div></div>
+    </div>
+    <figure style="max-width: 620px">
+      <video class="vid" src="media/robomemarena_tasks.mp4" style="aspect-ratio: 1" muted loop playsinline preload="metadata"></video>
+      <figcaption>12 of the 26 tasks, one category per row: Sequence, Counting, Occlusion, Transferring. Sped up to fit 16 s; each tile freezes on its last frame. From the RoboMemArena project page.</figcaption>
+    </figure>
+  </div>
+
+  <div>
+    <h2 class="section">How it's scored</h2>
+    <p class="callout">Each task is checked at 3 to 9 stages (most have more than 5). <strong>Task Success Rate (TSR)</strong> counts an episode only if every stage passes. <strong>Cumulative Success Rate (CSR)</strong> is the share of stages passed, which separates "nearly done" from "failed at once". Results are averaged within each category and then over all 26 tasks. The 5 real-robot tasks get 10 trials each.</p>
+  </div>
+
+  <div>
+    <h2 class="section">State of the art</h2>
+    <p class="sub">TSR / CSR (%) on all 26 simulated tasks. The grey row hands the policy the true subtasks.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Method</th><th>Transferring</th><th>Occlusion</th><th>Counting</th><th>Sequence</th><th>All 26</th></tr></thead>
+        <tbody>
+          <tr style="color: var(--faint)"><th>Ground-truth subtasks in place of the planner</th><td class="num">32.5 / 54.8</td><td class="num">33.6 / 49.8</td><td class="num">51.4 / 75.6</td><td class="num">85.0 / 92.3</td><td class="num">46.1 / 64.8</td></tr>
+          <tr><th>RoboFoundry (Sep 2026)</th><td class="num"><b>70.5 / 78.1</b></td><td class="num"><b>38.3 / 57.6</b></td><td class="num"><b>55.2 / 82.5</b></td><td class="num"><b>75.2 / 92.1</b></td><td class="num"><b>53.5 / 72.8</b></td></tr>
+          <tr><th>PrediMem (paper's method)</th><td class="num">22.5 / 45.2</td><td class="num">27.3 / 38.4</td><td class="num">45.7 / 69.3</td><td class="num">72.5 / 89.5</td><td class="num">38.5 / 55.2</td></tr>
+          <tr><th>MemER</th><td class="num">20.0 / 36.1</td><td class="num">16.4 / 33.2</td><td class="num">27.1 / 65.1</td><td class="num">65.0 / 79.1</td><td class="num">27.3 / 49.1</td></tr>
+          <tr><th>π0.5 (no memory)</th><td class="num">20.0 / 42.8</td><td class="num">12.7 / 17.2</td><td class="num">14.3 / 50.9</td><td class="num">60.0 / 71.6</td><td class="num">21.5 / 38.7</td></tr>
+          <tr><th>HiF-VLA</th><td class="num">17.5 / 38.9</td><td class="num">12.7 / 27.1</td><td class="num">8.6 / 45.9</td><td class="num">42.5 / 70.2</td><td class="num">16.9 / 39.8</td></tr>
+          <tr><th>MemoryVLA</th><td class="num">15.0 / 37.2</td><td class="num">7.3 / 13.1</td><td class="num">14.3 / 55.1</td><td class="num">37.5 / 65.2</td><td class="num">15.0 / 35.3</td></tr>
+          <tr><th>GPT-5.4 as planner, not fine-tuned</th><td class="num">13.8 / 32.9</td><td class="num">1.8 / 9.2</td><td class="num">12.9 / 50.7</td><td class="num">15.0 / 47.3</td><td class="num">8.7 / 30.5</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="src"><b>PrediMem</b> is a dual system. A Qwen3-VL-8B planner, updated about once a second, keeps the last 5 frames plus every keyframe it has chosen to store, and tells a VLA controller (3.4 action chunks a second) which subtask to do. During training it also learns to predict the next frame's features, which helps most on Occlusion. Without the keyframe store it drops to 17.7%. <b>RoboFoundry</b> follows the official protocol but is a self-improving agent built on Qwen3.7-Plus. It keeps improving itself between episodes, and the data it uses for that counts against the evaluation budget. Even with the true subtasks, the controller reaches only 46.1%, so motor skill is a bottleneck as well as memory. <b>HyMeS</b> (Aug 2026, memory kept as a symbolic program steering a frozen π0.5) reports 60.1% TSR, but on a corrected 12-task subset, so it isn't comparable. Sources: <a href="https://arxiv.org/abs/2605.10921" target="_blank" rel="noopener">RoboMemArena paper</a> (Table 2), <a href="https://arxiv.org/abs/2609.32862" target="_blank" rel="noopener">RoboFoundry</a>, <a href="https://arxiv.org/abs/2608.09410" target="_blank" rel="noopener">HyMeS</a>.</p>
+  </div>
+
+  <div>
+    <h2 class="section">Real robot</h2>
+    <p class="sub">Five tasks on a two-armed AgileX Cobot Mobile ALOHA, 10 trials each.</p>
+    <div class="tablebox compact">
+      <table>
+        <thead><tr><th>Task</th><th>Memory</th><th>π0.5</th><th>MemER</th><th>PrediMem</th></tr></thead>
+        <tbody>
+          <tr><th>Pour water from the bottle into the cup twice</th><td>Counting</td><td class="num">20%</td><td class="num">30%</td><td class="num"><b>60%</b></td></tr>
+          <tr><th>Brush three plates in order, with a swap</th><td>Sequence + counting</td><td class="num">10%</td><td class="num">50%</td><td class="num"><b>60%</b></td></tr>
+          <tr><th>Move a watermelon and a carrot to the other plate</th><td>Transferring</td><td class="num">60%</td><td class="num"><b>80%</b></td><td class="num"><b>80%</b></td></tr>
+          <tr><th>Shell game: hide, swap three cups, find it</th><td>Occlusion + sequence</td><td class="num">10%</td><td class="num">40%</td><td class="num"><b>50%</b></td></tr>
+          <tr><th>Copy a person making breakfast (3+ min)</th><td>Imitation + sequence</td><td class="num">0%</td><td class="num">0%</td><td class="num"><b>10%</b></td></tr>
+          <tr><th>Average</th><td></td><td class="num">20%</td><td class="num">40%</td><td class="num"><b>52%</b></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <h2 class="section">Key terms</h2>
+    <dl class="glossary" data-glossary="memory,markov,keyframe,subgoal,dualsys,vla,robosuite,bddl"></dl>
+  </div>
+
+  <div class="links">
+    <a href="https://robomemarena.github.io/" target="_blank" rel="noopener">Project page ↗</a>
+    <a href="https://github.com/OpenHelix-Team/RoboMemArena" target="_blank" rel="noopener">GitHub ↗</a>
+    <a href="https://huggingface.co/datasets/RoboMemArenaBenchmark/RoboMemArena" target="_blank" rel="noopener">Dataset (Hugging Face, gated) ↗</a>
+    <a href="https://huggingface.co/huashuolei/PrediMem" target="_blank" rel="noopener">PrediMem weights ↗</a>
+    <a href="https://robomemarena.github.io/leaderboard.html" target="_blank" rel="noopener">Leaderboard ↗</a>
+    <a href="https://arxiv.org/abs/2605.10921" target="_blank" rel="noopener">Paper ↗</a>
   </div>
 </section>
 
@@ -3556,7 +4311,7 @@
 </section>
 
 <footer>
-  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). M3-Bench-robot clips are cut from the benchmark's own videos (<code>ByteDance-Seed/M3-Bench</code>, CC BY-NC-SA 4.0). The NaVQA hero is CODa's own clip of sequence 16 (amrl.cs.utexas.edu/coda), and the Nova Carter clip is from the ReMEmbR project page. RAVEN-QA's Go1 clips are from the RAVEN project page (ravenmem.github.io); its memory-frame grid and source montage are built from the RAVEN-QA dataset (<code>zzcnewly/RAVEN_QA</code>, Apache 2.0). RoboMME clips are the task videos and rollouts on its project page (robomme.github.io), re-encoded and tiled here. LIBERO-PRO clips are rollouts from its project page (zxy-mllab.github.io/LIBERO-PRO-Webpage), tiled here. RoboVQA clips are from its released dataset (<code>gdm-robovqa</code>, CC BY 4.0), and the intervention run is from robovqa.github.io. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 30 September 2026.
+  Videos and GIFs belong to their projects: robocasa.ai, the MIKASA-Robo repository, libero-project.github.io, the EgoGym README, cap-policy.github.io, the RoboTwin project, the RLBench repository, VLABench, LIBERO-Plus (whose failure rollouts are from its repository) and MimicDroid (whose simulation rollouts are from its project page). Meta-World clips are rendered here from the Meta-World simulator with its own expert policies. LIBERO, RoboTwin, RLBench, VLABench, RoboCasa Kitchen, GR-1 Tabletop and LW-RoboCasa-Tasks simulator clips are built from real demo frames on Hugging Face (<code>lerobot/libero_*_image</code>, <code>lerobot/robotwin_unified</code>, <code>hqfang/rlbench-18-tasks</code>, <code>VLABench/vlabench_*_ft_lerobot_video</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-X-Embodiment-Sim</code>, <code>nvidia/PhysicalAI-Robotics-GR00T-Teleop-Sim</code>, <code>LightwheelAI/Lightwheel-Tasks-G1-WBC</code>). M3-Bench-robot clips are cut from the benchmark's own videos (<code>ByteDance-Seed/M3-Bench</code>, CC BY-NC-SA 4.0). The NaVQA hero is CODa's own clip of sequence 16 (amrl.cs.utexas.edu/coda), and the Nova Carter clip is from the ReMEmbR project page. RAVEN-QA's Go1 clips are from the RAVEN project page (ravenmem.github.io); its memory-frame grid and source montage are built from the RAVEN-QA dataset (<code>zzcnewly/RAVEN_QA</code>, Apache 2.0). RoboMME clips are the task videos and rollouts on its project page (robomme.github.io), re-encoded and tiled here. LIBERO-PRO clips are rollouts from its project page (zxy-mllab.github.io/LIBERO-PRO-Webpage), tiled here. RoboVQA clips are from its released dataset (<code>gdm-robovqa</code>, CC BY 4.0), and the intervention run is from robovqa.github.io. LIBERO-Mem clips are the demonstrations on libero-mem.github.io, cropped to the RGB views. MemMimic clips are Gated Memory Policy rollouts from gated-memory-policy.github.io. The MEMOBench figure is from its GitHub repo. MIKASA-Robo-VLA clips are episodes from the <code>mikasa-robo/mikasa-robo-vla-lerobot</code> dataset (CC BY 4.0). RoboMemArena clips are from robomemarena.github.io. They are re-encoded here for size; short MIKASA clips are slowed down. Numbers, controller conventions and SOTA results come from each project's site, code, leaderboard or papers as of 30 September 2026.
 </footer>
 </main>
 
@@ -3657,6 +4412,16 @@
     frontier: ["Frontier exploration", "A simple way to explore: keep driving to the nearest edge between mapped and unmapped space until nothing is left unmapped."],
     slam: ["SLAM", "Simultaneous localisation and mapping: building a map from the robot's sensors while working out where the robot is on it."],
     astar: ["A* planner", "A classic shortest-path search on a map. Given a goal position and the obstacle map, it returns a collision-free path for the robot to follow."],
+    objslot: ["Slot memory", "Memory split into a fixed number of slots, each meant to follow one object over time. Two identical bowls then stay separate entries, each with its own history."],
+    intrial: ["In-trial memory", "Remembering something from earlier in the same attempt: where the cup started, or what colour the bin was before it changed."],
+    crosstrial: ["Cross-trial memory", "Carrying what was learned in earlier attempts into the next one, e.g. this cube slides a long way, so push it gently. Also called in-context adaptation."],
+    gate: ["Memory gate", "A switch the policy learns to flip: closed, it acts on the present alone; open, it attends to its history. Keeping it closed when history isn't needed stops the policy latching onto irrelevant past details."],
+    diffusion: ["Diffusion Policy", "A policy that generates a chunk of actions by starting from random noise and refining it step by step, as image generators do. A strong, common baseline for imitation learning."],
+    procpoint: ["Process checkpoint", "A rule checked in the simulator part-way through a task, e.g. \"top drawer opened\". Checkpoints show where a failed episode went wrong, not just that it failed."],
+    memop: ["Memory operation", "MEMOBench's three labels for what a checkpoint tests: storage (take in a new fact), update (revise it after a change) and compression (reduce a long history to what matters)."],
+    replan: ["Replan interval", "How many actions from a predicted chunk are run before the policy looks again. Longer intervals are cheaper, but the policy reacts later to changes."],
+    infogap: ["Information gap", "How many steps pass between the last moment a needed cue is visible and the moment it has to be acted on. A policy whose history window is shorter than the gap can only guess."],
+    dualsys: ["Dual-system policy", "A slow model (usually a VLM, about once a second) that plans and keeps memory, on top of a fast VLA that turns the current subtask into motor actions several times a second."],
     llmjudge: ["LLM judge", "A language model that grades free-text answers by comparing them with a reference answer. Faster than human grading, but it has to be checked against people."],
   };
 
